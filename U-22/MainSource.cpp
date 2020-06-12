@@ -25,7 +25,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_
 	// フルスクリーンにしないかどうか TRUE:しない FALSE:する
 	ChangeWindowMode(TRUE);
 
-	SetMainWindowText("アメニモマケズ");
 	// ウィンドウ画面の大きさ
 	SetGraphMode(1280, 768, 32);
 
