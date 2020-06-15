@@ -1,9 +1,9 @@
 #pragma once
 #include "Struct.h"
 
-int Main();
+//int Main();
 
-void GameScene(int gameScene);
+//void GameScene(int gameScene);
 
 
 enum {

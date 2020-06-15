@@ -6,6 +6,12 @@
 #include "issei.h"
 #include "hiroaki.h"
 #include "daiki.h"
+#include "GameScene.h"
+#include "GameTitle.h"
+#include "StageSelect.h"
+#include "GamePlay.h"
+#include "GameClear.h"
+#include "GameOver.h"
 
 /************************************************
 **	U-22ゲーム（タイトル）
@@ -21,6 +27,8 @@ mouse g_mouseInfo;								// マウスの状態管理
 /***************************
 *	関数の宣言
 ****************************/
+int Main(void);					// ゲームのメイン処理
+void GameScene(int gameScene);	// 画面のシーン管理
 
 /***************************
 * WinMain関数
@@ -78,6 +86,10 @@ int Main() {
 void GameScene(int gameScene) {
 
 	switch (gameScene) {
-
+		case GAME_TITLE:	GameTitle();	break;	 // ゲームタイトル
+		case GAME_SELECT:	StageSelect();	break;	 // ゲームセレクト
+		case GAME_PLAY:	    GamePlay();		break;	 // ゲームプレイ	
+		case GAME_OVER:		GameOver();		break;	 // ゲームオーバー
+		case GAME_CLEAR:	GameClear();	break;	 // ゲームクリア
 	}
 }
