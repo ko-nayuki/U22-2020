@@ -12,6 +12,7 @@
 #include "GamePlay.h"
 #include "GameClear.h"
 #include "GameOver.h"
+#include "Picture.h"
 
 /************************************************
 **	U-22ゲーム（タイトル）
@@ -26,6 +27,9 @@ mouse g_mouseInfo;								// マウスの状態管理
 int g_KeyFlg; //6.16 (key入力変数）
 int g_OldKey;
 int g_NowKey;
+
+image g_img;	//6.16画像管理変数
+
 /***************************
 *	関数の宣言
 ****************************/
@@ -94,10 +98,11 @@ int Main() {
 void GameScene(int gameScene) {
 
 	switch (gameScene) {
-		case GAME_TITLE:	GameTitle();	break;	 // ゲームタイトル
-		case GAME_SELECT:	StageSelect();	break;	 // ゲームセレクト
-		case GAME_PLAY:	    GamePlay();		break;	 // ゲームプレイ	
-		case GAME_OVER:		GameOver();		break;	 // ゲームオーバー
-		case GAME_CLEAR:	GameClear();	break;	 // ゲームクリア
+		//case GAME_TITLE:	GameTitle();	break;	 // ゲームタイトル
+		//case GAME_SELECT:	StageSelect();	break;	 // ゲームセレクト
+		//case GAME_PLAY:	    GamePlay();		break;	 // ゲームプレイ	
+		//case GAME_OVER:		GameOver();		break;	 // ゲームオーバー
+		//case GAME_CLEAR:	GameClear();	break;	 // ゲームクリア
+	case PROLOGUE: Stage0();
 	}
 }
