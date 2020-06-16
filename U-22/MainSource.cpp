@@ -27,7 +27,7 @@ mouse g_mouseInfo;								// マウスの状態管理
 int g_KeyFlg; //6.16 (key入力変数）
 int g_OldKey;
 int g_NowKey;
-
+char key[256];
 image g_img;	//6.16画像管理変数
 
 /***************************
@@ -51,6 +51,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_
 
 	// DXライブラリの初期化
 	if (DxLib_Init() == -1) return  -1;
+	
+	if(LoadPicture() == -1) return -1;
 
 	//ゲームメイン
 	Main();
@@ -67,13 +69,14 @@ int Main() {
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	// メインループ
-	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0 && !(g_KeyFlg & PAD_INPUT_START)) {
+	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0 && !(g_KeyFlg & PAD_INPUT_START) &&GetHitKeyStateAll(key) == 0) {
 		// 画面のクリア
 		ClearDrawScreen();
 
 		//デバッグ？マウス取得
 		ControlInfo(&g_mouseInfo);
 
+		
 		//デバッグ前提座標
 		DrawFormatString(0, 20, 0xFFFFFF, "mouseX = %d \n mouseY = %d", g_mouseInfo.mouseX, g_mouseInfo.mouseY);
 
@@ -98,11 +101,11 @@ int Main() {
 void GameScene(int gameScene) {
 
 	switch (gameScene) {
-		//case GAME_TITLE:	GameTitle();	break;	 // ゲームタイトル
-		//case GAME_SELECT:	StageSelect();	break;	 // ゲームセレクト
-		//case GAME_PLAY:	    GamePlay();		break;	 // ゲームプレイ	
-		//case GAME_OVER:		GameOver();		break;	 // ゲームオーバー
-		//case GAME_CLEAR:	GameClear();	break;	 // ゲームクリア
-	case PROLOGUE: Stage0();
+		case GAME_TITLE:	GameTitle();	break;	 // ゲームタイトル
+		case GAME_SELECT:	StageSelect();	break;	 // ゲームセレクト
+		case GAME_PLAY:	    PlayerMove();		break;	 // ゲームプレイ	
+		case GAME_OVER:		GameOver();		break;	 // ゲームオーバー
+		case GAME_CLEAR:	GameClear();	break;	 // ゲームクリア
+		
 	}
 }
