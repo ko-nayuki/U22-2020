@@ -16,7 +16,7 @@ int ix = 0, iy = 0, result = 0;
 char key[256];
 
 //x座標
-int x = 300, y = 420, y_prev = 0, y_temp = 0;
+int px = 300, py = 416, y_prev = 0, y_temp = 0;
 
 //ジャンプしてるかのフラグ。
 bool jflag = false;

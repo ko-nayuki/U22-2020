@@ -20,33 +20,33 @@ void PlayerMove(){
 
 
 		if (key[KEY_INPUT_LEFT] == 1) {
-			x -= 4 * move;
+			px -= 4 * move;
 		}
 		if (key[KEY_INPUT_RIGHT] == 1) {
-			x += 4 * move;
+			px += 4 * move;
 
 		}
 		//画面移動制御
 
-		if (x + 49 > 640)
-			x = 640 - 49;
-		if (x < 0)
-			x = 0;
+		if (px + 49 > 640)
+			px = 640 - 49;
+		if (px < 0)
+			px = 0;
 
 		DrawFormatString(0, 0, 0xffffff, "xc%d", xcount);
 		DrawFormatString(0, 20, 0xffffff, "yc%d", ycount);
 		DrawFormatString(0, 40, 0xffffff, "re%d", result);
 		DrawFormatString(0, 60, 0xffffff, "dir%d", dir);
-		DrawFormatString(0, 80, 0xffffff, "x%d", x);
-		DrawFormatString(0, 100, 0xffffff, "y%d", y);
+		DrawFormatString(0, 80, 0xffffff, "x%d", px);
+		DrawFormatString(0, 100, 0xffffff, "y%d", py);
 
 		//ジャンプ処理
 
 		if (jflag == true) {
-			y_temp = y;
-			y += (y - y_prev) + 1;
+			y_temp = py;
+			py += (py - y_prev) + 1;
 			y_prev = y_temp;
-			if (y == 420) {
+			if (py == 420) {
 				jflag = false;
 				if (dir == 0) {
 					result = 0;
@@ -59,8 +59,8 @@ void PlayerMove(){
 
 		if (key[KEY_INPUT_SPACE] == 1 && jflag == false) {
 			jflag = true;
-			y_prev = y;
-			y = y - 15;
+			y_prev = py;
+			py = py - 15;
 
 		}
 
@@ -122,7 +122,7 @@ void PlayerMove(){
 
 		}
 
-		DrawGraph(x, y, g_img.gh[result], TRUE);
+		DrawGraph(px, py, g_img.gh[result], TRUE);
 
 
 		//押されてなければカウントをゼロにする。
