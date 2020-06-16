@@ -1,4 +1,7 @@
 #pragma once
+#include "DxLib.h"
+void PlayerMove();
+
 //移動係数
 float move = 1.0f;
 
@@ -17,9 +20,6 @@ int x = 300, y = 420, y_prev = 0, y_temp = 0;
 
 //ジャンプしてるかのフラグ。
 bool jflag = false;
-
-//グラフィックハンドル格納用配列
-int gh[9];
 
 //向き
 int dir = 0;

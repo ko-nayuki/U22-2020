@@ -1,25 +1,8 @@
 #include "DxLib.h"
 #include "player.h"
+#include "Picture.h"
 
-//プログラムは WinMain から始まります
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
-{
-	ChangeWindowMode(TRUE);
-
-	if (DxLib_Init() == -1)		// ＤＸライブラリ初期化処理
-	{
-		return -1;			// エラーが起きたら直ちに終了
-	}
-
-
-
-	//画像読み込み
-	LoadDivGraph("images/P2.png", 9, 3, 3, 60, 60, gh);
-
-
-
-	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0 && GetHitKeyStateAll(key) == 0) {
-
+void PlayerMove(){
 		if (key[KEY_INPUT_LEFT] == 1 || key[KEY_INPUT_RIGHT] == 1) {
 
 			if (key[KEY_INPUT_UP] == 1 || key[KEY_INPUT_DOWN] == 1) {
@@ -37,10 +20,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 
 		if (key[KEY_INPUT_LEFT] == 1) {
-			x -= (int)4 * move;
+			x -= 4 * move;
 		}
 		if (key[KEY_INPUT_RIGHT] == 1) {
-			x += (int)4 * move;
+			x += 4 * move;
 
 		}
 		//画面移動制御
@@ -139,7 +122,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		}
 
-		DrawGraph(x, y, gh[result], TRUE);
+		DrawGraph(x, y, g_img.gh[result], TRUE);
 
 
 		//押されてなければカウントをゼロにする。
@@ -150,12 +133,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		if (key[KEY_INPUT_ESCAPE] == 1) {
 
-			break;
+
 		}
 
 	}
-
-	DxLib_End();				// ＤＸライブラリ使用の終了処理
-
-	return 0;				// ソフトの終了 
-}
