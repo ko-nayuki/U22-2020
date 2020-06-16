@@ -23,7 +23,9 @@
 ****************************/
 int g_gameScene = 0;
 mouse g_mouseInfo;								// マウスの状態管理
-
+int g_KeyFlg; //6.16 (key入力変数）
+int g_OldKey;
+int g_NowKey;
 /***************************
 *	関数の宣言
 ****************************/
@@ -61,7 +63,7 @@ int Main() {
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	// メインループ
-	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0) {
+	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0 && !(g_KeyFlg & PAD_INPUT_START)) {
 		// 画面のクリア
 		ClearDrawScreen();
 
@@ -73,6 +75,12 @@ int Main() {
 
 		// ゲームシーンの中を見て適当なゲーム画面を描画
 		GameScene(g_gameScene);
+
+		//6.16 キー入力
+		g_OldKey = g_NowKey;
+		g_NowKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
+		g_KeyFlg = g_NowKey & ~g_OldKey;
+
 
 		// 画面の更新
 		ScreenFlip();
