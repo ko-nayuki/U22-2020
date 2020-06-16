@@ -1,4 +1,5 @@
 #include "DxLib.h"
+#include "GameScene.h"
 #include "StageSelect.h"
 
 void StageSelect() {
@@ -7,7 +8,7 @@ void StageSelect() {
 }
 
 void SelectDisp() {
-
+	g_gameScene = GAME_PLAY;
 }
 void SelectMove() {
 

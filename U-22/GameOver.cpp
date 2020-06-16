@@ -1,4 +1,5 @@
 #include "DxLib.h"
+#include "GameScene.h"
 #include "GameOver.h"
 
 void GameOver() {
