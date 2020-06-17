@@ -4,6 +4,7 @@
 //int Main();
 
 //void GameScene(int gameScene);
+void PlayerMove();
 
 
 enum {
