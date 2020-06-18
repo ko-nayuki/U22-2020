@@ -1,9 +1,11 @@
+//‰æ‘œ‚Ì•Ï”‚Æ‚©
+
 #pragma once
 
 int LoadPicture();
 
 struct image {
-	int sample;
+	int sample[10];
 	int gh[9];
 };
 
