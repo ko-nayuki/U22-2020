@@ -33,6 +33,7 @@ void PlayerMove(){
 	if (g_player.px < 0)
 		g_player.px = 0;
 
+
 	DrawFormatString(0, 0, 0xffffff, "xc%d", g_player.xcount);
 	DrawFormatString(0, 60, 0xffffff, "yc%d", g_player.ycount);
 	DrawFormatString(0, 80, 0xffffff, "re%d", g_player.result);
@@ -46,7 +47,7 @@ void PlayerMove(){
 		g_player.y_temp = g_player.py;
 		g_player.py += (g_player.py - g_player.y_prev) + 1;
 		g_player.y_prev = g_player.y_temp;
-		if (g_player.py == 416) {
+		if (g_player.py == 572) {
 			g_player.jflag = false;
 			if (g_player.dir == 0) {
 				g_player.result = 0;
