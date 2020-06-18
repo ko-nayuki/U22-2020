@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "GamePlay.h"
 #include "KeyControl.h"
+#include "player.h"
 
 
 int i;
@@ -23,6 +24,7 @@ void PlayDisp() {
 }
 
 void PlayMove() {
+	PlayerMove();
 	if (g_KeyFlg & KEY_INPUT_Z) Flg = TRUE;
 	if (Flg == TRUE) x3 += 5;
 	if (x3 > 500) Flg = TRUE, x = 0;
