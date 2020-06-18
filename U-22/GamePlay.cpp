@@ -12,7 +12,7 @@ int x2 =600;
 int y = 500;
 int y2 = 600;
 int x3 = 0;
-bool TKanjiFlg = FALSE; //漢字の弾を飛ばすフラグ
+bool ElFlg = FALSE; //エレベーターを動かすフラグ
 
 
 
@@ -28,8 +28,8 @@ void PlayDisp() {
 void PlayMove() {
 	StageInit();
 	PlayerMove();
-	if (g_KeyFlg & KEY_INPUT_Z) TKanjiFlg = TRUE;
-	if (TKanjiFlg == TRUE) x3 += 5;
-	if (x3 > 500) TKanjiFlg = TRUE, x = 0;
-	if (TKanjiFlg == TRUE)DrawBox(500 + x3, 500, 550 + x3, 550, 0xFFFFFF, TRUE);
+	if (g_KeyFlg & KEY_INPUT_Z) ElFlg = TRUE;
+	if (ElFlg == TRUE) x3 += 5;
+	if (x3 > 500) ElFlg = TRUE, x = 0;
+	if (ElFlg == TRUE)DrawBox(500 + x3, 500, 550 + x3, 550, 0xFFFFFF, TRUE);
 }
