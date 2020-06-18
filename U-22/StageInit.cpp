@@ -11,11 +11,18 @@ StageInfo Stage;
 void StageInit() {
 	for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
-			if (g_StageData[g_Stage][j][i] != 0){
+			if (g_StageData[g_Stage][j][i] != 0 && g_StageData[g_Stage][j][i] != 2){
 				DrawExtendGraph(i * Stage.HEIGHT,
 					j * Stage.WIDTH,
 					i * Stage.HEIGHT+Stage.HEIGHT,
 					j * Stage.WIDTH+Stage.WIDTH,
+					StageObj(g_StageData[g_Stage][j][i]), TRUE);
+			}
+			if (g_StageData[g_Stage][j][i] == 2) {
+				DrawExtendGraph(i * Stage.HEIGHT,
+					j * Stage.WIDTH,
+					(i * Stage.HEIGHT + Stage.HEIGHT)+Stage.HEIGHT,
+					(j * Stage.WIDTH + Stage.WIDTH)+Stage.WIDTH,
 					StageObj(g_StageData[g_Stage][j][i]), TRUE);
 			}
 		}
@@ -27,7 +34,7 @@ int StageObj(int Objimg) {
 	{
 	case 0:		break;
 	case 1:		return g_img.sample[1]; break;
-	case 2:		return g_img.sample[2]; break;
+	case 2:		return g_img.door[0]; break;
 	case 3:		return g_img.sample[3]; break;
 	case 4:		return g_img.sample[4]; break;
 	case 5:		return g_img.sample[5]; break;
