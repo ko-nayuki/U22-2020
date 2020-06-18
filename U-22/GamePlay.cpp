@@ -2,6 +2,8 @@
 #include "GamePlay.h"
 #include "KeyControl.h"
 #include "player.h"
+#include "yoshitaka.h"
+
 
 
 int i;
@@ -24,6 +26,7 @@ void PlayDisp() {
 }
 
 void PlayMove() {
+	StageInit();
 	PlayerMove();
 	if (g_KeyFlg & KEY_INPUT_Z) Flg = TRUE;
 	if (Flg == TRUE) x3 += 5;
