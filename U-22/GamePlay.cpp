@@ -28,7 +28,7 @@ void PlayDisp() {
 void PlayMove() {
 	StageInit();
 	PlayerMove();
-	if (g_KeyFlg & KEY_INPUT_Z) ElFlg = TRUE;
+	if (key[KEY_INPUT_Z]) ElFlg = TRUE;
 	if (ElFlg == TRUE) x3 += 5;
 	if (x3 > 500) ElFlg = TRUE, x = 0;
 	if (ElFlg == TRUE)DrawBox(500 + x3, 500, 550 + x3, 550, 0xFFFFFF, TRUE);
