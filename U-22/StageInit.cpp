@@ -13,12 +13,13 @@ void StageInit() {
 	//ステージ生成
 	for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
-			if (g_StageData[g_Stage][j][i] != 0 && g_StageData[g_Stage][j][i] != 2){
-				DrawExtendGraph(i * Stage.HEIGHT,
+			if (g_StageData[g_Stage][i][j] != 0 && g_StageData[g_Stage][i][j] != 2){
+				/*DrawExtendGraph(i * Stage.HEIGHT,
 					j * Stage.WIDTH,
 					i * Stage.HEIGHT+Stage.HEIGHT,
 					j * Stage.WIDTH+Stage.WIDTH,
-					StageObj(g_StageData[g_Stage][j][i]), TRUE);
+					StageObj(g_StageData[g_Stage][j][i]), TRUE);*/
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.sample[g_StageData[g_Stage][i][j]], TRUE);
 			}
 			if (g_StageData[g_Stage][j][i] == 2) {
 				DrawExtendGraph(i * Stage.HEIGHT,

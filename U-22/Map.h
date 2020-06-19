@@ -1,8 +1,11 @@
 #pragma once
 #include "DxLib.h"
 #define STAGE 1
-#define STAGE_HEIGHT 1124
-#define STAGE_WIDTH 768
+//#define STAGE_HEIGHT 1124
+//#define STAGE_WIDTH 768
+#define STAGE_HEIGHT 12		//1124
+#define STAGE_WIDTH 20		//768
+#define CHIPSIZE 64
 //#define HEIGHT 64
 //#define WIDTH 64
 
