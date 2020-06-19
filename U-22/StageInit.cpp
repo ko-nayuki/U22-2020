@@ -9,6 +9,8 @@ int g_Stage = 0;
 StageInfo Stage;
 
 void StageInit() {
+
+	//ステージ生成
 	for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
 			if (g_StageData[g_Stage][j][i] != 0 && g_StageData[g_Stage][j][i] != 2){
@@ -30,6 +32,7 @@ void StageInit() {
 }
 
 int StageObj(int Objimg) {
+	//オブジェクト判定
 	switch (Objimg)
 	{
 	case 0:		break;

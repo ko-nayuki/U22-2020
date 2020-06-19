@@ -22,11 +22,11 @@ void GamePlay() {
 }
 
 void PlayDisp() {
+	StageInit();
 	DrawBox(500, 600, 600, 700, 0xFF0000, true);
 }
 
 void PlayMove() {
-	StageInit();
 	PlayerMove();
 	if (key[KEY_INPUT_Z]) ElFlg = TRUE;
 	if (ElFlg == TRUE) x3 += 5;
