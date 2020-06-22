@@ -33,6 +33,12 @@ void PlayerMove(){
 	if (g_player.px < 0)
 		g_player.px = 0;
 
+	if (g_player.px + 32 > 582 && g_player.px + 32 < 701 && g_player.py > 515 && g_player.py < 632) {
+		g_player.px = 760, g_player.py = 70;
+
+	}
+
+
 
 	DrawFormatString(0, 0, 0xffffff, "xc%d", g_player.xcount);
 	DrawFormatString(0, 60, 0xffffff, "yc%d", g_player.ycount);
@@ -43,7 +49,7 @@ void PlayerMove(){
 
 	//ƒWƒƒƒ“ƒvˆ—
 
-	if (g_player.jflag == true) {
+	/*if (g_player.jflag == true) {
 		g_player.y_temp = g_player.py;
 		g_player.py += (g_player.py - g_player.y_prev) + 1;
 		g_player.y_prev = g_player.y_temp;
@@ -64,7 +70,7 @@ void PlayerMove(){
 		g_player.py = g_player.py - 15;
 
 	}
-
+	*/
 	if (key[KEY_INPUT_LEFT] == 1) {
 		if (g_player.xcount > 0)
 			g_player.xcount = 0;

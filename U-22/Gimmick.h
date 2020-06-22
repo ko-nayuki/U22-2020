@@ -7,7 +7,7 @@ void gimmickMove();
 void gimmickDisp();
 
 enum {
-	LIFT = 0,		//エレベーター
+	LIFT = 0,		//エレベーター(ワープゾーン)
 	BREAK = 1		//破壊できる壁
 
 };
