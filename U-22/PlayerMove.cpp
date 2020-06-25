@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "player.h"
 #include "Picture.h"
+#include "Map.h"
 
 void PlayerMove(){
 	if (key[KEY_INPUT_LEFT] == 1 || key[KEY_INPUT_RIGHT] == 1) {
@@ -33,12 +34,14 @@ void PlayerMove(){
 	if (g_player.px < 0)
 		g_player.px = 0;
 
-	if (g_player.px + 32 > 582 && g_player.px + 32 < 701 && g_player.py > 515 && g_player.py < 632) {
-		g_player.px = 760, g_player.py = 70;
+	//if (g_player.px + 32 > 582 && g_player.px + 32 < 701 && g_player.py > 515 && g_player.py < 632) {
+	//	g_player.px = 760, g_player.py = 70;
 
+	//}
+
+	if (g_map.playStage[int(g_player.py / 64) + 1][int(g_player.px / 64) + 1] != 9) {
+		g_player.py += 16;
 	}
-
-
 
 	DrawFormatString(0, 0, 0xffffff, "xc%d", g_player.xcount);
 	DrawFormatString(0, 60, 0xffffff, "yc%d", g_player.ycount);
@@ -130,7 +133,6 @@ void PlayerMove(){
 	}
 
 	DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
-
 
 	//押されてなければカウントをゼロにする。
 	if (key[KEY_INPUT_LEFT] != 1 && key[KEY_INPUT_RIGHT] != 1) {

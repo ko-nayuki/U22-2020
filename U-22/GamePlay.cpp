@@ -9,13 +9,16 @@
 void GamePlay() {
 	PlayDisp();
 	PlayMove();
-	
 }
 
 void PlayDisp() {
 	StageDisp();
+	gimmickDisp();
+	DrawFormatString(0, 700, 0xFF00FF, "%d", g_player.px / 64);
+	DrawFormatString(0, 750, 0xFF00FF, "%d", g_player.py / 64);
 }
 
 void PlayMove() {
-	PlayerMove();
+	gimmickMove();
+	if(g_gimmick->moveFlg != true) PlayerMove();
 }

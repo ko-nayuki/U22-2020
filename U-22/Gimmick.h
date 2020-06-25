@@ -5,11 +5,17 @@
 
 void gimmickMove();
 void gimmickDisp();
+void gimmickInit();
 
 enum {
 	LIFT = 0,		//エレベーター(ワープゾーン)
 	BREAK = 1		//破壊できる壁
 
+};
+
+enum {//漢字
+	K_UE = 0,		//上
+	K_HA = 1		//破
 };
 
 struct Gimmick {
