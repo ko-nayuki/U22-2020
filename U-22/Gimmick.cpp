@@ -11,16 +11,16 @@ void gimmickDisp() {
 
 void gimmickMove() {
 	//エレベーター処理
-	if (g_map.playStage[int(g_player.py / 64)][int(g_player.px / 64) + 1] == 2) {
+	if (g_map.playStage[int(g_player.py /CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == 2) {
 		g_gimmick[LIFT].moveFlg = true;
-		g_map.playStage[int(g_player.py / 64)][int(g_player.px / 64) + 1] = 0;
+		g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] = 0;
 	}
 
 	if (g_gimmick[LIFT].moveFlg == true) {
 		g_player.py -= 2;
 		g_gimmick[LIFT].y = g_player.py;
-		if (g_player.py / 64 <= 0) {
-			g_map.playStage[int(g_player.py / 64) + 2][int(g_player.px / 64) + 1] = 9;
+		if (g_player.py == CHIPSIZE) {
+			g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE) + 1] = 9;
 			g_gimmick[LIFT].moveFlg = false;
 		}
 	}
