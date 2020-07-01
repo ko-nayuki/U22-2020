@@ -2,20 +2,22 @@
 #include "DxLib.h"
 
 #define GIMMICK_NUM 2	//ギミック数
+#define KANZI_NUM 2		//漢字の数
 
 void gimmickMove();
 void gimmickDisp();
 void gimmickInit();
 
 enum {
-	LIFT = 0,		//エレベーター(ワープゾーン)
+	LIFT = 0,		//エレベーター
 	BREAK = 1		//破壊できる壁
 
 };
 
 enum {//漢字
-	K_UE = 0,		//上
-	K_HA = 1		//破
+	K_NO = 0,		//無し
+	K_UE = 1,		//上
+	K_HA = 2		//破
 };
 
 struct Gimmick {
@@ -24,6 +26,7 @@ struct Gimmick {
 	int w;				//幅
 	int h;				//高さ
 	bool moveFlg;		//ギミックの起動フラグ
+	float anime;		//ギミックアニメーション
 };
 
 extern Gimmick g_gimmick[GIMMICK_NUM];

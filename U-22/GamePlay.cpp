@@ -14,8 +14,8 @@ void GamePlay() {
 void PlayDisp() {
 	StageDisp();
 	gimmickDisp();
-	DrawFormatString(0, 700, 0xFF00FF, "%d", g_player.px / 64);
-	DrawFormatString(0, 750, 0xFF00FF, "%d", g_player.py / 64);
+	DrawFormatString(0, 400, 0xFF00FF, "%d", g_player.px / 64);
+	DrawFormatString(0, 450, 0xFF00FF, "%d", g_player.py / 64);
 }
 
 void PlayMove() {

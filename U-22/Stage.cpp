@@ -5,7 +5,7 @@
 #include "Picture.h"
 #include "Gimmick.h"
 
-int g_Stage = 0;
+//int g_Stage = 0;
 //StageInfo Stage;
 
 void StageInit() {
@@ -13,11 +13,12 @@ void StageInit() {
 	//ステージ読み込み
 	for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
-			g_map.playStage[i][j] = g_map.stageData[g_Stage][i][j];
-			if (g_map.playStage[i][j] == 2) {
+			g_map.playStage[i][j] = g_map.stageData[g_map.select][i][j];
+			if (g_map.playStage[i][j] == 4) {
 				g_gimmick[LIFT].x = j * CHIPSIZE;
 				g_gimmick[LIFT].y = i * CHIPSIZE;
 			}
+			g_map.random[i][j] = rand() % 3;
 		}
 	}
 }
@@ -26,12 +27,24 @@ void StageDisp() {
 	//ステージ描画
 	for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
-			if (g_map.playStage[i][j] != 0 && g_map.playStage[i][j] != 2) {
+			if (g_map.playStage[i][j] != 0 && g_map.playStage[i][j] != 4) {
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.sample[g_map.playStage[i][j]], TRUE);
 			}
 		}
 	}
 
+}
+
+void SelectMAPDisp() {
+	for (int i = 0; i < STAGE_HEIGHT; i++) {
+		for (int j = 0; j < STAGE_WIDTH; j++) {
+			g_map.playStage[i][j] = g_map.selectMap[i][j];
+			DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.sample[g_map.playStage[i][j]], TRUE);
+			if (g_map.playStage[i][j] == 0) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.bookshelf[g_map.random[i][j]], TRUE);
+			}
+		}
+	}
 }
 
 

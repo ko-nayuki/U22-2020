@@ -2,6 +2,8 @@
 #include "DxLib.h"
 #include "player.h"
 
+#define ITEM_MAX 5		//アイテムの最大数
+
 void PlayerMove();
 
 struct Player {
@@ -24,6 +26,10 @@ struct Player {
 
 	//向き
 	int dir = 0;
+
+	//アイテム所持数
+	int item[ITEM_MAX] = { 0 };
+	int itemNo = 0;
 };
 
 extern Player g_player;
