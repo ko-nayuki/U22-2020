@@ -3,15 +3,16 @@
 #include "Picture.h"
 #include "Map.h"
 
+
+
 void PlayerMove(){
 
 	DrawFormatString(0, 60, 0xffffff, "xc%d", g_player.xcount);
 	DrawFormatString(0, 80, 0xffffff, "yc%d", g_player.ycount);
 	DrawFormatString(0, 100, 0xffffff, "re%d", g_player.result);
 	DrawFormatString(0, 120, 0xffffff, "dir%d", g_player.dir);
-	DrawFormatString(0, 140, 0xffffff, "x%d", g_player.px);
-	DrawFormatString(0, 160, 0xffffff, "y%d", g_player.py);
-
+	
+	
 	if (key[KEY_INPUT_LEFT] == 1 || key[KEY_INPUT_RIGHT] == 1) {
 
 		if (key[KEY_INPUT_UP] == 1 || key[KEY_INPUT_DOWN] == 1) {
@@ -27,18 +28,30 @@ void PlayerMove(){
 		g_player.move = 1.0f;
 	}
 
-
+	//移動処理
 	if (key[KEY_INPUT_LEFT] == 1) {
-		g_player.px -= (int)4 * g_player.move;
+
+		//ブロック当たり判定して進む
+		if (g_map.playStage[int(g_player.py/CHIPSIZE)][int(g_player.px/CHIPSIZE)] != 1) {
+			g_player.px -= (int)4 * g_player.move;
+		}
+		
 	}
+
 	if (key[KEY_INPUT_RIGHT] == 1) {
-		g_player.px += (int)4 * g_player.move;
+
+		//ブロック当たり判定して進む
+		if (g_map.playStage[int(g_player.py/CHIPSIZE)][int(g_player.px/CHIPSIZE)+1] != 1) {
+			g_player.px += (int)4 * g_player.move;
+		}
+		
 
 	}
+
 	//画面移動制御
 
-	if (g_player.px + 64 > 1152)
-		g_player.px = 1152 - 64;
+	if (g_player.px + CHIPSIZE > 1280)
+		g_player.px = 1280 - CHIPSIZE;
 	if (g_player.px < 0)
 		g_player.px = 0;
 
@@ -47,10 +60,10 @@ void PlayerMove(){
 
 	//}
 
-	if (g_map.playStage[int(g_player.py / 64) + 1][int(g_player.px / 64) + 1] != 9) {
+	if (g_map.playStage[int(g_player.py /CHIPSIZE) + 1][int(g_player.px / CHIPSIZE) + 1] != 1) {
 		g_player.py += 16;
 	}
-
+	
 	//ジャンプ処理
 
 	/*if (g_player.jflag == true) {
@@ -134,11 +147,27 @@ void PlayerMove(){
 	//}
 
 	DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
-
+	//DrawExtendGraph();
 	//押されてなければカウントをゼロにする。
-	if (key[KEY_INPUT_LEFT] != 1 && key[KEY_INPUT_RIGHT] != 1) {
+	if (key[KEY_INPUT_LEFT] != 1 && key[KEY_INPUT_RIGHT] != 9) {
 		g_player.xcount = 0;
 		//g_player.ycount = 0;
 	}
 
 	}
+
+
+//int CharMove(float* PMX, float* PMY, float* DownSP,
+//		float MovePMX, float MovePMY, float Size) {
+//
+//}
+//
+//
+//// マップとの当たり判定( 戻り値 0:当たらなかった  1:左辺に当たった  2:右辺に当たった
+////                                                3:上辺に当たった  4:下辺に当たった
+//int MapHitCheck(float PHX, float PHY,
+//	float* MovePHX, float* MovePHY)
+//{
+//
+//}
+
