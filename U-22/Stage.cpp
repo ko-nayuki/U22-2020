@@ -14,7 +14,7 @@ void StageInit() {
 	for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
 			g_map.playStage[i][j] = g_map.stageData[g_map.select][i][j];
-			if (g_map.playStage[i][j] == 4) {
+			if (g_map.playStage[i][j] == 5) {
 				g_gimmick[LIFT].x = j * CHIPSIZE;
 				g_gimmick[LIFT].y = i * CHIPSIZE;
 			}
@@ -27,8 +27,11 @@ void StageDisp() {
 	//ステージ描画
 	for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
-			if (g_map.playStage[i][j] != 0 && g_map.playStage[i][j] != 4) {
-				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.sample[g_map.playStage[i][j]], TRUE);
+			if (g_map.playStage[i][j] != 0 && g_map.playStage[i][j] != 5 && g_map.playStage[i][j] < A) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[g_map.playStage[i][j]], TRUE);
+			}
+			if (g_map.playStage[i][j] >= A) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.kanzi[g_map.playStage[i][j] - A], TRUE);
 			}
 		}
 	}
@@ -40,7 +43,7 @@ void SelectMAPDisp() {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
 			g_map.playStage[i][j] = g_map.selectMap[i][j];
 			if (g_map.playStage[i][j] != 0) {
-			DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.sample[g_map.playStage[i][j]], TRUE);
+			DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[g_map.playStage[i][j]], TRUE);
 			}
 		}
 	}

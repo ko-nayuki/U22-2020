@@ -17,7 +17,7 @@ enum {
 enum {//漢字
 	K_NO = 0,		//無し
 	K_UE = 1,		//上
-	K_HA = 2		//破
+	K_SITA = 2		//下
 };
 
 struct Gimmick {
@@ -26,6 +26,7 @@ struct Gimmick {
 	int w;				//幅
 	int h;				//高さ
 	bool moveFlg;		//ギミックの起動フラグ
+	bool moveFlg2;		//ギミックの起動フラグ2
 	float anime;		//ギミックアニメーション
 };
 
