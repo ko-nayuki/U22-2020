@@ -11,6 +11,7 @@ void StageSelect() {
 }
 
 void SelectDisp() {
+	BackStageDisp();
 	SelectMAPDisp();
 	DrawFormatString(600, 300, 0xFF00FF, "SPACE");
 }
