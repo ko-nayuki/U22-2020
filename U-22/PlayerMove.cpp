@@ -98,7 +98,7 @@ void PlayerMove(){
 	if (key[KEY_INPUT_RIGHT] == 1) {
 		if (g_player.xcount < 0)
 			g_player.xcount = 0;
-		g_player.ycount = 0;
+		g_player.ycount = 0; 
 		++g_player.xcount;
 		g_player.dir = 0;
 	}
@@ -149,7 +149,7 @@ void PlayerMove(){
 	DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
 	//DrawExtendGraph();
 	//押されてなければカウントをゼロにする。
-	if (key[KEY_INPUT_LEFT] != 1 && key[KEY_INPUT_RIGHT] != 9) {
+	if (key[KEY_INPUT_LEFT] != 1 && key[KEY_INPUT_RIGHT] != 1) {
 		g_player.xcount = 0;
 		//g_player.ycount = 0;
 	}
@@ -157,17 +157,4 @@ void PlayerMove(){
 	}
 
 
-//int CharMove(float* PMX, float* PMY, float* DownSP,
-//		float MovePMX, float MovePMY, float Size) {
-//
-//}
-//
-//
-//// マップとの当たり判定( 戻り値 0:当たらなかった  1:左辺に当たった  2:右辺に当たった
-////                                                3:上辺に当たった  4:下辺に当たった
-//int MapHitCheck(float PHX, float PHY,
-//	float* MovePHX, float* MovePHY)
-//{
-//
-//}
 
