@@ -37,20 +37,22 @@ void gimmickMove() {
 	for (int i = 0; i < g_player.itemNo + 1; i++) {
 		//エレベーター処理
 		if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == 5) {
-			if (g_player.item[i] == K_UE) {//[上]を使う
+			if (g_player.item[i] == K_UE || g_player.item[i] == K_SITA) {
+				if (g_gimmick[LIFT].anime < 2.0F)g_gimmick[LIFT].anime += 0.1F;
+			}
+
+			if (g_player.item[i] == K_UE && key[KEY_INPUT_SPACE] == 1) {//[上]を使う
 				g_gimmick[LIFT].moveFlg = true;
 				g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] = 0;
 				g_player.item[i] = K_NO;
 			}
-			if (g_player.item[i] == K_SITA) {//[下]を使う
+			if (g_player.item[i] == K_SITA && key[KEY_INPUT_SPACE] == 1) {//[下]を使う
 				g_gimmick[LIFT].moveFlg2 = true;
 				g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] = 0;
 				g_player.item[i] = K_NO;
 			}
-		}
-		if (g_player.item[i] == K_UE || g_player.item[i] == K_SITA) {
-			//アイテムを持っていたらエレベータが開く
-			if (g_gimmick[LIFT].anime < 2.0F)g_gimmick[LIFT].anime += 0.1F;
+		} else {
+			if (g_gimmick[LIFT].anime > 0.0F)g_gimmick[LIFT].anime -= 0.1F;
 		}
 		if (g_gimmick[LIFT].moveFlg == true) {//上昇の処理
 			if (g_player.py == CHIPSIZE) {
