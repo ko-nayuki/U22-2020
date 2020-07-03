@@ -23,9 +23,28 @@ void PlayDisp() {
 			DrawFormatString(j * CHIPSIZE, i * CHIPSIZE, 0xFF0000, "%d", g_map.playStage[i][j]);
 		}
 	}*/
-	DrawFormatString(0, 650, 0xFF00FF, "%d", g_player.item[0]);
-	DrawFormatString(0, 670, 0xFF00FF, "%d", g_player.item[1]);
-	DrawFormatString(0, 690, 0xFF00FF, "%d", g_player.item[2]);
+	DrawFormatString(0, 600, 0xFF00FF, "%d", g_player.itemNo);
+
+	for (int i = 0; i < ITEM_MAX; i++) {
+		if (i != g_player.itemSelect) {
+			DrawGraph(96 + (CHIPSIZE + 32) * i, CHIPSIZE * 10 + 32, g_img.itemBox, TRUE);
+		} else {
+			SetDrawBright(255, 0, 0);
+			DrawGraph(96 + (CHIPSIZE + 32) * i, CHIPSIZE * 10 + 32, g_img.itemBox, TRUE);
+			SetDrawBright(255, 255, 255);
+		}
+		if (g_player.item[i] != 0) {
+			DrawGraph(96 + (CHIPSIZE + 32) * i, CHIPSIZE * 10 + 32, g_img.kanzi[g_player.item[i] - 1], TRUE);
+		}
+	}
+
+	if (g_KeyFlg & PAD_INPUT_RIGHT) {
+		if (++g_player.itemSelect > ITEM_MAX - 1) g_player.itemSelect = 0;
+	}
+	if (g_KeyFlg & PAD_INPUT_LEFT) {
+		if (--g_player.itemSelect < 0) g_player.itemSelect = ITEM_MAX - 1;
+	}
+
 }
 
 void PlayMove() {

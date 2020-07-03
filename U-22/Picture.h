@@ -10,6 +10,7 @@ struct image {
 	int door[4]; //エレベータ
 	int bookshelf[4];//本棚
 	int kanzi[5];//漢字
+	int itemBox;
 };
 
 extern image g_img;
