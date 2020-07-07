@@ -60,10 +60,11 @@ void PlayerMove(){
 
 	//}
 
-	if (g_map.playStage[int(g_player.py /CHIPSIZE) + 1][int(g_player.px / CHIPSIZE) + 1] != 1) {
+	if (g_map.playStage[int(g_player.py /CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] != 1 &&
+		g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] != 6) {
 		g_player.py += 16;
 	}
-	
+
 	//ƒWƒƒƒ“ƒvˆ—
 
 	/*if (g_player.jflag == true) {

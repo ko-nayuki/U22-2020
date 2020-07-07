@@ -14,9 +14,19 @@ void StageInit() {
 	for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
 			g_map.playStage[i][j] = g_map.stageData[g_map.select][i][j];
-			if (g_map.playStage[i][j] == 5) {
+			if (g_map.playStage[i][j] == 5) {//エレベータの情報
 				g_gimmick[LIFT].x = j * CHIPSIZE;
 				g_gimmick[LIFT].y = i * CHIPSIZE;
+			}
+			if (g_map.playStage[i][j] == 6) {//ジャンプ台の情報
+				g_gimmick[BOUND].x = j * CHIPSIZE;
+				g_gimmick[BOUND].y = i * CHIPSIZE;
+			}
+			if (g_map.playStage[i][j] == 7) {//破壊できる壁の情報
+				g_map.gimmickData[i][j] = g_map.playStage[i][j];
+				g_map.playStage[i][j] = 1;
+			} else {
+				g_map.gimmickData[i][j] = 0;
 			}
 			g_map.random[i][j] = rand() % 3;
 		}
@@ -26,11 +36,11 @@ void StageInit() {
 void StageDisp() {
 	//ステージ描画
 	for (int i = 0; i < STAGE_HEIGHT; i++) {
-		for (int j = 0; j < STAGE_WIDTH; j++) {
-			if (g_map.playStage[i][j] != 0 && g_map.playStage[i][j] != 5 && g_map.playStage[i][j] < A) {
+		for (int j = 0; j < STAGE_WIDTH; j++) {//マップの描画
+			if (g_map.playStage[i][j] != 0 && g_map.playStage[i][j] < 5 && g_map.playStage[i][j] < A) {
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[g_map.playStage[i][j]], TRUE);
 			}
-			if (g_map.playStage[i][j] >= A) {
+			if (g_map.playStage[i][j] >= A) {//漢字の描画
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.kanzi[g_map.playStage[i][j] - A], TRUE);
 			}
 		}
