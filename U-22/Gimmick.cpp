@@ -71,18 +71,23 @@ void gimmickMove() {
 	else {
 		if (g_gimmick[LIFT].anime > 0.0F)g_gimmick[LIFT].anime -= 0.1F;
 	}
+
 	if (g_gimmick[LIFT].moveFlg == true) {//è„è∏ÇÃèàóù
 		if (g_gimmick[LIFT].y == CHIPSIZE) {
+
 			g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] = GIM_1;
 			if (g_gimmick[LIFT].anime < 2.0F)g_gimmick[LIFT].anime += 0.1F;
 			else g_gimmick[LIFT].moveFlg = false;
+
 		} else if(g_gimmick[LIFT].y < CHIPSIZE){
 			g_gimmick[LIFT].y++;
+
 		} else {
 			if (g_gimmick[LIFT].anime > 0.0F)g_gimmick[LIFT].anime -= 0.1F;
 			else g_gimmick[LIFT].y -= 2, g_player.py = g_gimmick[LIFT].y;
 		}
 	}
+
 	if (g_gimmick[LIFT].moveFlg2 == true) {//â∫ç~ÇÃèàóù
 		if (g_player.py == CHIPSIZE * 9) {
 			g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] = GIM_1;
@@ -109,18 +114,44 @@ void gimmickMove() {
 	}
 	if (g_gimmick[BOUND].ONFlg == true) {
 		if (g_gimmick[LIFT].moveFlg == false && g_gimmick[LIFT].moveFlg2 == false) {
-			if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE) + 1] == GIM_2) {
+			if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px/ CHIPSIZE)] == GIM_2) {
 				g_gimmick[BOUND].speed = -JUMP_POWER;
-			}
-			if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE) + 1] != BLOCK) {
 				g_player.py += g_gimmick[BOUND].speed;
 				g_gimmick[BOUND].speed += G;
-			} else {
-				g_gimmick[BOUND].speed = 0;
 			}
+
 			if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == BLOCK) {
+
 				g_gimmick[BOUND].speed = 0;
+				g_gimmick[BOUND].speed += G*5;
+				g_player.py += g_gimmick[BOUND].speed;
+			
 			}
+
+			if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] != BLOCK
+				&& g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)+1] != BLOCK) {
+
+				g_player.py += g_gimmick[BOUND].speed;
+
+				g_gimmick[BOUND].speed += G;
+
+			} else {
+
+				g_gimmick[BOUND].speed = 0;
+
+				if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] == GIM_2) {
+					g_player.py = (g_player.py / CHIPSIZE) * CHIPSIZE;
+				}
+
+				if (g_map.playStage[int(g_player.py / CHIPSIZE)+1][int(g_player.px / CHIPSIZE)+1] == BLOCK){
+					g_player.py = (g_player.py / CHIPSIZE) * CHIPSIZE;
+				}
+
+				
+			}
+			/*if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == BLOCK) {
+				g_gimmick[BOUND].speed = 0;
+			}*/
 		}
 	}
 

@@ -5,7 +5,7 @@
 #define KANZI_NUM 3		//漢字の数
 
 #define G                (0.2F)		// 重力
-#define JUMP_POWER       (30.0F)	// ジャンプ台のジャンプ力
+#define JUMP_POWER       (15.0F)	// ジャンプ台のジャンプ力
 
 void gimmickMove();
 void gimmickDisp();
