@@ -8,10 +8,10 @@ void PlayerMove();
 
 struct Player {
 	//ˆÚ“®ŒW”
-	float move = 1.0f;
+	int move = 1;
 
 	// ˆÚ“®ŒW”
-	float speed = 1.0f;
+	int speed = 1;
 
 	//‰¡•ûŒü‚Æc•ûŒü‚ÌƒJƒEƒ“ƒg”B
 	int xcount = 0, ycount = 0;

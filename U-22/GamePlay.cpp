@@ -16,8 +16,10 @@ void PlayDisp() {
 	BackStageDisp();
 	gimmickDisp();
 	StageDisp();
-	DrawFormatString(0, 400, 0x000000, "%d", g_player.py / CHIPSIZE);
-	DrawFormatString(0, 450, 0x000000, "%d", g_player.py );
+	DrawFormatString(0, 400, 0x000000, "%d", g_player.px / CHIPSIZE);
+	DrawFormatString(0, 450, 0x000000, "%d", g_player.px );
+	DrawFormatString(0, 500, 0x000000, "%d", g_player.py / CHIPSIZE);
+	DrawFormatString(0, 550, 0x000000, "%d", g_player.py);
 	/*for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
 			DrawFormatString(j * CHIPSIZE, i * CHIPSIZE, 0xFF0000, "%d", g_map.playStage[i][j]);

@@ -32,9 +32,9 @@ void PlayerMove(){
 	if (key[KEY_INPUT_LEFT] == 1) {
 
 		//ブロック当たり判定して進む
-		if (g_map.playStage[int(g_player.py/CHIPSIZE)][int((g_player.px-4)/CHIPSIZE)] != 1
-			&& g_map.playStage[int((g_player.py-1) / CHIPSIZE)+1][int((g_player.px - 4) / CHIPSIZE)] != 1) {
-			g_player.px -= (int)4 * g_player.move;
+		if (g_map.playStage[int(g_player.py/CHIPSIZE)][int(g_player.px/CHIPSIZE)] != 1
+			&& g_map.playStage[int((g_player.py-1) / CHIPSIZE)+1][int((g_player.px-4)/ CHIPSIZE)] != 1) {
+			g_player.px -= 4 * g_player.move;
 		}
 		
 	}
@@ -43,8 +43,8 @@ void PlayerMove(){
 
 		//ブロック当たり判定して進む
 		if (g_map.playStage[int(g_player.py/CHIPSIZE)][int(g_player.px/CHIPSIZE)+1] != 1
-			&&g_map.playStage[int((g_player.py-1) / CHIPSIZE)+1][int(g_player.px / CHIPSIZE) + 1] != 1) {
-			g_player.px += (int)4 * g_player.move;
+			&&g_map.playStage[int((g_player.py-1) / CHIPSIZE)+1][int((g_player.px+4) / CHIPSIZE)+1] != 1) {
+			g_player.px += 4 * g_player.move;
 		}
 		
 
@@ -58,8 +58,8 @@ void PlayerMove(){
 	if (g_player.px < 0)
 		g_player.px = 0;
 
-	if (g_player.py - CHIPSIZE > 614)
-		g_player.py = 614 - CHIPSIZE;
+	if (g_player.py - CHIPSIZE > 576)
+		g_player.py = 576 - CHIPSIZE;
 
 	if (g_player.py < 0)
 		g_player.py = 0;

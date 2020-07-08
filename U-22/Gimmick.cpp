@@ -102,7 +102,7 @@ void gimmickMove() {
 	}
 
 	//ジャンプ台処理
-	if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE) + 1] == GIM_2) {
+	if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE) ] == GIM_2) {
 		if (g_gimmick[BOUND].y != CHIPSIZE) {//[力]を使う
 			if (g_player.item[g_player.itemSelect] == K_TIKARA && key[KEY_INPUT_SPACE] == 1 &&
 				g_gimmick[BOUND].ONFlg == false) {
@@ -112,6 +112,7 @@ void gimmickMove() {
 			}
 		}
 	}
+
 	if (g_gimmick[BOUND].ONFlg == true) {
 		if (g_gimmick[LIFT].moveFlg == false && g_gimmick[LIFT].moveFlg2 == false) {
 			if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px/ CHIPSIZE)] == GIM_2) {
@@ -121,6 +122,7 @@ void gimmickMove() {
 				g_gimmick[BOUND].anime = 3;
 			}
 
+			//頭上にブロックがあったら
 			if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == BLOCK) {
 
 				g_gimmick[BOUND].speed = 0;
@@ -144,7 +146,7 @@ void gimmickMove() {
 					g_player.py = (g_player.py / CHIPSIZE) * CHIPSIZE;
 				}
 
-				if (g_map.playStage[int(g_player.py / CHIPSIZE)+1][int(g_player.px / CHIPSIZE)+1] == BLOCK){
+				if (g_map.playStage[int(g_player.py / CHIPSIZE)+1][int(g_player.px / CHIPSIZE)] == BLOCK){
 					g_player.py = (g_player.py / CHIPSIZE) * CHIPSIZE;
 				}
 
@@ -158,8 +160,8 @@ void gimmickMove() {
 	}
 
 	//破壊できる壁の処理
-	if (g_map.gimmickData[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == GIM_3 ||
-		g_map.gimmickData[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) - 1] == GIM_3 ) {
+	if (g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px+4) / CHIPSIZE) + 1] == GIM_3 ||
+		g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px-4) / CHIPSIZE)] == GIM_3 ) {
 		if (g_player.item[g_player.itemSelect] == K_KAI && key[KEY_INPUT_SPACE] == 1) {
 			g_gimmick[BREAK].ONFlg = true;
 			g_player.item[g_player.itemSelect] = K_NO;
