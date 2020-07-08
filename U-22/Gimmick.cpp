@@ -7,7 +7,7 @@
 
 void gimmickDisp() {
 	DrawGraph(g_gimmick[LIFT].x, g_gimmick[LIFT].y, g_img.door[int(g_gimmick[LIFT].anime)], TRUE);
-	DrawGraph(g_gimmick[BOUND].x, g_gimmick[BOUND].y, g_img.spring, TRUE);
+	DrawGraph(g_gimmick[BOUND].x, g_gimmick[BOUND].y, g_img.spring[int(g_gimmick[BOUND].anime)], TRUE);
 }
 
 void gimmickMove() {
@@ -118,6 +118,7 @@ void gimmickMove() {
 				g_gimmick[BOUND].speed = -JUMP_POWER;
 				g_player.py += g_gimmick[BOUND].speed;
 				g_gimmick[BOUND].speed += G;
+				g_gimmick[BOUND].anime = 3;
 			}
 
 			if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == BLOCK) {
@@ -153,6 +154,7 @@ void gimmickMove() {
 				g_gimmick[BOUND].speed = 0;
 			}*/
 		}
+		if (g_gimmick[BOUND].anime > 0) g_gimmick[BOUND].anime -= 0.1F;
 	}
 
 	//”j‰ó‚Å‚«‚é•Ç‚Ìˆ—
