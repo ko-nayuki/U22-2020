@@ -53,5 +53,6 @@ void PlayMove() {
 
 	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == 2) {
 		g_gameScene = GAME_SELECT;
+		
 	}
 }

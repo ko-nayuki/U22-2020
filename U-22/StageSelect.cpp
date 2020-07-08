@@ -18,7 +18,13 @@ void SelectDisp() {
 	DrawFormatString(0, 600, 0x000000, "%d", g_map.select);
 }
 void SelectMove() {
+
+	if (g_map.playStage[int(g_player.py /CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] != 1) {
+		g_player.py += 16;
+	}
+
 	PlayerMove();
+
 	if (g_KeyFlg & PAD_INPUT_RIGHT) {
 		if (++g_map.select > STAGE - 1) g_map.select = 0;
 	}
