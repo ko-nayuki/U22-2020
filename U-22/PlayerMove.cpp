@@ -21,18 +21,18 @@ void PlayerMove(){
 		}
 		else {
 			//斜めじゃなければ１．０に設定
-			g_player.move = 1.0f;
+			g_player.move = 1;
 		}
 	}
 	else if (key[KEY_INPUT_UP] == 1 || key[KEY_INPUT_DOWN] == 1) {
-		g_player.move = 1.0f;
+		g_player.move = 1;
 	}
 
 	//移動処理
 	if (key[KEY_INPUT_LEFT] == 1) {
 
 		//ブロック当たり判定して進む
-		if (g_map.playStage[int(g_player.py/CHIPSIZE)][int(g_player.px/CHIPSIZE)] != 1
+		if (g_map.playStage[int(g_player.py/CHIPSIZE)][int((g_player.px-4)/CHIPSIZE)] != 1
 			&& g_map.playStage[int((g_player.py-1) / CHIPSIZE)+1][int((g_player.px-4)/ CHIPSIZE)] != 1) {
 			g_player.px -= 4 * g_player.move;
 		}
@@ -58,11 +58,7 @@ void PlayerMove(){
 	if (g_player.px < 0)
 		g_player.px = 0;
 
-	if (g_player.py - CHIPSIZE > 576)
-		g_player.py = 576 - CHIPSIZE;
-
-	if (g_player.py < 0)
-		g_player.py = 0;
+	
 
 
 	//if (g_player.px + 32 > 582 && g_player.px + 32 < 701 && g_player.py > 515 && g_player.py < 632) {
