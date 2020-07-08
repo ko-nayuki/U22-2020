@@ -7,7 +7,7 @@
 
 void gimmickDisp() {
 	DrawGraph(g_gimmick[LIFT].x, g_gimmick[LIFT].y, g_img.door[int(g_gimmick[LIFT].anime)], TRUE);
-	DrawGraph(g_gimmick[BOUND].x, g_gimmick[BOUND].y, g_img.door[int(g_gimmick[BOUND].anime)], TRUE);
+	DrawGraph(g_gimmick[BOUND].x, g_gimmick[BOUND].y, g_img.spring, TRUE);
 }
 
 void gimmickMove() {
