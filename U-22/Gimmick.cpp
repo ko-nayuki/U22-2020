@@ -102,7 +102,7 @@ void gimmickMove() {
 	}
 
 	//ÉWÉÉÉìÉvë‰èàóù
-	if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE) ] == GIM_2) {
+	if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] == GIM_2) {
 		if (g_gimmick[BOUND].y != CHIPSIZE) {//[óÕ]ÇégÇ§
 			if (g_player.item[g_player.itemSelect] == K_TIKARA && key[KEY_INPUT_SPACE] == 1 &&
 				g_gimmick[BOUND].ONFlg == false) {
@@ -115,7 +115,8 @@ void gimmickMove() {
 
 	if (g_gimmick[BOUND].ONFlg == true) {
 		if (g_gimmick[LIFT].moveFlg == false && g_gimmick[LIFT].moveFlg2 == false) {
-			if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px/ CHIPSIZE)] == GIM_2) {
+			if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int((g_player.px+4)/ CHIPSIZE)] == GIM_2
+			) {
 				g_gimmick[BOUND].speed = -JUMP_POWER;
 				g_player.py += g_gimmick[BOUND].speed;
 				g_gimmick[BOUND].speed += G;

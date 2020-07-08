@@ -42,7 +42,7 @@ void PlayerMove(){
 	if (key[KEY_INPUT_RIGHT] == 1) {
 
 		//ブロック当たり判定して進む
-		if (g_map.playStage[int(g_player.py/CHIPSIZE)][int(g_player.px/CHIPSIZE)+1] != 1
+		if (g_map.playStage[int(g_player.py/CHIPSIZE)][int((g_player.px+4)/CHIPSIZE)+1] != 1
 			&&g_map.playStage[int((g_player.py-1) / CHIPSIZE)+1][int((g_player.px+4) / CHIPSIZE)+1] != 1) {
 			g_player.px += 4 * g_player.move;
 		}
