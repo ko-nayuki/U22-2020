@@ -8,10 +8,11 @@ struct image {
 	int MAP[5];//画像が入っている数値
 	int gh[9];  //player
 	int door[4]; //エレベータ
-	int spring;	//ジャンプ台
+	int spring[3]; //ジャンプ台
 	int bookshelf[4];//本棚
 	int kanzi[5];//漢字
 	int itemBox;
+
 };
 
 extern image g_img;
