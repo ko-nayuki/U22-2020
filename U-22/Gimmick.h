@@ -11,6 +11,7 @@ void gimmickMove();
 void gimmickDisp();
 void gimmickInit();
 
+
 enum {//ギミック
 	LIFT = 0,		//エレベーター
 	BOUND = 1,		//ジャンプ台
@@ -35,6 +36,8 @@ struct Gimmick {
 	bool moveFlg2;		//ギミックのアニメーション起動フラグ2
 	float anime;		//ギミックアニメーション
 	float speed;		//ジャンプ用
+
+	int tikara = 0;
 };
 
 extern Gimmick g_gimmick[GIMMICK_NUM];

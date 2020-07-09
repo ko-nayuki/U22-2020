@@ -7,6 +7,8 @@
 #include "Gimmick.h"
 
 void StageSelect() {
+	g_gimmick[BOUND].tikara = 0;
+
 	SelectDisp();
 	SelectMove();
 }
