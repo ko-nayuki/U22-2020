@@ -31,6 +31,9 @@ struct Player {
 	int item[ITEM_MAX] = { 0 };
 	int itemNo = 0;
 	int itemSelect = 0;
+
+	//落下スピード
+	float fallSpeed = 0;
 };
 
 extern Player g_player;

@@ -2,6 +2,7 @@
 #include "player.h"
 #include "Picture.h"
 #include "Map.h"
+#include "Gimmick.h"
 
 
 
@@ -152,6 +153,27 @@ void PlayerMove(){
 	//	g_player.result = g_player.iy;
 
 	//}
+
+
+	g_player.py += g_player.fallSpeed;
+	g_player.fallSpeed += G;
+
+	if ((g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE) + 1] == BLOCK ||
+		g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] == BLOCK) ||
+		g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE) + 1] == GIM_2) {
+
+		g_player.fallSpeed = 0;
+
+		if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] == GIM_2) {
+			g_player.py = (g_player.py / CHIPSIZE) * CHIPSIZE;
+		}
+
+		if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] == BLOCK
+			|| g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE) + 1] == BLOCK) {
+			g_player.py = (g_player.py / CHIPSIZE) * CHIPSIZE;
+		}
+		
+	}
 
 	DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
 	//DrawExtendGraph();

@@ -45,7 +45,7 @@ void gimmickMove() {
 	}
 
 	//エレベーター処理
-	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == GIM_1) {
+	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px+32) / CHIPSIZE)] == GIM_1) {
 		if (g_player.item[g_player.itemSelect] == K_UE || g_player.item[g_player.itemSelect] == K_SITA) {
 			if (g_gimmick[LIFT].anime < 2.0F)g_gimmick[LIFT].anime += 0.1F;
 		}
@@ -109,75 +109,29 @@ void gimmickMove() {
 				g_gimmick[BOUND].ONFlg = true;
 				g_player.item[g_player.itemSelect] = K_NO;
 				g_player.itemNo--;
-				g_gimmick[BOUND].tikara = 1;
 				
 			}
 		}
 	}
 
-	//真下にブロックなかったら落ちる
-	if (g_gimmick[BOUND].ONFlg == false
-		&& g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] != GIM_2
-		&& g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] != BLOCK) {
-		g_gimmick[BOUND].ONFlg = true;
-		g_gimmick[BOUND].speed = 0;
-		g_gimmick[BOUND].speed += G * 5;
-		g_player.py += g_gimmick[BOUND].speed;
-	}
-
-
 	if (g_gimmick[BOUND].ONFlg == true) {
 		if (g_gimmick[LIFT].moveFlg == false && g_gimmick[LIFT].moveFlg2 == false) {
-			if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int((g_player.px+4)/ CHIPSIZE)] == GIM_2
-			) {
-				g_gimmick[BOUND].speed = -JUMP_POWER;
-				g_player.py += g_gimmick[BOUND].speed;
-				g_gimmick[BOUND].speed += G;
+			if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int((g_player.px+32)/ CHIPSIZE)] == GIM_2) {
+				g_player.fallSpeed = -JUMP_POWER;
 				g_gimmick[BOUND].anime = 3;
 			}
 
 			//頭上にブロックがあったら
 			if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == BLOCK) {
 
-				g_gimmick[BOUND].speed = 0;
-				g_gimmick[BOUND].speed += G*5;
-				g_player.py += g_gimmick[BOUND].speed;
-			
+				g_player.py = g_player.py + 1;
+				g_player.fallSpeed = 0;
+
 			}
 
-			if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] != BLOCK
-				&& g_map.playStage[int((g_player.py-1) / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)+1] != BLOCK) {
-
-		
-				g_player.py += g_gimmick[BOUND].speed;
-				g_gimmick[BOUND].speed += G;
-
-			} else {
-
-				g_gimmick[BOUND].speed = 0;
-
-				if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] == GIM_2) {
-					g_player.py = (g_player.py / CHIPSIZE) * CHIPSIZE;
-				}
-
-				if (g_map.playStage[int(g_player.py / CHIPSIZE)+1][int(g_player.px / CHIPSIZE)] == BLOCK
-					||g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)+1] == BLOCK){
-					g_player.py = (g_player.py / CHIPSIZE) * CHIPSIZE;
-				}
-				g_gimmick[BOUND].ONFlg = false;
-				
-			}
-			/*if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == BLOCK) {
-				g_gimmick[BOUND].speed = 0;
-			}*/
 		}
+
 		if (g_gimmick[BOUND].anime > 0) g_gimmick[BOUND].anime -= 0.1F;
-	}
-	if (g_gimmick[BOUND].ONFlg == false
-		&& g_gimmick[BOUND].tikara == 1
-		&& g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] == GIM_2) {
-		g_gimmick[BOUND].ONFlg = true;
-		
 	}
 	
 	//破壊できる壁の処理
@@ -211,6 +165,5 @@ void gimmickInit() {
 		g_gimmick[i].x = 0;
 		g_gimmick[i].y = 0;
 		g_gimmick[i].anime = 0;
-		g_gimmick[i].speed = 0;
 	}
 }

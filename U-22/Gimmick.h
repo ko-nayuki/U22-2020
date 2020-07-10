@@ -5,7 +5,7 @@
 #define KANZI_NUM 3		//漢字の数
 
 #define G                (0.2F)		// 重力
-#define JUMP_POWER       (15.0F)	// ジャンプ台のジャンプ力
+#define JUMP_POWER       (14.0F)	// ジャンプ台のジャンプ力
 
 void gimmickMove();
 void gimmickDisp();
@@ -35,7 +35,7 @@ struct Gimmick {
 	bool moveFlg;		//ギミックのアニメーション起動フラグ
 	bool moveFlg2;		//ギミックのアニメーション起動フラグ2
 	float anime;		//ギミックアニメーション
-	float speed;		//ジャンプ用
+	//float speed;		//ジャンプ用
 
 	int tikara = 0;
 };
