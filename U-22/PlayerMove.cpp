@@ -158,9 +158,9 @@ void PlayerMove(){
 	g_player.py += g_player.fallSpeed;
 	g_player.fallSpeed += G;
 
-	if ((g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE) + 1] == BLOCK ||
+	if ((g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE)] == BLOCK ||
 		g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] == BLOCK) ||
-		g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE) + 1] == GIM_2) {
+		g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] == GIM_2) {
 
 		g_player.fallSpeed = 0;
 
