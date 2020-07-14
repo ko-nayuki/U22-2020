@@ -37,10 +37,10 @@ void PlayDisp() {
 		}
 	}
 
-	if (g_KeyFlg & PAD_INPUT_RIGHT) {
+	if (g_KeyFlg & PAD_INPUT_Z) {
 		if (++g_player.itemSelect > ITEM_MAX - 1) g_player.itemSelect = 0;
 	}
-	if (g_KeyFlg & PAD_INPUT_LEFT) {
+	if (g_KeyFlg & PAD_INPUT_X) {
 		if (--g_player.itemSelect < 0) g_player.itemSelect = ITEM_MAX - 1;
 	}
 
