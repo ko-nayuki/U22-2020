@@ -14,6 +14,7 @@ void StageInit() {
 	for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
 			g_map.playStage[i][j] = g_map.stageData[g_map.select][i][j];
+			g_map.gimmickData[i][j] = 0;
 			if (g_map.playStage[i][j] == 5) {//エレベータの情報
 				g_gimmick[LIFT].x = j * CHIPSIZE;
 				g_gimmick[LIFT].y = i * CHIPSIZE;
@@ -25,8 +26,10 @@ void StageInit() {
 			if (g_map.playStage[i][j] == 7) {//破壊できる壁の情報
 				g_map.gimmickData[i][j] = g_map.playStage[i][j];
 				g_map.playStage[i][j] = 1;
-			} else {
-				g_map.gimmickData[i][j] = 0;
+			}
+			if (g_map.playStage[i][j] == 8) {//落下ギミックの情報
+				g_map.gimmickData[i][j] = g_map.playStage[i][j];
+				g_map.playStage[i][j] = 1;
 			}
 			g_map.random[i][j] = rand() % 3;
 		}
