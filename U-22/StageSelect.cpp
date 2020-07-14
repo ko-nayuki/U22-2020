@@ -17,7 +17,7 @@ void SelectDisp() {
 	BackStageDisp();
 	SelectMAPDisp();
 	DrawFormatString(600, 300, 0x000000, "SPACE");
-	DrawFormatString(0, 600, 0x000000, "%d", g_map.select);
+	DrawFormatString(0, 650, 0x000000, "%d", g_map.select);
 }
 void SelectMove() {
 

@@ -122,9 +122,12 @@ void gimmickMove() {
 			}
 
 			//ì™è„Ç…ÉuÉçÉbÉNÇ™Ç†Ç¡ÇΩÇÁ
-			if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == BLOCK) {
+			if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE)] == BLOCK ||
+				g_map.playStage[int((g_player.py-8) / CHIPSIZE)][int((g_player.px+64) / CHIPSIZE)] == BLOCK ||
+				g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == BLOCK||
+				g_player.py == 64) {
 
-				g_player.py = g_player.py + 1;
+				g_player.py = g_player.py+1;
 				g_player.fallSpeed = 0;
 
 			}
