@@ -11,6 +11,10 @@ void gimmickMove();
 void gimmickDisp();
 void gimmickInit();
 
+void liftMove();	//エレベーター
+void boundMove();	//ジャンプ台
+void breakMove();	//破壊できる壁
+void dropMove();	//落下ギミック
 
 enum {//ギミック
 	LIFT = 0,		//エレベーター

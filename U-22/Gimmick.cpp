@@ -46,6 +46,13 @@ void gimmickMove() {
 		}
 	}
 
+	liftMove();		//エレベーター
+	boundMove();	//ジャンプ台
+	breakMove();	//破壊できる壁
+	dropMove();		//落下ギミック
+}
+
+void liftMove() {
 	//エレベーター処理
 	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_1) {
 		if (g_player.item[g_player.itemSelect] == K_UE || g_player.item[g_player.itemSelect] == K_SITA &&
@@ -128,6 +135,8 @@ void gimmickMove() {
 		}
 	}
 
+}
+void boundMove() {
 	//ジャンプ台処理
 	if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_2) {
 		if (g_gimmick[BOUND].y != CHIPSIZE) {//[力]を使う
@@ -161,7 +170,7 @@ void gimmickMove() {
 				g_player.py == 64) {
 
 				g_player.py = g_player.py + 1;
-				g_player.py = g_player.py + 1;
+				g_player.fallSpeed = 0;
 			}
 
 		}
@@ -169,6 +178,8 @@ void gimmickMove() {
 		if (g_gimmick[BOUND].anime > 0) g_gimmick[BOUND].anime -= 0.1F;
 	}
 
+}
+void breakMove() {
 	//破壊できる壁の処理
 	if (g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 4) / CHIPSIZE) + 1] == GIM_3 ||
 		g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px - 4) / CHIPSIZE)] == GIM_3) {
@@ -190,6 +201,8 @@ void gimmickMove() {
 		g_gimmick[BREAK].ONFlg = false;
 	}
 
+}
+void dropMove() {
 	//落下ギミックの処理
 	if (g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_4) {
 		if (g_player.item[g_player.itemSelect] == K_SITA && key[KEY_INPUT_SPACE] == 1) {
@@ -214,6 +227,7 @@ void gimmickMove() {
 		}
 	}
 }
+
 
 void gimmickInit() {
 	for (int i = 0; i < GIMMICK_NUM; i++) {

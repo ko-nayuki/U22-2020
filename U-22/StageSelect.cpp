@@ -42,6 +42,7 @@ void SelectMove() {
 		for (int i = 0; i < ITEM_MAX; i++) {
 			g_player.item[i] = K_NO;
 		}
+		g_player.itemNo = 0;
 
 		g_gameScene = GAME_PLAY;
 	}
