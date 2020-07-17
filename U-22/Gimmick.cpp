@@ -8,6 +8,7 @@
 void gimmickDisp() {
 	DrawGraph(g_gimmick[LIFT].x, g_gimmick[LIFT].y, g_img.door[int(g_gimmick[LIFT].anime)], TRUE);
 	DrawGraph(g_gimmick[BOUND].x, g_gimmick[BOUND].y, g_img.spring[int(g_gimmick[BOUND].anime)], TRUE);
+	DrawGraph(g_gimmick[DROP].x, g_gimmick[DROP].y, g_img.itemBox, TRUE);
 	DrawFormatString(200, 550, 0x0000ff, "%d", g_gimmick[LIFT].h * CHIPSIZE);
 	DrawFormatString(200, 570, 0x0000ff, "%d", g_gimmick[LIFT].y);
 }
@@ -36,6 +37,11 @@ void gimmickMove() {
 			g_player.item[g_player.itemNo++] = K_HA;
 			g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = 0;
 		}
+		//消
+		if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == E) {
+			g_player.item[g_player.itemNo++] = K_SHOU;
+			g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = 0;
+		}
 
 		//アイテム欄左詰め
 		for (int i = 0; i < g_player.itemNo; i++) {
@@ -50,6 +56,7 @@ void gimmickMove() {
 	boundMove();	//ジャンプ台
 	breakMove();	//破壊できる壁
 	dropMove();		//落下ギミック
+	fireMove();		//炎
 }
 
 void liftMove() {
@@ -204,7 +211,7 @@ void breakMove() {
 }
 void dropMove() {
 	//落下ギミックの処理
-	if (g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_4) {
+	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_402) {
 		if (g_player.item[g_player.itemSelect] == K_SITA && key[KEY_INPUT_SPACE] == 1) {
 			g_gimmick[DROP].ONFlg = true;
 			g_player.item[g_player.itemSelect] = K_NO;
@@ -212,12 +219,24 @@ void dropMove() {
 		}
 	}
 	if (g_gimmick[DROP].ONFlg == true) {
+
+		for (int i = (g_gimmick[DROP].x / CHIPSIZE) + 1; i < STAGE_WIDTH; i++) {
+			if (g_map.gimmickData[int(g_gimmick[DROP].y / CHIPSIZE) + 1][i] == 8) {
+				g_map.playStage[int(g_gimmick[DROP].y / CHIPSIZE) + 1][i] = AIR;
+			} else {
+				break;
+			}
+		}
+		for (int i = (g_gimmick[DROP].x / CHIPSIZE) - 1; i > 0; i--) {
+			if (g_map.gimmickData[int(g_gimmick[DROP].y / CHIPSIZE) + 1][i] == 8) {
+				g_map.playStage[int(g_gimmick[DROP].y / CHIPSIZE) + 1][i] = AIR;
+			} else {
+				break;
+			}
+		}
 		for (int i = 0; i < STAGE_HEIGHT; i++) {
 			for (int j = 0; j < STAGE_WIDTH; j++) {
-				if (g_map.gimmickData[i][j] == 8) {
-					g_map.playStage[i][j] = AIR;
-				}
-				if (g_map.gimmickData[int(g_player.py / CHIPSIZE) - 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_4) {
+				if (g_map.gimmickData[int(g_player.py / CHIPSIZE) - 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_401) {
 					if (g_map.gimmickData[i][j] == 8) {
 						g_map.playStage[i][j] = BLOCK;
 					}
@@ -225,6 +244,28 @@ void dropMove() {
 				}
 			}
 		}
+	}
+}
+void fireMove() {
+	//炎の処理
+	if (g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 4) / CHIPSIZE) + 1] == GIM_5 ||
+		g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px - 4) / CHIPSIZE)] == GIM_5) {
+		if (g_player.item[g_player.itemSelect] == K_SHOU && key[KEY_INPUT_SPACE] == 1) {
+			g_gimmick[FIRE].ONFlg = true;
+			g_player.item[g_player.itemSelect] = K_NO;
+			g_player.itemNo--;
+		}
+	}
+	if (g_gimmick[FIRE].ONFlg == true) {
+		for (int i = 0; i < STAGE_HEIGHT; i++) {
+			for (int j = 0; j < STAGE_WIDTH; j++) {
+				if (g_map.gimmickData[i][j] == 10) {
+					g_map.playStage[i][j] = AIR;
+					g_map.gimmickData[i][j] = 0;
+				}
+			}
+		}
+		g_gimmick[BREAK].ONFlg = false;
 	}
 }
 

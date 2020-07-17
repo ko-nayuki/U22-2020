@@ -2,7 +2,7 @@
 #include "DxLib.h"
 
 #define GIMMICK_NUM 4	//ギミックの名前
-#define KANZI_NUM 3		//漢字の数
+#define KANZI_NUM 5		//漢字の数
 
 #define G                (0.2F)		// 重力
 #define JUMP_POWER       (14.0F)	// ジャンプ台のジャンプ力
@@ -15,12 +15,14 @@ void liftMove();	//エレベーター
 void boundMove();	//ジャンプ台
 void breakMove();	//破壊できる壁
 void dropMove();	//落下ギミック
+void fireMove();	//炎
 
 enum {//ギミック
 	LIFT = 0,		//エレベーター
 	BOUND = 1,		//ジャンプ台
 	BREAK = 2,		//破壊できる壁
-	DROP = 3		//落下ギミック
+	DROP = 3,		//落下ギミック
+	FIRE = 4,		//炎
 };
 
 enum {//漢字
@@ -29,6 +31,7 @@ enum {//漢字
 	K_SITA = 2,		//下[した]
 	K_TIKARA = 3,	//力[ちから]
 	K_HA = 4,		//破[は]
+	K_SHOU = 5,		//消[しょう]
 };
 
 struct Gimmick {

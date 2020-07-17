@@ -31,6 +31,14 @@ void StageInit() {
 				g_map.gimmickData[i][j] = g_map.playStage[i][j];
 				g_map.playStage[i][j] = 1;
 			}
+			if (g_map.playStage[i][j] == 9) {//—‰ºŠÅ”Â‚Ìî•ñ
+				g_gimmick[DROP].x = j * CHIPSIZE;
+				g_gimmick[DROP].y = i * CHIPSIZE;
+			}
+			if (g_map.playStage[i][j] == 10) {//‰Š‚Ìî•ñ
+				g_map.gimmickData[i][j] = g_map.playStage[i][j];
+				g_map.playStage[i][j] = 1;
+			}
 			g_map.random[i][j] = rand() % 3;
 		}
 	}
