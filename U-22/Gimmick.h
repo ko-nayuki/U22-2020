@@ -1,8 +1,8 @@
 #pragma once
 #include "DxLib.h"
 
-#define GIMMICK_NUM 4	//ギミックの名前
-#define KANZI_NUM 5		//漢字の数
+#define GIMMICK_NUM 10	//ギミックの数
+#define KANZI_NUM 6		//漢字の数
 
 #define G                (0.2F)		// 重力
 #define JUMP_POWER       (14.0F)	// ジャンプ台のジャンプ力
@@ -16,6 +16,7 @@ void boundMove();	//ジャンプ台
 void breakMove();	//破壊できる壁
 void dropMove();	//落下ギミック
 void fireMove();	//炎
+void warpMove();	//ワープ
 
 enum {//ギミック
 	LIFT = 0,		//エレベーター
@@ -23,6 +24,8 @@ enum {//ギミック
 	BREAK = 2,		//破壊できる壁
 	DROP = 3,		//落下ギミック
 	FIRE = 4,		//炎
+	WARP_A = 5,		//ワープA地点
+	WARP_B = 6,		//ワープB地点
 };
 
 enum {//漢字
@@ -32,6 +35,7 @@ enum {//漢字
 	K_TIKARA = 3,	//力[ちから]
 	K_HA = 4,		//破[は]
 	K_SHOU = 5,		//消[しょう]
+	K_DOU = 6,		//動[どう]
 };
 
 struct Gimmick {
@@ -49,4 +53,3 @@ struct Gimmick {
 };
 
 extern Gimmick g_gimmick[GIMMICK_NUM];
-

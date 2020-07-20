@@ -4,6 +4,7 @@
 #include "Map.h"
 #include "Picture.h"
 #include "Gimmick.h"
+#include "player.h"
 
 //int g_Stage = 0;
 //StageInfo Stage;
@@ -15,6 +16,12 @@ void StageInit() {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
 			g_map.playStage[i][j] = g_map.stageData[g_map.select][i][j];
 			g_map.gimmickData[i][j] = 0;
+
+			if (g_map.playStage[i][j] == 3) {//プレイヤーの座標
+				g_player.px = j * CHIPSIZE;
+				g_player.py = i * CHIPSIZE;
+			}
+
 			if (g_map.playStage[i][j] == 5) {//エレベータの情報
 				g_gimmick[LIFT].x = j * CHIPSIZE;
 				g_gimmick[LIFT].y = i * CHIPSIZE;
@@ -38,6 +45,14 @@ void StageInit() {
 			if (g_map.playStage[i][j] == 10) {//炎の情報
 				g_map.gimmickData[i][j] = g_map.playStage[i][j];
 				g_map.playStage[i][j] = 1;
+			}
+			if (g_map.playStage[i][j] == 11) {//ワープAの情報
+				g_gimmick[WARP_A].x = j * CHIPSIZE;
+				g_gimmick[WARP_A].y = i * CHIPSIZE;
+			}
+			if (g_map.playStage[i][j] == 12) {//ワープBの情報
+				g_gimmick[WARP_B].x = j * CHIPSIZE;
+				g_gimmick[WARP_B].y = i * CHIPSIZE;
 			}
 			g_map.random[i][j] = rand() % 3;
 		}

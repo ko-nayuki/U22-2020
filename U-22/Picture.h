@@ -10,7 +10,7 @@ struct image {
 	int door[4]; //エレベータ
 	int spring[3]; //ジャンプ台
 	int bookshelf[4];//本棚
-	int kanzi[5];//漢字
+	int kanzi[6];//漢字
 	int itemBox;
 
 };

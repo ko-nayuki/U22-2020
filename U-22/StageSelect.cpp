@@ -37,8 +37,6 @@ void SelectMove() {
 	if (key[KEY_INPUT_SPACE] == 1) {
 		gimmickInit();
 		StageInit();
-		g_player.px = 1 * CHIPSIZE;
-		g_player.py = 9 * CHIPSIZE;
 		for (int i = 0; i < ITEM_MAX; i++) {
 			g_player.item[i] = K_NO;
 		}

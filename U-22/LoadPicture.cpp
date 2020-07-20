@@ -19,6 +19,7 @@ int LoadPicture(){
 	if ((g_img.kanzi[2] = LoadGraph("images/maruchikara.png")) == -1) return -1;
 	if ((g_img.kanzi[3] = LoadGraph("images/maruha.png")) == -1) return -1;
 	if ((g_img.kanzi[4] = LoadGraph("images/marukesi.png")) == -1) return -1;
+	if ((g_img.kanzi[5] = LoadGraph("images/marudou.png")) == -1) return -1;
 	if ((g_img.itemBox = LoadGraph("images/itembox.png")) == -1) return -1;
 	return 0;
 }
