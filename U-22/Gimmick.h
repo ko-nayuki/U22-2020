@@ -11,6 +11,8 @@ void gimmickMove();
 void gimmickDisp();
 void gimmickInit();
 
+void smoke(int smokeX, int smokeY);		//煙
+
 void liftMove();	//エレベーター
 void boundMove();	//ジャンプ台
 void breakMove();	//破壊できる壁

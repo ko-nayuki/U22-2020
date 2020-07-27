@@ -5,6 +5,8 @@
 #include "Map.h"
 #include "Picture.h"
 
+bool smokeFlg = false;
+
 void gimmickDisp() {
 	DrawGraph(g_gimmick[LIFT].x, g_gimmick[LIFT].y, g_img.door[int(g_gimmick[LIFT].anime)], TRUE);
 	DrawGraph(g_gimmick[BOUND].x, g_gimmick[BOUND].y, g_img.spring[int(g_gimmick[BOUND].anime)], TRUE);
@@ -58,7 +60,6 @@ void gimmickMove() {
 			}
 		}
 	}
-
 	liftMove();		//エレベーター
 	boundMove();	//ジャンプ台
 	breakMove();	//破壊できる壁
@@ -73,6 +74,9 @@ void liftMove() {
 		if (g_player.item[g_player.itemSelect] == K_UE || g_player.item[g_player.itemSelect] == K_SITA &&
 			g_gimmick[LIFT].moveFlg == false && g_gimmick[LIFT].moveFlg2 == false) {
 			if (g_gimmick[LIFT].anime < 2.0F)g_gimmick[LIFT].anime += 0.1F;
+			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[0], TRUE);
+		}else {
+			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[1], TRUE);
 		}
 		//if (g_gimmick[LIFT].y != CHIPSIZE) {//[上]を使う
 		if (g_player.item[g_player.itemSelect] == K_UE && key[KEY_INPUT_SPACE] == 1
@@ -86,6 +90,7 @@ void liftMove() {
 						g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 						g_player.item[g_player.itemSelect] = K_NO;
 						g_player.itemNo--;
+						smokeFlg = true;
 						break;
 
 					}
@@ -106,6 +111,7 @@ void liftMove() {
 						g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 						g_player.item[g_player.itemSelect] = K_NO;
 						g_player.itemNo--;
+						smokeFlg = true;
 						break;
 					}
 				}
@@ -118,6 +124,10 @@ void liftMove() {
 	}
 
 	if (g_gimmick[LIFT].moveFlg == true) {//上昇の処理
+		if (smokeFlg == true) {//煙
+			smoke(g_gimmick[LIFT].x, g_gimmick[LIFT].y);
+		}
+
 		//if (g_gimmick[LIFT].ONFlg == true) {
 		if (g_gimmick[LIFT].y == g_gimmick[LIFT].h * CHIPSIZE) {
 			g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = GIM_1;
@@ -136,6 +146,9 @@ void liftMove() {
 	}
 
 	if (g_gimmick[LIFT].moveFlg2 == true) {//下降の処理
+		if (smokeFlg == true) {//煙
+			smoke(g_gimmick[LIFT].x, g_gimmick[LIFT].y);
+		}
 		if (g_player.py == g_gimmick[LIFT].h * CHIPSIZE) {
 			g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = GIM_1;
 			if (g_gimmick[LIFT].anime < 2.0F)g_gimmick[LIFT].anime += 0.1F;
@@ -160,12 +173,21 @@ void boundMove() {
 				g_gimmick[BOUND].ONFlg = true;
 				g_player.item[g_player.itemSelect] = K_NO;
 				g_player.itemNo--;
-
+				smokeFlg = true;
 			}
+		}
+		if (g_player.item[g_player.itemSelect] == K_TIKARA) {
+			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[0], TRUE);
+		}
+		else if(g_gimmick[BOUND].ONFlg == false){
+			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[1], TRUE);
 		}
 	}
 
 	if (g_gimmick[BOUND].ONFlg == true) {
+		if (smokeFlg == true) {//煙
+			smoke(g_gimmick[BOUND].x, g_gimmick[BOUND].y);
+		}
 		if (g_gimmick[LIFT].moveFlg == false && g_gimmick[LIFT].moveFlg2 == false) {
 			if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_2) {
 				g_player.fallSpeed = -JUMP_POWER;
@@ -202,9 +224,19 @@ void breakMove() {
 			g_gimmick[BREAK].ONFlg = true;
 			g_player.item[g_player.itemSelect] = K_NO;
 			g_player.itemNo--;
+			smokeFlg = true;
+		}
+		if (g_player.item[g_player.itemSelect] == K_HA) {
+			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[0], TRUE);
+		}
+		else{
+			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[1], TRUE);
 		}
 	}
 	if (g_gimmick[BREAK].ONFlg == true) {
+		if (smokeFlg == true) {//煙
+			smoke(g_player.px, g_player.py);
+		}
 		for (int i = 0; i < STAGE_HEIGHT; i++) {
 			for (int j = 0; j < STAGE_WIDTH; j++) {
 				if (g_map.gimmickData[i][j] == 7) {
@@ -224,10 +256,20 @@ void dropMove() {
 			g_gimmick[DROP].ONFlg = true;
 			g_player.item[g_player.itemSelect] = K_NO;
 			g_player.itemNo--;
+			smokeFlg = true;
+		}
+		if (g_player.item[g_player.itemSelect] == K_SITA) {
+			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[0], TRUE);
+		}
+		else{
+			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[1], TRUE);
 		}
 	}
 	if (g_gimmick[DROP].ONFlg == true) {
 
+		if (smokeFlg == true) {//煙
+			smoke(g_gimmick[DROP].x, g_gimmick[DROP].y);
+		}
 		for (int i = (g_gimmick[DROP].x / CHIPSIZE) + 1; i < STAGE_WIDTH; i++) {
 			if (g_map.gimmickData[int(g_gimmick[DROP].y / CHIPSIZE) + 1][i] == 8) {
 				g_map.playStage[int(g_gimmick[DROP].y / CHIPSIZE) + 1][i] = AIR;
@@ -262,9 +304,19 @@ void fireMove() {
 			g_gimmick[FIRE].ONFlg = true;
 			g_player.item[g_player.itemSelect] = K_NO;
 			g_player.itemNo--;
+			smokeFlg = true;
+		}
+		if (g_player.item[g_player.itemSelect] == K_SHOU) {
+			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[0], TRUE);
+		}
+		else{
+			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[1], TRUE);
 		}
 	}
 	if (g_gimmick[FIRE].ONFlg == true) {
+		if (smokeFlg == true) {//煙
+			smoke(g_player.px, g_player.py);
+		}
 		for (int i = 0; i < STAGE_HEIGHT; i++) {
 			for (int j = 0; j < STAGE_WIDTH; j++) {
 				if (g_map.gimmickData[i][j] == 10) {
@@ -287,9 +339,20 @@ void warpMove() {
 			g_gimmick[WARP_B].moveFlg = true;
 			g_player.item[g_player.itemSelect] = K_NO;
 			g_player.itemNo--;
+			smokeFlg = true;
+		}
+		if (g_player.item[g_player.itemSelect] == K_DOU) {
+			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[0], TRUE);
+		}
+		else if(g_gimmick[WARP_A].ONFlg == false){
+			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[1], TRUE);
 		}
 	}
 	if (g_gimmick[WARP_A].ONFlg == true) {
+		if (smokeFlg == true) {//煙
+			smoke(g_gimmick[WARP_A].x, g_gimmick[WARP_A].y);
+			smoke(g_gimmick[WARP_B].x, g_gimmick[WARP_B].y);
+		}
 		if (g_gimmick[WARP_A].moveFlg == true) {
 			if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_601) {
 				g_gimmick[WARP_B].moveFlg = false;
@@ -315,6 +378,20 @@ void warpMove() {
 	}
 }
 
+
+void smoke(int smokeX, int smokeY) {
+
+	static float anime = 0;
+
+	DrawGraph(smokeX, smokeY, g_img.smoke[int(anime)], TRUE);
+
+	if (anime < 7.0F) anime += 0.2F;
+	else {
+		anime = 0;
+		smokeFlg = false;
+	}
+
+}
 
 void gimmickInit() {
 	for (int i = 0; i < GIMMICK_NUM; i++) {

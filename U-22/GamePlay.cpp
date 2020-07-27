@@ -15,7 +15,7 @@ void GamePlay() {
 }
 
 void PlayDisp() {
-	//BackStageDisp();
+	BackStageDisp();
 	gimmickDisp();
 	StageDisp();
 	

@@ -4,7 +4,7 @@
 //画像をロードする
 
 int LoadPicture(){
-	if (LoadDivGraph("images/sample3.bmp", 3, 3, 1, 64, 64, g_img.MAP) == -1) return -1;					//画像チップ
+	if (LoadDivGraph("images/sample4.bmp", 3, 3, 1, 64, 64, g_img.MAP) == -1) return -1;					//画像チップ
 	//if((LoadDivGraph("images/Player.png", 9, 3, 3, 64, 64, g_img.gh)) == -1) return -1;							//プレイヤー変数
 	if ((LoadDivGraph("images/Door.png", 3, 3, 3, 64, 64, g_img.door)) == -1) return -1;							//ドア画像変数
 	if ((g_img.spring[0] = LoadGraph("images/Bane.png")) == -1) return -1;
@@ -21,5 +21,7 @@ int LoadPicture(){
 	if ((g_img.kanzi[4] = LoadGraph("images/marukesi.png")) == -1) return -1;
 	if ((g_img.kanzi[5] = LoadGraph("images/marudou.png")) == -1) return -1;
 	if ((g_img.itemBox = LoadGraph("images/itembox.png")) == -1) return -1;
+	if (LoadDivGraph("images/smoke.png", 8, 8, 1, 64, 64, g_img.smoke) == -1) return -1;
+	if (LoadDivGraph("images/marubatu.png", 2, 2, 1, 64, 64, g_img.marubatu) == -1) return -1;
 	return 0;
 }
