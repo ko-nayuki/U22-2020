@@ -13,6 +13,7 @@ struct image {
 	int smoke[8];		//‰Œ
 	int kanzi[6];		//Š¿Žš
 	int marubatu[2];
+	int gimKanzi[5];
 	int itemBox;
 
 };

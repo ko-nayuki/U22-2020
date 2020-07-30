@@ -23,5 +23,6 @@ int LoadPicture(){
 	if ((g_img.itemBox = LoadGraph("images/itembox.png")) == -1) return -1;
 	if (LoadDivGraph("images/smoke.png", 8, 8, 1, 64, 64, g_img.smoke) == -1) return -1;
 	if (LoadDivGraph("images/marubatu.png", 2, 2, 1, 64, 64, g_img.marubatu) == -1) return -1;
+	if (LoadDivGraph("images/gimmick_kanji.png", 5, 5, 1, 64, 64, g_img.gimKanzi) == -1) return -1;
 	return 0;
 }

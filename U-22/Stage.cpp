@@ -23,12 +23,14 @@ void StageInit() {
 			}
 
 			if (g_map.playStage[i][j] == 5) {//エレベータの情報
+				g_map.gimmickData[i][j] = g_map.playStage[i][j];
 				g_gimmick[LIFT].x = j * CHIPSIZE;
 				g_gimmick[LIFT].y = i * CHIPSIZE;
 			}
 			if (g_map.playStage[i][j] == 6) {//ジャンプ台の情報
-				g_gimmick[BOUND].x = j * CHIPSIZE;
-				g_gimmick[BOUND].y = i * CHIPSIZE;
+				g_map.gimmickData[i][j] = g_map.playStage[i][j];
+				//g_gimmick[BOUND].x = j * CHIPSIZE;
+				//g_gimmick[BOUND].y = i * CHIPSIZE;
 			}
 			if (g_map.playStage[i][j] == 7) {//破壊できる壁の情報
 				g_map.gimmickData[i][j] = g_map.playStage[i][j];
@@ -39,18 +41,21 @@ void StageInit() {
 				g_map.playStage[i][j] = 1;
 			}
 			if (g_map.playStage[i][j] == 9) {//落下看板の情報
-				g_gimmick[DROP].x = j * CHIPSIZE;
-				g_gimmick[DROP].y = i * CHIPSIZE;
+				g_map.gimmickData[i][j] = g_map.playStage[i][j];
+				//g_gimmick[DROP].x = j * CHIPSIZE;
+				//g_gimmick[DROP].y = i * CHIPSIZE;
 			}
 			if (g_map.playStage[i][j] == 10) {//炎の情報
 				g_map.gimmickData[i][j] = g_map.playStage[i][j];
 				g_map.playStage[i][j] = 1;
 			}
 			if (g_map.playStage[i][j] == 11) {//ワープAの情報
+				g_map.gimmickData[i][j] = g_map.playStage[i][j];
 				g_gimmick[WARP_A].x = j * CHIPSIZE;
 				g_gimmick[WARP_A].y = i * CHIPSIZE;
 			}
 			if (g_map.playStage[i][j] == 12) {//ワープBの情報
+				g_map.gimmickData[i][j] = g_map.playStage[i][j];
 				g_gimmick[WARP_B].x = j * CHIPSIZE;
 				g_gimmick[WARP_B].y = i * CHIPSIZE;
 			}
@@ -68,6 +73,22 @@ void StageDisp() {
 			}
 			if (g_map.playStage[i][j] >= A) {//漢字の描画
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.kanzi[g_map.playStage[i][j] - A], TRUE);
+			}
+			if (g_map.gimmickData[i][j] == GIM_1) {
+				if (g_player.item[g_player.itemSelect] == K_SITA) {
+					DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[1], TRUE);
+				} else {
+					DrawGraph(j* CHIPSIZE, i* CHIPSIZE, g_img.gimKanzi[0], TRUE);
+				}
+			}
+			if (g_map.gimmickData[i][j] == GIM_2) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[2], TRUE);
+			}
+			if (g_map.gimmickData[i][j] == GIM_402) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[3], TRUE);
+			}
+			if (g_map.gimmickData[i][j] == GIM_601 || g_map.gimmickData[i][j] == GIM_602) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[4], TRUE);
 			}
 		}
 	}

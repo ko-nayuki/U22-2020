@@ -10,7 +10,9 @@ bool smokeFlg = false;
 void gimmickDisp() {
 	DrawGraph(g_gimmick[LIFT].x, g_gimmick[LIFT].y, g_img.door[int(g_gimmick[LIFT].anime)], TRUE);
 	DrawGraph(g_gimmick[BOUND].x, g_gimmick[BOUND].y, g_img.spring[int(g_gimmick[BOUND].anime)], TRUE);
+	SetDrawBright(255, 0, 0);
 	DrawGraph(g_gimmick[DROP].x, g_gimmick[DROP].y, g_img.itemBox, TRUE);
+	SetDrawBright(255, 255, 255);
 	DrawGraph(g_gimmick[WARP_A].x, g_gimmick[WARP_A].y, g_img.itemBox, TRUE);
 	DrawGraph(g_gimmick[WARP_B].x, g_gimmick[WARP_B].y, g_img.itemBox, TRUE);
 	DrawFormatString(200, 550, 0x0000ff, "%d", g_gimmick[LIFT].h * CHIPSIZE);
@@ -91,6 +93,7 @@ void liftMove() {
 						g_player.item[g_player.itemSelect] = K_NO;
 						g_player.itemNo--;
 						smokeFlg = true;
+						g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 						break;
 
 					}
@@ -112,6 +115,7 @@ void liftMove() {
 						g_player.item[g_player.itemSelect] = K_NO;
 						g_player.itemNo--;
 						smokeFlg = true;
+						g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 						break;
 					}
 				}
@@ -121,6 +125,9 @@ void liftMove() {
 	}
 	else {
 		if (g_gimmick[LIFT].anime > 0.0F)g_gimmick[LIFT].anime -= 0.1F;
+		if (g_gimmick[LIFT].moveFlg == false && g_gimmick[LIFT].moveFlg2 == false && g_gimmick[LIFT].anime <= 0.0F) {
+			g_map.gimmickData[int(g_gimmick[LIFT].y / CHIPSIZE)][int(g_gimmick[LIFT].x) / CHIPSIZE] = GIM_1;
+		}
 	}
 
 	if (g_gimmick[LIFT].moveFlg == true) {//è„è∏ÇÃèàóù
@@ -174,6 +181,15 @@ void boundMove() {
 				g_player.item[g_player.itemSelect] = K_NO;
 				g_player.itemNo--;
 				smokeFlg = true;
+				g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] = AIR;
+				g_gimmick[BOUND].x = int((g_player.px + 32) / CHIPSIZE) * CHIPSIZE;
+				g_gimmick[BOUND].y = (int(g_player.py / CHIPSIZE) + 1) * CHIPSIZE;
+			}else if (g_player.item[g_player.itemSelect] == K_TIKARA && key[KEY_INPUT_SPACE] == 1 &&
+				g_gimmick[BOUND].ONFlg == true) {
+				g_map.gimmickData[g_gimmick[BOUND].y / CHIPSIZE][g_gimmick[BOUND].x / CHIPSIZE] = GIM_2;
+				g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] = AIR;
+				g_gimmick[BOUND].x = int((g_player.px + 32) / CHIPSIZE) * CHIPSIZE;
+				g_gimmick[BOUND].y = (int(g_player.py / CHIPSIZE) + 1) * CHIPSIZE;
 			}
 		}
 		if (g_player.item[g_player.itemSelect] == K_TIKARA) {
@@ -189,7 +205,7 @@ void boundMove() {
 			smoke(g_gimmick[BOUND].x, g_gimmick[BOUND].y);
 		}
 		if (g_gimmick[LIFT].moveFlg == false && g_gimmick[LIFT].moveFlg2 == false) {
-			if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_2) {
+			if (g_player.py + CHIPSIZE == g_gimmick[BOUND].y && g_player.px + 32 == g_gimmick[BOUND].x + 32) {
 				g_player.fallSpeed = -JUMP_POWER;
 				g_gimmick[BOUND].anime = 3;
 			}
@@ -257,6 +273,9 @@ void dropMove() {
 			g_player.item[g_player.itemSelect] = K_NO;
 			g_player.itemNo--;
 			smokeFlg = true;
+			g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
+			g_gimmick[DROP].x = int((g_player.px + 32) / CHIPSIZE) * CHIPSIZE;
+			g_gimmick[DROP].y = int(g_player.py / CHIPSIZE) * CHIPSIZE;
 		}
 		if (g_player.item[g_player.itemSelect] == K_SITA) {
 			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[0], TRUE);
@@ -270,25 +289,28 @@ void dropMove() {
 		if (smokeFlg == true) {//âå
 			smoke(g_gimmick[DROP].x, g_gimmick[DROP].y);
 		}
-		for (int i = (g_gimmick[DROP].x / CHIPSIZE) + 1; i < STAGE_WIDTH; i++) {
+		for (int i = (g_gimmick[DROP].x / CHIPSIZE) + 1; i < STAGE_WIDTH; i++) {//âE
 			if (g_map.gimmickData[int(g_gimmick[DROP].y / CHIPSIZE) + 1][i] == 8) {
 				g_map.playStage[int(g_gimmick[DROP].y / CHIPSIZE) + 1][i] = AIR;
 			} else {
 				break;
 			}
 		}
-		for (int i = (g_gimmick[DROP].x / CHIPSIZE) - 1; i > 0; i--) {
+		for (int i = (g_gimmick[DROP].x / CHIPSIZE) - 1; i > 0; i--) {//ç∂
 			if (g_map.gimmickData[int(g_gimmick[DROP].y / CHIPSIZE) + 1][i] == 8) {
 				g_map.playStage[int(g_gimmick[DROP].y / CHIPSIZE) + 1][i] = AIR;
 			} else {
 				break;
 			}
 		}
-		for (int i = 0; i < STAGE_HEIGHT; i++) {
+		for (int i = 0; i < STAGE_HEIGHT; i++) {//å≥Ç…ñﬂÇ∑
 			for (int j = 0; j < STAGE_WIDTH; j++) {
 				if (g_map.gimmickData[int(g_player.py / CHIPSIZE) - 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_401) {
 					if (g_map.gimmickData[i][j] == 8) {
 						g_map.playStage[i][j] = BLOCK;
+					}
+					if (g_map.playStage[i][j] == GIM_402) {
+						g_map.gimmickData[i][j] = GIM_402;
 					}
 					g_gimmick[DROP].ONFlg = false;
 				}
@@ -398,8 +420,8 @@ void gimmickInit() {
 		g_gimmick[i].ONFlg = false;
 		g_gimmick[i].moveFlg = false;
 		g_gimmick[i].moveFlg2 = false;
-		g_gimmick[i].x = 0;
-		g_gimmick[i].y = 0;
+		g_gimmick[i].x = -CHIPSIZE;
+		g_gimmick[i].y = -CHIPSIZE;
 		g_gimmick[i].w = 0;
 		g_gimmick[i].h = 0;
 		g_gimmick[i].anime = 0;
