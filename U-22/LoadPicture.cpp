@@ -20,6 +20,7 @@ int LoadPicture(){
 	if ((g_img.kanzi[3] = LoadGraph("images/maruha.png")) == -1) return -1;
 	if ((g_img.kanzi[4] = LoadGraph("images/marukesi.png")) == -1) return -1;
 	if ((g_img.kanzi[5] = LoadGraph("images/marudou.png")) == -1) return -1;
+	if ((g_img.kanzi[6] = LoadGraph("images/marubaku.png")) == -1) return -1;
 	if ((g_img.itemBox = LoadGraph("images/itembox.png")) == -1) return -1;
 	if (LoadDivGraph("images/smoke.png", 8, 8, 1, 64, 64, g_img.smoke) == -1) return -1;
 	if (LoadDivGraph("images/marubatu.png", 2, 2, 1, 64, 64, g_img.marubatu) == -1) return -1;

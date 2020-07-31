@@ -12,6 +12,7 @@ void gimmickDisp() {
 	DrawGraph(g_gimmick[BOUND].x, g_gimmick[BOUND].y, g_img.spring[int(g_gimmick[BOUND].anime)], TRUE);
 	SetDrawBright(255, 0, 0);
 	DrawGraph(g_gimmick[DROP].x, g_gimmick[DROP].y, g_img.itemBox, TRUE);
+	DrawGraph(g_gimmick[BOMB].x, g_gimmick[BOMB].y, g_img.itemBox, TRUE);
 	SetDrawBright(255, 255, 255);
 	DrawGraph(g_gimmick[WARP_A].x, g_gimmick[WARP_A].y, g_img.itemBox, TRUE);
 	DrawGraph(g_gimmick[WARP_B].x, g_gimmick[WARP_B].y, g_img.itemBox, TRUE);
@@ -53,6 +54,11 @@ void gimmickMove() {
 			g_player.item[g_player.itemNo++] = K_DOU;
 			g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = 0;
 		}
+		//爆
+		if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == 26) {
+			g_player.item[g_player.itemNo++] = K_BAKU;
+			g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = 0;
+		}
 
 		//アイテム欄左詰め
 		for (int i = 0; i < g_player.itemNo; i++) {
@@ -62,12 +68,39 @@ void gimmickMove() {
 			}
 		}
 	}
+
+	//漢字の重力
+	for (int i = 0; i < STAGE_HEIGHT; i++) {
+		for (int j = 0; j < STAGE_WIDTH; j++) {
+			if (g_map.playStage[i][j] >= A) {
+				if (g_map.playStage[i + 1][j] == AIR) {
+					g_map.playStage[i + 1][j] = g_map.playStage[i][j];
+					g_map.playStage[i][j] = AIR;
+				}
+			}
+			if (g_map.playStage[i][j] == GIM_2) {//爆弾
+				if (g_map.playStage[i - 1][j] == G) {
+					g_map.playStage[i - 1][j] = AIR;
+					g_map.gimmickData[i][j] = AIR;
+					g_map.playStage[i][j] = GIM_7;
+					g_gimmick[BOMB].x = j * CHIPSIZE;
+					g_gimmick[BOMB].y = i * CHIPSIZE;
+					g_gimmick[BOMB].ONFlg = true;
+				}
+			}
+		}
+
+	}
+
+
+
 	liftMove();		//エレベーター
 	boundMove();	//ジャンプ台
 	breakMove();	//破壊できる壁
 	dropMove();		//落下ギミック
 	fireMove();		//炎
 	warpMove();		//ワープ
+	bombMove();		//爆弾
 }
 
 void liftMove() {
@@ -192,7 +225,7 @@ void boundMove() {
 				g_gimmick[BOUND].y = (int(g_player.py / CHIPSIZE) + 1) * CHIPSIZE;
 			}
 		}
-		if (g_player.item[g_player.itemSelect] == K_TIKARA) {
+		if (g_player.item[g_player.itemSelect] == K_TIKARA || g_player.item[g_player.itemSelect] == K_BAKU) {
 			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[0], TRUE);
 		}
 		else if(g_gimmick[BOUND].ONFlg == false){
@@ -398,6 +431,34 @@ void warpMove() {
 			g_gimmick[WARP_A].moveFlg = true;
 		}
 	}
+}
+void bombMove() {
+	//爆弾の処理
+	if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_2) {
+		if (g_player.item[g_player.itemSelect] == K_BAKU && key[KEY_INPUT_SPACE] == 1 &&
+			g_gimmick[BOMB].ONFlg == false) {//[爆]を使う
+			g_gimmick[BOMB].ONFlg = true;
+			g_player.item[g_player.itemSelect] = K_NO;
+			g_player.itemNo--;
+			smokeFlg = true;
+			g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] = GIM_7;
+			g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] = AIR;
+			g_gimmick[BOMB].x = int((g_player.px + 32) / CHIPSIZE) * CHIPSIZE;
+			g_gimmick[BOMB].y = (int(g_player.py / CHIPSIZE) + 1) * CHIPSIZE;
+		}
+	}
+	if (g_gimmick[BOMB].ONFlg == true) {
+		DrawFormatString(g_gimmick[BOMB].x, g_gimmick[BOMB].y + 20, 0x00ff00, "%f", g_gimmick[BOMB].anime);
+		g_gimmick[BOMB].anime += 0.1F;
+		if (g_gimmick[BOMB].anime > 10.0F) {
+			g_map.playStage[g_gimmick[BOMB].y / CHIPSIZE][g_gimmick[BOMB].x / CHIPSIZE] = AIR;
+			g_gimmick[BOMB].anime = 0;
+			g_gimmick[BOMB].y = -CHIPSIZE;
+			g_gimmick[BOMB].x = -CHIPSIZE;
+			g_gimmick[BOMB].ONFlg = false;
+		}
+	}
+
 }
 
 

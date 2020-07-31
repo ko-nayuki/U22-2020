@@ -11,7 +11,7 @@ struct image {
 	int spring[3];		//ƒWƒƒƒ“ƒv‘ä
 	int bookshelf[4];	//–{’I
 	int smoke[8];		//‰Œ
-	int kanzi[6];		//Š¿Žš
+	int kanzi[7];		//Š¿Žš
 	int marubatu[2];
 	int gimKanzi[5];
 	int itemBox;

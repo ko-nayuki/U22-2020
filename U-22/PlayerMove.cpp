@@ -97,7 +97,7 @@ void PlayerMove(){
 	}
 
 	
-	g_player.fallSpeed += G;
+	g_player.fallSpeed += GRAVITY;
 	g_player.py += g_player.fallSpeed;
 
 
