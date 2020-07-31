@@ -72,7 +72,9 @@ void StageDisp() {
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[g_map.playStage[i][j]], TRUE);
 			}
 			if (g_map.playStage[i][j] >= A) {//Š¿Žš‚Ì•`‰æ
+				if(g_map.playStage[i][j] == G) SetDrawBright(255, 0, 0);
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.kanzi[g_map.playStage[i][j] - A], TRUE);
+				SetDrawBright(255, 255, 255);
 			}
 			if (g_map.gimmickData[i][j] == GIM_1) {
 				if (g_player.item[g_player.itemSelect] == K_SITA) {

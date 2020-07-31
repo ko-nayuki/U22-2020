@@ -22,6 +22,7 @@ void PlayDisp() {
 	/*for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
 			DrawFormatString(j * CHIPSIZE, i * CHIPSIZE, 0xFF0000, "%d", g_map.playStage[i][j]);
+			DrawFormatString(j * CHIPSIZE + 20, i * CHIPSIZE, 0x0000FF, "%d", g_map.gimmickData[i][j]);
 		}
 	}*/
 	

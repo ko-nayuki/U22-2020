@@ -5,7 +5,7 @@
 #include "Map.h"
 #include "Picture.h"
 
-bool smokeFlg = false;
+bool smokeFlg[7] = { false };
 
 void gimmickDisp() {
 	DrawGraph(g_gimmick[LIFT].x, g_gimmick[LIFT].y, g_img.door[int(g_gimmick[LIFT].anime)], TRUE);
@@ -55,10 +55,10 @@ void gimmickMove() {
 			g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = 0;
 		}
 		//爆
-		if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == 26) {
+		/*if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == 26) {
 			g_player.item[g_player.itemNo++] = K_BAKU;
 			g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = 0;
-		}
+		}*/
 
 		//アイテム欄左詰め
 		for (int i = 0; i < g_player.itemNo; i++) {
@@ -125,7 +125,7 @@ void liftMove() {
 						g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 						g_player.item[g_player.itemSelect] = K_NO;
 						g_player.itemNo--;
-						smokeFlg = true;
+						smokeFlg[LIFT] = true;
 						g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 						break;
 
@@ -147,7 +147,7 @@ void liftMove() {
 						g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 						g_player.item[g_player.itemSelect] = K_NO;
 						g_player.itemNo--;
-						smokeFlg = true;
+						smokeFlg[LIFT] = true;
 						g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 						break;
 					}
@@ -164,7 +164,7 @@ void liftMove() {
 	}
 
 	if (g_gimmick[LIFT].moveFlg == true) {//上昇の処理
-		if (smokeFlg == true) {//煙
+		if (smokeFlg[LIFT] == true) {//煙
 			smoke(g_gimmick[LIFT].x, g_gimmick[LIFT].y);
 		}
 
@@ -186,7 +186,7 @@ void liftMove() {
 	}
 
 	if (g_gimmick[LIFT].moveFlg2 == true) {//下降の処理
-		if (smokeFlg == true) {//煙
+		if (smokeFlg[LIFT] == true) {//煙
 			smoke(g_gimmick[LIFT].x, g_gimmick[LIFT].y);
 		}
 		if (g_player.py == g_gimmick[LIFT].h * CHIPSIZE) {
@@ -213,7 +213,7 @@ void boundMove() {
 				g_gimmick[BOUND].ONFlg = true;
 				g_player.item[g_player.itemSelect] = K_NO;
 				g_player.itemNo--;
-				smokeFlg = true;
+				smokeFlg[BOUND] = true;
 				g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 				g_gimmick[BOUND].x = int((g_player.px + 32) / CHIPSIZE) * CHIPSIZE;
 				g_gimmick[BOUND].y = (int(g_player.py / CHIPSIZE) + 1) * CHIPSIZE;
@@ -223,6 +223,7 @@ void boundMove() {
 				g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 				g_gimmick[BOUND].x = int((g_player.px + 32) / CHIPSIZE) * CHIPSIZE;
 				g_gimmick[BOUND].y = (int(g_player.py / CHIPSIZE) + 1) * CHIPSIZE;
+				smokeFlg[BOUND] = true;
 			}
 		}
 		if (g_player.item[g_player.itemSelect] == K_TIKARA || g_player.item[g_player.itemSelect] == K_BAKU) {
@@ -234,11 +235,11 @@ void boundMove() {
 	}
 
 	if (g_gimmick[BOUND].ONFlg == true) {
-		if (smokeFlg == true) {//煙
+		if (smokeFlg[BOUND] == true) {//煙
 			smoke(g_gimmick[BOUND].x, g_gimmick[BOUND].y);
 		}
 		if (g_gimmick[LIFT].moveFlg == false && g_gimmick[LIFT].moveFlg2 == false) {
-			if (g_player.py + CHIPSIZE == g_gimmick[BOUND].y && g_player.px + 32 == g_gimmick[BOUND].x + 32) {
+			if (g_player.py + CHIPSIZE == g_gimmick[BOUND].y && (g_player.px + 32 >= g_gimmick[BOUND].x && g_player.px + 32 <= g_gimmick[BOUND].x + CHIPSIZE)) {
 				g_player.fallSpeed = -JUMP_POWER;
 				g_gimmick[BOUND].anime = 3;
 			}
@@ -273,7 +274,7 @@ void breakMove() {
 			g_gimmick[BREAK].ONFlg = true;
 			g_player.item[g_player.itemSelect] = K_NO;
 			g_player.itemNo--;
-			smokeFlg = true;
+			smokeFlg[BREAK] = true;
 		}
 		if (g_player.item[g_player.itemSelect] == K_HA) {
 			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[0], TRUE);
@@ -283,7 +284,7 @@ void breakMove() {
 		}
 	}
 	if (g_gimmick[BREAK].ONFlg == true) {
-		if (smokeFlg == true) {//煙
+		if (smokeFlg[BREAK] == true) {//煙
 			smoke(g_player.px, g_player.py);
 		}
 		for (int i = 0; i < STAGE_HEIGHT; i++) {
@@ -305,7 +306,7 @@ void dropMove() {
 			g_gimmick[DROP].ONFlg = true;
 			g_player.item[g_player.itemSelect] = K_NO;
 			g_player.itemNo--;
-			smokeFlg = true;
+			smokeFlg[DROP] = true;
 			g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 			g_gimmick[DROP].x = int((g_player.px + 32) / CHIPSIZE) * CHIPSIZE;
 			g_gimmick[DROP].y = int(g_player.py / CHIPSIZE) * CHIPSIZE;
@@ -319,7 +320,7 @@ void dropMove() {
 	}
 	if (g_gimmick[DROP].ONFlg == true) {
 
-		if (smokeFlg == true) {//煙
+		if (smokeFlg[DROP] == true) {//煙
 			smoke(g_gimmick[DROP].x, g_gimmick[DROP].y);
 		}
 		for (int i = (g_gimmick[DROP].x / CHIPSIZE) + 1; i < STAGE_WIDTH; i++) {//右
@@ -359,7 +360,7 @@ void fireMove() {
 			g_gimmick[FIRE].ONFlg = true;
 			g_player.item[g_player.itemSelect] = K_NO;
 			g_player.itemNo--;
-			smokeFlg = true;
+			smokeFlg[FIRE] = true;
 		}
 		if (g_player.item[g_player.itemSelect] == K_SHOU) {
 			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[0], TRUE);
@@ -369,7 +370,7 @@ void fireMove() {
 		}
 	}
 	if (g_gimmick[FIRE].ONFlg == true) {
-		if (smokeFlg == true) {//煙
+		if (smokeFlg[FIRE] == true) {//煙
 			smoke(g_player.px, g_player.py);
 		}
 		for (int i = 0; i < STAGE_HEIGHT; i++) {
@@ -394,7 +395,7 @@ void warpMove() {
 			g_gimmick[WARP_B].moveFlg = true;
 			g_player.item[g_player.itemSelect] = K_NO;
 			g_player.itemNo--;
-			smokeFlg = true;
+			smokeFlg[WARP_A] = true;
 		}
 		if (g_player.item[g_player.itemSelect] == K_DOU) {
 			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[0], TRUE);
@@ -404,7 +405,7 @@ void warpMove() {
 		}
 	}
 	if (g_gimmick[WARP_A].ONFlg == true) {
-		if (smokeFlg == true) {//煙
+		if (smokeFlg[WARP_A] == true) {//煙
 			smoke(g_gimmick[WARP_A].x, g_gimmick[WARP_A].y);
 			smoke(g_gimmick[WARP_B].x, g_gimmick[WARP_B].y);
 		}
@@ -440,7 +441,7 @@ void bombMove() {
 			g_gimmick[BOMB].ONFlg = true;
 			g_player.item[g_player.itemSelect] = K_NO;
 			g_player.itemNo--;
-			smokeFlg = true;
+			smokeFlg[BOMB] = true;
 			g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] = GIM_7;
 			g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 			g_gimmick[BOMB].x = int((g_player.px + 32) / CHIPSIZE) * CHIPSIZE;
@@ -471,7 +472,7 @@ void smoke(int smokeX, int smokeY) {
 	if (anime < 7.0F) anime += 0.2F;
 	else {
 		anime = 0;
-		smokeFlg = false;
+		for (int i = 0; i < 7; i++)smokeFlg[i] = false;
 	}
 
 }
