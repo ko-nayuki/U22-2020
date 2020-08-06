@@ -6,6 +6,7 @@
 #include "Gimmick.h"
 #include "Picture.h"
 #include "Map.h"
+#include "Boss.h"
 
 float ItemAnime = 0;
 
@@ -54,6 +55,7 @@ void PlayDisp() {
 }
 
 void PlayMove() {
+	bossMove();
 	gimmickMove();
 	if(g_gimmick->moveFlg != true && g_gimmick->moveFlg2 != true) PlayerMove();
 

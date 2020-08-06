@@ -15,7 +15,7 @@ struct image {
 	int marubatu[2];
 	int gimKanzi[5];
 	int itemBox;
-
+	int wolf[5];		//boss1
 };
 
 extern image g_img;

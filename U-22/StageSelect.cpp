@@ -5,6 +5,7 @@
 #include "Map.h"
 #include "player.h"
 #include "Gimmick.h"
+#include "Boss.h"
 
 void StageSelect() {
 	g_gimmick[BOUND].tikara = 0;
@@ -37,6 +38,7 @@ void SelectMove() {
 	if (key[KEY_INPUT_SPACE] == 1) {
 		gimmickInit();
 		StageInit();
+		bossInit();
 		for (int i = 0; i < ITEM_MAX; i++) {
 			g_player.item[i] = K_NO;
 		}
