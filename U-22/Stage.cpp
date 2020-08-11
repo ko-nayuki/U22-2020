@@ -72,9 +72,9 @@ void StageDisp() {
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[g_map.playStage[i][j]], TRUE);
 			}
 			if (g_map.playStage[i][j] >= A) {//漢字の描画
-				if(g_map.playStage[i][j] == G) SetDrawBright(255, 0, 0);
+				//if(g_map.playStage[i][j] == G) SetDrawBright(255, 0, 0);
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.kanzi[g_map.playStage[i][j] - A], TRUE);
-				SetDrawBright(255, 255, 255);
+				//SetDrawBright(255, 255, 255);
 			}
 			if (g_map.gimmickData[i][j] == GIM_1) {
 				if (g_player.item[g_player.itemSelect] == K_SITA) {
@@ -104,6 +104,37 @@ void SelectMAPDisp() {
 			if (g_map.playStage[i][j] != 0) {
 			DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[g_map.playStage[i][j]], TRUE);
 			}
+			if (g_map.playStage[i][j] == 3) {//プレイヤーの座標
+				g_player.px = j * CHIPSIZE;
+				g_player.py = i * CHIPSIZE;
+			}
+		}
+	}
+}
+
+void TitleMAPDisp() {
+	for (int i = 0; i < STAGE_HEIGHT; i++) {
+		for (int j = 0; j < STAGE_WIDTH; j++) {
+			g_map.playStage[i][j] = g_map.TitleMap[i][j];
+			if (g_map.playStage[i][j] == 1) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[g_map.playStage[i][j]], TRUE);
+			}
+			if (g_map.playStage[i][j] == 3) {//プレイヤーの座標
+				g_player.px = j * CHIPSIZE;
+				g_player.py = i * CHIPSIZE;
+			}
+			if (g_map.playStage[i][j] == 30) {//始
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[0], TRUE);
+			}
+			//if (g_map.playStage[i][j] == 31) {//開
+			//	DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[1], TRUE);
+			//}
+			if (g_map.playStage[i][j] == 32) {//終
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[2], TRUE);
+			}
+			//if (g_map.playStage[i][j] == 33) {//了
+			//	DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[3], TRUE);
+			//}
 		}
 	}
 }

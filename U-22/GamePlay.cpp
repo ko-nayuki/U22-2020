@@ -6,12 +6,16 @@
 #include "Gimmick.h"
 #include "Picture.h"
 #include "Map.h"
+#include "yoshitaka.h"
 
 float ItemAnime = 0;
 
 void GamePlay() {
 	PlayDisp();
 	PlayMove();
+	if (Fead.FeadFlg == 0) FeadIn();
+	DrawFormatString(0, 650, 0x000000, "%d", g_map.select);
+
 }
 
 void PlayDisp() {
@@ -50,7 +54,6 @@ void PlayDisp() {
 		if (--g_player.itemSelect < 0) g_player.itemSelect = ITEM_MAX - 1;
 		ItemAnime = 0;
 	}
-
 }
 
 void PlayMove() {
@@ -58,7 +61,12 @@ void PlayMove() {
 	if(g_gimmick->moveFlg != true && g_gimmick->moveFlg2 != true) PlayerMove();
 
 	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == 2) {
-		g_gameScene = GAME_SELECT;
-		
+		//if ((g_map.select / 3) - 1 != 0){
+		g_map.select++;
+		g_gameScene = GAME_CLEAR;
+		//}
+		//else {
+		//	g_gameScene = GAME_SELECT;
+		//}
 	}
 }

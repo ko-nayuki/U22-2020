@@ -7,13 +7,14 @@
 
 bool smokeFlg[7] = { false };
 
+
 void gimmickDisp() {
 	DrawGraph(g_gimmick[LIFT].x, g_gimmick[LIFT].y, g_img.door[int(g_gimmick[LIFT].anime)], TRUE);
 	DrawGraph(g_gimmick[BOUND].x, g_gimmick[BOUND].y, g_img.spring[int(g_gimmick[BOUND].anime)], TRUE);
-	SetDrawBright(255, 0, 0);
+	//SetDrawBright(255, 0, 0);
 	DrawGraph(g_gimmick[DROP].x, g_gimmick[DROP].y, g_img.itemBox, TRUE);
 	DrawGraph(g_gimmick[BOMB].x, g_gimmick[BOMB].y, g_img.itemBox, TRUE);
-	SetDrawBright(255, 255, 255);
+	//SetDrawBright(255, 255, 255);
 	DrawGraph(g_gimmick[WARP_A].x, g_gimmick[WARP_A].y, g_img.itemBox, TRUE);
 	DrawGraph(g_gimmick[WARP_B].x, g_gimmick[WARP_B].y, g_img.itemBox, TRUE);
 	DrawFormatString(200, 550, 0x0000ff, "%d", g_gimmick[LIFT].h * CHIPSIZE);

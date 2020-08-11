@@ -5,12 +5,14 @@
 #include "Map.h"
 #include "player.h"
 #include "Gimmick.h"
+#include "yoshitaka.h"
 
 void StageSelect() {
 	g_gimmick[BOUND].tikara = 0;
-
 	SelectDisp();
 	SelectMove();
+	if (Fead.FeadFlg == 0) FeadIn();
+
 }
 
 void SelectDisp() {
@@ -34,14 +36,16 @@ void SelectMove() {
 		if (--g_map.select < 0) g_map.select = STAGE - 1;
 	}
 
-	if (key[KEY_INPUT_SPACE] == 1) {
+	if (g_KeyFlg & PAD_INPUT_M) {
+		Fead.InfoStg = 2;
+		FeadOut();
 		gimmickInit();
 		StageInit();
 		for (int i = 0; i < ITEM_MAX; i++) {
 			g_player.item[i] = K_NO;
 		}
 		g_player.itemNo = 0;
-
-		g_gameScene = GAME_PLAY;
+		
+		//g_gameScene = GAME_PLAY;
 	}
 }

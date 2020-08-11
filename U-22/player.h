@@ -19,7 +19,7 @@ struct Player {
 	int ix = 0, iy = 0, result = 0;
 
 	//x座標
-	int px = 700, py = 576, y_prev = 0, y_temp = 0;
+	int px = 64, py = 592, y_prev = 0, y_temp = 0;
 
 	//ジャンプしてるかのフラグ。
 	bool jflag = false;

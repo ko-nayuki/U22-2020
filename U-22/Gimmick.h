@@ -7,6 +7,7 @@
 #define GRAVITY          (0.2F)		// 重力
 #define JUMP_POWER       (14.0F)	// ジャンプ台のジャンプ力
 
+
 void gimmickMove();
 void gimmickDisp();
 void gimmickInit();

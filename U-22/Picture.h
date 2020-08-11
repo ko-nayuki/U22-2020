@@ -12,10 +12,11 @@ struct image {
 	int bookshelf[4];	//本棚
 	int smoke[8];		//煙
 	int kanzi[7];		//漢字
+	int T_kanzi[4];		//タイトル用漢字
 	int marubatu[2];
 	int gimKanzi[5];
 	int itemBox;
-
+	int wolf[5];		//boss1
 };
 
 extern image g_img;
