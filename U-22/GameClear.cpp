@@ -7,6 +7,7 @@
 #include "GameClear.h"
 #include "yoshitaka.h"
 #include "Picture.h"
+#include "Boss.h"
 
 void GameClear() {
 	GameClearDisp();
@@ -20,12 +21,14 @@ void GameClearDisp() {
 
 	DrawExtendGraph(50, 50, 200, 200, g_img.itemBox, FALSE);
 
-	//DrawFormatString(600, 300, 0xFFFFFF, "ステージクリア");
+	DrawFormatString(600, 300, 0xFFFFFF, "ステージクリア");
 	//DrawFormatString(600, 400, 0xFFFFFF, "Dキーで次のステージへ");
 }
 
 void GameClearMove() {
 	if (g_KeyFlg & PAD_INPUT_M) {
+		if(g_map.select < STAGE - 1) g_map.select++;
+
 		if ((g_map.select % 3) != 0) {
 			Fead.InfoStg = 4;
 			Fead.ClearFlg = 0;
@@ -33,6 +36,7 @@ void GameClearMove() {
 			
 			gimmickInit();
 			StageInit();
+			bossInit();
 			for (int i = 0; i < ITEM_MAX; i++) {
 				g_player.item[i] = K_NO;
 			}

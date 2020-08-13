@@ -17,6 +17,7 @@
 #include "Gimmick.h"
 #include "Map.h"
 #include "Boss.h"
+#include "UI.h"
 
 /************************************************
 **	U-22ゲーム（タイトル）
@@ -97,6 +98,7 @@ int Main() {
 		g_NowKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 		g_KeyFlg = g_NowKey & ~g_OldKey;
 
+		build_Time();
 
 		// 画面の更新
 		ScreenFlip();

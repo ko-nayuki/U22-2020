@@ -13,6 +13,7 @@ void gimmickDisp();
 void gimmickInit();
 
 void smoke(int smokeX, int smokeY);		//煙
+void mistake();		//漢字を間違えたときの反応
 
 void liftMove();	//エレベーター
 void boundMove();	//ジャンプ台
@@ -21,6 +22,8 @@ void dropMove();	//落下ギミック
 void fireMove();	//炎
 void warpMove();	//ワープ
 void bombMove();	//爆弾
+
+void cauldronMove();//大釜
 
 enum {//ギミック
 	LIFT = 0,		//エレベーター

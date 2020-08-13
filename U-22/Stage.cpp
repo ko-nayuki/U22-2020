@@ -92,6 +92,10 @@ void StageDisp() {
 			if (g_map.gimmickData[i][j] == GIM_601 || g_map.gimmickData[i][j] == GIM_602) {
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[4], TRUE);
 			}
+
+			if (g_map.playStage[i][j] == BOSS_G_1 && g_map.playStage[i][j + 1] == BOSS_G_1) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.Cauldron, TRUE);
+			}
 		}
 	}
 
