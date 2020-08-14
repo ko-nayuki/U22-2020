@@ -37,7 +37,7 @@ void SelectMove() {
 		if (--g_map.select < 0) g_map.select = STAGE - 1;
 	}
 
-	if (g_KeyFlg & PAD_INPUT_M) {
+	if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
 		Fead.InfoStg = 2;
 		FeadOut();
 		gimmickInit();

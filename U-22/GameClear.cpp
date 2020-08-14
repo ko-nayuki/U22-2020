@@ -25,7 +25,7 @@ void GameClearDisp() {
 }
 
 void GameClearMove() {
-	if (g_KeyFlg & PAD_INPUT_M) {
+	if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
 		if ((g_map.select % 3) != 0) {
 			Fead.InfoStg = 4;
 			Fead.ClearFlg = 0;
@@ -38,14 +38,14 @@ void GameClearMove() {
 			}
 			g_player.itemNo = 0;
 
-			if (CheckHitKey(KEY_INPUT_SPACE) == 1)
+			if (CheckHitKey(PAD_INPUT_1) == 1)
 				g_KeyFlg = 0;
 			//g_gameScene = GAME_PLAY;
 		}
 		else {
 			Fead.InfoStg = 4;
 			Fead.ClearFlg = 1;
-			if (CheckHitKey(KEY_INPUT_SPACE) == 1)
+			if (CheckHitKey(PAD_INPUT_1) == 1)
 				g_KeyFlg = 0;
 			//g_gameScene = GAME_SELECT;
 			FeadOut();

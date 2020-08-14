@@ -32,7 +32,7 @@ void TitleMove() {
 	//åàíË
 	if (MenuNo == 0) {
 		DrawGraph(128, 514, g_img.T_kanzi[1], TRUE);
-		if (g_KeyFlg & PAD_INPUT_M ) {
+		if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
 			Fead.InfoStg = 1;
 			FeadOut();
 			if (CheckHitKey(KEY_INPUT_SPACE) == 1) 
@@ -42,7 +42,7 @@ void TitleMove() {
 	//èIóπ
 	if (MenuNo == 1) {
 		DrawGraph(128, 514, g_img.T_kanzi[3], TRUE);
-		if (g_KeyFlg & PAD_INPUT_M) {
+		if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
 			g_gameScene = GAME_SELECT;
 		}
 	}

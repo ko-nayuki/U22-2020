@@ -4,6 +4,7 @@
 #include "GamePlay.h"
 #include "Map.h"
 #include "Picture.h"
+#include "KeyControl.h"
 
 bool smokeFlg[7] = { false };
 
@@ -115,7 +116,7 @@ void liftMove() {
 			DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[1], TRUE);
 		}
 		//if (g_gimmick[LIFT].y != CHIPSIZE) {//[上]を使う
-		if (g_player.item[g_player.itemSelect] == K_UE && key[KEY_INPUT_SPACE] == 1
+		if (g_player.item[g_player.itemSelect] == K_UE && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)
 			&& g_gimmick[LIFT].moveFlg == false && g_gimmick[LIFT].moveFlg2 == false) {
 
 			for (g_gimmick[LIFT].h = int(g_player.py / CHIPSIZE); g_gimmick[LIFT].h > 0; g_gimmick[LIFT].h--) {
@@ -136,7 +137,7 @@ void liftMove() {
 		}
 		//}
 		//if (g_gimmick[LIFT].y != CHIPSIZE * 9) {//[下]を使う
-		if (g_player.item[g_player.itemSelect] == K_SITA && key[KEY_INPUT_SPACE] == 1
+		if (g_player.item[g_player.itemSelect] == K_SITA && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)
 			&& g_gimmick[LIFT].moveFlg == false && g_gimmick[LIFT].moveFlg2 == false) {
 
 			for (g_gimmick[LIFT].h = int(g_player.py / CHIPSIZE); g_gimmick[LIFT].h < STAGE_HEIGHT; g_gimmick[LIFT].h++) {
@@ -209,7 +210,7 @@ void boundMove() {
 	//ジャンプ台処理
 	if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_2) {
 		if (g_gimmick[BOUND].y != CHIPSIZE) {//[力]を使う
-			if (g_player.item[g_player.itemSelect] == K_TIKARA && key[KEY_INPUT_SPACE] == 1 &&
+			if (g_player.item[g_player.itemSelect] == K_TIKARA && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2) &&
 				g_gimmick[BOUND].ONFlg == false) {
 				g_gimmick[BOUND].ONFlg = true;
 				g_player.item[g_player.itemSelect] = K_NO;
@@ -271,7 +272,7 @@ void breakMove() {
 	//破壊できる壁の処理
 	if (g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 4) / CHIPSIZE) + 1] == GIM_3 ||
 		g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px - 4) / CHIPSIZE)] == GIM_3) {
-		if (g_player.item[g_player.itemSelect] == K_HA && key[KEY_INPUT_SPACE] == 1) {
+		if (g_player.item[g_player.itemSelect] == K_HA && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)) {
 			g_gimmick[BREAK].ONFlg = true;
 			g_player.item[g_player.itemSelect] = K_NO;
 			g_player.itemNo--;
@@ -303,7 +304,7 @@ void breakMove() {
 void dropMove() {
 	//落下ギミックの処理
 	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_402) {
-		if (g_player.item[g_player.itemSelect] == K_SITA && key[KEY_INPUT_SPACE] == 1 && g_gimmick[DROP].ONFlg == false) {
+		if (g_player.item[g_player.itemSelect] == K_SITA && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2) && g_gimmick[DROP].ONFlg == false) {
 			g_gimmick[DROP].ONFlg = true;
 			g_player.item[g_player.itemSelect] = K_NO;
 			g_player.itemNo--;
@@ -357,7 +358,7 @@ void fireMove() {
 	//炎の処理
 	if (g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 4) / CHIPSIZE) + 1] == GIM_5 ||
 		g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px - 4) / CHIPSIZE)] == GIM_5) {
-		if (g_player.item[g_player.itemSelect] == K_SHOU && key[KEY_INPUT_SPACE] == 1) {
+		if (g_player.item[g_player.itemSelect] == K_SHOU && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)) {
 			g_gimmick[FIRE].ONFlg = true;
 			g_player.item[g_player.itemSelect] = K_NO;
 			g_player.itemNo--;
@@ -389,7 +390,7 @@ void warpMove() {
 	//ワープ処理
 	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_601 ||
 		g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_602) {
-		if (g_player.item[g_player.itemSelect] == K_DOU && key[KEY_INPUT_SPACE] == 1) {
+		if (g_player.item[g_player.itemSelect] == K_DOU && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)) {
 			g_gimmick[WARP_A].ONFlg = true;
 			g_gimmick[WARP_B].ONFlg = true;
 			g_gimmick[WARP_A].moveFlg = true;
@@ -437,7 +438,7 @@ void warpMove() {
 void bombMove() {
 	//爆弾の処理
 	if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_2) {
-		if (g_player.item[g_player.itemSelect] == K_BAKU && key[KEY_INPUT_SPACE] == 1 &&
+		if (g_player.item[g_player.itemSelect] == K_BAKU && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2) &&
 			g_gimmick[BOMB].ONFlg == false) {//[爆]を使う
 			g_gimmick[BOMB].ONFlg = true;
 			g_player.item[g_player.itemSelect] = K_NO;

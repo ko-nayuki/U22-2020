@@ -2,9 +2,8 @@
 #include "player.h"
 #include "Picture.h"
 #include "Map.h"
+#include "KeyControl.h"
 #include "Gimmick.h"
-
-
 
 void PlayerMove(){
 
@@ -19,9 +18,9 @@ void PlayerMove(){
 	DrawFormatString(0, 550, 0x000000, "%d", g_player.py);
 	DrawFormatString(0, 600, 0x000000, "%d", g_player.itemNo);
 	
-	if (key[KEY_INPUT_LEFT] == 1 || key[KEY_INPUT_RIGHT] == 1) {
+	if (g_NowKey & PAD_INPUT_LEFT || g_NowKey & PAD_INPUT_RIGHT || key[KEY_INPUT_LEFT] == 1 || key[KEY_INPUT_RIGHT] == 1) {
 
-		if (key[KEY_INPUT_UP] == 1 || key[KEY_INPUT_DOWN] == 1) {
+		if (g_NowKey & PAD_INPUT_UP || g_NowKey & KEY_INPUT_DOWN || key[KEY_INPUT_UP] == 1 || key[KEY_INPUT_DOWN] == 1) {
 			//移動係数を０．７１に設定
 			g_player.move = 0.71f;
 		}
@@ -30,12 +29,12 @@ void PlayerMove(){
 			g_player.move = 1;
 		}
 	}
-	else if (key[KEY_INPUT_UP] == 1 || key[KEY_INPUT_DOWN] == 1) {
+	else if (g_NowKey & PAD_INPUT_UP || g_NowKey & KEY_INPUT_DOWN || key[KEY_INPUT_UP] == 1 || key[KEY_INPUT_DOWN] == 1) {
 		g_player.move = 1;
 	}
 
 	//移動処理
-	if (key[KEY_INPUT_LEFT] == 1) {
+	if (g_NowKey & PAD_INPUT_LEFT || key[KEY_INPUT_LEFT] == 1) {
 
 		//ブロック当たり判定して進む
 		if (g_map.playStage[int(g_player.py/CHIPSIZE)][int((g_player.px-4)/CHIPSIZE)] != 1
@@ -45,7 +44,7 @@ void PlayerMove(){
 		
 	}
 
-	if (key[KEY_INPUT_RIGHT] == 1) {
+	if (g_NowKey & PAD_INPUT_RIGHT || key[KEY_INPUT_RIGHT] == 1) {
 
 		//ブロック当たり判定して進む
 		if (g_map.playStage[int(g_player.py/CHIPSIZE)][int((g_player.px+4)/CHIPSIZE)+1] != 1
@@ -65,14 +64,14 @@ void PlayerMove(){
 		g_player.px = 0;
 
 
-	if (key[KEY_INPUT_LEFT] == 1) {
+	if (g_NowKey & PAD_INPUT_LEFT || key[KEY_INPUT_LEFT] == 1) {
 		if (g_player.xcount > 0)
 			g_player.xcount = 0;
 		g_player.ycount = 0;
 		--g_player.xcount;
 		g_player.dir = 1;
 	}
-	if (key[KEY_INPUT_RIGHT] == 1) {
+	if (g_NowKey & PAD_INPUT_RIGHT || key[KEY_INPUT_RIGHT] == 1) {
 		if (g_player.xcount < 0)
 			g_player.xcount = 0;
 		g_player.ycount = 0; 
@@ -121,10 +120,10 @@ void PlayerMove(){
 	DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
 	
 	//押されてなければカウントをゼロにする。
-	if (key[KEY_INPUT_LEFT] != 1 && key[KEY_INPUT_RIGHT] != 1) {
-		g_player.xcount = 0;
-		
-	}
+	//if (/*CheckHitKey(PAD_INPUT_LEFT) == 0 || CheckHitKey(PAD_INPUT_RIGHT) == 0*/key[KEY_INPUT_LEFT] != 1 && key[KEY_INPUT_RIGHT] != 1) {
+	//	g_player.xcount = 0;
+	//	
+	//}
 
 	}
 
