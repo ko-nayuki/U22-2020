@@ -48,6 +48,7 @@ void gimmickMove() {
 		//è¡
 		if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == E) {
 			g_player.item[g_player.itemNo++] = K_SHOU;
+			g_player.syo = 1;
 			g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = 0;
 		}
 		//ìÆ

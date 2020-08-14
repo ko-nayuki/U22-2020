@@ -7,6 +7,7 @@
 #include "Picture.h"
 #include "Map.h"
 #include "yoshitaka.h"
+#include "enemy.h"
 #include "Boss.h"
 #include "UI.h"
 
@@ -22,6 +23,7 @@ void PlayDisp() {
 	BackStageDisp();
 	gimmickDisp();
 	StageDisp();
+
 	
 	/*for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
@@ -33,6 +35,17 @@ void PlayDisp() {
 }
 
 void PlayMove() {
+	if (g_map.select == 1||g_map.select == 2||
+		g_map.select==7) {
+		EnemyMove();
+	}
+	if (g_map.select == 3||g_map.select == 4) {
+		EnemyMove3();
+	}
+	if (g_map.select == 6) {
+		EnemyMove();
+		EnemyMove2();
+	}
 	bossMove();
 	gimmickMove();
 	if(g_gimmick->moveFlg != true && g_gimmick->moveFlg2 != true) PlayerMove();
@@ -56,6 +69,6 @@ void PlayMove() {
 		//}
 		//else {
 		//	g_gameScene = GAME_SELECT;
-		//}
+		////}
 	}
 }

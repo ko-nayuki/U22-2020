@@ -15,6 +15,7 @@ struct image {
 	int T_kanzi[4];		//タイトル用漢字
 	int marubatu[2];
 	int gimKanzi[5];
+	int Teki[4];
 	int itemBox;
 	int wolf[7];		//boss1
 	int thief[24];		//boss2

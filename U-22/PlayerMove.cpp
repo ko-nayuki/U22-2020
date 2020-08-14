@@ -19,21 +19,6 @@ void PlayerMove(){
 	DrawFormatString(0, 550, 0x000000, "%d", g_player.py);
 	DrawFormatString(0, 600, 0x000000, "%d", g_player.itemNo);
 	
-	if (key[KEY_INPUT_LEFT] == 1 || key[KEY_INPUT_RIGHT] == 1) {
-
-		if (key[KEY_INPUT_UP] == 1 || key[KEY_INPUT_DOWN] == 1) {
-			//à⁄ìÆåWêîÇÇOÅDÇVÇPÇ…ê›íË
-			g_player.move = 0.71f;
-		}
-		else {
-			//éŒÇﬂÇ∂Ç·Ç»ÇØÇÍÇŒÇPÅDÇOÇ…ê›íË
-			g_player.move = 1;
-		}
-	}
-	else if (key[KEY_INPUT_UP] == 1 || key[KEY_INPUT_DOWN] == 1) {
-		g_player.move = 1;
-	}
-
 	//à⁄ìÆèàóù
 	if (key[KEY_INPUT_LEFT] == 1) {
 
@@ -101,8 +86,8 @@ void PlayerMove(){
 	g_player.py += g_player.fallSpeed;
 
 
-	if ((g_map.playStage[int(g_player.py / CHIPSIZE)+1][int((g_player.px) / CHIPSIZE)+1] == BLOCK ||
-		 g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] == BLOCK) ||
+	if ((g_map.playStage[int(g_player.py / CHIPSIZE)+1][int((g_player.px+64) / CHIPSIZE)] == BLOCK ||
+		 g_map.playStage[int(g_player.py / CHIPSIZE)+1][int(g_player.px / CHIPSIZE)] == BLOCK) ||
 		 g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] == GIM_2) {
 
 		g_player.fallSpeed = 0;

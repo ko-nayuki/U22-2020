@@ -4,12 +4,15 @@
 #include "StageSelect.h"
 #include "Map.h"
 #include "player.h"
+#include "enemy.h"
 #include "Gimmick.h"
 #include "yoshitaka.h"
 #include "Boss.h"
 
 void StageSelect() {
 	g_gimmick[BOUND].tikara = 0;
+	g_player.life = 3;
+	g_player.syo = 0;
 	SelectDisp();
 	SelectMove();
 	if (Fead.FeadFlg == 0) FeadIn();
@@ -42,12 +45,13 @@ void SelectMove() {
 		FeadOut();
 		gimmickInit();
 		StageInit();
+		EnemyInit();
 		bossInit();
 		for (int i = 0; i < ITEM_MAX; i++) {
 			g_player.item[i] = K_NO;
 		}
 		g_player.itemNo = 0;
 		
-		//g_gameScene = GAME_PLAY;
+		g_gameScene = GAME_PLAY;
 	}
 }

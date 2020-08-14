@@ -28,6 +28,12 @@ int LoadPicture(){
 	if ((g_img.T_kanzi[2] = LoadGraph("images/title_end01.png")) == -1) return -1;
 	if ((g_img.T_kanzi[3] = LoadGraph("images/title_end02.png")) == -1) return -1;
 
+	//“G
+	if ((g_img.Teki[1] = LoadGraph("images/Cone.png")) == -1)return -1;
+	if ((g_img.Teki[2] = LoadGraph("images/Cone2.png")) == -1)return -1;
+	if ((g_img.Teki[3] = LoadGraph("images/Cone3.png")) == -1)return -1;
+	
+
 	if ((g_img.itemBox = LoadGraph("images/itembox.png")) == -1) return -1;
 	if (LoadDivGraph("images/smoke.png", 8, 8, 1, 64, 64, g_img.smoke) == -1) return -1;
 	if (LoadDivGraph("images/marubatu.png", 2, 2, 1, 64, 64, g_img.marubatu) == -1) return -1;
