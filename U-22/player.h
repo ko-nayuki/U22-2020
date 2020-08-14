@@ -15,12 +15,17 @@ struct Player {
 
 	//横方向と縦方向のカウント数。
 	int xcount = 0, ycount = 0;
+
 	//添字用変数
 	int ix = 0, iy = 0, result = 0;
 
-	//x座標
-	int px = 64, py = 592, y_prev = 0, y_temp = 0;
+	//座標
+	int px = 64, py = 592;
+	int ph = 61, pw = 32;
 
+	//ライフ
+	int life;
+	
 	//ジャンプしてるかのフラグ。
 	bool jflag = false;
 
@@ -34,6 +39,10 @@ struct Player {
 
 	//落下スピード
 	float fallSpeed = 0;
+
+	//消アイテム
+	int syo = 0;
+
 };
 
 extern Player g_player;

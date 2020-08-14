@@ -9,15 +9,15 @@
 #include "Gimmick.h"
 #include "GameClear.h"
 
-static int i = 0;
+static int num = 0;
 
 
 void FeadOut() {
-	i = 0;
+	num = 0;
 	Fead.FeadFlg = 0;
 	//フェードアウト
-	while(i<255) {
-		SetDrawBright(255 - i, 255 - i, 255 - i);
+	while(num<255) {
+		SetDrawBright(255 - num, 255 - num, 255 - num);
 
 		//ステージ描画
 		if (Fead.InfoStg == 1) {
@@ -34,7 +34,7 @@ void FeadOut() {
 			GameClearDisp();
 		}
 
-		i += 2;
+		num += 2;
 
 		//画面を再表示
 		ScreenFlip();
@@ -65,11 +65,11 @@ void FeadOut() {
 }
 
 void FeadIn() {
-	i = 0;
+	num = 0;
 	Fead.FeadFlg = 1;
 	//フェードイン
-	while (i < 255) {
-		SetDrawBright(i,i,i);
+	while (num < 255) {
+		SetDrawBright(num,num,num);
 
 		//タイトルステージ描画
 		if (Fead.InfoStg == 1) {
@@ -85,7 +85,7 @@ void FeadIn() {
 		if (Fead.InfoStg == 3) {
 			PlayDisp();
 		}
-		i += 2;
+		num += 2;
 
 		//画面を再表示
 		ScreenFlip();
