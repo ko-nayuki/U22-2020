@@ -20,6 +20,9 @@ void GameClearDisp() {
 
 	DrawExtendGraph(50, 50, 200, 200, g_img.itemBox, FALSE);
 
+	DrawFormatString(0, 650, 0x000000, "%d", g_map.select);
+
+
 	//DrawFormatString(600, 300, 0xFFFFFF, "ステージクリア");
 	//DrawFormatString(600, 400, 0xFFFFFF, "Dキーで次のステージへ");
 }
@@ -45,6 +48,10 @@ void GameClearMove() {
 		else {
 			Fead.InfoStg = 4;
 			Fead.ClearFlg = 1;
+			if (g_Select.Checkkey == g_Select.CheckCorect) {
+				++g_Select.CheckCorect;
+				++g_Select.Key;
+			}
 			if (CheckHitKey(PAD_INPUT_1) == 1)
 				g_KeyFlg = 0;
 			//g_gameScene = GAME_SELECT;

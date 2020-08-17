@@ -38,7 +38,9 @@ int g_OldKey;
 int g_NowKey;
 char key[256];
 image g_img;	//6.16画像管理変数
-FeadCode Fead;
+FeadCode Fead;			//フェードアウト構造体
+StageInfo g_Select;		//セレクト画面のワールド選択
+
 
 /***************************
 *	関数の宣言

@@ -138,6 +138,7 @@ void wolfMove() {// boss1
 					wind_time = 200;
 					jumpFlg = false;
 					if (g_boss[0].y > 10 * CHIPSIZE - 16) {
+						g_map.select++;
 						g_gameScene = GAME_CLEAR;
 					}
 					else g_boss[0].y += 0.2F;

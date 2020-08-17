@@ -108,10 +108,10 @@ void SelectMAPDisp() {
 			if (g_map.playStage[i][j] != 0) {
 			DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[g_map.playStage[i][j]], TRUE);
 			}
-			if (g_map.playStage[i][j] == 3) {//プレイヤーの座標
-				g_player.px = j * CHIPSIZE;
-				g_player.py = i * CHIPSIZE;
-			}
+			//if (g_map.playStage[i][j] == 3) {//プレイヤーの座標
+			//	g_player.px = j * CHIPSIZE;
+			//	g_player.py = i * CHIPSIZE;
+			//}
 		}
 	}
 }

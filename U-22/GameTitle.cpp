@@ -15,9 +15,10 @@ void GameTitle() {
 void TitleDisp() {
 	BackStageDisp();
 	TitleMAPDisp();
-	PlayerMove();
 
-	DrawFormatString(600, 300, 0xFFFFFF, "Dキー");
+	DrawFormatString(600, 300, 0xFFFFFF, "スペースキー");
+
+	DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
 
 	//SetDrawBright(255, 255, 255);
 

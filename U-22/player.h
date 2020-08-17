@@ -20,7 +20,7 @@ struct Player {
 	int ix = 0, iy = 0, result = 0;
 
 	//À•W
-	int px = 64, py = 592;
+	int px = 64, py = 576;
 	int ph = 61, pw = 32;
 
 	//ƒ‰ƒCƒt
