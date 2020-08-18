@@ -27,6 +27,9 @@ int LoadPicture(){
 	if ((g_img.T_kanzi[1] = LoadGraph("images/title_start02.png")) == -1) return -1;
 	if ((g_img.T_kanzi[2] = LoadGraph("images/title_end01.png")) == -1) return -1;
 	if ((g_img.T_kanzi[3] = LoadGraph("images/title_end02.png")) == -1) return -1;
+	//ƒNƒŠƒA•¶š
+	if ((g_img.ClearText = LoadGraph("images/stageclear.png")) == -1) return -1;
+	if ((g_img.NextText = LoadGraph("images/next01.png")) == -1) return -1;
 
 	//“G
 	if ((g_img.Teki[1] = LoadGraph("images/Cone.png")) == -1)return -1;

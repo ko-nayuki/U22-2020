@@ -18,7 +18,11 @@ void GameClearDisp() {
 	gimmickDisp();
 	StageDisp();
 
-	DrawExtendGraph(50, 50, 200, 200, g_img.itemBox, FALSE);
+	//DrawExtendGraph(50, 50, 200, 200, g_img.itemBox, FALSE);
+
+	DrawGraph(180, 100, g_img.ClearText, FALSE);
+
+	DrawGraph(480, 450, g_img.NextText, FALSE);
 
 	DrawFormatString(0, 650, 0x000000, "%d", g_map.select);
 

@@ -103,7 +103,7 @@ void EnemyMove() {
 
 		//プレイヤーのライフが０なったら
 		if (g_player.life == 0) {
-			g_gameScene = GAME_SELECT;
+			g_gameScene = GAME_OVER;
 			g_player.px = CHIPSIZE * 1, g_player.py = CHIPSIZE * 9;
 		}
 		//敵の表示
@@ -147,7 +147,7 @@ void EnemyMove2() {
 
 		//プレイヤーのライフが０なったら
 		if (g_player.life == 0) {
-			g_gameScene = GAME_SELECT;
+			g_gameScene = GAME_OVER;
 			g_player.px = CHIPSIZE * 1, g_player.py = CHIPSIZE * 9;
 		}
 	
@@ -185,7 +185,7 @@ void EnemyMove3() {
 
 		//プレイヤーのライフが０なったら
 		if (g_player.life == 0) {
-			g_gameScene = GAME_SELECT;
+			g_gameScene = GAME_OVER;
 			g_player.px = CHIPSIZE * 1, g_player.py = CHIPSIZE * 9;
 		}
 

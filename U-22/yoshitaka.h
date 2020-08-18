@@ -6,17 +6,22 @@
 //PAD_INPUT_1...Aキー
 //PAD_INPUT_2...Bキー
 
-//シーケンスつなげる（セレクト画面を想像通りにする）→drawxboxを基準にドアに判定を作ってそこでボタン押すとそのステージに行けるようにする
-//ゲームタイトル想像通りにする→タイトル貼るだけ
-//ゲームクリア画面仕上げる
-//ゲームオーバー画面、仕上げておく
+//g_img.T_kanzi[0]・・・始
+//g_img.T_kanzi[1]・・・開
+//g_img.T_kanzi[2]・・・終
+//g_img.T_kanzi[3]・・・了
+
+
+//ゲームタイトル想像通りにする→タイトル貼る
+//ゲームクリア画面仕上げる→おおよそ完成、確認するだけ
+//ゲームオーバー画面、仕上げておく→文字が完成し次第、作り上げる
+//音を実装する←これが最優先
 
 //void StageInit();
 //int StageObj(int Objimg);
 
 struct StageInfo {
 	int stage1x = 192;
-	int stage1y = 576;
 	int stage2x = 576;
 	int stage3x = 768;
 	int stage4x = 960;

@@ -72,7 +72,6 @@ void SelectMove() {
 		//
 		//g_gameScene = GAME_PLAY;
 		if (g_Select.stage1x < g_player.px + 64 && g_Select.stage1x + 128 > g_player.px) {
-			DrawString(0, 650, "ステージ１", 0x000000);
 			g_map.select = 0;
 			g_Select.Checkkey = 0;
 			Fead.InfoStg = 2;

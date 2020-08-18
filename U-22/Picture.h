@@ -20,6 +20,8 @@ struct image {
 	int wolf[7];		//boss1
 	int thief[24];		//boss2
 	int Cauldron;		//‘åŠ˜
+	int ClearText;		//ƒNƒŠƒA•¶š
+	int NextText;		//NEXT•¶š
 };
 
 extern image g_img;
