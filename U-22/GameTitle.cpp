@@ -6,6 +6,7 @@
 #include "player.h"
 #include "Picture.h"
 #include "yoshitaka.h"
+#include "Sounds.h"
 
 static int MenuNo = 0;
 static int Sketch = 0;
@@ -13,21 +14,17 @@ static int Sketch = 0;
 void GameTitle() {
 	TitleDisp();
 	TitleMove();
+	if (Fead.FeadFlg == 0) FeadIn();
+
+	//タイトルBGM
+	//if (CheckSoundMem(g_sounds.Title) == 0) PlaySoundMem(g_sounds.Title, DX_PLAYTYPE_LOOP);
+	
 }
 
 void TitleDisp() {
 
 	BackStageDisp();
 	TitleMAPDisp();
-
-	if (Sketch == 0) {
-		//決定
-		if (MenuNo == 0) {
-		}
-		//終了
-		if (MenuNo == 1) {
-		}
-	}
 
 	DrawFormatString(600, 300, 0xFFFFFF, "スペースキー");
 
@@ -74,5 +71,5 @@ void TitleMove() {
 
 	//カーソル
 	MenuY = MenuNo * 80;
-	DrawTriangle(440, 455 + MenuY, 460, 470 + MenuY, 440, 485 + MenuY, GetColor(255, 0, 0), TRUE);
+	DrawTriangle(440, 455 + MenuY, 460, 470 + MenuY, 440, 485 + MenuY, GetColor(0, 0, 0), TRUE);
 }

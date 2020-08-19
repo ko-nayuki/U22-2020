@@ -22,7 +22,7 @@ void GameClearDisp() {
 
 	DrawGraph(180, 100, g_img.ClearText, FALSE);
 
-	DrawGraph(480, 450, g_img.NextText, FALSE);
+	DrawGraph(450, 450, g_img.NextText, FALSE);
 
 	DrawFormatString(0, 650, 0x000000, "%d", g_map.select);
 

@@ -22,6 +22,9 @@ struct image {
 	int Cauldron;		//大釜
 	int ClearText;		//クリア文字
 	int NextText;		//NEXT文字
+	int GameOver;		//オーバー文字
+	int OverText[2];	//ゲームオーバーでの選択肢
+	int Triger[2];		//トリガー表示
 };
 
 extern image g_img;

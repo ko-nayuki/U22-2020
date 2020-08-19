@@ -84,7 +84,7 @@ void SelectMove() {
 				g_player.item[i] = K_NO;
 			}
 			g_player.itemNo = 0;
-			g_gameScene = GAME_PLAY;
+			//g_gameScene = GAME_PLAY;
 		}
 		if ((g_Select.stage2x < g_player.px + 64 && g_Select.stage2x + 128 > g_player.px) && g_Select.Key >= 1) {
 			g_map.select = 3;

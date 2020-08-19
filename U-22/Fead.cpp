@@ -8,6 +8,7 @@
 #include "GamePlay.h"
 #include "Gimmick.h"
 #include "GameClear.h"
+#include "GameOver.h"
 
 static int num = 0;
 
@@ -33,6 +34,10 @@ void FeadOut() {
 		if (Fead.InfoStg == 4) {
 			GameClearDisp();
 		}
+		//ゲームオーバー描画
+		if (Fead.InfoStg == 5) {
+			GameOverDisp();
+		}
 
 		num += 2;
 
@@ -57,6 +62,16 @@ void FeadOut() {
 	{
 		Fead.InfoStg = 2;
 		g_gameScene = GAME_SELECT;
+	}
+	else if (Fead.InfoStg == 5 && Fead.OverFlg == 0)
+	{
+		Fead.InfoStg = 3;
+		g_gameScene = GAME_PLAY;
+	}
+	else if (Fead.InfoStg == 5 && Fead.OverFlg == 1)
+	{
+		Fead.InfoStg = 1;
+		g_gameScene = GAME_TITLE;
 	}
 	//if (InfoStg == 3) {
 	//	g_gameScene = GAME_CLEAR;

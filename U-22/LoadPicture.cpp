@@ -30,6 +30,14 @@ int LoadPicture(){
 	//クリア文字
 	if ((g_img.ClearText = LoadGraph("images/stageclear.png")) == -1) return -1;
 	if ((g_img.NextText = LoadGraph("images/next01.png")) == -1) return -1;
+	//ゲームオーバー画面
+	if ((g_img.GameOver = LoadGraph("images/gameover.png")) == -1) return -1;
+	if ((g_img.OverText[0] = LoadGraph("images/backtitle.png")) == -1) return -1;
+	if ((g_img.OverText[1] = LoadGraph("images/replay.png")) == -1) return -1;
+	//トリガー表示
+	if ((g_img.Triger[0] = LoadGraph("images/Rbutton01.png")) == -1) return -1;	//R
+	if ((g_img.Triger[1] = LoadGraph("images/Lbutton01.png")) == -1) return -1;	//L
+
 
 	//敵
 	if ((g_img.Teki[1] = LoadGraph("images/Cone.png")) == -1)return -1;

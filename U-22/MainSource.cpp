@@ -18,6 +18,7 @@
 #include "Map.h"
 #include "Boss.h"
 #include "UI.h"
+#include "Sounds.h"
 
 /************************************************
 **	U-22ゲーム（タイトル）
@@ -40,7 +41,7 @@ char key[256];
 image g_img;	//6.16画像管理変数
 FeadCode Fead;			//フェードアウト構造体
 StageInfo g_Select;		//セレクト画面のワールド選択
-
+sounds g_sounds;		//音管理変数
 
 /***************************
 *	関数の宣言
@@ -66,6 +67,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_
 	
 	if(LoadPicture() == -1) return -1;
 
+	if (LoadSounds() == -1) return -1;
+
 	//ゲームメイン
 	Main();
 
@@ -81,7 +84,7 @@ int Main() {
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	// メインループ
-	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0 && !(g_KeyFlg & PAD_INPUT_START) &&GetHitKeyStateAll(key) == 0) {
+	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0 && !(g_KeyFlg & PAD_INPUT_START) && GetHitKeyStateAll(key) == 0 && g_gameScene != 99) {
 		// 画面のクリア
 		ClearDrawScreen();
 
