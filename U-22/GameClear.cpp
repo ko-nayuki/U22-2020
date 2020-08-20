@@ -7,6 +7,8 @@
 #include "GameClear.h"
 #include "yoshitaka.h"
 #include "Picture.h"
+#include "enemy.h"
+#include "Boss.h"
 
 void GameClear() {
 	GameClearDisp();
@@ -40,6 +42,8 @@ void GameClearMove() {
 			
 			gimmickInit();
 			StageInit();
+			EnemyInit();
+			bossInit();
 			for (int i = 0; i < ITEM_MAX; i++) {
 				g_player.item[i] = K_NO;
 			}

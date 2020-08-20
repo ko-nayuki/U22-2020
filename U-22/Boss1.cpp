@@ -5,6 +5,7 @@
 #include "player.h"
 #include "Gimmick.h"
 #include "GameScene.h"
+#include "enemy.h"
 
 #include <math.h>
 
@@ -15,6 +16,7 @@ void wolfMove() {// boss1
 	static float fallSpeed = 0.0;
 	static int wind_time = 200;					//風の時間
 	static bool jumpFlg = false;
+	static int gimmick_time = 100;				//落下ギミックが元に戻る時間
 
 	//DrawFormatString(500, 450, 0x00FFFF, "%d", jump_x);
 	//DrawFormatString(500, 420, 0x00FFFF, "%d", next_Action);
@@ -36,7 +38,7 @@ void wolfMove() {// boss1
 		if (g_boss[0].attackFlg == false) g_boss[0].count++, g_boss[0].anime -= 0.1;
 		if (g_boss[0].anime < 3.0) g_boss[0].anime = 6;
 
-		if (g_boss[0].count > 15 * g_boss[0].hp) {
+		if (g_boss[0].count > 50 * g_boss[0].hp) {
 			next_Action++;
 			if (next_Action == 4 && g_boss[0].x != 15 * CHIPSIZE + 32) next_Action--;
 			if (next_Action > 4) next_Action = 1;
@@ -95,11 +97,41 @@ void wolfMove() {// boss1
 
 	//風
 	if (next_Action == 4 && g_boss[0].attackFlg == true) {
+
 		g_boss[0].anime = 0;
 		if (g_player.px < g_boss[0].x) g_player.px -= (wind_time * 0.01) + (4.5 - float(g_boss[0].hp));
+
 		if (wind_time-- <= 0) {
 			wind_time = 200;
 			g_boss[0].attackFlg = false;
+		}
+		for (int i = 1; i < ENEMY_MAX; i++) {
+			//当たり判定
+			if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE) {
+				wind_time = 200;
+				g_boss[0].attackFlg = false;
+			}
+		}
+	}
+
+	//落下ギミックを時間で元に戻す
+	if (g_gimmick[DROP].ONFlg == true && g_boss[0].damageFlg == false) {
+		if (gimmick_time-- < 0) {
+			g_gimmick[DROP].ONFlg = false;
+			g_gimmick[DROP].x = -CHIPSIZE;
+			g_gimmick[DROP].y = -CHIPSIZE;
+			gimmick_time = 100;
+			g_map.playStage[6][18] = B;
+			for (int i = 0; i < STAGE_HEIGHT; i++) {
+				for (int j = 0; j < STAGE_WIDTH; j++) {
+					if (g_map.gimmickData[i][j] == 8) {
+						g_map.playStage[i][j] = BLOCK;
+					}
+					if (g_map.playStage[i][j] == GIM_402 && g_map.gimmickData[i][j] == AIR) {
+						g_map.gimmickData[i][j] = GIM_402;
+					}
+				}
+			}
 		}
 	}
 
@@ -136,6 +168,7 @@ void wolfMove() {// boss1
 					g_boss[0].anime = 2;
 					next_Action = 0;
 					wind_time = 200;
+					gimmick_time = 100;
 					jumpFlg = false;
 					if (g_boss[0].y > 10 * CHIPSIZE - 16) {
 						g_map.select++;
@@ -170,6 +203,24 @@ void wolfMove() {// boss1
 
 	if (g_player.py > 9 * CHIPSIZE) {//playerが下に落ちたら
 		g_map.playStage[6][18] = B;
+	}
+
+	//playerダメージ
+	if (g_player.px < g_boss[0].x + 44 &&
+		g_player.px + 64 > g_boss[0].x + 20 &&
+		g_player.py < g_boss[0].y + 44 &&
+		g_player.py + 64 > g_boss[0].y + 20) {
+		if (g_boss[0].damageFlg == false) {
+			if (g_player.px + 64 < g_boss[0].x + 44) {
+				g_player.px -= CHIPSIZE;
+				g_player.life -= 1;
+			}
+			else if (g_player.px > g_boss[0].x) {
+				g_player.px += CHIPSIZE;
+				g_player.life -= 1;
+			}
+		}
+		//DrawBox(g_boss[0].x + 20, g_boss[0].y + 20, g_boss[0].x + 44, g_boss[0].y + 44,0xFF0000,true);
 	}
 
 }

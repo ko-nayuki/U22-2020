@@ -5,6 +5,7 @@
 #include "Picture.h"
 #include "Gimmick.h"
 #include "player.h"
+#include "GameScene.h"
 
 //int g_Stage = 0;
 //StageInfo Stage;
@@ -24,8 +25,8 @@ void StageInit() {
 
 			if (g_map.playStage[i][j] == 5) {//エレベータの情報
 				g_map.gimmickData[i][j] = g_map.playStage[i][j];
-				g_gimmick[LIFT].x = j * CHIPSIZE;
-				g_gimmick[LIFT].y = i * CHIPSIZE;
+				//g_gimmick[LIFT].x = j * CHIPSIZE;
+				//g_gimmick[LIFT].y = i * CHIPSIZE;
 			}
 			if (g_map.playStage[i][j] == 6) {//ジャンプ台の情報
 				g_map.gimmickData[i][j] = g_map.playStage[i][j];
@@ -45,6 +46,9 @@ void StageInit() {
 				//g_gimmick[DROP].x = j * CHIPSIZE;
 				//g_gimmick[DROP].y = i * CHIPSIZE;
 			}
+			if (g_map.playStage[i][j] == 15) {//破損看板の情報
+				g_map.gimmickData[i][j] = g_map.playStage[i][j];
+			}
 			if (g_map.playStage[i][j] == 10) {//炎の情報
 				g_map.gimmickData[i][j] = g_map.playStage[i][j];
 				g_map.playStage[i][j] = 1;
@@ -59,6 +63,19 @@ void StageInit() {
 				g_gimmick[WARP_B].x = j * CHIPSIZE;
 				g_gimmick[WARP_B].y = i * CHIPSIZE;
 			}
+			if (g_map.playStage[i][j] == 13) {//ワープCの情報
+				g_map.gimmickData[i][j] = g_map.playStage[i][j];
+				g_gimmick[WARP_C].x = j * CHIPSIZE;
+				g_gimmick[WARP_C].y = i * CHIPSIZE;
+			}
+			if (g_map.playStage[i][j] == 16) {//透明壁
+				g_map.gimmickData[i][j] = g_map.playStage[i][j];
+				g_map.playStage[i][j] = 1;
+			}
+			if (g_map.playStage[i][j] == 18) {//横長ジャンプ台の情報
+				g_map.gimmickData[i][j] = g_map.playStage[i][j];
+				g_map.playStage[i][j] = 1;
+			}
 			g_map.random[i][j] = rand() % 3;
 		}
 	}
@@ -69,7 +86,29 @@ void StageDisp() {
 	for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {//マップの描画
 			if (g_map.playStage[i][j] != 0 && g_map.playStage[i][j] < 5 && g_map.playStage[i][j] < A) {
-				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[g_map.playStage[i][j]], TRUE);
+				if (g_map.playStage[i][j] == 1 && g_map.gimmickData[i][j] == 0) {
+					if (g_map.playStage[i - 1][j] != 1) {
+						DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[(g_map.select / 3) * 3 + 1], TRUE);
+					}
+					else if (g_map.playStage[i][j] != 3) {
+						DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[(g_map.select / 3) * 3 + 2], TRUE);
+					}
+				}
+				else {
+
+					if (g_map.gimmickData[i][j] == GIM_5 && g_map.gimmickData[i][j + 1] == GIM_5 && g_map.gimmickData[i + 1][j] == GIM_5) {
+						DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.fire, TRUE);
+					}
+					if (g_map.gimmickData[i][j] == GIM_401 || g_map.gimmickData[i][j] == GIM_3) {
+						DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.crack, TRUE);
+					}
+					if (g_map.gimmickData[i][j] == BOSS_G_2 && g_map.gimmickData[i][j + 1] == BOSS_G_2) {
+						DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.trampoline[0], TRUE);
+					}
+					if (g_map.gimmickData[i][j] == BOSS_G_3 && g_map.gimmickData[i][j + 1] == BOSS_G_3) {
+						DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.trampoline[1], TRUE);
+					}
+				}
 			}
 			if (g_map.playStage[i][j] >= A) {//漢字の描画
 				//if(g_map.playStage[i][j] == G) SetDrawBright(255, 0, 0);
@@ -79,18 +118,46 @@ void StageDisp() {
 			if (g_map.gimmickData[i][j] == GIM_1) {
 				if (g_player.item[g_player.itemSelect] == K_SITA) {
 					DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[1], TRUE);
-				} else {
-					DrawGraph(j* CHIPSIZE, i* CHIPSIZE, g_img.gimKanzi[0], TRUE);
+				}
+				else {
+					DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[0], TRUE);
 				}
 			}
-			if (g_map.gimmickData[i][j] == GIM_2) {
+			if (g_map.playStage[i][j] == GIM_2 && g_map.gimmickData[i][j] == GIM_2) {
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[2], TRUE);
 			}
+			else if (g_map.playStage[i][j] == GIM_2 && g_map.gimmickData[i][j] == AIR) {
+				if (g_gimmick[BOUND].x != j * CHIPSIZE && g_gimmick[BOUND].y + CHIPSIZE != i * CHIPSIZE) {
+					DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.spring[0], TRUE);
+				}
+
+			}
+
+
 			if (g_map.gimmickData[i][j] == GIM_402) {
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[3], TRUE);
 			}
-			if (g_map.gimmickData[i][j] == GIM_601 || g_map.gimmickData[i][j] == GIM_602) {
+			if (g_map.gimmickData[i][j] == GIM_403) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[5], TRUE);
+			}
+
+			if (g_map.gimmickData[i][j] == GIM_601 && g_map.gimmickData[i][j] == GIM_601) {
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[4], TRUE);
+			}
+			else if (g_map.playStage[i][j] == GIM_601 && g_map.gimmickData[i][j] == AIR) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.warp, TRUE);
+			}
+			if (g_map.gimmickData[i][j] == GIM_602 && g_map.gimmickData[i][j] == GIM_602) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[4], TRUE);
+			}
+			else if (g_map.playStage[i][j] == GIM_602 && g_map.gimmickData[i][j] == AIR) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.warp, TRUE);
+			}
+			if (g_map.gimmickData[i][j] == GIM_603 && g_map.gimmickData[i][j] == GIM_603) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[4], TRUE);
+			}
+			else if (g_map.playStage[i][j] == GIM_603 && g_map.gimmickData[i][j] == AIR) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.warp, TRUE);
 			}
 
 			if (g_map.playStage[i][j] == BOSS_G_1 && g_map.playStage[i][j + 1] == BOSS_G_1) {
@@ -105,8 +172,11 @@ void SelectMAPDisp() {
 	for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
 			g_map.playStage[i][j] = g_map.selectMap[i][j];
-			if (g_map.playStage[i][j] != 0) {
-			DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[g_map.playStage[i][j]], TRUE);
+			if (g_map.playStage[i][j] == 1) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[1], TRUE);
+			}
+			if (g_map.playStage[i][j] == 2 && g_map.playStage[i][j + 1] == 2 && g_map.playStage[i + 1][j] == 2) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.goal[0], TRUE);
 			}
 			//if (g_map.playStage[i][j] == 3) {//プレイヤーの座標
 			//	g_player.px = j * CHIPSIZE;
@@ -147,7 +217,13 @@ void BackStageDisp() {
 	for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
 			//DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.bookshelf[g_map.random[i][j]], TRUE);
-			DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[0], TRUE);
+
+			if (g_gameScene == GAME_PLAY || g_gameScene == GAME_CLEAR) {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[(g_map.select / 3) * 3], TRUE);
+			}
+			else {
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[0], TRUE);
+			}
 		}
 	}
 }

@@ -24,6 +24,7 @@ void warpMove();	//ワープ
 void bombMove();	//爆弾
 
 void cauldronMove();//大釜
+void bigboundMove();//横長ジャンプ台
 
 enum {//ギミック
 	LIFT = 0,		//エレベーター
@@ -31,9 +32,10 @@ enum {//ギミック
 	BREAK = 2,		//破壊できる壁
 	DROP = 3,		//落下ギミック
 	FIRE = 4,		//炎
-	WARP_A = 5,		//ワープA地点
-	WARP_B = 6,		//ワープB地点
-	BOMB = 7,		//爆弾
+	WARP_A = 5,		//ワープA
+	WARP_B = 6,		//ワープB
+	WARP_C = 7,		//ワープC
+	BOMB = 8,		//爆弾
 };
 
 enum {//漢字
