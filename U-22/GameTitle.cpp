@@ -26,6 +26,8 @@ void TitleDisp() {
 	BackStageDisp();
 	TitleMAPDisp();
 
+	DrawExtendGraph(220, 110,1100,260, g_img.Title, FALSE);
+
 	DrawFormatString(600, 300, 0xFFFFFF, "スペースキー");
 
 	DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);

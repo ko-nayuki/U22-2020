@@ -12,6 +12,7 @@ struct image {
 	int bookshelf[4];	//本棚
 	int smoke[8];		//煙
 	int kanzi[7];		//漢字
+	int Title;			//タイトル
 	int T_kanzi[4];		//タイトル用漢字
 	int Button;			//Bボタン
 	int goal[5];
