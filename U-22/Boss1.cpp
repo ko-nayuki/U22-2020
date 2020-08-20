@@ -105,12 +105,10 @@ void wolfMove() {// boss1
 			wind_time = 200;
 			g_boss[0].attackFlg = false;
 		}
-		for (int i = 1; i < ENEMY_MAX; i++) {
-			//“–‚½‚è”»’è
-			if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE) {
-				wind_time = 200;
-				g_boss[0].attackFlg = false;
-			}
+		if (g_player.px + 32 <= CHIPSIZE) {
+			wind_time = 200;
+			g_boss[0].attackFlg = false;
+			g_player.px = CHIPSIZE;
 		}
 	}
 
@@ -171,7 +169,7 @@ void wolfMove() {// boss1
 					gimmick_time = 100;
 					jumpFlg = false;
 					if (g_boss[0].y > 10 * CHIPSIZE - 16) {
-						g_map.select++;
+						//g_map.select++;
 						g_gameScene = GAME_CLEAR;
 					}
 					else g_boss[0].y += 0.2F;

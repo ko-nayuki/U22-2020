@@ -35,7 +35,7 @@ void GameClearDisp() {
 
 void GameClearMove() {
 	if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
-		if ((g_map.select % 3) != 0) {
+		if ((g_map.select + 1) % 3 != 0) {
 			Fead.InfoStg = 4;
 			Fead.ClearFlg = 0;
 			FeadOut();
