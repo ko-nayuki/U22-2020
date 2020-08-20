@@ -56,6 +56,7 @@ void FeadOut() {
 	}
 	else if(Fead.InfoStg == 4 && Fead.ClearFlg == 0) {
 		Fead.InfoStg = 3;
+		g_map.select++;
 		g_gameScene = GAME_PLAY;
 	}
 	else if(Fead.InfoStg == 4 && Fead.ClearFlg == 1)
