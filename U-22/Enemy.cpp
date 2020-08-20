@@ -13,62 +13,57 @@ Enemy3 g_enemy3[ENEMY_MAX];
 
 
 void EnemyInit() {
-	
+
 	for (int i = 1; i < ENEMY_MAX; i++) {
-		
-				if (g_map.select == 1) {
-					
-						g_enemy[i].ex = CHIPSIZE * 13, g_enemy[i].ey = CHIPSIZE * 2;
-					
-				
-						
-				}
-				if (g_map.select == 2) {
-					
-						g_enemy[i].ex = CHIPSIZE * 10, g_enemy[i].ey = CHIPSIZE * 2;
 
-						g_enemy[2].ex = CHIPSIZE * 16, g_enemy[2].ey = CHIPSIZE * 2;
-					
-					
-				}
-				if (g_map.select == 3) {
-					
-						g_enemy3[i].ex3 = CHIPSIZE * 13, g_enemy3[i].ey3 = CHIPSIZE * 8;
-						
-				}
-				if (g_map.select == 4) {
-					g_enemy3[i].ex3 = CHIPSIZE * 4, g_enemy3[i].ey3 = CHIPSIZE * 3;
+		if (g_map.select == 1) {
 
-				}
+			g_enemy[i].ex = CHIPSIZE * 4, g_enemy[i].ey = CHIPSIZE * 9;
 
-				if (g_map.select == 5) {
-					g_enemy3[i].ex3 = CHIPSIZE * 0, g_enemy3[i].ey3 = CHIPSIZE * 5;
 
-				}
 
-				if (g_map.select == 6) {
-					
-						g_enemy[i].ex = CHIPSIZE * 8, g_enemy[i].ey = CHIPSIZE * 2;
-					
-						g_enemy2[i].ex2 = CHIPSIZE * 16, g_enemy2[i].ey2 = CHIPSIZE * 4;
-					
-				}
-				
-				if (g_map.select == 7) {
-				
-						g_enemy[i].ex = CHIPSIZE * 16, g_enemy[i].ey = CHIPSIZE * 6;
-						
-					
-				}
-				
-			}
-		
+		}
+		if (g_map.select == 2) {
+
+			g_enemy[i].ex = CHIPSIZE * 10, g_enemy[i].ey = CHIPSIZE * 2;
+
+			g_enemy[2].ex = CHIPSIZE * 16, g_enemy[2].ey = CHIPSIZE * 2;
+
+
+		}
+		if (g_map.select == 3) {
+
+			g_enemy3[i].ex3 = CHIPSIZE * 13, g_enemy3[i].ey3 = CHIPSIZE * 8;
+
+		}
+		if (g_map.select == 4) {
+			g_enemy3[i].ex3 = CHIPSIZE * 4, g_enemy3[i].ey3 = CHIPSIZE * 3;
+
+		}
+
+		if (g_map.select == 6) {
+
+			g_enemy[i].ex = CHIPSIZE * 8, g_enemy[i].ey = CHIPSIZE * 2;
+
+			g_enemy2[i].ex2 = CHIPSIZE * 16, g_enemy2[i].ey2 = CHIPSIZE * 4;
+
+		}
+
+		if (g_map.select == 7) {
+
+			g_enemy[i].ex = CHIPSIZE * 15, g_enemy[i].ey = CHIPSIZE * 6;
+
+			g_enemy3[i].ex3 = CHIPSIZE * 3, g_enemy3[i].ey3 = CHIPSIZE * 5;
+		}
+
 	}
+
+}
 
 
 
 void EnemyMove() {
-	for (int i = 1; i < ENEMY_MAX; i++){
+	for (int i = 1; i < ENEMY_MAX; i++) {
 		//上下
 		if (g_map.playStage[int((g_enemy[i].ey) / CHIPSIZE)][int(g_enemy[i].ex / CHIPSIZE)] != 1
 			&& g_enemy[i].es == 0) {
@@ -92,24 +87,29 @@ void EnemyMove() {
 			g_enemy[i].es = 0;
 		}
 
+		//爆発したら消える
+		if (g_gimmick[BOMB].anime == 50&&g_map.select==7) {
+			g_enemy[i].ex = CHIPSIZE * -1, g_enemy[i].ey = CHIPSIZE * -1;
+		}
+
 		//当たり判定
 		if (HitBoxPlayer(&g_player, &g_enemy[i]) == TRUE
-			&& g_player.dir == 0) {
+			&& g_player.dir == 0 && g_player.muteki == 0) {
 			g_player.life -= 1;
-			g_player.px = g_player.px - 80;
+			g_player.muteki = 1;
+
 		}
 
 		if (HitBoxPlayer(&g_player, &g_enemy[i]) == TRUE
-			&& g_player.dir == 1) {
+			&& g_player.dir == 1 && g_player.muteki == 0) {
 			g_player.life -= 1;
-			g_player.px = g_player.px + 80;
-
+			g_player.muteki = 1;
 		}
 
 		//プレイヤーのライフが０なったら
 		if (g_player.life == 0) {
 			g_gameScene = GAME_OVER;
-			g_player.px = CHIPSIZE * 1, g_player.py = CHIPSIZE * 9;
+	
 		}
 		//敵の表示
 		DrawGraph(g_enemy[i].ex, g_enemy[i].ey, g_img.Teki[1], TRUE);
@@ -122,7 +122,7 @@ void EnemyMove2() {
 		if (g_map.playStage[int(g_enemy2[i].ey2 / CHIPSIZE)][int(g_enemy2[i].ex2 / CHIPSIZE)] != 1
 			&& g_enemy2[i].es2 == 0) {
 			g_enemy2[i].ex2 -= 3;
-		
+
 		}
 		else {
 			g_enemy2[i].es2 = 1;
@@ -131,57 +131,74 @@ void EnemyMove2() {
 		if (g_map.playStage[int(g_enemy2[i].ey2 / CHIPSIZE)][int((g_enemy2[i].ex2 + 64) / CHIPSIZE)] != 1
 			&& g_enemy2[i].es2 == 1) {
 			g_enemy2[i].ex2 += 3;
-		
+
 		}
 		else {
 			g_enemy2[i].es2 = 0;
 		}
+
+		//爆発したら消える
+		if (g_gimmick[BOMB].anime == 50) {
+			g_enemy2[i].ex2 = CHIPSIZE * -1, g_enemy2[i].ey2 = CHIPSIZE * -1;
+		}
+
 		//当たり判定
 		if (HitBoxPlayer2(&g_player, &g_enemy2[i]) == TRUE
-			&& g_player.dir == 0) {
+			&& g_player.dir == 0 && g_player.muteki == 0) {
 			g_player.life -= 1;
-			g_player.px = g_player.px - 80;
+			g_player.muteki = 1;
 		}
 
 		if (HitBoxPlayer2(&g_player, &g_enemy2[i]) == TRUE
-			&& g_player.dir == 1) {
+			&& g_player.dir == 1 && g_player.muteki == 0) {
 			g_player.life -= 1;
-			g_player.px = g_player.px + 80;
+			g_player.muteki = 1;
 
 		}
 
 		//プレイヤーのライフが０なったら
 		if (g_player.life == 0) {
 			g_gameScene = GAME_OVER;
-			g_player.px = CHIPSIZE * 1, g_player.py = CHIPSIZE * 9;
+		
 		}
-	
-			//敵の表示
-			DrawGraph(g_enemy2[i].ex2, g_enemy2[i].ey2, g_img.Teki[2], TRUE);
-		
-		
+
+		//敵の表示
+		DrawGraph(g_enemy2[i].ex2, g_enemy2[i].ey2, g_img.Teki[2], TRUE);
+
+
 	}
 }
 
 void EnemyMove3() {
 	for (int i = 1; i < ENEMY_MAX; i++) {
-		
+
+		//毒が落ちるとき
+		if (g_map.playStage[int((g_enemy3[i].ey3 + 128) / CHIPSIZE)][int(g_enemy3[i].ex3 / CHIPSIZE)] != 1) {
+			g_enemy3[i].ey3 += 2;
+
+		}
+		//壺に当たったら消える
+		if (g_map.playStage[int((g_enemy3[i].ey3 + 128) / CHIPSIZE)][int(g_enemy3[i].ex3 / CHIPSIZE)] == h) {
+			g_enemy3[i].ex3 = CHIPSIZE * -1, g_enemy3[i].ey3 = CHIPSIZE * -1;
+		}
+
 		//当たり判定
 		if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
-			&& g_player.dir == 0&&g_player.syo != 1) {
+			&& g_player.dir == 0 && g_player.syo != 1 && g_player.muteki == 0) {
 			g_player.life -= 1;
+			g_player.muteki = 1;
 			g_player.px = g_player.px - 80;
 		}
-		else if(HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
-			&& g_player.dir == 0 && g_player.syo == 1){
+		else if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
+			&& g_player.dir == 0 && g_player.syo == 1) {
 			g_enemy3[i].ex3 = CHIPSIZE * -1, g_enemy3[i].ey3 = CHIPSIZE * -1;
 		}
 
 		if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
-			&& g_player.dir == 1&&g_player.syo!=1) {
+			&& g_player.dir == 1 && g_player.syo != 1 && g_player.muteki == 0) {
 			g_player.life -= 1;
+			g_player.muteki = 1;
 			g_player.px = g_player.px + 80;
-
 		}
 		else if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
 			&& g_player.dir == 0 && g_player.syo == 1) {
@@ -191,7 +208,7 @@ void EnemyMove3() {
 		//プレイヤーのライフが０なったら
 		if (g_player.life == 0) {
 			g_gameScene = GAME_OVER;
-			g_player.px = CHIPSIZE * 1, g_player.py = CHIPSIZE * 9;
+			
 		}
 
 		//敵の表示
@@ -208,13 +225,13 @@ void EnemyMove3() {
 int HitBoxPlayer(Player* p, Enemy* e)
 {
 	//x,yは中心座標とする
-	int sx1 = p->px - (p->pw-49);
-	int sy1 = p->py - (p->ph/32);
+	int sx1 = p->px - (p->pw - 49);
+	int sy1 = p->py - (p->ph / 32);
 	int sx2 = sx1 + p->pw;
 	int sy2 = sy1 + p->ph;
 
-	int dx1 = e->ex - (e->ew-64);
-	int dy1 = e->ey - (e->eh-63);
+	int dx1 = e->ex - (e->ew - 64);
+	int dy1 = e->ey - (e->eh - 63);
 	int dx2 = dx1 + e->ew;
 	int dy2 = dy1 + e->eh;
 
@@ -236,7 +253,7 @@ int HitBoxPlayer(Player* p, Enemy* e)
 * 引数：PLAYER　ポインタ
 * 戻り値：TRUE：あたり、FALSE：はずれ
 ************************************* */
-int HitBoxPlayer2(Player * p, Enemy2* e2)
+int HitBoxPlayer2(Player* p, Enemy2* e2)
 {
 	//x,yは中心座標とする
 	int sx1 = p->px - (p->pw - 49);
@@ -268,7 +285,7 @@ int HitBoxPlayer2(Player * p, Enemy2* e2)
 * 引数：PLAYER　ポインタ
 * 戻り値：TRUE：あたり、FALSE：はずれ
 ************************************* */
-int HitBoxPlayer3(Player * p, Enemy3 * e3)
+int HitBoxPlayer3(Player* p, Enemy3* e3)
 {
 	//x,yは中心座標とする
 	int sx1 = p->px - (p->pw - 49);

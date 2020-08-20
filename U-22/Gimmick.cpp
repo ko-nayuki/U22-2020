@@ -5,6 +5,7 @@
 #include "Map.h"
 #include "Picture.h"
 #include "KeyControl.h"
+#include "Sounds.h"
 
 bool smokeFlg[GIMMICK_NUM] = { false };
 float goal_Anime = 0.0;
@@ -720,6 +721,7 @@ void cauldronMove() {
 	//大釜の処理
 	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == BOSS_G_1) {
 		g_player.life--;//ダメージ
+		g_player.muteki = 1;
 		for (int i = 0; i < STAGE_HEIGHT; i++) {
 			for (int j = 0; j < STAGE_WIDTH; j++) {
 				if (g_map.playStage[i][j] == 3) {
@@ -758,8 +760,9 @@ void bigboundMove() {
 }
 
 void mistake() {
-	if ((key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)) {
+	if (/*key[KEY_INPUT_SPACE] == 1 ||*/ g_KeyFlg & PAD_INPUT_2) {
 		if (g_player.item[g_player.itemSelect] != K_NO) {
+			PlaySoundMem(g_sounds.Select, DX_PLAYTYPE_BACK, TRUE);
 			//エレベータ
 			if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_1) {
 				if (g_player.item[g_player.itemSelect] != K_UE && g_player.item[g_player.itemSelect] != K_SITA) {

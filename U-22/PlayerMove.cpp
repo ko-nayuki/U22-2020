@@ -4,9 +4,24 @@
 #include "Map.h"
 #include "KeyControl.h"
 #include "Gimmick.h"
+#include "GameScene.h"
+
+void PlayerInit() {
+	g_gimmick[BOUND].tikara = 0;
+	g_player.life = 3;
+	g_player.syo = 0;
+}
+
+void HPDisp() {
+	//HPï\é¶
+	DrawGraph(600,675, g_img.hp, TRUE);
+	SetFontSize(50);
+	DrawFormatString(670, 690, 0xffffff, "Å~%d", g_player.life);
+	SetFontSize(20);
+}
 
 void PlayerMove(){
-
+	SetFontSize(20);
 	DrawFormatString(0, 60, 0xffffff, "xc%d", g_player.xcount);
 	DrawFormatString(0, 80, 0xffffff, "yc%d", g_player.ycount);
 	DrawFormatString(0, 100, 0xffffff, "re%d", g_player.result);
@@ -18,20 +33,8 @@ void PlayerMove(){
 	DrawFormatString(0, 550, 0x000000, "%d", g_player.py);
 	DrawFormatString(0, 600, 0x000000, "%d", g_player.itemNo);
 	
-	if (g_NowKey & PAD_INPUT_LEFT || g_NowKey & PAD_INPUT_RIGHT || key[KEY_INPUT_LEFT] == 1 || key[KEY_INPUT_RIGHT] == 1) {
-
-		if (g_NowKey & PAD_INPUT_UP || g_NowKey & KEY_INPUT_DOWN || key[KEY_INPUT_UP] == 1 || key[KEY_INPUT_DOWN] == 1) {
-			//à⁄ìÆåWêîÇÇOÅDÇVÇPÇ…ê›íË
-			g_player.move = 0.71f;
-		}
-		else {
-			//éŒÇﬂÇ∂Ç·Ç»ÇØÇÍÇŒÇPÅDÇOÇ…ê›íË
-			g_player.move = 1;
-		}
-	}
-	else if (g_NowKey & PAD_INPUT_UP || g_NowKey & KEY_INPUT_DOWN || key[KEY_INPUT_UP] == 1 || key[KEY_INPUT_DOWN] == 1) {
-		g_player.move = 1;
-	}
+	
+	
 
 	//à⁄ìÆèàóù
 	if (g_NowKey & PAD_INPUT_LEFT || key[KEY_INPUT_LEFT] == 1) {
@@ -117,8 +120,34 @@ void PlayerMove(){
 		
 	}
 
-	DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
+	if(g_player.muteki == 0){
+		DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
+	}
+
+	if (g_player.muteki == 1) {
+		
+		// ÇTâÒÇÃÇ§ÇøÇQâÒï\é¶Ç∑ÇÈÅB
+		static int count = 0;
+		count = (count + 1) % 60;
+		DrawFormatString(0, 700, 0x000000, "%d", count);
+		if (count%2==0) {
+			//ï\é¶
+			DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
+		}
+		if (count==59||g_player.life==0){
+			g_player.muteki = 0;
+
+			if (g_player.life == 0) {
+				g_gameScene = GAME_OVER;
+			}
+
+		}
+	}
+
+
+	//DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
 	
+
 	//âüÇ≥ÇÍÇƒÇ»ÇØÇÍÇŒÉJÉEÉìÉgÇÉ[ÉçÇ…Ç∑ÇÈÅB
 	//if (/*CheckHitKey(PAD_INPUT_LEFT) == 0 || CheckHitKey(PAD_INPUT_RIGHT) == 0*/key[KEY_INPUT_LEFT] != 1 && key[KEY_INPUT_RIGHT] != 1) {
 	//	g_player.xcount = 0;

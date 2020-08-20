@@ -35,8 +35,6 @@ void PlayDisp() {
 	
 	if (ItemAnime < 7.5) ItemAnime += 0.5F;
 
-	item_Box();
-
 	//for (int i = 0; i < ITEM_MAX; i++) {
 	//	if (i != g_player.itemSelect) {
 	//		DrawGraph(96 + (CHIPSIZE + 32) * i, CHIPSIZE * 10 + 32, g_img.itemBox, TRUE);
@@ -62,16 +60,19 @@ void PlayDisp() {
 }
 
 void PlayMove() {
-	if (g_map.select == 1 || g_map.select == 2 ||
-		g_map.select == 7) {
+	if (g_map.select == 1 || g_map.select == 2 ){
 		EnemyMove();
 	}
-	if (g_map.select == 3 || g_map.select == 4 || g_map.select == 5) {
+	if (g_map.select == 3 || g_map.select == 4) {
 		EnemyMove3();
 	}
 	if (g_map.select == 6) {
 		EnemyMove();
 		EnemyMove2();
+	}
+	if (g_map.select == 7) {
+		EnemyMove();
+		EnemyMove3();
 	}
 	bossMove();
 	gimmickMove();
@@ -87,9 +88,13 @@ void PlayMove() {
 		}
 	}
 
+	HPDisp();
+	item_Box();
+
 	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == 2) {
 		//if ((g_map.select / 3) - 1 != 0){
 		g_map.select++;
+		EnemyInit();
 		g_gameScene = GAME_CLEAR;
 		//}
 		//else {

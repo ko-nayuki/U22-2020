@@ -37,7 +37,7 @@ void thiefMove() {//boss2
 	if (g_boss[1].x == 17 * CHIPSIZE + 32) DrawGraph(1 * CHIPSIZE + 32, g_boss[1].y + 21 - motion_y, g_img.thief[15], TRUE);
 	if (g_boss[1].x == 1 * CHIPSIZE + 32) DrawGraph(17 * CHIPSIZE + 32, g_boss[1].y + 21 - motion_y, g_img.thief[23], TRUE);
 
-	if (g_player.px > 12 * CHIPSIZE + 32 && g_boss[1].x == 17 * CHIPSIZE + 32) {
+	if (g_player.px > 10 * CHIPSIZE + 32 && g_boss[1].x == 17 * CHIPSIZE + 32) {
 		if (warpFlg == false) {//player‚ª‰E‚ÉˆÚ“®
 			g_boss[1].anime = 16;
 			g_boss[1].count = 0;
@@ -46,7 +46,7 @@ void thiefMove() {//boss2
 			warpFlg = true;
 		}
 	}
-	else if (g_player.px < 6 * CHIPSIZE + 32 && g_boss[1].x == 1 * CHIPSIZE + 32) {
+	else if (g_player.px < 8 * CHIPSIZE + 32 && g_boss[1].x == 1 * CHIPSIZE + 32) {
 		if (warpFlg == false) {//player‚ª¶‚ÉˆÚ“®
 			g_boss[1].anime = 8;
 			g_boss[1].count = 0;
@@ -93,7 +93,7 @@ void thiefMove() {//boss2
 		}
 	}
 
-	if (warpFlg == false && g_boss[1].attackFlg == false) {//UŒ‚‘Ò‹@
+	if (warpFlg == false && g_boss[1].attackFlg == false && g_boss[1].damageFlg == false) {//UŒ‚‘Ò‹@
 		//‚·‚×‚Ä‚Ì”š’e‚ª”š”­‚µ‚½‚çcountŠJŽn
 		if(Bomb_Flg[0] == false && Bomb_Flg[1] == false && Bomb_Flg[2] == false
 			&& Bomb_Flg2[0] == false && Bomb_Flg2[1] == false && Bomb_Flg2[2] == false) g_boss[1].count++;
@@ -231,35 +231,61 @@ void thiefMove() {//boss2
 			}
 			else {
 				if (Bomb_count[bomb_num]-- > 0) {
+					g_boss[1].count = 0;
 					DrawRotaGraph(Bomb_X[bomb_num] + 64, Bomb_Y[bomb_num] + 32, 1 + ((50 - Bomb_count[bomb_num]) * 0.01), 0, g_img.bomb, TRUE);//”š’e‚Ì•`‰æ
 					g_map.gimmickData[(Bomb_Y[bomb_num] / CHIPSIZE) + 1][Bomb_X[bomb_num] / CHIPSIZE] = 0;
 					g_map.gimmickData[(Bomb_Y[bomb_num] / CHIPSIZE) + 1][(Bomb_X[bomb_num] / CHIPSIZE) + 1] = 0;
 				}
 				else {
-					DrawBox(Bomb_X[bomb_num] - 32, Bomb_Y[bomb_num] - 64, Bomb_X[bomb_num] + 160, Bomb_Y[bomb_num] + 64, 0xFF0000, true);//”š”­”ÍˆÍ
-					g_map.gimmickData[(Bomb_Y[bomb_num] / CHIPSIZE) + 1][Bomb_X[bomb_num] / CHIPSIZE] = BOSS_G_2;
-					g_map.gimmickData[(Bomb_Y[bomb_num] / CHIPSIZE) + 1][(Bomb_X[bomb_num] / CHIPSIZE) + 1] = BOSS_G_2;
-					g_boss[1].damageFlg = false;
-					Bomb_Flg[bomb_num] = false;
-					Bomb_Flg2[bomb_num] = false;
-					Bomb_count[bomb_num] = 0;
-					if(Bomb_X[bomb_num] == int(g_boss[1].x) - 32) g_boss[1].hp--;
-					Bomb_Y[bomb_num] = -CHIPSIZE;
-					Bomb_X[bomb_num] = -CHIPSIZE;
+					if (g_boss[1].count == 0) {
+						DrawBox(Bomb_X[bomb_num] - 32, Bomb_Y[bomb_num] - 64, Bomb_X[bomb_num] + 160, Bomb_Y[bomb_num] + 64, 0xFF0000, true);//”š”­”ÍˆÍ
+						g_map.gimmickData[(Bomb_Y[bomb_num] / CHIPSIZE) + 1][Bomb_X[bomb_num] / CHIPSIZE] = BOSS_G_2;
+						g_map.gimmickData[(Bomb_Y[bomb_num] / CHIPSIZE) + 1][(Bomb_X[bomb_num] / CHIPSIZE) + 1] = BOSS_G_2;
+					}
+
+					// ‚T‰ñ‚Ì‚¤‚¿‚Q‰ñ•\Ž¦‚·‚éB
+					g_boss[1].count++;
+					if (g_boss[1].count % 10 == 0) {
+						//•\Ž¦
+						if (Bomb_X[bomb_num] == int(g_boss[1].x) - 32) {
+							SetDrawBright(255, 0, 0);
+							DrawGraph(g_boss[1].x, g_boss[1].y - CHIPSIZE, g_img.thief[int(g_boss[1].anime)], TRUE);
+							SetDrawBright(255, 255, 255);
+						}
+					}
+					if (g_boss[1].count >= 40) {
+						g_boss[1].damageFlg = false;
+						g_boss[1].count = 0;
+						Bomb_Flg[bomb_num] = false;
+						Bomb_Flg2[bomb_num] = false;
+						Bomb_count[bomb_num] = 0;
+						if (Bomb_X[bomb_num] == int(g_boss[1].x) - 32) g_boss[1].hp--;
+						Bomb_Y[bomb_num] = -CHIPSIZE;
+						Bomb_X[bomb_num] = -CHIPSIZE;
+					}
 				}
 			}
 		}
 	}
 
 	if (g_boss[1].hp <= 0) {//HP‚ª0‚É‚È‚Á‚½‚ç
+		g_map.select++;
 		g_gameScene = GAME_CLEAR;
 	}
 
 
 	if (g_player.py == 9 * CHIPSIZE) {//player‚ª’n–Ê‚É’…’n‚µ‚½‚ç
-		if (g_player.item[0] == K_NO && g_map.playStage[9][17] == 0) {
-			g_map.playStage[9][17] = C;
+		if (g_boss[1].x == 1 * CHIPSIZE + 32) {
+			if (g_player.item[0] == K_NO && g_map.playStage[9][18] == 0 && g_map.playStage[9][1] == 0) {
+				g_map.playStage[9][1] = C;
+			}
 		}
+		if (g_boss[1].x == 17 * CHIPSIZE + 32) {
+			if (g_player.item[0] == K_NO && g_map.playStage[9][1] == 0 && g_map.playStage[9][18] == 0) {
+				g_map.playStage[9][18] = C;
+			}
+		}
+
 		for (int i = 0; i < STAGE_HEIGHT; i++) {
 			for (int j = 0; j < STAGE_WIDTH; j++) {
 				if (g_map.gimmickData[i][j] == BOSS_G_3) {
@@ -276,14 +302,15 @@ void thiefMove() {//boss2
 			g_player.py < Bomb_Y[i] + 64 &&
 			g_player.py + 64 > Bomb_Y[i] - 64) {
 			if (Bomb_count[i] <= 0) {
+				g_player.muteki = 1;
 				g_player.life -= 1;
 				g_player.py -= CHIPSIZE * 2;
 			}
 		}
 	}
 	//ƒvƒŒƒCƒ„[‚Ìƒ‰ƒCƒt‚ª‚O‚È‚Á‚½‚ç
-	if (g_player.life == 0) {
-		g_gameScene = GAME_SELECT;
-		g_player.px = CHIPSIZE * 1, g_player.py = CHIPSIZE * 9;
-	}
+	//if (g_player.life == 0) {
+	//	g_gameScene = GAME_OVER;
+	//	//g_player.px = CHIPSIZE * 1, g_player.py = CHIPSIZE * 9;
+	//}
 }

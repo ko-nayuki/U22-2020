@@ -210,17 +210,21 @@ void wolfMove() {// boss1
 		g_player.px + 64 > g_boss[0].x + 20 &&
 		g_player.py < g_boss[0].y + 44 &&
 		g_player.py + 64 > g_boss[0].y + 20) {
-		if (g_boss[0].damageFlg == false) {
+		if (g_boss[0].damageFlg == false&&g_player.muteki==0) {
 			if (g_player.px + 64 < g_boss[0].x + 44) {
-				g_player.px -= CHIPSIZE;
+				g_player.muteki = 1;
 				g_player.life -= 1;
 			}
 			else if (g_player.px > g_boss[0].x) {
-				g_player.px += CHIPSIZE;
+				g_player.muteki = 1;
 				g_player.life -= 1;
 			}
 		}
 		//DrawBox(g_boss[0].x + 20, g_boss[0].y + 20, g_boss[0].x + 44, g_boss[0].y + 44,0xFF0000,true);
 	}
+	//プレイヤーのライフが０なったら
+	//if (g_player.life == 0) {
+	//	g_gameScene = GAME_OVER;
+	//}
 
 }

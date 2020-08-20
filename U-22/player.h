@@ -5,6 +5,8 @@
 #define ITEM_MAX 5		//アイテムの最大数
 
 void PlayerMove();
+void PlayerInit();
+void HPDisp();
 
 struct Player {
 	//移動係数
@@ -42,6 +44,8 @@ struct Player {
 
 	//消アイテム
 	int syo = 0;
+
+	int muteki = 0;
 
 };
 

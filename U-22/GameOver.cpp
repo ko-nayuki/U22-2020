@@ -54,7 +54,7 @@ void GameOverMove() {
 				g_player.item[i] = K_NO;
 			}
 			g_player.itemNo = 0;
-			g_player.life = 3;
+			PlayerInit();
 			//g_gameScene = GAME_PLAY;
 			if (CheckHitKey(KEY_INPUT_SPACE) == 1)
 				g_KeyFlg = 0;
