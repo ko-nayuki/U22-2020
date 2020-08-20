@@ -222,5 +222,9 @@ void wolfMove() {// boss1
 		}
 		//DrawBox(g_boss[0].x + 20, g_boss[0].y + 20, g_boss[0].x + 44, g_boss[0].y + 44,0xFF0000,true);
 	}
+	//プレイヤーのライフが０なったら
+	//if (g_player.life == 0) {
+	//	g_gameScene = GAME_OVER;
+	//}
 
 }

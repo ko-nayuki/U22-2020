@@ -25,7 +25,6 @@ void PlayDisp() {
 	BackStageDisp();
 	gimmickDisp();
 	StageDisp();
-	HPDisp();
 	
 	/*for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
@@ -35,8 +34,6 @@ void PlayDisp() {
 	}*/
 	
 	if (ItemAnime < 7.5) ItemAnime += 0.5F;
-
-	item_Box();
 
 	//for (int i = 0; i < ITEM_MAX; i++) {
 	//	if (i != g_player.itemSelect) {
@@ -90,6 +87,9 @@ void PlayMove() {
 			}
 		}
 	}
+
+	HPDisp();
+	item_Box();
 
 	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == 2) {
 		//if ((g_map.select / 3) - 1 != 0){

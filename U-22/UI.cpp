@@ -4,6 +4,7 @@
 #include "Map.h"
 #include "Picture.h"
 #include "KeyControl.h"
+#include "Sounds.h"
 
 const char data[] = __DATE__;
 const char time[] = __TIME__;
@@ -48,9 +49,6 @@ void item_Box() {
 
 	static float ItemAnime = 0;
 
-	DrawExtendGraph(70, 655,100,675 , g_img.Triger[0], FALSE);
-	DrawExtendGraph(150, 655,180,675 , g_img.Triger[1], FALSE);
-
 	if (ItemAnime < 7.5) ItemAnime += 0.5F;
 
 	for (int i = 0; i < ITEM_MAX; i++) {
@@ -58,6 +56,9 @@ void item_Box() {
 			DrawGraph(96 + (CHIPSIZE + 32) * i, CHIPSIZE * 10 + 32, g_img.itemBox, TRUE);
 		}
 		else {
+			DrawExtendGraph(70 + (CHIPSIZE + 32) * i, 655, 100 + (CHIPSIZE + 32) * i, 675, g_img.Triger[0], FALSE);
+			DrawExtendGraph(150 + (CHIPSIZE + 32) * i, 655, 180 + (CHIPSIZE + 32) * i, 675, g_img.Triger[1], FALSE);
+
 			SetDrawBright(255, 0, 0);
 			//DrawGraph(96 + (CHIPSIZE + 32) * i, CHIPSIZE * 10 + 32, g_img.itemBox, TRUE);
 			DrawRotaGraph(128 + (CHIPSIZE + 32) * i, CHIPSIZE * 10 + 64, 1, -(ItemAnime / 3.14), g_img.itemBox, TRUE);
@@ -69,10 +70,12 @@ void item_Box() {
 	}
 
 	if (g_KeyFlg & PAD_INPUT_Z) {
+		PlaySoundMem(g_sounds.SenTaku, DX_PLAYTYPE_BACK, TRUE);
 		if (++g_player.itemSelect > ITEM_MAX - 1) g_player.itemSelect = 0;
 		ItemAnime = 0;
 	}
 	if (g_KeyFlg & PAD_INPUT_5 || g_KeyFlg & PAD_INPUT_X) {
+		PlaySoundMem(g_sounds.SenTaku, DX_PLAYTYPE_BACK, TRUE);
 		if (--g_player.itemSelect < 0) g_player.itemSelect = ITEM_MAX - 1;
 		ItemAnime = 0;
 	}
