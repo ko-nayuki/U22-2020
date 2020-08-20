@@ -4,6 +4,7 @@
 #include "Map.h"
 #include "KeyControl.h"
 #include "Gimmick.h"
+#include "GameScene.h"
 
 void PlayerInit() {
 	g_gimmick[BOUND].tikara = 0;
@@ -16,6 +17,7 @@ void HPDisp() {
 	DrawGraph(600,675, g_img.hp, TRUE);
 	SetFontSize(50);
 	DrawFormatString(670, 690, 0xffffff, "Å~%d", g_player.life);
+	SetFontSize(20);
 }
 
 void PlayerMove(){
@@ -134,6 +136,11 @@ void PlayerMove(){
 		}
 		if (count==59||g_player.life==0){
 			g_player.muteki = 0;
+
+			if (g_player.life == 0) {
+				g_gameScene = GAME_OVER;
+			}
+
 		}
 	}
 
