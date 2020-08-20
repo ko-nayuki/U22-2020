@@ -23,6 +23,7 @@ int LoadPicture(){
 	if ((g_img.kanzi[5] = LoadGraph("images/marudou.png")) == -1) return -1;
 	if ((g_img.kanzi[6] = LoadGraph("images/marubaku.png")) == -1) return -1;
 	//ƒ^ƒCƒgƒ‹Š¿š
+	if ((g_img.Title = LoadGraph("images/title01.png")) == -1) return -1;
 	if ((g_img.T_kanzi[0] = LoadGraph("images/title_start01.png")) == -1) return -1;
 	if ((g_img.T_kanzi[1] = LoadGraph("images/title_start02.png")) == -1) return -1;
 	if ((g_img.T_kanzi[2] = LoadGraph("images/title_end01.png")) == -1) return -1;
