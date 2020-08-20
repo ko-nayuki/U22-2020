@@ -51,7 +51,7 @@ void EnemyInit() {
 
 		if (g_map.select == 7) {
 
-			g_enemy[i].ex = CHIPSIZE * 16, g_enemy[i].ey = CHIPSIZE * 6;
+			g_enemy[i].ex = CHIPSIZE * 15, g_enemy[i].ey = CHIPSIZE * 6;
 
 			g_enemy3[i].ex3 = CHIPSIZE * 3, g_enemy3[i].ey3 = CHIPSIZE * 5;
 		}
@@ -85,6 +85,11 @@ void EnemyMove() {
 		}
 		else {
 			g_enemy[i].es = 0;
+		}
+
+		//îöî≠ÇµÇΩÇÁè¡Ç¶ÇÈ
+		if (g_gimmick[BOMB].anime == 50&&g_map.select==7) {
+			g_enemy[i].ex = CHIPSIZE * -1, g_enemy[i].ey = CHIPSIZE * -1;
 		}
 
 		//ìñÇΩÇËîªíË
@@ -131,6 +136,12 @@ void EnemyMove2() {
 		else {
 			g_enemy2[i].es2 = 0;
 		}
+
+		//îöî≠ÇµÇΩÇÁè¡Ç¶ÇÈ
+		if (g_gimmick[BOMB].anime == 50) {
+			g_enemy2[i].ex2 = CHIPSIZE * -1, g_enemy2[i].ey2 = CHIPSIZE * -1;
+		}
+
 		//ìñÇΩÇËîªíË
 		if (HitBoxPlayer2(&g_player, &g_enemy2[i]) == TRUE
 			&& g_player.dir == 0 && g_player.muteki == 0) {
