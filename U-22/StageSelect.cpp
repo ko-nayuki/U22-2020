@@ -11,9 +11,7 @@
 
 
 void StageSelect() {
-	g_gimmick[BOUND].tikara = 0;
-	g_player.life = 3;
-	g_player.syo = 0;
+	PlayerInit();
 	SelectDisp();
 	SelectMove();
 	if (Fead.FeadFlg == 0) FeadIn();
@@ -51,82 +49,82 @@ void SelectMove() {
 		DrawString(0, 650, "ステージ4", 0x000000);
 	}
 
-	//if (g_KeyFlg & PAD_INPUT_RIGHT) {
-	//	if (++g_map.select > STAGE - 1) g_map.select = 0;
-	//}
-	//if (g_KeyFlg & PAD_INPUT_LEFT) {
-	//	if (--g_map.select < 0) g_map.select = STAGE - 1;
-	//}
+	/*if (g_KeyFlg & PAD_INPUT_RIGHT) {
+		if (++g_map.select > STAGE - 1) g_map.select = 0;
+	}
+	if (g_KeyFlg & PAD_INPUT_LEFT) {
+		if (--g_map.select < 0) g_map.select = STAGE - 1;
+	}*/
 
 	if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
-		//Fead.InfoStg = 2;
-		//FeadOut();
-		//gimmickInit();
-		//StageInit();
-		//EnemyInit();
-		//bossInit();
-		//for (int i = 0; i < ITEM_MAX; i++) {
-		//	g_player.item[i] = K_NO;
-		//}
-		//g_player.itemNo = 0;
-		//
-		//g_gameScene = GAME_PLAY;
-		if (g_Select.stage1x < g_player.px + 64 && g_Select.stage1x + 128 > g_player.px) {
-			g_map.select = 0;
-			g_Select.Checkkey = 0;
-			Fead.InfoStg = 2;
-			FeadOut();
-			gimmickInit();
-			StageInit();
-			EnemyInit();
-			bossInit();
-			for (int i = 0; i < ITEM_MAX; i++) {
-				g_player.item[i] = K_NO;
-			}
-			g_player.itemNo = 0;
-			//g_gameScene = GAME_PLAY;
+		/*Fead.InfoStg = 2;
+		FeadOut();
+		gimmickInit();
+		StageInit();
+		EnemyInit();
+		bossInit();
+		for (int i = 0; i < ITEM_MAX; i++) {
+			g_player.item[i] = K_NO;
 		}
-		if ((g_Select.stage2x < g_player.px + 64 && g_Select.stage2x + 128 > g_player.px) && g_Select.Key >= 1) {
-			g_map.select = 3;
-			g_Select.Checkkey = 1;
-			Fead.InfoStg = 2;
-			FeadOut();
-			gimmickInit();
-			StageInit();
-			EnemyInit();
-			bossInit();
-			for (int i = 0; i < ITEM_MAX; i++) {
-				g_player.item[i] = K_NO;
+		g_player.itemNo = 0;
+
+		g_gameScene = GAME_PLAY;*/
+			if (g_Select.stage1x < g_player.px + 64 && g_Select.stage1x + 128 > g_player.px) {
+				g_map.select = 0;
+				g_Select.Checkkey = 0;
+				Fead.InfoStg = 2;
+				FeadOut();
+				gimmickInit();
+				StageInit();
+				EnemyInit();
+				bossInit();
+				for (int i = 0; i < ITEM_MAX; i++) {
+					g_player.item[i] = K_NO;
+				}
+				g_player.itemNo = 0;
+				//g_gameScene = GAME_PLAY;
 			}
-			g_player.itemNo = 0;
-		}
-		if ((g_Select.stage3x < g_player.px + 64 && g_Select.stage3x + 128 > g_player.px) && g_Select.Key >= 2) {
-			g_map.select = 6;
-			g_Select.Checkkey = 2;
-			Fead.InfoStg = 2;
-			FeadOut();
-			gimmickInit();
-			StageInit();
-			EnemyInit();
-			bossInit();
-			for (int i = 0; i < ITEM_MAX; i++) {
-				g_player.item[i] = K_NO;
+			if ((g_Select.stage2x < g_player.px + 64 && g_Select.stage2x + 128 > g_player.px) && g_Select.Key >= 1) {
+				g_map.select = 3;
+				g_Select.Checkkey = 1;
+				Fead.InfoStg = 2;
+				FeadOut();
+				gimmickInit();
+				StageInit();
+				EnemyInit();
+				bossInit();
+				for (int i = 0; i < ITEM_MAX; i++) {
+					g_player.item[i] = K_NO;
+				}
+				g_player.itemNo = 0;
 			}
-			g_player.itemNo = 0;
-		}
-		if ((g_Select.stage4x < g_player.px + 64 && g_Select.stage4x + 128 > g_player.px) && g_Select.Key >= 3) {
-			g_map.select = 9;
-			g_Select.Checkkey = 3;
-			Fead.InfoStg = 2;
-			FeadOut();
-			gimmickInit();
-			StageInit();
-			EnemyInit();
-			bossInit();
-			for (int i = 0; i < ITEM_MAX; i++) {
-				g_player.item[i] = K_NO;
+			if ((g_Select.stage3x < g_player.px + 64 && g_Select.stage3x + 128 > g_player.px) && g_Select.Key >= 2) {
+				g_map.select = 6;
+				g_Select.Checkkey = 2;
+				Fead.InfoStg = 2;
+				FeadOut();
+				gimmickInit();
+				StageInit();
+				EnemyInit();
+				bossInit();
+				for (int i = 0; i < ITEM_MAX; i++) {
+					g_player.item[i] = K_NO;
+				}
+				g_player.itemNo = 0;
 			}
-			g_player.itemNo = 0;
-		}
+			if ((g_Select.stage4x < g_player.px + 64 && g_Select.stage4x + 128 > g_player.px) && g_Select.Key >= 3) {
+				g_map.select = 9;
+				g_Select.Checkkey = 3;
+				Fead.InfoStg = 2;
+				FeadOut();
+				gimmickInit();
+				StageInit();
+				EnemyInit();
+				bossInit();
+				for (int i = 0; i < ITEM_MAX; i++) {
+					g_player.item[i] = K_NO;
+				}
+				g_player.itemNo = 0;
+			}
 	}
 }

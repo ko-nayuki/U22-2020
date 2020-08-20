@@ -17,7 +17,8 @@ struct image {
 	int goal[5];
 	int marubatu[2];
 	int gimKanzi[6];
-	int Teki[4];
+	int Teki[4];        //“G
+	int hp;             //player hp
 	int itemBox;
 	int wolf[7];		//boss1
 	int thief[24];		//boss2
