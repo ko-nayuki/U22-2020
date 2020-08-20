@@ -76,6 +76,7 @@ void PlayMove() {
 	if (g_map.select == 7) {
 		EnemyMove();
 		EnemyMove3();
+		EnemyMove4();
 	}
 	bossMove();
 	gimmickMove();
