@@ -415,7 +415,7 @@ int HitBoxPlayer4(Player* p, Enemy4* e4)
 
 	////判定確認用
 	//DrawBox(sx1, sy1, sx2, sy2, 0xFFFFFF, TRUE);
-	DrawBox(dx7, dy7, dx8, dy8, 0xFFFFFF, TRUE);
+	//DrawBox(dx7, dy7, dx8, dy8, 0xFFFFFF, TRUE);
 
 	//短径が重なっていたら当たり
 	if (sx1 < dx8 && dx7 < sx2 && sy1 < dy8 && dy7 < sy2) {
