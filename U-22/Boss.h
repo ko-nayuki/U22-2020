@@ -7,6 +7,7 @@ void bossInit();
 
 void wolfMove();
 void thiefMove();
+void ColossusMove();
 
 struct boss {
 	float x;		//xç¿ïW
