@@ -44,6 +44,7 @@ int LoadPicture(){
 	if ((g_img.Teki[1] = LoadGraph("images/Cone.png")) == -1)return -1;
 	if ((g_img.Teki[2] = LoadGraph("images/Cone2.png")) == -1)return -1;
 	if ((g_img.Teki[3] = LoadGraph("images/Cone3.png")) == -1)return -1;
+	if ((g_img.Teki[4] = LoadGraph("images/Cone4.png")) == -1)return -1;
 
 	//player hp
 	if ((g_img.hp = LoadGraph("images/heart01.png")) == -1)return -1;

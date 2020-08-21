@@ -63,7 +63,7 @@ void PlayMove() {
 	if (g_map.select == 1 || g_map.select == 2 ){
 		EnemyMove();
 	}
-	if (g_map.select == 3 || g_map.select == 4) {
+	if (g_map.select == 3 || g_map.select == 4 || g_map.select == 5) {
 		EnemyMove3();
 	}
 	if (g_map.select == 6) {
@@ -73,6 +73,7 @@ void PlayMove() {
 	if (g_map.select == 7) {
 		EnemyMove();
 		EnemyMove3();
+		EnemyMove4();
 	}
 	bossMove();
 	gimmickMove();
@@ -91,9 +92,9 @@ void PlayMove() {
 	HPDisp();
 	item_Box();
 
-	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == 2) {
+	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == 2) {
 		//if ((g_map.select / 3) - 1 != 0){
-		g_map.select++;
+		//g_map.select++;
 		EnemyInit();
 		g_gameScene = GAME_CLEAR;
 		//}

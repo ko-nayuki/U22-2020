@@ -48,6 +48,10 @@ void FeadOut() {
 	}
 
 	//FeadIn();
+	if (num >= 255 && g_gameScene == GAME_CLEAR && Fead.ClearFlg == 0) {
+		if (g_map.select < STAGE - 1) g_map.select++;
+	}
+
 	if (Fead.InfoStg == 1) {
 		g_gameScene = GAME_SELECT;
 		Fead.InfoStg = 2;

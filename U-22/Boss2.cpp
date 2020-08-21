@@ -5,6 +5,7 @@
 #include "player.h"
 #include "Gimmick.h"
 #include "GameScene.h"
+#include "enemy.h"
 
 #include <math.h>
 
@@ -269,7 +270,7 @@ void thiefMove() {//boss2
 	}
 
 	if (g_boss[1].hp <= 0) {//HP‚ª0‚É‚È‚Á‚½‚ç
-		g_map.select++;
+		//g_map.select++;
 		g_gameScene = GAME_CLEAR;
 	}
 
