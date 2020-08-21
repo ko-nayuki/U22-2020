@@ -4,3 +4,5 @@
 void GameClear();
 void GameClearDisp();
 void GameClearMove();
+
+void GameComplete();

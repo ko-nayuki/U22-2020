@@ -31,6 +31,7 @@ int LoadPicture(){
 	//クリア文字
 	if ((g_img.ClearText = LoadGraph("images/stageclear.png")) == -1) return -1;
 	if ((g_img.NextText = LoadGraph("images/next01.png")) == -1) return -1;
+	if ((g_img.End = LoadGraph("images/EndingScnene.PNG")) == -1) return -1;
 	//ゲームオーバー画面
 	if ((g_img.GameOver = LoadGraph("images/gameover.png")) == -1) return -1;
 	if ((g_img.OverText[0] = LoadGraph("images/backtitle.png")) == -1) return -1;

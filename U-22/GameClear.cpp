@@ -54,16 +54,25 @@ void GameClearMove() {
 			//g_gameScene = GAME_PLAY;
 		}
 		else {
-			Fead.InfoStg = 4;
-			Fead.ClearFlg = 1;
-			if (g_Select.Checkkey == g_Select.CheckCorect) {
-				++g_Select.CheckCorect;
-				++g_Select.Key;
+			if (g_map.select != 11) {
+				Fead.InfoStg = 4;
+				Fead.ClearFlg = 1;
+				if (g_Select.Checkkey == g_Select.CheckCorect) {
+					++g_Select.CheckCorect;
+					++g_Select.Key;
+				}
+				if (CheckHitKey(PAD_INPUT_1) == 1)
+					g_KeyFlg = 0;
+				//g_gameScene = GAME_SELECT;
+				FeadOut();
 			}
-			if (CheckHitKey(PAD_INPUT_1) == 1)
-				g_KeyFlg = 0;
-			//g_gameScene = GAME_SELECT;
-			FeadOut();
+			else {
+				GameComplete();
+			}
 		}
 	}
+}
+
+void GameComplete() {
+	DrawGraph(0, 0, g_img.End, FALSE);
 }

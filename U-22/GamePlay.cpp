@@ -95,7 +95,7 @@ void PlayMove() {
 
 	HPDisp();
 	item_Box();
-	if (g_KeyFlg & PAD_INPUT_X) {
+	if (g_KeyFlg & PAD_INPUT_2 /*|| g_KeyFlg & PAD_INPUT_X*/) {//現在のリトライはXボタン。本番ではコメント外してYボタンにします
 		Fead.InfoStg = 3;
 		Fead.OverFlg = 0;
 		FeadOut();

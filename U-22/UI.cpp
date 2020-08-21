@@ -74,7 +74,7 @@ void item_Box() {
 		if (++g_player.itemSelect > ITEM_MAX - 1) g_player.itemSelect = 0;
 		ItemAnime = 0;
 	}
-	if (g_KeyFlg & PAD_INPUT_5 /*|| g_KeyFlg & PAD_INPUT_X*/) {
+	if (g_KeyFlg & PAD_INPUT_5 || g_KeyFlg & PAD_INPUT_X) {
 		PlaySoundMem(g_sounds.SenTaku, DX_PLAYTYPE_BACK, TRUE);
 		if (--g_player.itemSelect < 0) g_player.itemSelect = ITEM_MAX - 1;
 		ItemAnime = 0;
