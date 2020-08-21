@@ -32,6 +32,10 @@ void FeadOut() {
 		if (Fead.InfoStg == 2) {
 			SelectDisp();
 		}
+		//ゲームプレイ描画
+		if (Fead.InfoStg == 3) {
+			PlayDisp();
+		}
 		//ゲームクリア描画
 		if (Fead.InfoStg == 4) {
 			GameClearDisp();
@@ -40,6 +44,7 @@ void FeadOut() {
 		if (Fead.InfoStg == 5) {
 			GameOverDisp();
 		}
+
 
 		num += 2;
 
@@ -60,6 +65,19 @@ void FeadOut() {
 		g_gameScene = GAME_PLAY;
 		Fead.InfoStg = 3;
 	}
+	else if (Fead.InfoStg == 3) {
+		Fead.InfoStg = 3;
+		gimmickInit();
+		StageInit();
+		EnemyInit();
+		bossInit();
+		for (int i = 0; i < ITEM_MAX; i++) {
+			g_player.item[i] = K_NO;
+		}
+		g_player.itemNo = 0;
+		PlayerInit();
+		g_gameScene = GAME_PLAY;
+	}
 	else if(Fead.InfoStg == 4 && Fead.ClearFlg == 0) {
 		Fead.InfoStg = 3;
 		//g_map.select++;
@@ -77,6 +95,11 @@ void FeadOut() {
 		StageInit();
 		EnemyInit();
 		bossInit();
+		for (int i = 0; i < ITEM_MAX; i++) {
+			g_player.item[i] = K_NO;
+		}
+		g_player.itemNo = 0;
+		PlayerInit();
 		g_gameScene = GAME_PLAY;
 	}
 	else if (Fead.InfoStg == 5 && Fead.OverFlg == 1)

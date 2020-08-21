@@ -91,6 +91,11 @@ void PlayMove() {
 
 	HPDisp();
 	item_Box();
+	if (g_KeyFlg & PAD_INPUT_X) {
+		Fead.InfoStg = 3;
+		Fead.OverFlg = 0;
+		FeadOut();
+	}
 
 	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == 2) {
 		//if ((g_map.select / 3) - 1 != 0){

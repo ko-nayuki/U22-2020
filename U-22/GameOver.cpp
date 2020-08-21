@@ -46,15 +46,7 @@ void GameOverMove() {
 			Fead.InfoStg = 5;
 			Fead.OverFlg = 0;
 			FeadOut();
-			gimmickInit();
-			StageInit();
-			EnemyInit();
-			bossInit();
-			for (int i = 0; i < ITEM_MAX; i++) {
-				g_player.item[i] = K_NO;
-			}
-			g_player.itemNo = 0;
-			PlayerInit();
+
 			//g_gameScene = GAME_PLAY;
 			if (CheckHitKey(KEY_INPUT_SPACE) == 1)
 				g_KeyFlg = 0;
