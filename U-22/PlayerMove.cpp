@@ -10,6 +10,13 @@ void PlayerInit() {
 	g_gimmick[BOUND].tikara = 0;
 	g_player.life = 3;
 	g_player.syo = 0;
+	g_player.dir = 0;
+
+	for (int i = 0; i < ITEM_MAX; i++) {
+		g_player.item[i] = K_NO;
+	}
+	g_player.itemNo = 0;
+	g_player.itemSelect = 0;
 }
 
 void HPDisp() {
