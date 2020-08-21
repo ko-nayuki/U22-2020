@@ -21,3 +21,4 @@ struct boss {
 };
 
 extern boss g_boss[4];//0 :BOSS_1, 1 :BOSS_2, 2 :BOSS_3_L, BOSS_3_R 
+
