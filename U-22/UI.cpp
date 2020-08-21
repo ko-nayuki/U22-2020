@@ -56,8 +56,8 @@ void item_Box() {
 			DrawGraph(96 + (CHIPSIZE + 32) * i, CHIPSIZE * 10 + 32, g_img.itemBox, TRUE);
 		}
 		else {
-			DrawExtendGraph(70 + (CHIPSIZE + 32) * i, 655, 100 + (CHIPSIZE + 32) * i, 675, g_img.Triger[0], FALSE);
-			DrawExtendGraph(150 + (CHIPSIZE + 32) * i, 655, 180 + (CHIPSIZE + 32) * i, 675, g_img.Triger[1], FALSE);
+			DrawExtendGraph(70 + (CHIPSIZE + 32) * i, 655, 100 + (CHIPSIZE + 32) * i, 675, g_img.Triger[1], FALSE);
+			DrawExtendGraph(150 + (CHIPSIZE + 32) * i, 655, 180 + (CHIPSIZE + 32) * i, 675, g_img.Triger[0], FALSE);
 
 			SetDrawBright(255, 0, 0);
 			//DrawGraph(96 + (CHIPSIZE + 32) * i, CHIPSIZE * 10 + 32, g_img.itemBox, TRUE);
@@ -74,7 +74,7 @@ void item_Box() {
 		if (++g_player.itemSelect > ITEM_MAX - 1) g_player.itemSelect = 0;
 		ItemAnime = 0;
 	}
-	if (g_KeyFlg & PAD_INPUT_5 || g_KeyFlg & PAD_INPUT_X) {
+	if (g_KeyFlg & PAD_INPUT_5 /*|| g_KeyFlg & PAD_INPUT_X*/) {
 		PlaySoundMem(g_sounds.SenTaku, DX_PLAYTYPE_BACK, TRUE);
 		if (--g_player.itemSelect < 0) g_player.itemSelect = ITEM_MAX - 1;
 		ItemAnime = 0;
