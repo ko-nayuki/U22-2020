@@ -6,6 +6,8 @@
 
 #define ENEMY_MAX  3 //“G‚ÌÅ‘å‚Ì”
 
+
+
 struct Enemy {
 	
 	int ex=0,ey=0;
@@ -24,6 +26,7 @@ struct Enemy2 {
 
 	int es2 = 0;
 
+	
 
 
 }; extern Enemy2 g_enemy2[ENEMY_MAX];

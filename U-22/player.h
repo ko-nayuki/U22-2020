@@ -45,6 +45,9 @@ struct Player {
 	//ÁƒAƒCƒeƒ€
 	int syo = 0;
 
+	int aaa = 0;
+	int aab = 0;
+
 	int muteki = 0;
 
 };

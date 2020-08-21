@@ -18,7 +18,7 @@ void EnemyInit() {
 
 		if (g_map.select == 1) {
 
-			g_enemy[i].ex = CHIPSIZE * 4, g_enemy[i].ey = CHIPSIZE * 9;
+			g_enemy[i].ex = CHIPSIZE * 12, g_enemy[i].ey = CHIPSIZE * 3;
 
 
 
@@ -47,6 +47,7 @@ void EnemyInit() {
 		}
 
 		if (g_map.select == 6) {
+			
 
 			g_enemy[i].ex = CHIPSIZE * 8, g_enemy[i].ey = CHIPSIZE * 2;
 
@@ -149,9 +150,18 @@ void EnemyMove2() {
 			g_enemy2[i].es2 = 0;
 		}
 
-		//îöî≠ÇµÇΩÇÁè¡Ç¶ÇÈ
-		if (g_gimmick[BOMB].anime == 50) {
+		//îöíeÇ…ìñÇΩÇ¡ÇΩÇÁ
+		if (g_enemy2[i].ex2 < g_gimmick[BOMB].x + 128 &&
+			g_enemy2[i].ex2 + 64 > g_gimmick[BOMB].x - 64 &&
+			g_enemy2[i].ey2  < g_gimmick[BOMB].y + 64 &&
+			g_enemy2[i].ey2 + 64 > g_gimmick[BOMB].y - 64) {
+
 			g_enemy2[i].ex2 = CHIPSIZE * -1, g_enemy2[i].ey2 = CHIPSIZE * -1;
+			g_map.playStage[5][17] = F;
+		
+		}
+		if (g_map.select==6&&g_player.aaa ==1) {
+			g_map.playStage[5][17] = 0;
 		}
 
 		//ìñÇΩÇËîªíË
@@ -268,6 +278,9 @@ void EnemyMove4(){
 
 				g_enemy4[i].ex4 = CHIPSIZE * -1, g_enemy4[i].ey4 = CHIPSIZE * -1;
 				g_map.playStage[9][8] = A;
+			}
+			if (g_map.select == 7 && g_player.aab == 1) {
+				g_map.playStage[9][8] = 0;
 			}
 
 		

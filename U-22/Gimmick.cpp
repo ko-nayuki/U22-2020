@@ -41,6 +41,7 @@ void gimmickMove() {
 		//è„
 		if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == A) {
 			g_player.item[g_player.itemNo++] = K_UE;
+			g_player.aab = 1;
 			g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = 0;
 		}
 		//â∫
@@ -67,6 +68,7 @@ void gimmickMove() {
 		//ìÆ
 		if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == F) {
 			g_player.item[g_player.itemNo++] = K_DOU;
+			g_player.aaa = 1;
 			g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = 0;
 		}
 		//îö
