@@ -75,6 +75,10 @@ void PlayMove() {
 		EnemyMove3();
 		EnemyMove4();
 	}
+	if (g_map.select == 9) {
+		EnemyMove3();
+	}
+
 	bossMove();
 	gimmickMove();
 	if(g_gimmick->moveFlg != true && g_gimmick->moveFlg2 != true) PlayerMove();
