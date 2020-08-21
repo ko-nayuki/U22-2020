@@ -17,22 +17,22 @@ void HPDisp() {
 	DrawGraph(600,675, g_img.hp, TRUE);
 	SetFontSize(50);
 	DrawFormatString(670, 690, 0xffffff, "Å~%d", g_player.life);
-	SetFontSize(20);
+
 }
 
 void PlayerMove(){
-	SetFontSize(20);
-	DrawFormatString(0, 60, 0xffffff, "xc%d", g_player.xcount);
-	DrawFormatString(0, 80, 0xffffff, "yc%d", g_player.ycount);
-	DrawFormatString(0, 100, 0xffffff, "re%d", g_player.result);
-	DrawFormatString(0, 120, 0xffffff, "dir%d", g_player.dir);
+	//SetFontSize(20);
+	//DrawFormatString(0, 60, 0xffffff, "xc%d", g_player.xcount);
+	//DrawFormatString(0, 80, 0xffffff, "yc%d", g_player.ycount);
+	//DrawFormatString(0, 100, 0xffffff, "re%d", g_player.result);
+	//DrawFormatString(0, 120, 0xffffff, "dir%d", g_player.dir);
 
-	DrawFormatString(0, 400, 0x000000, "%d", g_player.px / CHIPSIZE);
-	DrawFormatString(0, 450, 0x000000, "%d", g_player.px);
-	DrawFormatString(0, 500, 0x000000, "%d", g_player.py / CHIPSIZE);
-	DrawFormatString(0, 550, 0x000000, "%d", g_player.py);
-	DrawFormatString(0, 600, 0x000000, "%d", g_player.itemNo);
-	
+	//DrawFormatString(0, 400, 0x000000, "%d", g_player.px / CHIPSIZE);
+	//DrawFormatString(0, 450, 0x000000, "%d", g_player.px);
+	//DrawFormatString(0, 500, 0x000000, "%d", g_player.py / CHIPSIZE);
+	//DrawFormatString(0, 550, 0x000000, "%d", g_player.py);
+	//DrawFormatString(0, 600, 0x000000, "%d", g_player.itemNo);
+	//
 	
 	
 

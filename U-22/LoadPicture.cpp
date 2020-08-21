@@ -57,6 +57,7 @@ int LoadPicture(){
 	if (LoadDivGraph("images/gimmick_kanji.png", 6, 6, 1, 64, 64, g_img.gimKanzi) == -1) return -1;
 	if (LoadDivGraph("images/wolf.png", 7, 7, 1, 64, 128, g_img.wolf) == -1) return -1;				//boss1
 	if (LoadDivGraph("images/BossThief.png", 24, 8, 3, 64, 128, g_img.thief) == -1) return -1;		//boss2
+	if (LoadDivGraph("images/BOSS3HAND.png", 6, 3, 2, 384, 256, g_img.Colossus) == -1) return -1;   //boss3
 	if ((g_img.Cauldron = LoadGraph("images/Cauldron.png")) == -1) return -1;
 	if ((g_img.trampoline[0] = LoadGraph("images/trampoline0.png")) == -1) return -1;
 	if ((g_img.trampoline[1] = LoadGraph("images/trampoline.png")) == -1) return -1;

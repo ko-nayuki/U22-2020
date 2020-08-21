@@ -16,7 +16,7 @@ void bossDisp() {
 		DrawGraph(g_boss[1].x, g_boss[1].y - CHIPSIZE, g_img.thief[int(g_boss[1].anime)], TRUE);
 	}
 	if (g_map.select == 11) {//boss3
-
+		DrawGraph(g_boss[2].x, g_boss[2].y - CHIPSIZE, g_img.Colossus[0], TRUE);
 	}
 
 }
@@ -32,6 +32,7 @@ void bossMove() {
 	}
 	if (g_map.select == 11) {//boss3
 		bossDisp();
+		ColossusMove();
 	}
 }
 
@@ -53,4 +54,12 @@ void bossInit() {
 	g_boss[1].count = 0;
 	g_boss[1].damageFlg = false;
 	g_boss[1].attackFlg = false;
+
+	//É{ÉX3ÇÃèâä˙âª
+	g_boss[2].x = 1 * CHIPSIZE;
+	g_boss[2].y = 2 * CHIPSIZE;
+	g_boss[2].hp = 3;
+	g_boss[2].count = 0;
+	g_boss[2].damageFlg = false;
+	g_boss[2].attackFlg = false;
 }

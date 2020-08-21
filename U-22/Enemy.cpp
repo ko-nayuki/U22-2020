@@ -63,6 +63,12 @@ void EnemyInit() {
 			g_enemy4[i].ex4 = CHIPSIZE * 8, g_enemy4[i].ey4 = CHIPSIZE * 9;
 		}
 
+		if (g_map.select == 9) {
+
+			g_enemy3[i].ex3 = CHIPSIZE * 18, g_enemy3[i].ey3 = CHIPSIZE * 8;
+		
+		}
+
 	}
 
 }
@@ -195,22 +201,20 @@ void EnemyMove3() {
 			g_player.muteki = 1;
 			g_player.px = g_player.px - 80;
 		}
-		else if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
-			&& g_player.dir == 0 && g_player.syo == 1) {
-			g_enemy3[i].ex3 = CHIPSIZE * -1, g_enemy3[i].ey3 = CHIPSIZE * -1;
-		}
-
+		
 		if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
 			&& g_player.dir == 1 && g_player.syo != 1 && g_player.muteki == 0) {
 			g_player.life -= 1;
 			g_player.muteki = 1;
 			g_player.px = g_player.px + 80;
 		}
-		else if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
-			&& g_player.dir == 0 && g_player.syo == 1) {
-			g_enemy3[i].ex3 = CHIPSIZE * -1, g_enemy3[i].ey3 = CHIPSIZE * -1;
-		}
 
+		if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
+			&& g_player.syo == 1) {
+			g_enemy3[i].ex3 = CHIPSIZE * -1, g_enemy3[i].ey3 = CHIPSIZE * -1;
+
+		}
+	
 		//プレイヤーのライフが０なったら
 		if (g_player.life == 0) {
 			g_gameScene = GAME_OVER;
@@ -269,14 +273,14 @@ void EnemyMove4(){
 		
 		//当たり判定
 		if (HitBoxPlayer4(&g_player,&g_enemy4[i]) == TRUE
-			&& g_player.dir == 0 && g_player.syo != 1 && g_player.muteki == 0) {
+			&& g_player.dir == 0 && g_player.muteki == 0) {
 			g_player.life -= 1;
 			g_player.muteki = 1;
 
 		}
 		
 		if (HitBoxPlayer4(&g_player,&g_enemy4[i]) == TRUE
-			&& g_player.dir == 1 && g_player.syo != 1 && g_player.muteki == 0) {
+			&& g_player.dir == 1&& g_player.muteki == 0) {
 			g_player.life -= 1;
 			g_player.muteki = 1;
 		
@@ -379,7 +383,7 @@ int HitBoxPlayer3(Player* p, Enemy3* e3)
 
 	////判定確認用
 	//DrawBox(sx1, sy1, sx2, sy2, 0xFFFFFF, TRUE);
-	DrawBox(dx5, dy5, dx6, dy6, 0xFFFFFF, TRUE);
+	//DrawBox(dx5, dy5, dx6, dy6, 0xFFFFFF, TRUE);
 
 	//短径が重なっていたら当たり
 	if (sx1 < dx6 && dx5 < sx2 && sy1 < dy6 && dy5 < sy2) {
@@ -411,7 +415,7 @@ int HitBoxPlayer4(Player* p, Enemy4* e4)
 
 	////判定確認用
 	//DrawBox(sx1, sy1, sx2, sy2, 0xFFFFFF, TRUE);
-	DrawBox(dx7, dy7, dx8, dy8, 0xFFFFFF, TRUE);
+	//DrawBox(dx7, dy7, dx8, dy8, 0xFFFFFF, TRUE);
 
 	//短径が重なっていたら当たり
 	if (sx1 < dx8 && dx7 < sx2 && sy1 < dy8 && dy7 < sy2) {
