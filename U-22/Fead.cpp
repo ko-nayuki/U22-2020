@@ -9,6 +9,8 @@
 #include "Gimmick.h"
 #include "GameClear.h"
 #include "GameOver.h"
+#include "Boss.h"
+#include "enemy.h"
 
 static int num = 0;
 
@@ -67,6 +69,10 @@ void FeadOut() {
 	else if (Fead.InfoStg == 5 && Fead.OverFlg == 0)
 	{
 		Fead.InfoStg = 3;
+		gimmickInit();
+		StageInit();
+		EnemyInit();
+		bossInit();
 		g_gameScene = GAME_PLAY;
 	}
 	else if (Fead.InfoStg == 5 && Fead.OverFlg == 1)
