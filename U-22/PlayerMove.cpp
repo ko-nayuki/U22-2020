@@ -17,7 +17,10 @@ void HPDisp() {
 	DrawGraph(600,675, g_img.hp, TRUE);
 	SetFontSize(50);
 	DrawFormatString(670, 690, 0xffffff, "Å~%d", g_player.life);
-
+	DrawExtendGraph(780, 690,830,740, g_img.RetryButon, TRUE);
+	DrawGraph(840, 685, g_img.RetryText, FALSE);
+	/*DrawExtendGraph(750, 760, 690, 730, g_img.RetryButon, TRUE);
+	DrawExtendGraph(670, 730, 690, 780, g_img.RetryText, FALSE);*/
 }
 
 void PlayerMove(){

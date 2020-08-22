@@ -25,6 +25,8 @@ void PlayDisp() {
 	BackStageDisp();
 	gimmickDisp();
 	StageDisp();
+
+
 	
 	/*for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
@@ -95,7 +97,7 @@ void PlayMove() {
 
 	HPDisp();
 	item_Box();
-	if (g_KeyFlg & PAD_INPUT_2 /*|| g_KeyFlg & PAD_INPUT_X*/) {//現在のリトライはXボタン。本番ではコメント外してYボタンにします
+	if (/*g_KeyFlg & PAD_INPUT_2 ||*/ g_KeyFlg & PAD_INPUT_X) {//コントローラを基準にしています。デバッグ時はコメント化なりしてください。コントローラはY
 		Fead.InfoStg = 3;
 		Fead.OverFlg = 0;
 		FeadOut();
@@ -105,7 +107,15 @@ void PlayMove() {
 		//if ((g_map.select / 3) - 1 != 0){
 		//g_map.select++;
 		EnemyInit();
-		g_gameScene = GAME_CLEAR;
+		if (g_map.select != 11) {
+			g_gameScene = GAME_CLEAR;
+		}
+		else {
+			Fead.InfoStg = 3;
+			Fead.EndFlg = 1;
+			FeadOut();
+			//GameComplete();
+		}
 		//}
 		//else {
 		//	g_gameScene = GAME_SELECT;

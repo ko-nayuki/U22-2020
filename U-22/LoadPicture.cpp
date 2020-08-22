@@ -28,10 +28,13 @@ int LoadPicture(){
 	if ((g_img.T_kanzi[1] = LoadGraph("images/title_start02.png")) == -1) return -1;
 	if ((g_img.T_kanzi[2] = LoadGraph("images/title_end01.png")) == -1) return -1;
 	if ((g_img.T_kanzi[3] = LoadGraph("images/title_end02.png")) == -1) return -1;
+	//リトライで使う漢字
+	if ((g_img.RetryButon = LoadGraph("images/Ybutton01.png")) == -1) return -1;
+	if ((g_img.RetryText = LoadGraph("images/retry.png")) == -1) return -1;
 	//クリア文字
 	if ((g_img.ClearText = LoadGraph("images/stageclear.png")) == -1) return -1;
 	if ((g_img.NextText = LoadGraph("images/next01.png")) == -1) return -1;
-	if ((g_img.End = LoadGraph("images/EndingScnene.PNG")) == -1) return -1;
+	if ((g_img.End = LoadGraph("images/EndingScnene.png")) == -1) return -1;
 	//ゲームオーバー画面
 	if ((g_img.GameOver = LoadGraph("images/gameover.png")) == -1) return -1;
 	if ((g_img.OverText[0] = LoadGraph("images/backtitle.png")) == -1) return -1;

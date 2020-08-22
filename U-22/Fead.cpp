@@ -37,8 +37,12 @@ void FeadOut() {
 			PlayDisp();
 		}
 		//ゲームクリア描画
-		if (Fead.InfoStg == 4) {
+		if (Fead.InfoStg == 4 && Fead.EndFlg == 0) {
 			GameClearDisp();
+		}
+		//ゲームエンド描画
+		if (Fead.InfoStg == 4 && Fead.EndFlg == 1) {
+			GameComplete();
 		}
 		//ゲームオーバー描画
 		if (Fead.InfoStg == 5) {
@@ -65,6 +69,10 @@ void FeadOut() {
 		g_gameScene = GAME_PLAY;
 		Fead.InfoStg = 3;
 	}
+	else if (Fead.InfoStg == 3 && Fead.EndFlg == 1) {
+		Fead.InfoStg = 4;
+		g_gameScene = GAME_CLEAR;
+	}
 	else if (Fead.InfoStg == 3) {
 		Fead.InfoStg = 3;
 		gimmickInit();
@@ -87,6 +95,11 @@ void FeadOut() {
 	{
 		Fead.InfoStg = 2;
 		g_gameScene = GAME_SELECT;
+	}
+	else if (Fead.InfoStg == 4 && Fead.ClearFlg == 2)
+	{
+		Fead.InfoStg = 1;
+		g_gameScene = GAME_TITLE;
 	}
 	else if (Fead.InfoStg == 5 && Fead.OverFlg == 0)
 	{
@@ -133,6 +146,10 @@ void FeadIn() {
 		//ゲームプレイ描画
 		if (Fead.InfoStg == 3) {
 			PlayDisp();
+		}
+		//エンド
+		if (Fead.InfoStg == 4) {
+			GameComplete();
 		}
 		num += 2;
 

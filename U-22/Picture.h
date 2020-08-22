@@ -32,6 +32,8 @@ struct image {
 	int Cauldron;		//大釜
 	int trampoline[2];	//トランポリン
 
+	int RetryButon;		//リトライボタン
+	int RetryText;		//リトライテキスト
 	int ClearText;		//クリア文字
 	int NextText;		//NEXT文字
 	int GameOver;		//オーバー文字

@@ -9,10 +9,17 @@
 #include "Picture.h"
 #include "enemy.h"
 #include "Boss.h"
+#include "yoshitaka.h"
 
 void GameClear() {
-	GameClearDisp();
-	GameClearMove();
+	if (Fead.EndFlg == 0) {
+		GameClearDisp();
+		GameClearMove();
+	}
+	else {
+		GameComplete();
+		GameCompMove();
+	}
 }
 
 void GameClearDisp() {
@@ -39,7 +46,7 @@ void GameClearMove() {
 			Fead.InfoStg = 4;
 			Fead.ClearFlg = 0;
 			FeadOut();
-			
+
 			gimmickInit();
 			StageInit();
 			EnemyInit();
@@ -54,25 +61,30 @@ void GameClearMove() {
 			//g_gameScene = GAME_PLAY;
 		}
 		else {
-			if (g_map.select != 11) {
-				Fead.InfoStg = 4;
-				Fead.ClearFlg = 1;
-				if (g_Select.Checkkey == g_Select.CheckCorect) {
-					++g_Select.CheckCorect;
-					++g_Select.Key;
-				}
-				if (CheckHitKey(PAD_INPUT_1) == 1)
-					g_KeyFlg = 0;
-				//g_gameScene = GAME_SELECT;
-				FeadOut();
+			Fead.InfoStg = 4;
+			Fead.ClearFlg = 1;
+			if (g_Select.Checkkey == g_Select.CheckCorect) {
+				++g_Select.CheckCorect;
+				++g_Select.Key;
 			}
-			else {
-				GameComplete();
-			}
+			if (CheckHitKey(PAD_INPUT_1) == 1)
+				g_KeyFlg = 0;
+			//g_gameScene = GAME_SELECT;
+			FeadOut();
 		}
 	}
 }
 
+
 void GameComplete() {
 	DrawGraph(0, 0, g_img.End, FALSE);
+
+}
+
+void GameCompMove() {
+	if (g_KeyFlg & PAD_INPUT_2) {
+		Fead.InfoStg = 4;
+		Fead.ClearFlg = 2;
+		FeadOut();
+	}
 }

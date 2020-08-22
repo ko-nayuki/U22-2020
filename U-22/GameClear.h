@@ -6,3 +6,4 @@ void GameClearDisp();
 void GameClearMove();
 
 void GameComplete();
+void GameCompMove();
