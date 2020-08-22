@@ -11,7 +11,7 @@
 
 
 void StageSelect() {
-	PlayerInit();
+	//PlayerInit();
 	SelectDisp();
 	SelectMove();
 	if (Fead.FeadFlg == 0) FeadIn();
@@ -75,13 +75,10 @@ void SelectMove() {
 				Fead.InfoStg = 2;
 				FeadOut();
 				gimmickInit();
+				PlayerInit();
 				StageInit();
 				EnemyInit();
 				bossInit();
-				for (int i = 0; i < ITEM_MAX; i++) {
-					g_player.item[i] = K_NO;
-				}
-				g_player.itemNo = 0;
 				//g_gameScene = GAME_PLAY;
 			}
 			if ((g_Select.stage2x < g_player.px + 64 && g_Select.stage2x + 128 > g_player.px) && g_Select.Key >= 1) {
@@ -90,13 +87,10 @@ void SelectMove() {
 				Fead.InfoStg = 2;
 				FeadOut();
 				gimmickInit();
+				PlayerInit();
 				StageInit();
 				EnemyInit();
 				bossInit();
-				for (int i = 0; i < ITEM_MAX; i++) {
-					g_player.item[i] = K_NO;
-				}
-				g_player.itemNo = 0;
 			}
 			if ((g_Select.stage3x < g_player.px + 64 && g_Select.stage3x + 128 > g_player.px) && g_Select.Key >= 2) {
 				g_map.select = 6;
@@ -104,13 +98,10 @@ void SelectMove() {
 				Fead.InfoStg = 2;
 				FeadOut();
 				gimmickInit();
+				PlayerInit();
 				StageInit();
 				EnemyInit();
 				bossInit();
-				for (int i = 0; i < ITEM_MAX; i++) {
-					g_player.item[i] = K_NO;
-				}
-				g_player.itemNo = 0;
 			}
 			if ((g_Select.stage4x < g_player.px + 64 && g_Select.stage4x + 128 > g_player.px) && g_Select.Key >= 3) {
 				g_map.select = 9;
@@ -118,13 +109,10 @@ void SelectMove() {
 				Fead.InfoStg = 2;
 				FeadOut();
 				gimmickInit();
+				PlayerInit();
 				StageInit();
 				EnemyInit();
 				bossInit();
-				for (int i = 0; i < ITEM_MAX; i++) {
-					g_player.item[i] = K_NO;
-				}
-				g_player.itemNo = 0;
 			}
 	}
 }

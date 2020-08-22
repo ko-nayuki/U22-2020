@@ -18,10 +18,10 @@ void gimmickDisp() {
 	//SetDrawBright(255, 255, 255);
 	//DrawGraph(g_gimmick[WARP_A].x, g_gimmick[WARP_A].y, g_img.warp, TRUE);
 	//DrawGraph(g_gimmick[WARP_B].x, g_gimmick[WARP_B].y, g_img.warp, TRUE);
-	DrawFormatString(200, 550, 0x0000ff, "%d", g_gimmick[LIFT].h * CHIPSIZE);
-	DrawFormatString(200, 570, 0x0000ff, "%d", g_gimmick[LIFT].y);
-	DrawFormatString(200, 590, 0xff00ff, "%d", g_gimmick[WARP_A].x / CHIPSIZE);
-	DrawFormatString(200, 610, 0xff00ff, "%d", g_gimmick[WARP_A].w / CHIPSIZE);
+	//DrawFormatString(200, 550, 0x0000ff, "%d", g_gimmick[LIFT].h * CHIPSIZE);
+	//DrawFormatString(200, 570, 0x0000ff, "%d", g_gimmick[LIFT].y);
+	//DrawFormatString(200, 590, 0xff00ff, "%d", g_gimmick[WARP_A].x / CHIPSIZE);
+	//DrawFormatString(200, 610, 0xff00ff, "%d", g_gimmick[WARP_A].w / CHIPSIZE);
 
 	for (int i = 0; i < STAGE_HEIGHT; i++) {//ゴールの描画
 		for (int j = 0; j < STAGE_WIDTH; j++) {
@@ -41,6 +41,7 @@ void gimmickMove() {
 		//上
 		if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == A) {
 			g_player.item[g_player.itemNo++] = K_UE;
+			g_player.aab = 1;
 			g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = 0;
 		}
 		//下
@@ -67,6 +68,7 @@ void gimmickMove() {
 		//動
 		if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == F) {
 			g_player.item[g_player.itemNo++] = K_DOU;
+			g_player.aaa = 1;
 			g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = 0;
 		}
 		//爆
@@ -770,7 +772,7 @@ void mistake() {
 				}
 			}
 			//ジャンプ台
-			if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_2) {
+			if (g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_2) {
 				if (g_player.item[g_player.itemSelect] != K_TIKARA) {
 					DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[1], TRUE);
 				}
@@ -802,9 +804,9 @@ void mistake() {
 				}
 			}
 			//ワープ
-			if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_601 ||
-				g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_602 ||
-				g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_603) {
+			if (g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_601 ||
+				g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_602 ||
+				g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_603) {
 				if (g_player.item[g_player.itemSelect] != K_DOU) {
 					DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[1], TRUE);
 				}
@@ -819,7 +821,7 @@ void mistake() {
 			}
 		}
 		//ジャンプ台
-		if (g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_2) {
+		if (g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_2) {
 			if (g_player.item[g_player.itemSelect] != K_NO) {
 				DrawGraph(g_player.px, g_player.py - 40, g_img.Button, TRUE);
 			}
@@ -851,8 +853,9 @@ void mistake() {
 			}
 		}
 		//ワープ
-		if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_601 ||
-			g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_602) {
+		if (g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_601 ||
+			g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_602 ||
+			g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_603) {
 			if (g_player.item[g_player.itemSelect] != K_NO) {
 				DrawGraph(g_player.px, g_player.py - 40, g_img.Button, TRUE);
 			}
