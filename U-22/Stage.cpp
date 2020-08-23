@@ -221,7 +221,7 @@ void BackStageDisp() {
 		for (int j = 0; j < STAGE_WIDTH; j++) {
 			//DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.bookshelf[g_map.random[i][j]], TRUE);
 
-			if (g_gameScene == GAME_PLAY || g_gameScene == GAME_CLEAR) {
+			if (g_gameScene == GAME_PLAY || g_gameScene == GAME_CLEAR || g_gameScene == GAME_OVER) {
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[(g_map.select / 3) * 3], TRUE);
 			}
 			else {
