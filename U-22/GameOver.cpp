@@ -10,8 +10,6 @@
 #include "enemy.h"
 #include "Boss.h"
 
-static int NFlg=0;
-
 void GameOver() {
 	GameOverDisp();
 	GameOverMove();
@@ -35,10 +33,7 @@ void GameOverMove() {
 	static int OverMenu;
 	int OverY;
 
-	if (NFlg == 0) {
-		OverMenu = 0;
-		NFlg = 1;
-	}
+	if (g_Select.CursorFlg == 1) OverMenu = 0, g_Select.CursorFlg = 0;
 
 	//Œˆ’è
 	if (OverMenu == 0) {

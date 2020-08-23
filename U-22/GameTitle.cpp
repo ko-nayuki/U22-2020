@@ -12,9 +12,16 @@ static int MenuNo = 0;
 static int Sketch = 0;
 
 void GameTitle() {
-	TitleDisp();
-	TitleMove();
-	if (Fead.FeadFlg == 0) FeadIn();
+	if (Fead.FeadCredit == 0) {
+		TitleDisp();
+		TitleMove();
+		if (Fead.FeadFlg == 0) FeadIn();
+	}
+	else{
+		CrejitDips();
+		CrejitMove();
+		if (Fead.FeadFlg == 0) FeadIn();
+	}
 
 	//タイトルBGM
 	//if (CheckSoundMem(g_sounds.Title) == 0) PlaySoundMem(g_sounds.Title, DX_PLAYTYPE_LOOP);
@@ -34,44 +41,82 @@ void TitleDisp() {
 
 	//SetDrawBright(255, 255, 255);
 
-	//DrawFormatString(600, 465, 0xFFFFFF, "開始（仮）");
 	//DrawFormatString(600, 535, 0xFFFFFF, "終了（機能しません）");
 	//g_gameScene = GAME_SELECT;
 }
 void TitleMove() {
 	int MenuY;
-	
+
+	if (g_Select.CursorFlg == 1) MenuNo = 0, g_Select.CursorFlg = 0;
+
 	//決定
 	if (MenuNo == 0) {
 		if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
 			++Sketch;
-			DrawGraph(576, 448, g_img.T_kanzi[1], TRUE);//開
+			DrawGraph(576, 448, g_img.T_kanzi[1], FALSE);//開
 			ScreenFlip();
 			WaitTimer(2000);
 			Fead.InfoStg = 1;
+			Fead.FeadCredit = 0;
 			FeadOut();
 			if (CheckHitKey(KEY_INPUT_SPACE) == 1)
 				g_KeyFlg = 0;
 		}
-		if(Sketch == 0)DrawGraph(128, 512, g_img.T_kanzi[1], TRUE);
+		if(Sketch == 0)DrawGraph(128, 512, g_img.T_kanzi[1], FALSE);
 	}
-	//終了
+	//協賛
 	if (MenuNo == 1) {
 		if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
-			++Sketch;
-			DrawGraph(640, 512, g_img.T_kanzi[3], TRUE);//了
+			DrawGraph(640, 512, g_img.T_kanzi[5], FALSE);//賛
+			ScreenFlip();
+			WaitTimer(2000);
+			Fead.FeadCredit = 1;
+			Fead.InfoStg = 1;
+			FeadOut();
+		}
+		if (Sketch == 0) DrawGraph(128, 512, g_img.T_kanzi[5], FALSE);
+	}
+	//終了
+	if (MenuNo == 2) {
+		if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
+			DrawGraph(576, 576, g_img.T_kanzi[2], FALSE);//終
 			ScreenFlip();
 			WaitTimer(200);
 			g_gameScene = 99;
 		}
-		if (Sketch == 0) DrawGraph(128, 512, g_img.T_kanzi[3], TRUE);
+		if (Sketch == 0)DrawGraph(128, 512, g_img.T_kanzi[2], FALSE);
 	}
 
+
 	//ゲーム開始か終了か、選択
-	if (g_KeyFlg & PAD_INPUT_DOWN) if (++MenuNo > 1) MenuNo = 0;
-	if (g_KeyFlg & PAD_INPUT_UP) if (--MenuNo < 0) MenuNo = 1;
+	if (g_KeyFlg & PAD_INPUT_DOWN) if (++MenuNo > 2) MenuNo = 0;
+	if (g_KeyFlg & PAD_INPUT_UP) if (--MenuNo < 0) MenuNo = 2;
 
 	//カーソル
-	MenuY = MenuNo * 80;
-	DrawTriangle(440, 455 + MenuY, 460, 470 + MenuY, 440, 485 + MenuY, GetColor(0, 0, 0), TRUE);
+	MenuY = MenuNo * 75;
+	DrawTriangle(540, 450 + MenuY, 560, 465 + MenuY, 540, 480 + MenuY, GetColor(0, 0, 0), TRUE);
+}
+
+void CrejitDips() {
+	BackStageDisp();
+	DrawExtendGraph(192, 64,384,256, g_img.T_kanzi[4], FALSE);
+	DrawExtendGraph(896, 64, 1090, 256, g_img.T_kanzi[5], FALSE);
+
+	SetFontSize(64);
+	DrawString(320, 320, "BGM提供", 0x000000);
+	DrawString(384, 384, "”魔王魂”様", 0x000000);
+	DrawString(320, 448, "SE提供", 0x000000);
+	DrawString(384, 512, "”魔王魂”様", 0x000000);
+	DrawString(384, 576, "”On-Jin～音人～”様", 0x000000);
+	SetFontSize(0);
+
+}
+
+void CrejitMove() {
+	if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
+		Fead.FeadCredit = 2;
+		Fead.InfoStg = 1;
+		g_Select.CursorFlg = 1;
+		FeadOut();
+	}
 }

@@ -6,6 +6,7 @@
 #include "Gimmick.h"
 #include "GameScene.h"
 #include "GameTitle.h"
+#include "yoshitaka.h"
 
 Enemy g_enemy[ENEMY_MAX];
 Enemy2 g_enemy2[ENEMY_MAX];
@@ -123,6 +124,7 @@ void EnemyMove() {
 		//プレイヤーのライフが０なったら
 		if (g_player.life == 0) {
 			g_gameScene = GAME_OVER;
+			g_Select.CursorFlg = 1;
 	
 		}
 		//敵の表示
@@ -181,6 +183,7 @@ void EnemyMove2() {
 		//プレイヤーのライフが０なったら
 		if (g_player.life == 0) {
 			g_gameScene = GAME_OVER;
+			g_Select.CursorFlg = 1;
 		
 		}
 
@@ -228,6 +231,8 @@ void EnemyMove3() {
 		//プレイヤーのライフが０なったら
 		if (g_player.life == 0) {
 			g_gameScene = GAME_OVER;
+			g_Select.CursorFlg = 1;
+			
 			
 		}
 
@@ -303,6 +308,7 @@ void EnemyMove4(){
 		//プレイヤーのライフが０なったら
 		if (g_player.life == 0) {
 			g_gameScene = GAME_OVER;
+			g_Select.CursorFlg = 1;
 
 		}
 

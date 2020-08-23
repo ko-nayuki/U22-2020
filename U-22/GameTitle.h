@@ -4,3 +4,6 @@
 void GameTitle();
 void TitleDisp();
 void TitleMove();
+
+void CrejitDips();
+void CrejitMove();

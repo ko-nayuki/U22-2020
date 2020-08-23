@@ -11,6 +11,7 @@
 #include "GameOver.h"
 #include "Boss.h"
 #include "enemy.h"
+#include "GameTitle.h"
 
 static int num = 0;
 
@@ -23,10 +24,11 @@ void FeadOut() {
 		SetDrawBright(255 - num, 255 - num, 255 - num);
 
 		//ステージ描画
-		if (Fead.InfoStg == 1) {
-			BackStageDisp();
-			TitleMAPDisp();
-			PlayerMove();
+		if (Fead.InfoStg == 1 && Fead.FeadCredit != 2) {
+			TitleDisp();
+		}
+		else {
+			CrejitDips();
 		}
 		//セレクトステージ描画
 		if (Fead.InfoStg == 2) {
@@ -61,9 +63,16 @@ void FeadOut() {
 		if (g_map.select < STAGE - 1) g_map.select++;
 	}
 
-	if (Fead.InfoStg == 1) {
+	if (Fead.InfoStg == 1 && Fead.FeadCredit == 0) {
 		g_gameScene = GAME_SELECT;
 		Fead.InfoStg = 2;
+	}
+	else if (Fead.InfoStg == 1 && Fead.FeadCredit == 1) {
+		Fead.InfoStg = 5;
+	}
+	else if (Fead.InfoStg == 1 && Fead.FeadCredit == 2) {
+		Fead.InfoStg = 1;
+		Fead.FeadCredit = 0;
 	}
 	else if (Fead.InfoStg == 2) {
 		g_gameScene = GAME_PLAY;
@@ -150,6 +159,10 @@ void FeadIn() {
 		//エンド
 		if (Fead.InfoStg == 4) {
 			GameComplete();
+		}
+		//クレジット
+		if (Fead.InfoStg == 5) {
+			CrejitDips();
 		}
 		num += 2;
 

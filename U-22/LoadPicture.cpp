@@ -28,6 +28,8 @@ int LoadPicture(){
 	if ((g_img.T_kanzi[1] = LoadGraph("images/title_start02.png")) == -1) return -1;
 	if ((g_img.T_kanzi[2] = LoadGraph("images/title_end01.png")) == -1) return -1;
 	if ((g_img.T_kanzi[3] = LoadGraph("images/title_end02.png")) == -1) return -1;
+	if ((g_img.T_kanzi[4] = LoadGraph("images/kyo.png")) == -1) return -1;
+	if ((g_img.T_kanzi[5] = LoadGraph("images/ryoku.png")) == -1) return -1;
 	//ƒŠƒgƒ‰ƒC‚ÅŽg‚¤Š¿Žš
 	if ((g_img.RetryButon = LoadGraph("images/Ybutton01.png")) == -1) return -1;
 	if ((g_img.RetryText = LoadGraph("images/retry.png")) == -1) return -1;

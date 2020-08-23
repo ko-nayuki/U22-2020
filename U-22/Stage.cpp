@@ -198,17 +198,20 @@ void TitleMAPDisp() {
 				g_player.py = i * CHIPSIZE;
 			}
 			if (g_map.playStage[i][j] == 30) {//én
-				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[0], TRUE);
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[0], FALSE);
 			}
 			//if (g_map.playStage[i][j] == 31) {//äJ
-			//	DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[1], TRUE);
+			//	DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[1], FALSE);
 			//}
 			if (g_map.playStage[i][j] == 32) {//èI
-				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[2], TRUE);
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[4], FALSE);
 			}
 			//if (g_map.playStage[i][j] == 33) {//óπ
-			//	DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[3], TRUE);
+			//	DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[3], FALSE);
 			//}
+			if (g_map.playStage[i][j] == 33) {//óπ
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[3], FALSE);
+			}
 		}
 	}
 }
