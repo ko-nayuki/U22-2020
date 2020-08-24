@@ -8,6 +8,7 @@
 #include "Gimmick.h"
 #include "yoshitaka.h"
 #include "Boss.h"
+#include "Picture.h"
 
 
 void StageSelect() {
@@ -21,6 +22,7 @@ void StageSelect() {
 void SelectDisp() {
 	BackStageDisp();
 	SelectMAPDisp();
+	SelectBook();
 	DrawFormatString(600, 300, 0x000000, "SPACE");
 	DrawFormatString(0, 650, 0x000000, "%d", g_map.select);
 	DrawFormatString(0, 670, 0x000000, "%d", g_Select.Key);
@@ -115,4 +117,85 @@ void SelectMove() {
 				bossInit();
 			}
 	}
+}
+
+void SelectBook() {
+	static bool text_Flg = true;//テキストをふわふわさせる
+	static float text_Y = 0.0;
+
+	static float animation =  0.0;//本のアニメーション
+
+	if (animation < 4.0) animation += 0.1F;
+	else animation = 0.0;
+
+	//g_Select.Key = 3;
+
+	//W1
+	if (g_Select.stage1x < g_player.px + 64 && g_Select.stage1x + 128 > g_player.px) {
+		DrawGraph(3 * CHIPSIZE, 8 * CHIPSIZE, g_img.goal[int(animation)], TRUE);
+	}
+	else {
+		DrawGraph(3 * CHIPSIZE, 8 * CHIPSIZE, g_img.goal[0], TRUE);
+	}
+
+	//W2
+	if (g_Select.stage2x < g_player.px + 64 && g_Select.stage2x + 128 > g_player.px && g_Select.Key >= 1) {
+		//SetDrawBright(255, 255, 255);
+		DrawGraph(9 * CHIPSIZE, 8 * CHIPSIZE, g_img.goal[int(animation)], TRUE);
+		//SetDrawBright(255, 255, 255);
+	}
+	else {
+		DrawGraph(9 * CHIPSIZE, 8 * CHIPSIZE, g_img.SelectBook[0], TRUE);
+	}
+
+	//W3
+	if (g_Select.stage3x < g_player.px + 64 && g_Select.stage3x + 128 > g_player.px && g_Select.Key >= 2) {
+		//SetDrawBright(255, 0, 0);
+		DrawGraph(12 * CHIPSIZE, 8 * CHIPSIZE, g_img.goal[int(animation)], TRUE);
+		//SetDrawBright(255, 255, 255);
+	}
+	else {
+		DrawGraph(12 * CHIPSIZE, 8 * CHIPSIZE, g_img.SelectBook[1], TRUE);
+	}
+
+	//W4
+	if (g_Select.stage4x < g_player.px + 64 && g_Select.stage4x + 128 > g_player.px && g_Select.Key >= 3) {
+		//SetDrawBright(255, 0, 0);
+		DrawGraph(15 * CHIPSIZE, 8 * CHIPSIZE, g_img.goal[int(animation)], TRUE);
+		//SetDrawBright(255, 255, 255);
+	}
+	else {
+		DrawGraph(15 * CHIPSIZE, 8 * CHIPSIZE, g_img.SelectBook[2], TRUE);
+	}
+
+	//text
+	if (text_Flg == true) {
+		text_Y += 0.1F;
+		if (text_Y >= 1.5F) text_Flg = false;
+	}
+	if (text_Flg == false) {
+		text_Y -= 0.1F;
+		if (text_Y <= -1.5F) text_Flg = true;
+	}
+
+	SetFontSize(24);
+	if (g_Select.Key != 0 && g_Select.Key <= 3) {
+		DrawString((6 + (3 * g_Select.Key)) * CHIPSIZE + 38, 480 + text_Y, "NEXT", 0x444444);
+	} else if(g_Select.Key == 0){
+		DrawString(3 * CHIPSIZE + 30, 480 + text_Y, "START", 0x444444);
+	}
+
+	if (g_Select.Key > 0) {
+		DrawString(3 * CHIPSIZE + 30, 480, "CLEAR", 0x00FFFF);
+	}
+	if (g_Select.Key > 1) {
+		DrawString(9 * CHIPSIZE + 30, 480, "CLEAR", 0x00FFFF);
+	}
+	if (g_Select.Key > 2) {
+		DrawString(12 * CHIPSIZE + 30, 480, "CLEAR", 0x00FFFF);
+	}
+	if (g_Select.Key > 3) {
+		DrawString(15 * CHIPSIZE + 30, 480, "CLEAR", 0x00FFFF);
+	}
+	SetFontSize(16);
 }

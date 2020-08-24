@@ -175,9 +175,6 @@ void SelectMAPDisp() {
 			if (g_map.playStage[i][j] == 1) {
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[1], TRUE);
 			}
-			if (g_map.playStage[i][j] == 2 && g_map.playStage[i][j + 1] == 2 && g_map.playStage[i + 1][j] == 2) {
-				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.goal[0], TRUE);
-			}
 			//if (g_map.playStage[i][j] == 3) {//プレイヤーの座標
 			//	g_player.px = j * CHIPSIZE;
 			//	g_player.py = i * CHIPSIZE;

@@ -4,3 +4,4 @@
 void StageSelect();
 void SelectDisp();
 void SelectMove();
+void SelectBook();
