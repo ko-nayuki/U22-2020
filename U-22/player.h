@@ -6,7 +6,7 @@
 
 void PlayerMove();
 void PlayerInit();
-void HPDisp();
+//void HPDisp();
 
 struct Player {
 	//ˆÚ“®ŒW”

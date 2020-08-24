@@ -208,26 +208,44 @@ void EnemyMove3() {
 		}
 
 		//当たり判定
+		/*
 		if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
 			&& g_player.dir == 0 && g_player.syo != 1 && g_player.muteki == 0) {
 			g_player.life -= 1;
 			g_player.muteki = 1;
 			g_player.px = g_player.px - 80;
 		}
-		
+
 		if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
 			&& g_player.dir == 1 && g_player.syo != 1 && g_player.muteki == 0) {
 			g_player.life -= 1;
 			g_player.muteki = 1;
 			g_player.px = g_player.px + 80;
+		}*/
+		if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
+			&& g_player.dir == 0 && g_player.item[g_player.itemSelect] != K_SHOU) {
+			if (g_player.muteki == 0) {
+				g_player.life -= 1;
+				g_player.muteki = 1;
+			}
+			g_player.px = g_player.px - 80;
 		}
 
 		if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
-			&& g_player.syo == 1) {
-			g_enemy3[i].ex3 = CHIPSIZE * -1, g_enemy3[i].ey3 = CHIPSIZE * -1;
-
+			&& g_player.dir == 1 && g_player.item[g_player.itemSelect] != K_SHOU) {
+			if (g_player.muteki == 0) {
+				g_player.life -= 1;
+				g_player.muteki = 1;
+			}
+			g_player.px = g_player.px + 80;
 		}
-	
+
+		//if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
+		//	&& g_player.syo == 1) {
+		//	g_enemy3[i].ex3 = CHIPSIZE * -1, g_enemy3[i].ey3 = CHIPSIZE * -1;
+
+		//}
+
 		//プレイヤーのライフが０なったら
 		if (g_player.life == 0) {
 			g_gameScene = GAME_OVER;

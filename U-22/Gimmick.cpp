@@ -6,8 +6,10 @@
 #include "Picture.h"
 #include "KeyControl.h"
 #include "Sounds.h"
+#include "enemy.h"
 
 bool smokeFlg[GIMMICK_NUM] = { false };
+bool use_Flg = false;
 float goal_Anime = 0.0;
 
 void gimmickDisp() {
@@ -113,6 +115,7 @@ void gimmickMove() {
 	}
 
 	mistake();
+	if (use_Flg == true) use_Effect(g_player.px, g_player.py - 40);
 
 	liftMove();		//エレベーター
 	boundMove();	//ジャンプ台
@@ -128,6 +131,15 @@ void gimmickMove() {
 	if (g_map.playStage[int((g_player.py + 32) / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == BLOCK) {
 		if (g_player.py % CHIPSIZE != 0) g_player.py--;
 	}
+
+	for (int i = 1; i < ENEMY_MAX; i++) {//毒敵
+		if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
+			&& g_player.item[g_player.itemSelect] == K_SHOU) {
+			g_enemy3[i].ex3 = CHIPSIZE * -1, g_enemy3[i].ey3 = CHIPSIZE * -1;
+			g_player.syo = 0;
+			use_Flg = true;
+		}
+	}
 }
 
 void liftMove() {
@@ -137,8 +149,6 @@ void liftMove() {
 			g_gimmick[LIFT].moveFlg == false && g_gimmick[LIFT].moveFlg2 == false) {
 			if (g_gimmick[LIFT].anime < 2.0F)g_gimmick[LIFT].anime += 0.1F;
 			//DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[0], TRUE);
-			g_gimmick[LIFT].x = int((g_player.px + 32) / CHIPSIZE) * CHIPSIZE;
-			g_gimmick[LIFT].y = int(g_player.py / CHIPSIZE) * CHIPSIZE;
 		}
 		else {
 			//DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[1], TRUE);
@@ -147,14 +157,18 @@ void liftMove() {
 		if (g_player.item[g_player.itemSelect] == K_UE && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)
 			&& g_gimmick[LIFT].moveFlg == false && g_gimmick[LIFT].moveFlg2 == false) {
 
+			g_gimmick[LIFT].x = int((g_player.px + 32) / CHIPSIZE) * CHIPSIZE;
+			g_gimmick[LIFT].y = int(g_player.py / CHIPSIZE) * CHIPSIZE;
+
 			for (g_gimmick[LIFT].h = int(g_player.py / CHIPSIZE); g_gimmick[LIFT].h > 0; g_gimmick[LIFT].h--) {
 				if (g_map.playStage[g_gimmick[LIFT].h][int(g_gimmick[LIFT].x / CHIPSIZE)] == BLOCK) {
 					if (g_map.playStage[g_gimmick[LIFT].h - 1][int(g_gimmick[LIFT].x / CHIPSIZE)] == AIR) {
 						g_gimmick[LIFT].h--;
 						g_gimmick[LIFT].moveFlg = true;
+						use_Flg = true;
 						g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
-						g_player.item[g_player.itemSelect] = K_NO;
-						g_player.itemNo--;
+						//g_player.item[g_player.itemSelect] = K_NO;
+						//g_player.itemNo--;
 						smokeFlg[LIFT] = true;
 						g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 						break;
@@ -168,15 +182,19 @@ void liftMove() {
 		if (g_player.item[g_player.itemSelect] == K_SITA && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)
 			&& g_gimmick[LIFT].moveFlg == false && g_gimmick[LIFT].moveFlg2 == false) {
 
+			g_gimmick[LIFT].x = int((g_player.px + 32) / CHIPSIZE) * CHIPSIZE;
+			g_gimmick[LIFT].y = int(g_player.py / CHIPSIZE) * CHIPSIZE;
+
 			for (g_gimmick[LIFT].h = int(g_player.py / CHIPSIZE); g_gimmick[LIFT].h < STAGE_HEIGHT; g_gimmick[LIFT].h++) {
 				if (g_map.playStage[g_gimmick[LIFT].h][int(g_gimmick[LIFT].x / CHIPSIZE)] == BLOCK) {
 					if (g_map.playStage[g_gimmick[LIFT].h - 1][int(g_gimmick[LIFT].x / CHIPSIZE)] == AIR) {
 
 						g_gimmick[LIFT].h--;
 						g_gimmick[LIFT].moveFlg2 = true;
+						use_Flg = true;
 						g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
-						g_player.item[g_player.itemSelect] = K_NO;
-						g_player.itemNo--;
+						//g_player.item[g_player.itemSelect] = K_NO;
+						//g_player.itemNo--;
 						smokeFlg[LIFT] = true;
 						g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 						break;
@@ -242,8 +260,9 @@ void boundMove() {
 		g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_2) {
 		if (g_gimmick[BOUND].y != CHIPSIZE) {//[力]を使う
 			if (g_player.item[g_player.itemSelect] == K_TIKARA && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)) {
-				g_player.item[g_player.itemSelect] = K_NO;
-				g_player.itemNo--;
+				use_Flg = true;
+				//g_player.item[g_player.itemSelect] = K_NO;
+				//g_player.itemNo--;
 				smokeFlg[BOUND] = true;
 				g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 				g_gimmick[BOUND].x = int((g_player.px + 32) / CHIPSIZE) * CHIPSIZE;
@@ -277,14 +296,15 @@ void boundMove() {
 				g_player.fallSpeed = 0;
 
 			}*/
-			if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE)] == BLOCK ||
+			/*if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE)] == BLOCK ||
 				g_map.playStage[int((g_player.py - 8) / CHIPSIZE)][int((g_player.px + 64) / CHIPSIZE)] == BLOCK ||
+				g_map.playStage[int((g_player.py - 8) / CHIPSIZE)][int((g_player.px) / CHIPSIZE)] == BLOCK ||
 				g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == BLOCK ||
 				g_player.py == 64) {
 
 				g_player.py = g_player.py + 1;
 				g_player.fallSpeed = 0;
-			}
+			}*/
 		}
 	}
 
@@ -303,8 +323,9 @@ void breakMove() {
 		g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] != AIR) {
 		if (g_player.item[g_player.itemSelect] == K_HA && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)) {
 			g_gimmick[BREAK].ONFlg = true;
-			g_player.item[g_player.itemSelect] = K_NO;
-			g_player.itemNo--;
+			use_Flg = true;
+			//g_player.item[g_player.itemSelect] = K_NO;
+			//g_player.itemNo--;
 			smokeFlg[BREAK] = true;
 		}
 		/*if (g_player.item[g_player.itemSelect] == K_HA) {
@@ -370,8 +391,9 @@ void dropMove() {
 	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_402) {
 		if (g_player.item[g_player.itemSelect] == K_SITA && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2) && g_gimmick[DROP].ONFlg == false) {
 			g_gimmick[DROP].ONFlg = true;
-			g_player.item[g_player.itemSelect] = K_NO;
-			g_player.itemNo--;
+			use_Flg = true;
+			//g_player.item[g_player.itemSelect] = K_NO;
+			//g_player.itemNo--;
 			smokeFlg[DROP] = true;
 			g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 			g_gimmick[DROP].x = int((g_player.px + 32) / CHIPSIZE) * CHIPSIZE;
@@ -388,8 +410,9 @@ void dropMove() {
 	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == GIM_403) {
 		if (g_player.item[g_player.itemSelect] == K_HA && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2) && g_gimmick[DROP].ONFlg == false) {
 			g_gimmick[DROP].ONFlg = true;
-			g_player.item[g_player.itemSelect] = K_NO;
-			g_player.itemNo--;
+			use_Flg = true;
+			//g_player.item[g_player.itemSelect] = K_NO;
+			//g_player.itemNo--;
 			smokeFlg[DROP] = true;
 			g_map.gimmickData[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = AIR;
 			g_gimmick[DROP].x = int((g_player.px + 32) / CHIPSIZE) * CHIPSIZE;
@@ -425,7 +448,9 @@ void dropMove() {
 		}
 		for (int i = 0; i < STAGE_HEIGHT; i++) {//元に戻す
 			for (int j = 0; j < STAGE_WIDTH; j++) {
-				if (g_map.gimmickData[int(g_player.py / CHIPSIZE) - 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_401) {
+				if (g_map.gimmickData[int(g_player.py / CHIPSIZE) - 1][int((g_player.px + 32) / CHIPSIZE)] == GIM_401 ||
+					g_map.gimmickData[int((g_enemy3[1].ey3 + 128) / CHIPSIZE) - 1][int(g_enemy3[1].ex3 / CHIPSIZE)] == GIM_401 ||
+					g_gimmick[BOMB].ONFlg == true) {
 					if (g_map.gimmickData[i][j] == 8) {
 						g_map.playStage[i][j] = BLOCK;
 					}
@@ -448,8 +473,9 @@ void fireMove() {
 		g_map.playStage[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] != AIR) {
 		if (g_player.item[g_player.itemSelect] == K_SHOU && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)) {
 			g_gimmick[FIRE].ONFlg = true;
-			g_player.item[g_player.itemSelect] = K_NO;
-			g_player.itemNo--;
+			use_Flg = true;
+			//g_player.item[g_player.itemSelect] = K_NO;
+			//g_player.itemNo--;
 			smokeFlg[FIRE] = true;
 		}
 		/*if (g_player.item[g_player.itemSelect] == K_SHOU) {
@@ -515,8 +541,9 @@ void warpMove() {
 				}
 				g_gimmick[WARP_A].ONFlg = true;
 				g_gimmick[WARP_A].moveFlg = true;
-				g_player.item[g_player.itemSelect] = K_NO;
-				g_player.itemNo--;
+				use_Flg = true;
+				//g_player.item[g_player.itemSelect] = K_NO;
+				//g_player.itemNo--;
 				smokeFlg[WARP_A] = true;
 			}
 			/*if (g_player.item[g_player.itemSelect] == K_DOU) {
@@ -578,8 +605,9 @@ void warpMove() {
 				}
 				g_gimmick[WARP_B].ONFlg = true;
 				g_gimmick[WARP_B].moveFlg = true;
-				g_player.item[g_player.itemSelect] = K_NO;
-				g_player.itemNo--;
+				use_Flg = true;
+				//g_player.item[g_player.itemSelect] = K_NO;
+				//g_player.itemNo--;
 				smokeFlg[WARP_B] = true;
 			}
 			/*if (g_player.item[g_player.itemSelect] == K_DOU) {
@@ -641,8 +669,9 @@ void warpMove() {
 				}
 				g_gimmick[WARP_C].ONFlg = true;
 				g_gimmick[WARP_C].moveFlg = true;
-				g_player.item[g_player.itemSelect] = K_NO;
-				g_player.itemNo--;
+				use_Flg = true;
+				//g_player.item[g_player.itemSelect] = K_NO;
+				//g_player.itemNo--;
 				smokeFlg[WARP_C] = true;
 			}
 			/*if (g_player.item[g_player.itemSelect] == K_DOU) {
@@ -746,8 +775,9 @@ void bigboundMove() {
 				g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE) - 1] = BOSS_G_3;
 			}
 
-			g_player.item[g_player.itemSelect] = K_NO;
-			g_player.itemNo--;
+			use_Flg = true;
+			//g_player.item[g_player.itemSelect] = K_NO;
+			//g_player.itemNo--;
 			g_player.fallSpeed = -JUMP_POWER;
 		}
 	}
@@ -811,6 +841,12 @@ void mistake() {
 					DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[1], TRUE);
 				}
 			}
+			//横長ジャンプ台
+			if (g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == BOSS_G_2) {
+				if (g_player.item[g_player.itemSelect] != K_TIKARA) {
+					DrawGraph(g_player.px, g_player.py - 32, g_img.marubatu[1], TRUE);
+				}
+			}
 		}
 	}
 	else {
@@ -860,6 +896,12 @@ void mistake() {
 				DrawGraph(g_player.px, g_player.py - 40, g_img.Button, TRUE);
 			}
 		}
+		//ジャンプ台
+		if (g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == BOSS_G_2) {
+			if (g_player.item[g_player.itemSelect] != K_NO) {
+				DrawGraph(g_player.px, g_player.py - 40, g_img.Button, TRUE);
+			}
+		}
 	}
 }
 
@@ -875,6 +917,26 @@ void smoke(int smokeX, int smokeY) {
 		for (int i = 0; i < GIMMICK_NUM; i++)smokeFlg[i] = false;
 	}
 
+}
+
+void use_Effect(int effectX, int effectY) {//漢字を使ったときのエフェクト
+
+	static int effect = 0;
+
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 - (effect * 15));
+	DrawModiGraph((effectX) - effect, (effectY) - effect,
+		(effectX + 64) + effect, (effectY) - effect,
+		(effectX + 64) + effect, ((effectY + 64)) + effect,
+		(effectX) - effect, ((effectY + 64)) + effect,
+		g_img.kanzi[g_player.item[g_player.itemSelect] - 1], TRUE);
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
+	if (effect++ > 17) {
+		g_player.item[g_player.itemSelect] = K_NO;
+		g_player.itemNo--;
+		effect = 0;
+		use_Flg = false;
+	}
 }
 
 void gimmickInit() {

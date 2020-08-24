@@ -14,6 +14,7 @@ void gimmickInit();
 
 void smoke(int smokeX, int smokeY);		//煙
 void mistake();		//漢字を間違えたときの反応
+void use_Effect(int effectX, int effectY);//漢字を使ったときのエフェクト
 
 void liftMove();	//エレベーター
 void boundMove();	//ジャンプ台

@@ -21,16 +21,16 @@ void PlayerInit() {
 	g_player.itemSelect = 0;
 }
 
-void HPDisp() {
-	//HPï\é¶
-	DrawGraph(600,675, g_img.hp, TRUE);
-	SetFontSize(50);
-	DrawFormatString(670, 690, 0xffffff, "Å~%d", g_player.life);
-	DrawExtendGraph(780, 690,830,740, g_img.RetryButon, TRUE);
-	DrawGraph(840, 685, g_img.RetryText, FALSE);
-	/*DrawExtendGraph(750, 760, 690, 730, g_img.RetryButon, TRUE);
-	DrawExtendGraph(670, 730, 690, 780, g_img.RetryText, FALSE);*/
-}
+//void HPDisp() {
+//	//HPï\é¶
+//	DrawGraph(600,675, g_img.hp, TRUE);
+//	SetFontSize(50);
+//	DrawFormatString(670, 690, 0xffffff, "Å~%d", g_player.life);
+//	DrawExtendGraph(780, 690,830,740, g_img.RetryButon, TRUE);
+//	DrawGraph(840, 685, g_img.RetryText, FALSE);
+//	/*DrawExtendGraph(750, 760, 690, 730, g_img.RetryButon, TRUE);
+//	DrawExtendGraph(670, 730, 690, 780, g_img.RetryText, FALSE);*/
+//}
 
 void PlayerMove(){
 	//SetFontSize(20);
@@ -130,6 +130,16 @@ void PlayerMove(){
 			g_player.py = (g_player.py / CHIPSIZE) * CHIPSIZE;
 		}
 		
+	}
+
+	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE)] == BLOCK ||
+		g_map.playStage[int((g_player.py - 8) / CHIPSIZE)][int((g_player.px + 64) / CHIPSIZE)] == BLOCK ||
+		g_map.playStage[int((g_player.py - 8) / CHIPSIZE)][int((g_player.px) / CHIPSIZE)] == BLOCK ||
+		g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == BLOCK ||
+		g_player.py == 64) {
+
+		g_player.py = g_player.py + 1;
+		g_player.fallSpeed = 0;
 	}
 
 	if(g_player.muteki == 0){
