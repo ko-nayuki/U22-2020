@@ -17,7 +17,7 @@ void GamePlay() {
 	PlayDisp();
 	PlayMove();
 	if (Fead.FeadFlg == 0) FeadIn();
-	DrawFormatString(0, 650, 0x000000, "%d", g_map.select);
+	//DrawFormatString(0, 650, 0x000000, "%d", g_map.select);
 
 }
 
@@ -94,13 +94,10 @@ void PlayMove() {
 		}
 	}
 
-	HPDisp();
+	//HPDisp();
+	player_Life();
+	retry_Button();
 	item_Box();
-	if (/*g_KeyFlg & PAD_INPUT_2 ||*/ g_KeyFlg & PAD_INPUT_X) {//コントローラを基準にしています。デバッグ時はコメント化なりしてください。コントローラはY
-		Fead.InfoStg = 3;
-		Fead.OverFlg = 0;
-		FeadOut();
-	}
 
 	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == 2) {
 		//if ((g_map.select / 3) - 1 != 0){

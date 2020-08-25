@@ -5,6 +5,7 @@
 #include "Picture.h"
 #include "KeyControl.h"
 #include "Sounds.h"
+#include "yoshitaka.h"//fead
 
 const char data[] = __DATE__;
 const char time[] = __TIME__;
@@ -45,6 +46,62 @@ void build_Time() {
         time);
 }
 
+void player_Life() {
+
+	static float effect = 0;
+
+	if (effect > 255 / ((4 - g_player.life) * 5)) effect = 0;
+	else effect += 0.5;
+
+	//HP表示
+	DrawGraph(25,675, g_img.hp, TRUE);
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 - effect * 5);
+	DrawModiGraph((25) - effect, (675) - effect,
+		(25 + 64) + effect, (675) - effect,
+		(25 + 64) + effect, ((675 + 64)) + effect,
+		(25) - effect, ((675 + 64)) + effect,
+		g_img.hp, TRUE);
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
+	SetFontSize(45);
+	DrawFormatString(45, 690, 0xffffff, "%d", g_player.life);
+	SetFontSize(16);
+
+}
+
+void retry_Button() {
+
+	static float Anime = 255;
+	static bool AnimeFlg = false;
+	static int control_time = 0;
+
+	DrawExtendGraph(1230 - Anime, 690, 1280 - Anime, 740, g_img.RetryButon, TRUE);
+	if (AnimeFlg == true) {
+		if (Anime <= 0) AnimeFlg = false;
+		else Anime -= 2;
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, Anime);
+	} else {
+		if (control_time++ > 300) {
+			if (Anime < 255) Anime++;
+		}
+	}
+	DrawGraph(1290 - Anime, 685, g_img.RetryText, FALSE);
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
+	if ((g_NowKey & PAD_INPUT_LEFT || key[KEY_INPUT_LEFT] == 1) ||
+		(g_NowKey & PAD_INPUT_RIGHT || key[KEY_INPUT_RIGHT] == 1)) {//playerが操作されたら
+		AnimeFlg = true;
+		control_time = 0;
+	}
+
+	if (/*g_KeyFlg & PAD_INPUT_2 ||*/ g_KeyFlg & PAD_INPUT_X) {//コントローラを基準にしています。デバッグ時はコメント化なりしてください。コントローラはY
+		Fead.InfoStg = 3;
+		Fead.OverFlg = 0;
+		FeadOut();
+	}
+
+}
+
 void item_Box() {
 
 	static float ItemAnime = 0;
@@ -53,19 +110,24 @@ void item_Box() {
 
 	for (int i = 0; i < ITEM_MAX; i++) {
 		if (i != g_player.itemSelect) {
-			DrawGraph(96 + (CHIPSIZE + 32) * i, CHIPSIZE * 10 + 32, g_img.itemBox, TRUE);
+			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 100);
+			DrawGraph(128 + (CHIPSIZE + 24) * i, CHIPSIZE * 10 + 80, g_img.itemBox, TRUE);
+			if (g_player.item[i] != 0) {
+				DrawGraph(128 + (CHIPSIZE + 24) * i, CHIPSIZE * 10 + 80, g_img.kanzi[g_player.item[i] - 1], TRUE);
+			}
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		}
 		else {
-			DrawExtendGraph(70 + (CHIPSIZE + 32) * i, 655, 100 + (CHIPSIZE + 32) * i, 675, g_img.Triger[1], FALSE);
-			DrawExtendGraph(150 + (CHIPSIZE + 32) * i, 655, 180 + (CHIPSIZE + 32) * i, 675, g_img.Triger[0], FALSE);
+			DrawExtendGraph(104 + (CHIPSIZE + 24) * i, 750, 134 + (CHIPSIZE + 24) * i, 770, g_img.Triger[1], FALSE);//L
+			DrawExtendGraph(184 + (CHIPSIZE + 24) * i, 750, 214 + (CHIPSIZE + 24) * i, 770, g_img.Triger[0], FALSE);//R
 
 			SetDrawBright(255, 0, 0);
 			//DrawGraph(96 + (CHIPSIZE + 32) * i, CHIPSIZE * 10 + 32, g_img.itemBox, TRUE);
-			DrawRotaGraph(128 + (CHIPSIZE + 32) * i, CHIPSIZE * 10 + 64, 1, -(ItemAnime / 3.14), g_img.itemBox, TRUE);
+			DrawRotaGraph(160 + (CHIPSIZE + 24) * i, (CHIPSIZE * 10 + 64) + (ItemAnime * 3), 1, -(ItemAnime / 3.14), g_img.itemBox, TRUE);
 			SetDrawBright(255, 255, 255);
-		}
-		if (g_player.item[i] != 0) {
-			DrawGraph(96 + (CHIPSIZE + 32) * i, CHIPSIZE * 10 + 32, g_img.kanzi[g_player.item[i] - 1], TRUE);
+			if (g_player.item[i] != 0) {
+				DrawGraph(128 + (CHIPSIZE + 24) * i, (CHIPSIZE * 10 + 32) + (ItemAnime * 3), g_img.kanzi[g_player.item[i] - 1], TRUE);
+			}
 		}
 	}
 

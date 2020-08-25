@@ -51,16 +51,17 @@ void GameClearMove() {
 			StageInit();
 			EnemyInit();
 			bossInit();
-			for (int i = 0; i < ITEM_MAX; i++) {
-				g_player.item[i] = K_NO;
-			}
-			g_player.itemNo = 0;
+			PlayerInit();
 
 			if (CheckHitKey(PAD_INPUT_1) == 1)
 				g_KeyFlg = 0;
 			//g_gameScene = GAME_PLAY;
 		}
 		else {
+			PlayerInit();
+			g_player.px = 128;
+			g_player.py = 576;
+
 			Fead.InfoStg = 4;
 			Fead.ClearFlg = 1;
 			if (g_Select.Checkkey == g_Select.CheckCorect) {
