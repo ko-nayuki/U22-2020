@@ -7,6 +7,8 @@ struct sounds {
 	int World1;		//ワールド２BGM
 	int World2;		//ワールド３BGM
 	int World3;		//ワールド４BGM
+	int Boss;		//ボスBGM
+	int End;
 
 	int Select;		//決定SE
 	int SenTaku;	//アイテム選択SE

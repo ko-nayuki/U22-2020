@@ -26,7 +26,6 @@ void PlayDisp() {
 	gimmickDisp();
 	StageDisp();
 
-
 	
 	/*for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {

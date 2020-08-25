@@ -15,7 +15,6 @@ void StageSelect() {
 	SelectDisp();
 	SelectMove();
 	if (Fead.FeadFlg == 0) FeadIn();
-
 }
 
 void SelectDisp() {

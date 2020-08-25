@@ -12,6 +12,10 @@ static int MenuNo = 0;
 static int Sketch = 0;
 
 void GameTitle() {
+	//タイトルBGM
+	if (CheckSoundMem(g_sounds.Title) == 0) PlaySoundMem(g_sounds.Title, DX_PLAYTYPE_LOOP);
+
+	//画面表示&動き
 	if (Fead.FeadCredit == 0) {
 		TitleDisp();
 		TitleMove();
@@ -23,8 +27,7 @@ void GameTitle() {
 		if (Fead.FeadFlg == 0) FeadIn();
 	}
 
-	//タイトルBGM
-	//if (CheckSoundMem(g_sounds.Title) == 0) PlaySoundMem(g_sounds.Title, DX_PLAYTYPE_LOOP);
+
 	
 }
 

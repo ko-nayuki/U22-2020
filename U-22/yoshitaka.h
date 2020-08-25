@@ -11,10 +11,6 @@
 //g_img.T_kanzi[2]・・・終
 //g_img.T_kanzi[3]・・・了
 
-//足りない音
-//タイトル(OK)・セレクト・クリア画面・プレイ画面・ボス（←余裕があったら入れるか？）・タイトル用決定音
-
-//音の実装
 //白くフェードアウト→加算合成(加算ブレンド) ( SetDrawBlendMode 引数→DX_BLENDMODE_ADD ) 画像にしか使用できない、内藤先生に聞く
 
 //音を実装する→バグ修正終わったら取り掛かる
@@ -23,12 +19,13 @@
 //int StageObj(int Objimg);
 
 struct StageInfo {
+	//セレクトの扉の座標
 	int stage1x = 192;
 	int stage2x = 576;
 	int stage3x = 768;
 	int stage4x = 960;
 
-	int CursorFlg = 0;
+	int CursorFlg = 0;	//カーソルを元に戻す
 	int Key = 0;		//セレクト画面でステージをロックするフラグ
 	int Checkkey = 0;	//ちゃんとステージクリアしたかチェックするための変数
 	int CheckCorect = 0;	//上と比較する

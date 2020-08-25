@@ -6,15 +6,17 @@ int LoadSounds(void)
 	//タイトルBGM
 	if ((g_sounds.Title = LoadSoundMem("sounds/bgm_title.mp3")) == -1) return -1;
 	//ワールド０BGM
-	if ((g_sounds.Title = LoadSoundMem("sounds/bgm_world1.mp3")) == -1) return -1;
+	if ((g_sounds.World0 = LoadSoundMem("sounds/bgm_world1.mp3")) == -1) return -1;
 	//ワールド１BGM
-	if ((g_sounds.Title = LoadSoundMem("sounds/bgm_world2.mp3")) == -1) return -1;
+	if ((g_sounds.World1 = LoadSoundMem("sounds/bgm_world2.mp3")) == -1) return -1;
 	//ワールド２BGM
-	if ((g_sounds.Title = LoadSoundMem("sounds/bgm_world3.mp3")) == -1) return -1;
+	if ((g_sounds.World2 = LoadSoundMem("sounds/bgm_world3.mp3")) == -1) return -1;
 	//ワールド３BGM
-	if ((g_sounds.Title = LoadSoundMem("sounds/bgm_world4.mp3")) == -1) return -1;
+	if ((g_sounds.World3 = LoadSoundMem("sounds/bgm_world4.mp3")) == -1) return -1;
 	//ボスBGM
-	if ((g_sounds.Title = LoadSoundMem("sounds/bgm_boss.mp3")) == -1) return -1;
+	if ((g_sounds.Boss = LoadSoundMem("sounds/bgm_boss.mp3")) == -1) return -1;
+	//エンドBGM
+	if ((g_sounds.End = LoadSoundMem("sounds/bgm_end.mp3")) == -1) return -1;
 
 	//決定SE
 	if ((g_sounds.Select = LoadSoundMem("sounds/decision1.mp3")) == -1) return -1;
