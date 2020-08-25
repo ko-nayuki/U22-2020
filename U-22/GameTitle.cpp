@@ -9,7 +9,7 @@
 #include "Sounds.h"
 
 static int MenuNo = 0;
-static int Sketch = 0;
+
 
 void GameTitle() {
 	//タイトルBGM
@@ -55,7 +55,6 @@ void TitleMove() {
 	//決定
 	if (MenuNo == 0) {
 		if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
-			++Sketch;
 			DrawGraph(576, 448, g_img.T_kanzi[1], FALSE);//開
 			ScreenFlip();
 			WaitTimer(2000);
@@ -65,7 +64,7 @@ void TitleMove() {
 			if (CheckHitKey(KEY_INPUT_SPACE) == 1)
 				g_KeyFlg = 0;
 		}
-		if(Sketch == 0)DrawGraph(128, 512, g_img.T_kanzi[1], FALSE);
+		DrawGraph(128, 512, g_img.T_kanzi[1], FALSE);
 	}
 	//協賛
 	if (MenuNo == 1) {
@@ -77,7 +76,7 @@ void TitleMove() {
 			Fead.InfoStg = 1;
 			FeadOut();
 		}
-		if (Sketch == 0) DrawGraph(128, 512, g_img.T_kanzi[5], FALSE);
+		DrawGraph(128, 512, g_img.T_kanzi[5], FALSE);
 	}
 	//終了
 	if (MenuNo == 2) {
@@ -87,7 +86,7 @@ void TitleMove() {
 			WaitTimer(200);
 			g_gameScene = 99;
 		}
-		if (Sketch == 0)DrawGraph(128, 512, g_img.T_kanzi[2], FALSE);
+		DrawGraph(128, 512, g_img.T_kanzi[2], FALSE);
 	}
 
 
