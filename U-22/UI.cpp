@@ -104,6 +104,10 @@ void retry_Button() {
 
 void item_Box() {
 
+	static bool L_Flg = false;
+	static bool R_Flg = false;
+	static int delay = 5;
+
 	static float ItemAnime = 0;
 
 	if (ItemAnime < 7.5) ItemAnime += 0.5F;
@@ -132,14 +136,29 @@ void item_Box() {
 	}
 
 	if (g_KeyFlg & PAD_INPUT_Z) {//コントローラを基準にしています。デバッグ時はコメント化なりしてください。コントローラはトリガーR
-		PlaySoundMem(g_sounds.SenTaku, DX_PLAYTYPE_BACK, TRUE);
-		if (++g_player.itemSelect > ITEM_MAX - 1) g_player.itemSelect = 0;
-		ItemAnime = 0;
+		if (L_Flg == false && R_Flg == false) R_Flg = true;
 	}
 	if (g_KeyFlg & PAD_INPUT_5 /*|| g_KeyFlg & PAD_INPUT_X*/) {//コントローラを基準にしています。デバッグ時はコメント化なりしてください。コントローラはトリガーL
-		PlaySoundMem(g_sounds.SenTaku, DX_PLAYTYPE_BACK, TRUE);
-		if (--g_player.itemSelect < 0) g_player.itemSelect = ITEM_MAX - 1;
-		ItemAnime = 0;
+		if (L_Flg == false && R_Flg == false) L_Flg = true;
 	}
 
+	//L・Rの入力を遅延
+	if (L_Flg == true) {
+		if (delay-- < 0) {
+			PlaySoundMem(g_sounds.SenTaku, DX_PLAYTYPE_BACK, TRUE);
+			if (--g_player.itemSelect < 0) g_player.itemSelect = ITEM_MAX - 1;
+			ItemAnime = 0;
+			L_Flg = false;
+			delay = 5;
+		}
+	}
+	if (R_Flg == true) {
+		if (delay-- < 0) {
+			PlaySoundMem(g_sounds.SenTaku, DX_PLAYTYPE_BACK, TRUE);
+			if (++g_player.itemSelect > ITEM_MAX - 1) g_player.itemSelect = 0;
+			ItemAnime = 0;
+			R_Flg = false;
+			delay = 5;
+		}
+	}
 }

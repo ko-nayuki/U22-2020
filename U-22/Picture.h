@@ -24,14 +24,17 @@ struct image {
 	int wolf[7];		//boss1
 	int thief[24];		//boss2
 	int Colossus[6];    //boss3
-	int fire;			//炎
+	int fire[2];		//炎
 	int drop;			//落下看板
 	int crack;			//ヒビ入りブロック
+	int gear[2];		//回転足場
 	int warp;			//ワープ
 	int bomb;
 	int Cauldron;		//大釜
 	int trampoline[2];	//トランポリン
 
+	int stage3;
+	int stage4;
 	int SelectBook[3];
 
 	int RetryButon;		//リトライボタン

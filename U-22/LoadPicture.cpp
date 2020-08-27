@@ -67,11 +67,15 @@ int LoadPicture(){
 	if ((g_img.Cauldron = LoadGraph("images/Cauldron.png")) == -1) return -1;
 	if ((g_img.trampoline[0] = LoadGraph("images/trampoline0.png")) == -1) return -1;
 	if ((g_img.trampoline[1] = LoadGraph("images/trampoline.png")) == -1) return -1;
-	if ((g_img.fire = LoadGraph("images/flame.png")) == -1) return -1;
+	if ((g_img.fire[0] = LoadGraph("images/flame.png")) == -1) return -1;
+	if ((g_img.fire[1] = LoadGraph("images/flame1.png")) == -1) return -1;
 	if ((g_img.drop = LoadGraph("images/Stage2Swich.png")) == -1) return -1;
 	if ((g_img.crack = LoadGraph("images/Stege1Blockbreak0.png")) == -1) return -1;
 	if ((g_img.warp = LoadGraph("images/warpzone.png")) == -1) return -1;
 	if ((g_img.bomb = LoadGraph("images/bomb.png")) == -1) return -1;
+	if (LoadDivGraph("images/RYuka0.png", 2, 2, 1, 64, 64, g_img.gear) == -1) return -1;
 	if (LoadDivGraph("images/SelectBooks.png", 3, 3, 1, 128, 128, g_img.SelectBook) == -1) return -1;
+	if ((g_img.stage3 = LoadGraph("images/Stage3.png")) == -1) return -1;
+	if ((g_img.stage4 = LoadGraph("images/Stage4.png")) == -1) return -1;
 	return 0;
 }

@@ -37,7 +37,11 @@ int LoadSounds(void)
 	//ワープ
 	if ((g_sounds.Warp= LoadSoundMem("sounds/warp.mp3")) == -1) return -1;
 
-
+	/**************/
+	/* 音量の設定 */
+	/**************/
+	//アイテム選択SE
+	ChangeVolumeSoundMem(255 * 80 / 100, g_sounds.SenTaku);
 
 
 	return 0;

@@ -6,6 +6,7 @@
 #include "Gimmick.h"
 #include "GameScene.h"
 #include "enemy.h"
+#include "Sounds.h"
 
 #include <math.h>
 
@@ -140,13 +141,13 @@ void wolfMove() {// boss1
 		DrawGraph(g_boss[0].x, g_boss[0].y - CHIPSIZE, g_img.wolf[int(g_boss[0].anime)], TRUE);
 		SetDrawBright(255, 255, 255);
 
-		if (g_boss[0].y < 9 * CHIPSIZE && g_boss[0].count == 0) {
+		if (g_boss[0].y < 9 * CHIPSIZE && g_boss[0].count == 0) {//—Ž‰º
 			g_boss[0].anime = 1;
 			g_boss[0].y += 8;
 		}
 		else {
 			g_boss[0].count++;
-			if (g_boss[0].count > 50) {
+			if (g_boss[0].count > 50) {//‘«ê‚ð‚à‚Ç‚·
 
 				g_gimmick[DROP].ONFlg = false;
 				g_gimmick[DROP].x = -CHIPSIZE;
@@ -176,7 +177,7 @@ void wolfMove() {// boss1
 				}
 				else {//HP‚ª‚Ü‚¾Žc‚Á‚Ä‚¢‚é‚È‚ç
 					if (jumpFlg == false) g_boss[0].y -= 8, g_boss[0].anime = 2;
-					else {
+					else {//ã‚É•œ‹A
 						g_boss[0].y += 8;
 						if (g_boss[0].y >= 6 * CHIPSIZE) {
 							g_boss[0].y = 6 * CHIPSIZE;
@@ -191,7 +192,8 @@ void wolfMove() {// boss1
 					if (g_boss[0].y < 3 * CHIPSIZE) jumpFlg = true;
 				}
 			}
-			else {
+			else {//‰º‚Å–\‚ê‚é
+				PlaySoundMem(g_sounds.Fire, DX_PLAYTYPE_BACK, TRUE);//Ä‚¯‚é‰¹
 				g_boss[0].y += 0.3F;
 				if (g_boss[0].count % 9 == 0) g_boss[0].anime = 1;
 				if (g_boss[0].count % 9 == 5) g_boss[0].anime = 2;

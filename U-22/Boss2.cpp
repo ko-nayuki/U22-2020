@@ -6,6 +6,7 @@
 #include "Gimmick.h"
 #include "GameScene.h"
 #include "enemy.h"
+#include "Sounds.h"
 
 #include <math.h>
 
@@ -59,6 +60,7 @@ void thiefMove() {//boss2
 
 	if (warpFlg == true) {
 		if (warp_num == 0) {//ˆÚ“®ŠJn
+			PlaySoundMem(g_sounds.Warp, DX_PLAYTYPE_BACK, TRUE);//ˆÚ“®‰¹
 			if (motion_y < 85) {
 				motion_y++;
 				if (motion_y < 80) {
@@ -127,22 +129,23 @@ void thiefMove() {//boss2
 	}
 
 	//”š’e‚Ìˆ—
-	if (Bomb_Flg[0] == true) {
-		if (Bomb_Y[0] <= 9 * CHIPSIZE) {
+	if (Bomb_Flg[0] == true) {//1‚Â–Ú
+		if (Bomb_Y[0] <= 9 * CHIPSIZE) {//“Š‰º
 			DrawGraph(Bomb_X[0] + 32, Bomb_Y[0], g_img.kanzi[6], TRUE);//[”š]‚Ì•`‰æ
 			Bomb_Y[0] += Bomb_speed[0];
 		} else {
-			if (g_map.gimmickData[(Bomb_Y[0] / CHIPSIZE) + 1][Bomb_X[0] / CHIPSIZE] == BOSS_G_3) {
+			if (g_map.gimmickData[(Bomb_Y[0] / CHIPSIZE) + 1][Bomb_X[0] / CHIPSIZE] == BOSS_G_3) {//’e—Í‚È‚ç’µ‚Ë•Ô‚·
 				g_boss[1].damageFlg = true;
 				Bomb_Flg2[0] = true;
 				Bomb_Flg[0] = false;
+				PlaySoundMem(g_sounds.Spring, DX_PLAYTYPE_BACK, TRUE);//‚Î‚Ë‰¹
 			}
-			else {
-				if (Bomb_count[0]-- > 0) {
+			else {//’…’e
+				if (Bomb_count[0]-- > 0) {//”š”jƒJƒEƒ“ƒg
 					DrawRotaGraph(Bomb_X[0] + 64, Bomb_Y[0] + 32, 1 + ((50 - Bomb_count[0]) * 0.01), 0, g_img.bomb, TRUE);//”š’e‚Ì•`‰æ
 					g_map.gimmickData[(Bomb_Y[0] / CHIPSIZE) + 1][Bomb_X[0] / CHIPSIZE] = 0;
 					g_map.gimmickData[(Bomb_Y[0] / CHIPSIZE) + 1][(Bomb_X[0] / CHIPSIZE) + 1] = 0;
-				} else {
+				} else {//”š”j
 					DrawBox(Bomb_X[0] - 32, Bomb_Y[0] - 64, Bomb_X[0] + 160, Bomb_Y[0] + 64, 0xFF0000, true);//”š”­”ÍˆÍ
 					g_map.gimmickData[(Bomb_Y[0] / CHIPSIZE) + 1][Bomb_X[0] / CHIPSIZE] = BOSS_G_2;
 					g_map.gimmickData[(Bomb_Y[0] / CHIPSIZE) + 1][(Bomb_X[0] / CHIPSIZE) + 1] = BOSS_G_2;
@@ -150,11 +153,12 @@ void thiefMove() {//boss2
 					Bomb_Y[0] = -CHIPSIZE;
 					Bomb_X[0] = -CHIPSIZE;
 					Bomb_count[0] = 0;
+					PlaySoundMem(g_sounds.Break, DX_PLAYTYPE_BACK, TRUE);//”š”j‰¹
 				}
 			}
 		}
 	}
-	if (Bomb_Flg[1] == true) {
+	if (Bomb_Flg[1] == true) {//2‚Â–Ú
 		if (Bomb_Y[1] <= 9 * CHIPSIZE) {
 			DrawGraph(Bomb_X[1] + 32, Bomb_Y[1], g_img.kanzi[6], TRUE);//[”š]‚Ì•`‰æ
 			Bomb_Y[1] += Bomb_speed[1];
@@ -164,6 +168,7 @@ void thiefMove() {//boss2
 				g_boss[1].damageFlg = true;
 				Bomb_Flg2[1] = true;
 				Bomb_Flg[1] = false;
+				PlaySoundMem(g_sounds.Spring, DX_PLAYTYPE_BACK, TRUE);//‚Î‚Ë‰¹
 			}
 			else {
 				if (Bomb_count[1]-- > 0) {
@@ -179,11 +184,12 @@ void thiefMove() {//boss2
 					Bomb_Y[1] = -CHIPSIZE;
 					Bomb_X[1] = -CHIPSIZE;
 					Bomb_count[1] = 0;
+					PlaySoundMem(g_sounds.Break, DX_PLAYTYPE_BACK, TRUE);//”š”j‰¹
 				}
 			}
 		}
 	}
-	if (Bomb_Flg[2] == true) {
+	if (Bomb_Flg[2] == true) {//3‚Â–Ú
 		if (Bomb_Y[2] <= 9 * CHIPSIZE) {
 			DrawGraph(Bomb_X[2] + 32, Bomb_Y[2], g_img.kanzi[6], TRUE);//[”š]‚Ì•`‰æ
 			Bomb_Y[2] += Bomb_speed[2];
@@ -193,6 +199,7 @@ void thiefMove() {//boss2
 				g_boss[1].damageFlg = true;
 				Bomb_Flg2[2] = true;
 				Bomb_Flg[2] = false;
+				PlaySoundMem(g_sounds.Spring, DX_PLAYTYPE_BACK, TRUE);//‚Î‚Ë‰¹
 			}
 			else {
 				if (Bomb_count[2]-- > 0) {
@@ -208,6 +215,7 @@ void thiefMove() {//boss2
 					Bomb_Y[2] = -CHIPSIZE;
 					Bomb_X[2] = -CHIPSIZE;
 					Bomb_count[2] = 0;
+					PlaySoundMem(g_sounds.Break, DX_PLAYTYPE_BACK, TRUE);//”š”j‰¹
 				}
 			}
 		}
@@ -216,17 +224,17 @@ void thiefMove() {//boss2
 	//ƒ_ƒ[ƒW‚ğó‚¯‚é
 	if (g_boss[1].damageFlg == true) {
 		for (bomb_num = 0; bomb_num < 3; bomb_num++) {
-			if (Bomb_Flg2[bomb_num] == true) {
+			if (Bomb_Flg2[bomb_num] == true) {//3‚Â‚Ì‚¤‚¿‚Ç‚Ì”š’e‚ª’µ‚Ë•Ô‚³‚ê‚½‚©
 				break;
 			}
 		}
-		if (Bomb_X[bomb_num] != 1 * CHIPSIZE && Bomb_X[bomb_num] != 17 * CHIPSIZE) {
+		if (Bomb_X[bomb_num] != 1 * CHIPSIZE && Bomb_X[bomb_num] != 17 * CHIPSIZE) {//”š’eã¸
 			DrawGraph(Bomb_X[bomb_num] + 32, Bomb_Y[bomb_num], g_img.kanzi[6], TRUE);//[”š]‚Ì•`‰æ
 			if (Bomb_Y[bomb_num] > -CHIPSIZE) Bomb_Y[bomb_num] -= 8;
 			else Bomb_X[bomb_num] = g_boss[1].x - 32;
 		}
 		else {
-			if (Bomb_Y[bomb_num] < 3 * CHIPSIZE) {
+			if (Bomb_Y[bomb_num] < 3 * CHIPSIZE) {//”š’e~‰º
 				DrawGraph(Bomb_X[bomb_num] + 32, Bomb_Y[bomb_num], g_img.kanzi[6], TRUE);//[”š]‚Ì•`‰æ
 				Bomb_Y[bomb_num] += 4;
 			}
@@ -239,12 +247,13 @@ void thiefMove() {//boss2
 				}
 				else {
 					if (g_boss[1].count == 0) {
+						PlaySoundMem(g_sounds.Break, DX_PLAYTYPE_BACK, TRUE);//”š”j‰¹
 						DrawBox(Bomb_X[bomb_num] - 32, Bomb_Y[bomb_num] - 64, Bomb_X[bomb_num] + 160, Bomb_Y[bomb_num] + 64, 0xFF0000, true);//”š”­”ÍˆÍ
 						g_map.gimmickData[(Bomb_Y[bomb_num] / CHIPSIZE) + 1][Bomb_X[bomb_num] / CHIPSIZE] = BOSS_G_2;
 						g_map.gimmickData[(Bomb_Y[bomb_num] / CHIPSIZE) + 1][(Bomb_X[bomb_num] / CHIPSIZE) + 1] = BOSS_G_2;
 					}
 
-					// ‚T‰ñ‚Ì‚¤‚¿‚Q‰ñ•\¦‚·‚éB
+					// ‚T‰ñ‚Ì‚¤‚¿‚Q‰ñ•\¦‚·‚é
 					g_boss[1].count++;
 					if (g_boss[1].count % 10 == 0) {
 						//•\¦

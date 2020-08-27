@@ -88,18 +88,15 @@ void StageDisp() {
 			if (g_map.playStage[i][j] != 0 && g_map.playStage[i][j] < 5 && g_map.playStage[i][j] < A) {
 				if (g_map.playStage[i][j] == 1 && g_map.gimmickData[i][j] == 0) {
 					if (g_map.playStage[i - 1][j] != 1) {
-						DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[(g_map.select / 3) * 3 + 1], TRUE);
+						DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[(g_map.select / 3) * 3 + 1], FALSE);
 					}
 					else if (g_map.playStage[i][j] != 3) {
-						DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[(g_map.select / 3) * 3 + 2], TRUE);
+						DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[(g_map.select / 3) * 3 + 2], FALSE);
 					}
 				}
 				else {
 
-					if (g_map.gimmickData[i][j] == GIM_5 && g_map.gimmickData[i][j + 1] == GIM_5 && g_map.gimmickData[i + 1][j] == GIM_5) {
-						DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.fire, TRUE);
-					}
-					if (g_map.gimmickData[i][j] == GIM_401 || g_map.gimmickData[i][j] == GIM_3) {
+					if (g_map.gimmickData[i][j] == GIM_3) {
 						DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.crack, TRUE);
 					}
 					if (g_map.gimmickData[i][j] == BOSS_G_2 && g_map.gimmickData[i][j + 1] == BOSS_G_2) {
@@ -219,11 +216,25 @@ void BackStageDisp() {
 			//DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.bookshelf[g_map.random[i][j]], TRUE);
 
 			if (g_gameScene == GAME_PLAY || g_gameScene == GAME_CLEAR || g_gameScene == GAME_OVER) {
-				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[(g_map.select / 3) * 3], TRUE);
+				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[(g_map.select / 3) * 3], FALSE);
 			}
 			else {
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.MAP[0], TRUE);
 			}
+		}
+	}
+	if (g_gameScene == GAME_PLAY || g_gameScene == GAME_CLEAR || g_gameScene == GAME_OVER) {
+		if (g_map.select >= 6 && g_map.select <= 8) {
+			DrawGraph(0, 0, g_img.stage3, FALSE);
+			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 100);
+			DrawBox(0, 0, 1280, 768, 0x000000, TRUE);
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		}
+		if (g_map.select >= 9 && g_map.select <= 11) {
+			DrawGraph(0, 0, g_img.stage4, FALSE);
+			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 50);
+			DrawBox(0, 0, 1280, 768, 0x000000, TRUE);
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		}
 	}
 }
