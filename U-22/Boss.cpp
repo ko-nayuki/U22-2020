@@ -17,6 +17,7 @@ void bossDisp() {
 	}
 	if (g_map.select == 11) {//boss3
 		DrawGraph(g_boss[2].x, g_boss[2].y - CHIPSIZE, g_img.Colossus[0], TRUE);
+		DrawGraph(g_boss[3].x, g_boss[3].y - CHIPSIZE, g_img.Colossus[3], TRUE);
 	}
 
 }
@@ -56,10 +57,18 @@ void bossInit() {
 	g_boss[1].attackFlg = false;
 
 	//ボス3の初期化
-	g_boss[2].x = 1 * CHIPSIZE;
+	g_boss[2].x = -3 * CHIPSIZE;
 	g_boss[2].y = 2 * CHIPSIZE;
-	g_boss[2].hp = 3;
+	g_boss[2].hp = 2;
 	g_boss[2].count = 0;
 	g_boss[2].damageFlg = false;
 	g_boss[2].attackFlg = false;
+
+	//ボス3の初期化
+	g_boss[3].x = 17 * CHIPSIZE;
+	g_boss[3].y = 2 * CHIPSIZE;
+	g_boss[3].hp = 2;
+	g_boss[3].count = 0;
+	g_boss[3].damageFlg = false;
+	g_boss[3].attackFlg = false;
 }
