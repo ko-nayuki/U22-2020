@@ -40,8 +40,33 @@ int LoadSounds(void)
 	/**************/
 	/* 音量の設定 */
 	/**************/
+	//タイトルBGM
+	ChangeVolumeSoundMem(255 * 40 / 100, g_sounds.Title);
+	//ワールド0BGM
+	ChangeVolumeSoundMem(255 * 40 / 100, g_sounds.World0);
+	//ワールド1BGM
+	ChangeVolumeSoundMem(255 * 40 / 100, g_sounds.World1);
+	//ワールド2BGM
+	ChangeVolumeSoundMem(255 * 40 / 100, g_sounds.World2);
+	//ワールド3BGM
+	ChangeVolumeSoundMem(255 * 40 / 100, g_sounds.World3);
+	//ボスBGM
+	ChangeVolumeSoundMem(255 * 40 / 100, g_sounds.Boss);
+	//エンドBGM
+	ChangeVolumeSoundMem(255 * 40 / 100, g_sounds.End);
+
+	//決定SE
+	ChangeVolumeSoundMem(255 * 50 / 100, g_sounds.Select);
 	//アイテム選択SE
-	ChangeVolumeSoundMem(255 * 80 / 100, g_sounds.SenTaku);
+	ChangeVolumeSoundMem(255 * 50 / 100, g_sounds.SenTaku);
+	//エレベータSE
+	ChangeVolumeSoundMem(255 * 50 / 100, g_sounds.Eleverter);
+	//バネSE
+	ChangeVolumeSoundMem(255 * 50 / 100, g_sounds.Spring);
+	//消火
+	ChangeVolumeSoundMem(255 * 60 / 100, g_sounds.Fire);
+	//ワープ
+	ChangeVolumeSoundMem(255 * 40 / 100, g_sounds.Warp);
 
 
 	return 0;
