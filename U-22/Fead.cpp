@@ -142,6 +142,11 @@ void FeadOut() {
 	else if (Fead.InfoStg == 5 && Fead.OverFlg == 1)
 	{
 		Fead.InfoStg = 1;
+		StopSoundMem(g_sounds.World0);
+		StopSoundMem(g_sounds.World1);
+		StopSoundMem(g_sounds.World2);
+		StopSoundMem(g_sounds.World3);
+		StopSoundMem(g_sounds.Boss);
 		g_gameScene = GAME_TITLE;
 	}
 	//if (InfoStg == 3) {
