@@ -53,7 +53,7 @@ void FeadOut() {
 		}
 
 
-		num += 2;
+		num += 5;
 
 		//‰æ–Ê‚ğÄ•\¦
 		ScreenFlip();

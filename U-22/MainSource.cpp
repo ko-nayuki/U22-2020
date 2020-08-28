@@ -83,7 +83,7 @@ int Main() {
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	// メインループ
-	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0 && !(g_KeyFlg & PAD_INPUT_START) && GetHitKeyStateAll(key) == 0 && g_gameScene != 99) {
+	while (ProcessMessage() == 0 && /*CheckHitKey(KEY_INPUT_ESCAPE) == 0 && !(g_KeyFlg & PAD_INPUT_START) && */GetHitKeyStateAll(key) == 0 && g_gameScene != 99) {
 		// 画面のクリア
 		ClearDrawScreen();
 	

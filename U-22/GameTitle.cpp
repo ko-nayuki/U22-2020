@@ -38,7 +38,7 @@ void TitleDisp() {
 
 	DrawExtendGraph(220, 110,1100,260, g_img.Title, FALSE);
 
-	DrawFormatString(600, 300, 0xFFFFFF, "スペースキー");
+	//DrawFormatString(600, 300, 0xFFFFFF, "スペースキー");
 
 	DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
 
@@ -57,7 +57,7 @@ void TitleMove() {
 		if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
 			DrawGraph(576, 448, g_img.T_kanzi[1], FALSE);//開
 			ScreenFlip();
-			WaitTimer(2000);
+			WaitTimer(1000);
 			Fead.InfoStg = 1;
 			Fead.FeadCredit = 0;
 			FeadOut();
@@ -71,7 +71,7 @@ void TitleMove() {
 		if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
 			DrawGraph(640, 512, g_img.T_kanzi[5], FALSE);//賛
 			ScreenFlip();
-			WaitTimer(2000);
+			WaitTimer(1000);
 			Fead.FeadCredit = 1;
 			Fead.InfoStg = 1;
 			FeadOut();
