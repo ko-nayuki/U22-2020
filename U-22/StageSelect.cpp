@@ -9,6 +9,7 @@
 #include "yoshitaka.h"
 #include "Boss.h"
 #include "Picture.h"
+#include "Sounds.h"
 
 
 void StageSelect() {
@@ -71,6 +72,7 @@ void SelectMove() {
 
 		g_gameScene = GAME_PLAY;*/
 			if (g_Select.stage1x < g_player.px + 64 && g_Select.stage1x + 128 > g_player.px) {
+				PlaySoundMem(g_sounds.Select, DX_PLAYTYPE_BACK, TRUE);
 				g_map.select = 0;
 				g_Select.Checkkey = 0;
 				Fead.InfoStg = 2;
@@ -83,6 +85,7 @@ void SelectMove() {
 				//g_gameScene = GAME_PLAY;
 			}
 			if ((g_Select.stage2x < g_player.px + 64 && g_Select.stage2x + 128 > g_player.px) && g_Select.Key >= 1) {
+				PlaySoundMem(g_sounds.Select, DX_PLAYTYPE_BACK, TRUE);
 				g_map.select = 3;
 				g_Select.Checkkey = 1;
 				Fead.InfoStg = 2;
@@ -94,6 +97,7 @@ void SelectMove() {
 				bossInit();
 			}
 			if ((g_Select.stage3x < g_player.px + 64 && g_Select.stage3x + 128 > g_player.px) && g_Select.Key >= 2) {
+				PlaySoundMem(g_sounds.Select, DX_PLAYTYPE_BACK, TRUE);
 				g_map.select = 6;
 				g_Select.Checkkey = 2;
 				Fead.InfoStg = 2;
@@ -105,6 +109,7 @@ void SelectMove() {
 				bossInit();
 			}
 			if ((g_Select.stage4x < g_player.px + 64 && g_Select.stage4x + 128 > g_player.px) && g_Select.Key >= 3) {
+				PlaySoundMem(g_sounds.Select, DX_PLAYTYPE_BACK, TRUE);
 				g_map.select = 9;
 				g_Select.Checkkey = 3;
 				Fead.InfoStg = 2;

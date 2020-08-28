@@ -191,21 +191,21 @@ void TitleMAPDisp() {
 				g_player.px = j * CHIPSIZE;
 				g_player.py = i * CHIPSIZE;
 			}
-			if (g_map.playStage[i][j] == 30) {//始
-				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[0], FALSE);
-			}
-			//if (g_map.playStage[i][j] == 31) {//開
-			//	DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[1], FALSE);
+			//if (g_map.playStage[i][j] == 30) {//始
+			//	DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[0], FALSE);
 			//}
-			if (g_map.playStage[i][j] == 32) {//終
-				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[4], FALSE);
-			}
+			////if (g_map.playStage[i][j] == 31) {//開
+			////	DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[1], FALSE);
+			////}
+			//if (g_map.playStage[i][j] == 32) {//終
+			//	DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[4], FALSE);
+			//}
+			////if (g_map.playStage[i][j] == 33) {//了
+			////	DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[3], FALSE);
+			////}
 			//if (g_map.playStage[i][j] == 33) {//了
 			//	DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[3], FALSE);
 			//}
-			if (g_map.playStage[i][j] == 33) {//了
-				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.T_kanzi[3], FALSE);
-			}
 		}
 	}
 }

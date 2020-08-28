@@ -38,6 +38,7 @@ void TitleDisp() {
 
 	DrawExtendGraph(220, 110,1100,260, g_img.Title, FALSE);
 
+
 	//DrawFormatString(600, 300, 0xFFFFFF, "スペースキー");
 
 	DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
@@ -52,10 +53,16 @@ void TitleMove() {
 
 	if (g_Select.CursorFlg == 1) MenuNo = 0, g_Select.CursorFlg = 0;
 
+	//漢字表示（フェードアウトで消えるように）
+	DrawGraph(640, 448, g_img.T_kanzi[0], FALSE);
+	DrawGraph(578, 512, g_img.T_kanzi[4], FALSE);
+	DrawGraph(640, 576, g_img.T_kanzi[3], FALSE);
+
 	//決定
 	if (MenuNo == 0) {
 		if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
 			DrawGraph(576, 448, g_img.T_kanzi[1], FALSE);//開
+			PlaySoundMem(g_sounds.SenTaku, DX_PLAYTYPE_BACK, TRUE);
 			ScreenFlip();
 			WaitTimer(1000);
 			Fead.InfoStg = 1;
@@ -70,6 +77,7 @@ void TitleMove() {
 	if (MenuNo == 1) {
 		if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
 			DrawGraph(640, 512, g_img.T_kanzi[5], FALSE);//賛
+			PlaySoundMem(g_sounds.Select, DX_PLAYTYPE_BACK, TRUE);
 			ScreenFlip();
 			WaitTimer(1000);
 			Fead.FeadCredit = 1;
@@ -82,6 +90,7 @@ void TitleMove() {
 	if (MenuNo == 2) {
 		if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
 			DrawGraph(576, 576, g_img.T_kanzi[2], FALSE);//終
+			PlaySoundMem(g_sounds.Select, DX_PLAYTYPE_BACK, TRUE);
 			ScreenFlip();
 			WaitTimer(200);
 			g_gameScene = 99;
@@ -91,8 +100,11 @@ void TitleMove() {
 
 
 	//ゲーム開始か終了か、選択
-	if (g_KeyFlg & PAD_INPUT_DOWN) if (++MenuNo > 2) MenuNo = 0;
-	if (g_KeyFlg & PAD_INPUT_UP) if (--MenuNo < 0) MenuNo = 2;
+	if (g_KeyFlg & PAD_INPUT_DOWN)if (++MenuNo > 2) MenuNo = 0;
+	if (g_KeyFlg & PAD_INPUT_UP)if (--MenuNo < 0) MenuNo = 2;
+
+	if (g_KeyFlg & PAD_INPUT_DOWN)PlaySoundMem(g_sounds.SenTaku, DX_PLAYTYPE_BACK, TRUE);
+	if (g_KeyFlg & PAD_INPUT_UP)PlaySoundMem(g_sounds.SenTaku, DX_PLAYTYPE_BACK, TRUE);
 
 	//カーソル
 	MenuY = MenuNo * 75;
@@ -116,6 +128,7 @@ void CrejitDips() {
 
 void CrejitMove() {
 	if (g_KeyFlg & PAD_INPUT_M || g_KeyFlg & PAD_INPUT_2) {
+		PlaySoundMem(g_sounds.Select, DX_PLAYTYPE_BACK, TRUE);
 		Fead.FeadCredit = 2;
 		Fead.InfoStg = 1;
 		g_Select.CursorFlg = 1;
