@@ -5,7 +5,7 @@
 #include "player.h"
 #include "Gimmick.h"
 #include "GameScene.h"
-
+#include "KeyControl.h"
 
 #include <math.h>
 
@@ -28,6 +28,11 @@ void ColossusMove() {//boss3
 
 	static int attck_count = 0;
 
+	DrawFormatString(500, 510, 0xFFFF00, "%d", search_count);
+	DrawFormatString(500, 530, 0xFFFF00, "%d", search_stop);
+	DrawFormatString(500, 550, 0xFFFF00, "%d", search_attack1);
+	DrawFormatString(500, 570, 0xFFFF00, "%d", attack1_Fall);
+	if (g_KeyFlg & PAD_INPUT_Z) g_player.py -= 300;
 
 	if (boss3_attack == 0 && (g_boss[2].hp > 0 || g_boss[3].hp > 0)) {
 		if (g_boss[2].hp > 0 && g_boss[3].hp > 0) {
@@ -99,6 +104,21 @@ void ColossusMove() {//boss3
 
 			if (search_attack1 == 1)  //振り下ろしモーション
 			{
+				boss_Hand();//bossのdamageFlg切り替え
+
+				//手の右判定
+				if (g_player.px + 64 > g_boss[Random].x + 54 && g_player.px + 64 < g_boss[Random].x + 330 && g_player.py + 64 >= g_boss[Random].y) {
+					g_player.px -= 4;
+				}
+				//手の左判定
+				if (g_player.px < g_boss[Random].x + 330 && g_player.px > g_boss[Random].x + 54 && g_player.py + 64 >= g_boss[Random].y) {
+					g_player.px += 4;
+				}
+				//手の上判定
+				if (g_player.py + 64 > g_boss[Random].y - 32 && g_player.px < g_boss[Random].x + 330 && g_player.px + 64 > g_boss[Random].x + 54) {
+					g_player.fallSpeed = 0;
+				}
+
 				if ((g_map.playStage[(int(g_boss[Random].y) / CHIPSIZE) + 1][int(g_boss[Random].x) / CHIPSIZE] == AIR ||
 					(g_map.playStage[(int(g_boss[Random].y) / CHIPSIZE) + 3][int(g_boss[Random].x) / CHIPSIZE]) == START) &&
 					g_boss[Random].damageFlg == false) {
@@ -225,6 +245,17 @@ void ColossusMove() {//boss3
 		}
 	}
 
+	//bossダメージ
+	if (g_boss[Random].damageFlg == true) {
+		attack1_Fall = 400;
+		g_boss[Random].anime += 1;
+		g_boss[Random].hp -= 1;
+		g_map.playStage[9][9] = D;//[破]を再設置
+		g_boss[Random].damageFlg = false;
+	}
+	if (g_boss[2].hp <= 0 && g_boss[3].hp <= 0) {
+		g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = 2;
+	}
 
 	if (g_map.playStage[int((g_player.py - 1) / CHIPSIZE) + 1][int((g_player.px - 4) / CHIPSIZE)] == g_boss[Random].x + 330) {
 		g_player.px -= 4 * g_player.move;

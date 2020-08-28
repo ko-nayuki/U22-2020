@@ -26,6 +26,7 @@ void bombMove();	//爆弾
 
 void cauldronMove();//大釜
 void bigboundMove();//横長ジャンプ台
+void boss_Hand();	//boss3の手
 
 enum {//ギミック
 	LIFT = 0,		//エレベーター

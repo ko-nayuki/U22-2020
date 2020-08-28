@@ -7,6 +7,7 @@
 #include "KeyControl.h"
 #include "Sounds.h"
 #include "enemy.h"
+#include "Boss.h"
 
 bool smokeFlg[GIMMICK_NUM] = { false };
 bool use_Flg = false;
@@ -136,7 +137,8 @@ void gimmickMove() {
 	bombMove();		//爆弾
 
 	cauldronMove();	//大釜
-	if (g_map.select == 8) bigboundMove(); //横長ジャンプ台
+	if (g_map.select == 8 || g_map.select == 11) bigboundMove();	//横長ジャンプ台
+	//if (g_map.select == 11) boss_Hand();	//boss3の手
 
 	if (g_map.playStage[int((g_player.py + 32) / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == BLOCK) {
 		if (g_player.py % CHIPSIZE != 0) g_player.py--;
@@ -839,6 +841,19 @@ void bigboundMove() {
 			g_player.fallSpeed = -JUMP_POWER;
 		}
 	}
+	if (g_map.select == 11) {
+		for (int i = 0; i < STAGE_HEIGHT; i++) {
+			for (int j = 0; j < STAGE_WIDTH; j++) {
+				if (g_map.gimmickData[i][j] == BOSS_G_2) {
+					g_map.gimmickData[i][j] = BOSS_G_3;
+				}
+			}
+		}
+		if (g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == BOSS_G_3) {
+			PlaySoundMem(g_sounds.Spring, DX_PLAYTYPE_BACK, TRUE);//ばね音
+			g_player.fallSpeed = -JUMP_POWER;
+		}
+	}
 	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE)] == BLOCK ||
 		g_map.playStage[int((g_player.py - 8) / CHIPSIZE)][int((g_player.px + 64) / CHIPSIZE)] == BLOCK ||
 		g_map.playStage[int(g_player.py / CHIPSIZE)][int(g_player.px / CHIPSIZE) + 1] == BLOCK ||
@@ -846,6 +861,31 @@ void bigboundMove() {
 
 		g_player.py = g_player.py + 1;
 		g_player.fallSpeed = 0;
+	}
+}
+void boss_Hand() {
+	//bossにダメージを与える処理
+
+	//boss3右手
+	if (g_player.py <= g_boss[2].y + 256 && g_player.py + 64 >= g_boss[2].y - 32 && g_player.px + 32 < g_boss[2].x + 330 && g_player.px + 32 > g_boss[2].x + 54) {
+		if (g_player.item[g_player.itemSelect] == K_HA && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)) {
+			use_Flg = true;
+			g_boss[2].damageFlg = true;
+		}
+		if (g_player.item[g_player.itemSelect] != K_NO) {
+			DrawGraph(g_player.px, g_player.py - 40, g_img.Button, TRUE);
+		}
+	}
+
+	//boss3左手
+	if (g_player.py <= g_boss[3].y + 256 && g_player.py + 64 >= g_boss[3].y - 32 && g_player.px + 32 < g_boss[3].x + 330 && g_player.px + 32 > g_boss[3].x + 54) {
+		if (g_player.item[g_player.itemSelect] == K_HA && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)) {
+			use_Flg = true;
+			g_boss[3].damageFlg = true;
+		}
+		if (g_player.item[g_player.itemSelect] != K_NO) {
+			DrawGraph(g_player.px, g_player.py - 40, g_img.Button, TRUE);
+		}
 	}
 }
 
@@ -954,7 +994,7 @@ void mistake() {
 				DrawGraph(g_player.px, g_player.py - 40, g_img.Button, TRUE);
 			}
 		}
-		//ジャンプ台
+		//横長ジャンプ台
 		if (g_map.gimmickData[int(g_player.py / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == BOSS_G_2) {
 			if (g_player.item[g_player.itemSelect] != K_NO) {
 				DrawGraph(g_player.px, g_player.py - 40, g_img.Button, TRUE);
