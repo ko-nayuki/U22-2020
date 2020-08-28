@@ -131,6 +131,7 @@ void CrejitMove() {
 		PlaySoundMem(g_sounds.Select, DX_PLAYTYPE_BACK, TRUE);
 		Fead.FeadCredit = 2;
 		Fead.InfoStg = 1;
+		Fead.EndFlg = 0;
 		g_Select.CursorFlg = 1;
 		FeadOut();
 	}
