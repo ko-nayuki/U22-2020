@@ -59,7 +59,7 @@ void bossInit() {
 	//É{ÉX3ÇÃèâä˙âª
 	g_boss[2].x = -3 * CHIPSIZE;
 	g_boss[2].y = 2 * CHIPSIZE;
-	g_boss[2].hp = 2;
+	g_boss[2].hp = 0;
 	g_boss[2].count = 0;
 	g_boss[2].damageFlg = false;
 	g_boss[2].attackFlg = false;

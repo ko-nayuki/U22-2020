@@ -33,18 +33,19 @@ void ColossusMove() {//boss3
 		if (g_boss[2].hp > 0 && g_boss[3].hp > 0) {
 			Random = GetRand(1);
 			Random += 2;
-			boss3_attack = GetRand(1);
+			boss3_attack = (GetRand(1) + 1);
+			//boss3_attack += 1;
 		}
 		else if (g_boss[2].hp > 0 && g_boss[3].hp == 0) {
 			Random = 2;
-			boss3_attack = GetRand(1);
-			boss3_attack += 1;
+			boss3_attack = (GetRand(1) + 1);
+			//boss3_attack += 1;
 		}
 		else
 		{
 			Random = 3;
-			boss3_attack = GetRand(1);
-			boss3_attack += 1;
+			boss3_attack = (GetRand(1) + 1);
+			//boss3_attack += 1;
 		}
 	}
 
@@ -105,12 +106,29 @@ void ColossusMove() {//boss3
 					if ((g_map.playStage[(int(g_boss[Random].y) / CHIPSIZE) + 3][int(g_boss[Random].x) / CHIPSIZE]) == AIR ||
 						(g_map.playStage[(int(g_boss[Random].y) / CHIPSIZE) + 3][int(g_boss[Random].x) / CHIPSIZE]) == START) {
 						g_boss[Random].y += CHIPSIZE;
+						if (g_player.px <= g_boss[Random].x + 330 &&
+							g_player.px + 64 >= g_boss[Random].x + 54 &&
+							g_player.py <= g_boss[Random].y + 256 &&
+							g_player.py + 64 >= g_boss[Random].y) {
+							if (g_boss[Random].damageFlg == false && g_player.muteki == 0) {
+								if (g_player.px + 34 < g_boss[Random].x + 256) {
+									g_player.px -= 3 * CHIPSIZE;
+									g_player.muteki = 1;
+									//g_player.life -= 1;
+								}
+								if (g_player.px + 34 > g_boss[Random].x + 256) {
+									g_player.px += 3 * CHIPSIZE;
+									g_player.muteki = 1;
+									//g_player.life -= 1;
+								}
+							}
+						}
 					}
 					attack1_Fall += 1;
 				}
 			}
 
-			if (attack1_Fall >= 40000) {  //˜r–ß‚é
+			if (attack1_Fall >= 400) {  //˜r–ß‚é
 				search_attack1 = 0;
 				search_count = 250;
 				if (g_boss[Random].y >= -192)
@@ -131,63 +149,88 @@ void ColossusMove() {//boss3
 					UpDown_s = 0;
 				}
 			}
-			if (g_player.px <= g_boss[Random].x + 256 &&
-				g_player.px + 64 >= g_boss[Random].x &&
-				g_player.py <= g_boss[Random].y + 384 &&
-				g_player.py + 64 >= g_boss[Random].y) {
-				if (g_boss[Random].damageFlg == false && g_player.muteki == 0) {
-					if (g_player.px + 34 < g_boss[Random].x + 256) {
-						g_player.px -= 3 * CHIPSIZE;
-						g_player.muteki = 1;
-						//g_player.life -= 1;
-					}
-					if (g_player.px + 34 > g_boss[Random].x + 256) {
-						g_player.px += 3 * CHIPSIZE;
-						g_player.muteki = 1;
-						//g_player.life -= 1;
-					}
-				}
-			}
 
-
-
-
-
-			if (g_boss[Random].attackFlg == true) {
-				if (boss3_attack == 2) {    //“ã‚¬•¥‚¢
-					if (attck_count == 0)
-					{
-						g_boss[Random].y = 7 * CHIPSIZE;
-						attck_count = 1;
-					}
-
-					if (Random == 2) {
-						g_boss[2].x += 6;
-						if (g_boss[2].x >= CHIPSIZE * 6 - 32) {
-							g_boss[2].y -= 7;
-						}
-					}
-
-
-					if (Random == 3) {
-						g_boss[3].x -= 6;
-						if (g_boss[3].x <= CHIPSIZE * 8 + 32) {
-							g_boss[3].y -= 7;
-						}
-					}
-
-					if (g_boss[Random].y <= -192) {    //‰Šú‰»
-						g_boss[2].x = -3 * CHIPSIZE;
-						g_boss[3].x = 17 * CHIPSIZE;
-						g_boss[Random].y = 2 * CHIPSIZE;
-						attck_count = 0;
-						g_boss[Random].count = 0;
-						g_boss[Random].attackFlg = false;
-						boss3_attack = 0;
-					}
-				}
-			}
 		}
 
 	}
+
+
+
+	if (g_boss[Random].attackFlg == true) {
+		if (boss3_attack == 2) {    //“ã‚¬•¥‚¢
+			if (attck_count == 0)
+			{
+				g_boss[Random].y = 7 * CHIPSIZE;
+				attck_count = 1;
+			}
+
+			if (Random == 2) {
+				g_boss[2].x += 6;
+				if (g_boss[2].x >= CHIPSIZE * 6 - 32) {
+					g_boss[2].y -= 7;
+				}
+				if (g_player.px <= g_boss[Random].x + 330 &&
+					g_player.px + 64 >= g_boss[Random].x + 54 &&
+					g_player.py <= g_boss[Random].y + 256 &&
+					g_player.py + 64 >= g_boss[Random].y) {
+					if (g_boss[Random].damageFlg == false && g_player.muteki == 0) {
+						if (g_player.px + 34 < g_boss[Random].x + 256) {
+							g_player.px -= 3 * CHIPSIZE;
+							g_player.muteki = 1;
+							//g_player.life -= 1;
+						}
+						if (g_player.px + 34 > g_boss[Random].x + 256) {
+							g_player.px += 3 * CHIPSIZE;
+							g_player.muteki = 1;
+							//g_player.life -= 1;
+						}
+					}
+				}
+			}
+
+
+			if (Random == 3) {
+				g_boss[3].x -= 6;
+				if (g_boss[3].x <= CHIPSIZE * 8 + 32) {
+					g_boss[3].y -= 7;
+				}
+				if (g_player.px <= g_boss[Random].x + 330 &&
+					g_player.px + 64 >= g_boss[Random].x + 54 &&
+					g_player.py <= g_boss[Random].y + 256 &&
+					g_player.py + 64 >= g_boss[Random].y) {
+					if (g_boss[Random].damageFlg == false && g_player.muteki == 0) {
+						if (g_player.px + 34 < g_boss[Random].x + 256) {
+							g_player.px -= 3 * CHIPSIZE;
+							g_player.muteki = 1;
+							//g_player.life -= 1;
+						}
+						if (g_player.px + 34 > g_boss[Random].x + 256) {
+							g_player.px += 3 * CHIPSIZE;
+							g_player.muteki = 1;
+							//g_player.life -= 1;
+						}
+					}
+				}
+			}
+
+			if (g_boss[Random].y <= -192) {    //‰Šú‰»
+				g_boss[2].x = -3 * CHIPSIZE;
+				g_boss[3].x = 17 * CHIPSIZE;
+				g_boss[Random].y = 2 * CHIPSIZE;
+				attck_count = 0;
+				g_boss[Random].count = 0;
+				g_boss[Random].attackFlg = false;
+				boss3_attack = 0;
+			}
+		}
+	}
+
+
+	if (g_map.playStage[int((g_player.py - 1) / CHIPSIZE) + 1][int((g_player.px - 4) / CHIPSIZE)] == g_boss[Random].x + 330) {
+		g_player.px -= 4 * g_player.move;
+	}
+
+
+
+
 }
