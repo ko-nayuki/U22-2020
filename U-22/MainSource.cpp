@@ -29,7 +29,6 @@
 *	グローバル変数の宣言
 ****************************/
 int g_gameScene = 0;
-mouse g_mouseInfo;								// マウスの状態管理
 Player g_player;								// プレイヤーの情報
 Gimmick g_gimmick[GIMMICK_NUM];					// ギミックの情報
 MAP g_map;										// マップの情報
@@ -87,13 +86,7 @@ int Main() {
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0 && !(g_KeyFlg & PAD_INPUT_START) && GetHitKeyStateAll(key) == 0 && g_gameScene != 99) {
 		// 画面のクリア
 		ClearDrawScreen();
-
-		//デバッグ？マウス取得
-		ControlInfo(&g_mouseInfo);
-
-		
-		//デバッグ前提座標
-		DrawFormatString(0, 20, 0xFFFFFF, "mouseX = %d \n mouseY = %d", g_mouseInfo.mouseX, g_mouseInfo.mouseY);
+	
 
 		// ゲームシーンの中を見て適当なゲーム画面を描画
 		GameScene(g_gameScene);
