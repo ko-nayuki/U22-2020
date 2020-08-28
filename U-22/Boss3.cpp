@@ -28,11 +28,11 @@ void ColossusMove() {//boss3
 
 	static int attck_count = 0;
 
-	DrawFormatString(500, 510, 0xFFFF00, "%d", search_count);
-	DrawFormatString(500, 530, 0xFFFF00, "%d", search_stop);
-	DrawFormatString(500, 550, 0xFFFF00, "%d", search_attack1);
-	DrawFormatString(500, 570, 0xFFFF00, "%d", attack1_Fall);
-	if (g_KeyFlg & PAD_INPUT_Z) g_player.py -= 300;
+	//DrawFormatString(500, 510, 0xFFFF00, "%d", search_count);
+	//DrawFormatString(500, 530, 0xFFFF00, "%d", search_stop);
+	//DrawFormatString(500, 550, 0xFFFF00, "%d", search_attack1);
+	//DrawFormatString(500, 570, 0xFFFF00, "%d", attack1_Fall);
+	//if (g_KeyFlg & PAD_INPUT_Z) g_player.py -= 300;
 
 	if (boss3_attack == 0 && (g_boss[2].hp > 0 || g_boss[3].hp > 0)) {
 		if (g_boss[2].hp > 0 && g_boss[3].hp > 0) {
@@ -254,7 +254,7 @@ void ColossusMove() {//boss3
 		g_boss[Random].damageFlg = false;
 	}
 	if (g_boss[2].hp <= 0 && g_boss[3].hp <= 0) {
-		g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = 2;
+		g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = 2;//ƒS[ƒ‹Ý’u
 	}
 
 	if (g_map.playStage[int((g_player.py - 1) / CHIPSIZE) + 1][int((g_player.px - 4) / CHIPSIZE)] == g_boss[Random].x + 330) {
