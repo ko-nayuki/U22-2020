@@ -30,9 +30,12 @@ int LoadPicture(){
 	if ((g_img.T_kanzi[3] = LoadGraph("images/title_end02.png")) == -1) return -1;
 	if ((g_img.T_kanzi[4] = LoadGraph("images/kyo.png")) == -1) return -1;
 	if ((g_img.T_kanzi[5] = LoadGraph("images/ryoku.png")) == -1) return -1;
-	//リトライで使う漢字
+	//リトライ・セレクトで使う漢字
 	if ((g_img.RetryButon = LoadGraph("images/Ybutton01.png")) == -1) return -1;
 	if ((g_img.RetryText = LoadGraph("images/retry.png")) == -1) return -1;
+	if ((g_img.ReturnButton = LoadGraph("images/Xbutton01.png")) == -1) return -1;
+	if ((g_img.ReturnText = LoadGraph("images/select (1).png")) == -1) return -1;
+
 	//クリア文字
 	if ((g_img.ClearText = LoadGraph("images/stageclear.png")) == -1) return -1;
 	if ((g_img.NextText = LoadGraph("images/next01.png")) == -1) return -1;

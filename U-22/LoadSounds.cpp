@@ -36,6 +36,14 @@ int LoadSounds(void)
 	if ((g_sounds.Fire = LoadSoundMem("sounds/syoka.mp3")) == -1) return -1;
 	//ワープ
 	if ((g_sounds.Warp= LoadSoundMem("sounds/warp.mp3")) == -1) return -1;
+	//クリアSE
+	if ((g_sounds.Clear_SE = LoadSoundMem("sounds/clear_se.mp3")) == -1) return -1;
+	//ダメージSE
+	if ((g_sounds.Damage = LoadSoundMem("sounds/damage.mp3")) == -1) return -1;
+	//オオカミ男のブレスSE
+	if ((g_sounds.Breath = LoadSoundMem("sounds/boss1_breath.mp3")) == -1) return -1;
+	//巨人の腕の衝撃
+	if ((g_sounds.Arm = LoadSoundMem("sounds/boss3_impact.mp3")) == -1) return -1;
 
 	/**************/
 	/* 音量の設定 */

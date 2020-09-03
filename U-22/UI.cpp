@@ -75,7 +75,8 @@ void retry_Button() {
 	static bool AnimeFlg = false;
 	static int control_time = 0;
 
-	DrawExtendGraph(1230 - Anime, 690, 1280 - Anime, 740, g_img.RetryButon, TRUE);
+	//リトライボタン
+	DrawExtendGraph(1230 - Anime, 650, 1280 - Anime, 700, g_img.RetryButon, TRUE);
 	if (AnimeFlg == true) {
 		if (Anime <= 0) AnimeFlg = false;
 		else Anime -= 2;
@@ -85,7 +86,7 @@ void retry_Button() {
 			if (Anime < 255) Anime++;
 		}
 	}
-	DrawGraph(1290 - Anime, 685, g_img.RetryText, FALSE);
+	DrawGraph(1290 - Anime, 640, g_img.RetryText, FALSE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
 	if ((g_NowKey & PAD_INPUT_LEFT || key[KEY_INPUT_LEFT] == 1) ||
@@ -100,6 +101,32 @@ void retry_Button() {
 		FeadOut();
 	}
 
+	//セレクトに戻るボタン
+	DrawExtendGraph(1230 - Anime, 710, 1280 - Anime, 760, g_img.ReturnButton, TRUE);
+	if (AnimeFlg == true) {
+		if (Anime <= 0) AnimeFlg = false;
+		else Anime -= 2;
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, Anime);
+	}
+	else {
+		if (control_time++ > 300) {
+			if (Anime < 255) Anime++;
+		}
+	}
+	DrawGraph(1290 - Anime, 705, g_img.ReturnText, FALSE);
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
+	if ((g_NowKey & PAD_INPUT_LEFT || key[KEY_INPUT_LEFT] == 1) ||
+		(g_NowKey & PAD_INPUT_RIGHT || key[KEY_INPUT_RIGHT] == 1)) {//playerが操作されたら
+		AnimeFlg = true;
+		control_time = 0;
+	}
+
+	if (/*g_KeyFlg & PAD_INPUT_2 ||*/ g_KeyFlg & PAD_INPUT_C) {//コントローラを基準にしています。デバッグ時はコメント化なりしてください。コントローラはX
+		Fead.InfoStg = 3;
+		Fead.OverFlg = 1;
+		FeadOut();
+	}
 }
 
 void item_Box() {

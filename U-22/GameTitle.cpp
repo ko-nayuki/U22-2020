@@ -17,6 +17,7 @@ void GameTitle() {
 
 	//‰æ–Ê•\Ž¦&“®‚«
 	if (Fead.FeadCredit == 0) {
+		Fead.EndFlg = 0;
 		TitleDisp();
 		TitleMove();
 		if (Fead.FeadFlg == 0) FeadIn();

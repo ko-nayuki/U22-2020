@@ -8,7 +8,7 @@ struct sounds {
 	int World2;		//ワールド３BGM
 	int World3;		//ワールド４BGM
 	int Boss;		//ボスBGM
-	int End;
+	int End;		//エンドBGM
 
 	int Select;		//決定SE
 	int SenTaku;	//アイテム選択SE
@@ -19,6 +19,11 @@ struct sounds {
 	int Fall;		//落下SE
 	int Fire;		//消火
 	int Warp;		//ワープ
+
+	int Damage;		//ダメージ
+	int Clear_SE;	//クリアSE
+	int Breath;		//オオカミ男の息
+	int Arm;		//巨人の腕
 };
 
 extern sounds g_sounds;

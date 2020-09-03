@@ -85,7 +85,7 @@ void FeadOut() {
 		StopSoundMem(g_sounds.Boss);
 		g_gameScene = GAME_CLEAR;
 	}
-	else if (Fead.InfoStg == 3) {
+	else if (Fead.InfoStg == 3 && Fead.OverFlg == 0) {
 		Fead.InfoStg = 3;
 		gimmickInit();
 		StageInit();
@@ -97,6 +97,10 @@ void FeadOut() {
 		g_player.itemNo = 0;
 		PlayerInit();
 		g_gameScene = GAME_PLAY;
+	}
+	else if (Fead.InfoStg == 3 && Fead.OverFlg == 1) {
+		g_gameScene = GAME_SELECT;
+		Fead.InfoStg = 2;
 	}
 	else if(Fead.InfoStg == 4 && Fead.ClearFlg == 0) {
 		if (g_map.select == 5 || g_map.select == 8 || g_map.select == 11) {

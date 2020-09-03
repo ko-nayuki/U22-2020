@@ -40,6 +40,8 @@ struct image {
 	int Curtain;		//セレクト画面の幕
 	int RetryButon;		//リトライボタン
 	int RetryText;		//リトライテキスト
+	int ReturnButton;	//セレクトに戻るためのボタン
+	int ReturnText;		//セレクトテキスト
 	int ClearText;		//クリア文字
 	int NextText;		//NEXT文字
 	int GameOver;		//オーバー文字
