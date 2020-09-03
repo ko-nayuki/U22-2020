@@ -23,7 +23,7 @@ struct sounds {
 	int Damage;		//ダメージ
 	int Clear_SE;	//クリアSE
 	int Breath;		//オオカミ男の息
-	int Arm;		//巨人の腕
+	int Arm;		//巨人の腕の衝撃
 };
 
 extern sounds g_sounds;
