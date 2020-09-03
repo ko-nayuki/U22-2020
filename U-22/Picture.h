@@ -37,6 +37,7 @@ struct image {
 	int stage4;
 	int SelectBook[3];
 
+	int Curtain;		//セレクト画面の幕
 	int RetryButon;		//リトライボタン
 	int RetryText;		//リトライテキスト
 	int ClearText;		//クリア文字

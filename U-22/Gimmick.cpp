@@ -781,7 +781,7 @@ void bombMove() {
 	if (g_gimmick[BOMB].ONFlg == true) {
 		//DrawGraph(g_gimmick[BOMB].x, g_gimmick[BOMB].y, g_img.bomb, TRUE);
 		DrawRotaGraph(g_gimmick[BOMB].x + 32, g_gimmick[BOMB].y + 32, 1 + ((50 - g_gimmick[BOMB].anime) * 0.01), 0, g_img.bomb, TRUE);//”š’e‚Ì•`‰æ
-		DrawFormatString(g_gimmick[BOMB].x, g_gimmick[BOMB].y + 20, 0x00ff00, "%f", g_gimmick[BOMB].anime);
+		//DrawFormatString(g_gimmick[BOMB].x, g_gimmick[BOMB].y + 20, 0x00ff00, "%f", g_gimmick[BOMB].anime);
 		g_gimmick[BOMB].anime;
 		if (g_gimmick[BOMB].anime-- < 0) {
 			PlaySoundMem(g_sounds.Break, DX_PLAYTYPE_BACK, TRUE);//”š”­‰¹

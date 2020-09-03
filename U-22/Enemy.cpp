@@ -58,9 +58,9 @@ void EnemyInit() {
 
 		if (g_map.select == 7) {
 
-			g_enemy[i].ex = CHIPSIZE * 15, g_enemy[i].ey = CHIPSIZE * 6;
+			g_enemy[i].ex = CHIPSIZE * 15, g_enemy[i].ey = CHIPSIZE * 5;
 
-			g_enemy3[i].ex3 = CHIPSIZE * 3, g_enemy3[i].ey3 = CHIPSIZE * 5;
+			g_enemy3[i].ex3 = CHIPSIZE * 3, g_enemy3[i].ey3 = CHIPSIZE * 4;
 
 			g_enemy4[i].ex4 = CHIPSIZE * 8, g_enemy4[i].ey4 = CHIPSIZE * 9;
 		}

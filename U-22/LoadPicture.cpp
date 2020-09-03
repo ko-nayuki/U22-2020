@@ -45,6 +45,8 @@ int LoadPicture(){
 	if ((g_img.Triger[0] = LoadGraph("images/Rbutton01.png")) == -1) return -1;	//R
 	if ((g_img.Triger[1] = LoadGraph("images/Lbutton01.png")) == -1) return -1;	//L
 
+	//ƒZƒŒƒNƒg‰æ–Ê‚Ì–‹
+	if ((g_img.Curtain = LoadGraph("images/Select.png")) == -1)return -1;
 
 	//“G
 	if ((g_img.Teki[1] = LoadGraph("images/Cone.png")) == -1)return -1;

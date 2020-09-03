@@ -21,11 +21,13 @@ void StageSelect() {
 
 void SelectDisp() {
 	BackStageDisp();
+	DrawExtendGraph(0, 0,1280,768, g_img.Curtain, TRUE);
+	DrawExtendGraph(220, 140, 1050, 280, g_img.Title, FALSE);
 	SelectMAPDisp();
 	SelectBook();
-	DrawFormatString(600, 300, 0x000000, "SPACE");
-	DrawFormatString(0, 650, 0x000000, "%d", g_map.select);
-	DrawFormatString(0, 670, 0x000000, "%d", g_Select.Key);
+	//DrawFormatString(600, 300, 0x000000, "SPACE");
+	//DrawFormatString(0, 650, 0x000000, "%d", g_map.select);
+	//DrawFormatString(0, 670, 0x000000, "%d", g_Select.Key);
 
 }
 void SelectMove() {
@@ -38,18 +40,18 @@ void SelectMove() {
 
 	//DrawBox(g_Select.stage3x, 0, g_Select.stage3x + 128, g_Select.stage1y, 0xFFFFFF, FALSE);
 
-	if (g_Select.stage1x < g_player.px + 64 && g_Select.stage1x + 128 > g_player.px) {
-		DrawString(0, 650, "ステージ１", 0x000000);
-	}
-	if (g_Select.stage2x < g_player.px + 64 && g_Select.stage2x + 128 > g_player.px) {
-		DrawString(0, 650, "ステージ２", 0x000000);
-	}
-	if (g_Select.stage3x < g_player.px + 64 && g_Select.stage3x + 128 > g_player.px) {
-		DrawString(0, 650, "ステージ３", 0x000000);
-	}
-	if (g_Select.stage4x < g_player.px + 64 && g_Select.stage4x + 128 > g_player.px) {
-		DrawString(0, 650, "ステージ4", 0x000000);
-	}
+	//if (g_Select.stage1x < g_player.px + 64 && g_Select.stage1x + 128 > g_player.px) {
+	//	DrawString(0, 650, "ステージ１", 0x000000);
+	//}
+	//if (g_Select.stage2x < g_player.px + 64 && g_Select.stage2x + 128 > g_player.px) {
+	//	DrawString(0, 650, "ステージ２", 0x000000);
+	//}
+	//if (g_Select.stage3x < g_player.px + 64 && g_Select.stage3x + 128 > g_player.px) {
+	//	DrawString(0, 650, "ステージ３", 0x000000);
+	//}
+	//if (g_Select.stage4x < g_player.px + 64 && g_Select.stage4x + 128 > g_player.px) {
+	//	DrawString(0, 650, "ステージ4", 0x000000);
+	//}
 
 	/*if (g_KeyFlg & PAD_INPUT_RIGHT) {
 		if (++g_map.select > STAGE - 1) g_map.select = 0;
@@ -110,7 +112,7 @@ void SelectMove() {
 			}
 			if ((g_Select.stage4x < g_player.px + 64 && g_Select.stage4x + 128 > g_player.px) && g_Select.Key >= 3) {
 				PlaySoundMem(g_sounds.Select, DX_PLAYTYPE_BACK, TRUE);
-				g_map.select = 9;
+				g_map.select = 10;
 				g_Select.Checkkey = 3;
 				Fead.InfoStg = 2;
 				FeadOut();

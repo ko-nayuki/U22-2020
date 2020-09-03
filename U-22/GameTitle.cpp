@@ -26,9 +26,6 @@ void GameTitle() {
 		CrejitMove();
 		if (Fead.FeadFlg == 0) FeadIn();
 	}
-
-
-	
 }
 
 void TitleDisp() {
@@ -117,11 +114,13 @@ void CrejitDips() {
 	DrawExtendGraph(896, 64, 1090, 256, g_img.T_kanzi[5], FALSE);
 
 	SetFontSize(64);
-	DrawString(320, 320, "BGM’ñ‹Ÿ", 0x000000);
-	DrawString(384, 384, "h–‚‰¤°h—l", 0x000000);
-	DrawString(320, 448, "SE’ñ‹Ÿ", 0x000000);
-	DrawString(384, 512, "h–‚‰¤°h—l", 0x000000);
-	DrawString(384, 576, "hOn-Jin`‰¹l`h—l", 0x000000);
+	DrawString(320, 300, "BGM’ñ‹Ÿ", 0x000000);
+	DrawString(384, 364, "h–‚‰¤°h—l", 0x000000);
+	DrawString(320, 428, "SE’ñ‹Ÿ", 0x000000);
+	DrawString(384, 492, "h–‚‰¤°h—l", 0x000000);
+	DrawString(384, 556, "hOn-Jin`‰¹l`h—l", 0x000000);
+	DrawString(320, 620, "ƒCƒ‰ƒXƒg’ñ‹Ÿ", 0x000000);
+	DrawString(384, 684, "hACƒCƒ‰ƒXƒgh—l", 0x000000);
 	SetFontSize(0);
 
 }
