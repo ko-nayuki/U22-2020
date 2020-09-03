@@ -312,6 +312,7 @@ void thiefMove() {//boss2
 			g_player.py < Bomb_Y[i] + 64 &&
 			g_player.py + 64 > Bomb_Y[i] - 64) {
 			if (Bomb_count[i] <= 0) {
+				PlaySoundMem(g_sounds.Damage, DX_PLAYTYPE_BACK, TRUE);
 				g_player.muteki = 1;
 				g_player.life -= 1;
 				g_player.py -= CHIPSIZE * 2;

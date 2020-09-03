@@ -98,7 +98,7 @@ void wolfMove() {// boss1
 
 	//•—
 	if (next_Action == 4 && g_boss[0].attackFlg == true) {
-
+		PlaySoundMem(g_sounds.Breath, DX_PLAYTYPE_BACK, TRUE);
 		g_boss[0].anime = 0;
 		if (g_player.px < g_boss[0].x) g_player.px -= (wind_time * 0.01) + (4.5 - float(g_boss[0].hp));
 
@@ -212,10 +212,12 @@ void wolfMove() {// boss1
 		g_player.py + 64 > g_boss[0].y + 20) {
 		if (g_boss[0].damageFlg == false&&g_player.muteki==0) {
 			if (g_player.px + 64 < g_boss[0].x + 44) {
+				PlaySoundMem(g_sounds.Damage, DX_PLAYTYPE_BACK, TRUE);
 				g_player.muteki = 1;
 				g_player.life -= 1;
 			}
 			else if (g_player.px > g_boss[0].x) {
+				PlaySoundMem(g_sounds.Damage, DX_PLAYTYPE_BACK, TRUE);
 				g_player.muteki = 1;
 				g_player.life -= 1;
 			}

@@ -112,7 +112,7 @@ void SelectMove() {
 			}
 			if ((g_Select.stage4x < g_player.px + 64 && g_Select.stage4x + 128 > g_player.px) && g_Select.Key >= 3) {
 				PlaySoundMem(g_sounds.Select, DX_PLAYTYPE_BACK, TRUE);
-				g_map.select = 10;
+				g_map.select = 9;
 				g_Select.Checkkey = 3;
 				Fead.InfoStg = 2;
 				FeadOut();

@@ -7,6 +7,7 @@
 #include "GameScene.h"
 #include "GameTitle.h"
 #include "yoshitaka.h"
+#include "Sounds.h"
 
 Enemy g_enemy[ENEMY_MAX];
 Enemy2 g_enemy2[ENEMY_MAX];
@@ -110,6 +111,7 @@ void EnemyMove() {
 		//“–‚½‚è”»’è
 		if (HitBoxPlayer(&g_player, &g_enemy[i]) == TRUE
 			&& g_player.dir == 0 && g_player.muteki == 0) {
+			PlaySoundMem(g_sounds.Damage, DX_PLAYTYPE_BACK, TRUE);
 			g_player.life -= 1;
 			g_player.muteki = 1;
 
@@ -169,12 +171,14 @@ void EnemyMove2() {
 		//“–‚½‚è”»’è
 		if (HitBoxPlayer2(&g_player, &g_enemy2[i]) == TRUE
 			&& g_player.dir == 0 && g_player.muteki == 0) {
+			PlaySoundMem(g_sounds.Damage, DX_PLAYTYPE_BACK, TRUE);
 			g_player.life -= 1;
 			g_player.muteki = 1;
 		}
 
 		if (HitBoxPlayer2(&g_player, &g_enemy2[i]) == TRUE
 			&& g_player.dir == 1 && g_player.muteki == 0) {
+			PlaySoundMem(g_sounds.Damage, DX_PLAYTYPE_BACK, TRUE);
 			g_player.life -= 1;
 			g_player.muteki = 1;
 
@@ -225,6 +229,7 @@ void EnemyMove3() {
 		if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
 			&& g_player.dir == 0 && g_player.item[g_player.itemSelect] != K_SHOU) {
 			if (g_player.muteki == 0) {
+				PlaySoundMem(g_sounds.Damage, DX_PLAYTYPE_BACK, TRUE);
 				g_player.life -= 1;
 				g_player.muteki = 1;
 			}
@@ -234,6 +239,7 @@ void EnemyMove3() {
 		if (HitBoxPlayer3(&g_player, &g_enemy3[i]) == TRUE
 			&& g_player.dir == 1 && g_player.item[g_player.itemSelect] != K_SHOU) {
 			if (g_player.muteki == 0) {
+				PlaySoundMem(g_sounds.Damage, DX_PLAYTYPE_BACK, TRUE);
 				g_player.life -= 1;
 				g_player.muteki = 1;
 			}
@@ -310,6 +316,7 @@ void EnemyMove4(){
 		//“–‚½‚è”»’è
 		if (HitBoxPlayer4(&g_player,&g_enemy4[i]) == TRUE
 			&& g_player.dir == 0 && g_player.muteki == 0) {
+			PlaySoundMem(g_sounds.Damage, DX_PLAYTYPE_BACK, TRUE);
 			g_player.life -= 1;
 			g_player.muteki = 1;
 
@@ -317,6 +324,7 @@ void EnemyMove4(){
 		
 		if (HitBoxPlayer4(&g_player,&g_enemy4[i]) == TRUE
 			&& g_player.dir == 1&& g_player.muteki == 0) {
+			PlaySoundMem(g_sounds.Damage, DX_PLAYTYPE_BACK, TRUE);
 			g_player.life -= 1;
 			g_player.muteki = 1;
 		

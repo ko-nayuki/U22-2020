@@ -10,6 +10,7 @@
 #include "Boss.h"
 #include "enemy.h"
 #include "UI.h"
+#include "Sounds.h"
 
 float ItemAnime = 0;
 
@@ -100,6 +101,7 @@ void PlayMove() {
 	item_Box();
 
 	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == 2) {
+		PlaySoundMem(g_sounds.Clear_SE, DX_PLAYTYPE_BACK, TRUE);
 		//if ((g_map.select / 3) - 1 != 0){
 		//g_map.select++;
 		EnemyInit();
