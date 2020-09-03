@@ -21,7 +21,7 @@ struct image {
 	int Teki[5];        //敵
 	int hp;             //player hp
 	int itemBox;
-	int wolf[7];		//boss1
+	int wolf[9];		//boss1
 	int thief[24];		//boss2
 	int Colossus[6];    //boss3
 	int fire[2];		//炎
@@ -32,10 +32,12 @@ struct image {
 	int bomb;
 	int Cauldron;		//大釜
 	int trampoline[2];	//トランポリン
+	int wind;
 
 	int stage3;
 	int stage4;
 	int SelectBook[3];
+	int BookAnime[8];
 
 	int Curtain;		//セレクト画面の幕
 	int RetryButon;		//リトライボタン

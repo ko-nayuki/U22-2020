@@ -82,7 +82,7 @@ void retry_Button() {
 		else Anime -= 2;
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, Anime);
 	} else {
-		if (control_time++ > 300) {
+		if (control_time++ > 400) {
 			if (Anime < 255) Anime++;
 		}
 	}
@@ -104,14 +104,9 @@ void retry_Button() {
 	//セレクトに戻るボタン
 	DrawExtendGraph(1230 - Anime, 710, 1280 - Anime, 760, g_img.ReturnButton, TRUE);
 	if (AnimeFlg == true) {
-		if (Anime <= 0) AnimeFlg = false;
-		else Anime -= 2;
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, Anime);
 	}
 	else {
-		if (control_time++ > 300) {
-			if (Anime < 255) Anime++;
-		}
 	}
 	DrawGraph(1290 - Anime, 705, g_img.ReturnText, FALSE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);

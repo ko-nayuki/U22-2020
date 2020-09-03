@@ -35,70 +35,71 @@ void thiefMove() {//boss2
 	//DrawFormatString(500, 510, 0xFFFF00, "%d", g_boss[1].hp); 
 	//DrawFormatString(500, 530, 0xFFFF00, "%d", g_player.life);
 
-	//player‚ª‚¢‚é•ûŒü‚Æ‚Í‹t•ûŒü‚Éƒ[ƒv
-	if (g_boss[1].x == 17 * CHIPSIZE + 32) DrawGraph(1 * CHIPSIZE + 32, g_boss[1].y + 21 - motion_y, g_img.thief[15], TRUE);
-	if (g_boss[1].x == 1 * CHIPSIZE + 32) DrawGraph(17 * CHIPSIZE + 32, g_boss[1].y + 21 - motion_y, g_img.thief[23], TRUE);
+	if (g_boss[1].hp > 0) {
+		//player‚ª‚¢‚é•ûŒü‚Æ‚Í‹t•ûŒü‚Éƒ[ƒv
+		if (g_boss[1].x == 17 * CHIPSIZE + 32) DrawGraph(1 * CHIPSIZE + 32, g_boss[1].y + 21 - motion_y, g_img.thief[15], TRUE);
+		if (g_boss[1].x == 1 * CHIPSIZE + 32) DrawGraph(17 * CHIPSIZE + 32, g_boss[1].y + 21 - motion_y, g_img.thief[23], TRUE);
 
-	if (g_player.px > 10 * CHIPSIZE + 32 && g_boss[1].x == 17 * CHIPSIZE + 32) {
-		if (warpFlg == false) {//player‚ª‰E‚ÉˆÚ“®
-			g_boss[1].anime = 16;
-			g_boss[1].count = 0;
-			g_boss[1].attackFlg = false;
-			warp_num = 0;
-			warpFlg = true;
+		if (g_player.px > 10 * CHIPSIZE + 32 && g_boss[1].x == 17 * CHIPSIZE + 32) {
+			if (warpFlg == false) {//player‚ª‰E‚ÉˆÚ“®
+				g_boss[1].anime = 16;
+				g_boss[1].count = 0;
+				g_boss[1].attackFlg = false;
+				warp_num = 0;
+				warpFlg = true;
+			}
 		}
-	}
-	else if (g_player.px < 8 * CHIPSIZE + 32 && g_boss[1].x == 1 * CHIPSIZE + 32) {
-		if (warpFlg == false) {//player‚ª¶‚ÉˆÚ“®
-			g_boss[1].anime = 8;
-			g_boss[1].count = 0;
-			g_boss[1].attackFlg = false;
-			warp_num = 0;
-			warpFlg = true;
+		else if (g_player.px < 8 * CHIPSIZE + 32 && g_boss[1].x == 1 * CHIPSIZE + 32) {
+			if (warpFlg == false) {//player‚ª¶‚ÉˆÚ“®
+				g_boss[1].anime = 8;
+				g_boss[1].count = 0;
+				g_boss[1].attackFlg = false;
+				warp_num = 0;
+				warpFlg = true;
+			}
 		}
-	}
 
-	if (warpFlg == true) {
-		if (warp_num == 0) {//ˆÚ“®ŠJŽn
-			PlaySoundMem(g_sounds.Warp, DX_PLAYTYPE_BACK, TRUE);//ˆÚ“®‰¹
-			if (motion_y < 85) {
-				motion_y++;
-				if (motion_y < 80) {
-					g_boss[1].anime += 0.1;
+		if (warpFlg == true) {
+			if (warp_num == 0) {//ˆÚ“®ŠJŽn
+				PlaySoundMem(g_sounds.Warp, DX_PLAYTYPE_BACK, TRUE);//ˆÚ“®‰¹
+				if (motion_y < 85) {
+					motion_y++;
+					if (motion_y < 80) {
+						g_boss[1].anime += 0.1;
+					}
+					else {
+						if (g_boss[1].x == 17 * CHIPSIZE + 32) {
+							g_boss[1].x = 1 * CHIPSIZE + 32;
+							g_boss[1].anime = 15;
+							warp_num = 1;
+						}
+						else if (g_boss[1].x == 1 * CHIPSIZE + 32) {
+							g_boss[1].x = 17 * CHIPSIZE + 32;
+							g_boss[1].anime = 23;
+							warp_num = 1;
+						}
+					}
+				}
+			}
+			else if (warp_num == 1) {//”½‘Î‘¤‚Ö
+				if (motion_y > 0) {
+					motion_y--;
+					if (motion_y <= 80 && motion_y > 10) {
+						g_boss[1].anime -= 0.1;
+					}
 				}
 				else {
-					if (g_boss[1].x == 17 * CHIPSIZE + 32) {
-						g_boss[1].x = 1 * CHIPSIZE + 32;
-						g_boss[1].anime = 15;
-						warp_num = 1;
-					}
-					else if (g_boss[1].x == 1 * CHIPSIZE + 32) {
-						g_boss[1].x = 17 * CHIPSIZE + 32;
-						g_boss[1].anime = 23;
-						warp_num = 1;
-					}
+					if (g_boss[1].x == 1 * CHIPSIZE + 32) g_boss[1].anime = 0;
+					if (g_boss[1].x == 17 * CHIPSIZE + 32) g_boss[1].anime = 4;
+					warp_num = 2;//ˆÚ“®Š®—¹
+					warpFlg = false;
 				}
-			}
-		}
-		else if (warp_num == 1) {//”½‘Î‘¤‚Ö
-			if (motion_y > 0) {
-				motion_y--;
-				if (motion_y <= 80 && motion_y > 10) {
-					g_boss[1].anime -= 0.1;
-				}
-			}
-			else {
-				if (g_boss[1].x == 1 * CHIPSIZE + 32) g_boss[1].anime = 0;
-				if (g_boss[1].x == 17 * CHIPSIZE + 32) g_boss[1].anime = 4;
-				warp_num = 2;//ˆÚ“®Š®—¹
-				warpFlg = false;
 			}
 		}
 	}
-
 	if (warpFlg == false && g_boss[1].attackFlg == false && g_boss[1].damageFlg == false) {//UŒ‚‘Ò‹@
 		//‚·‚×‚Ä‚Ì”š’e‚ª”š”­‚µ‚½‚çcountŠJŽn
-		if(Bomb_Flg[0] == false && Bomb_Flg[1] == false && Bomb_Flg[2] == false
+		if (Bomb_Flg[0] == false && Bomb_Flg[1] == false && Bomb_Flg[2] == false
 			&& Bomb_Flg2[0] == false && Bomb_Flg2[1] == false && Bomb_Flg2[2] == false) g_boss[1].count++;
 
 		if (g_boss[1].count > 50 * g_boss[1].hp) {
@@ -133,7 +134,8 @@ void thiefMove() {//boss2
 		if (Bomb_Y[0] <= 9 * CHIPSIZE) {//“Š‰º
 			DrawGraph(Bomb_X[0] + 32, Bomb_Y[0], g_img.kanzi[6], TRUE);//[”š]‚Ì•`‰æ
 			Bomb_Y[0] += Bomb_speed[0];
-		} else {
+		}
+		else {
 			if (g_map.gimmickData[(Bomb_Y[0] / CHIPSIZE) + 1][Bomb_X[0] / CHIPSIZE] == BOSS_G_3) {//’e—Í‚È‚ç’µ‚Ë•Ô‚·
 				g_boss[1].damageFlg = true;
 				Bomb_Flg2[0] = true;
@@ -145,7 +147,8 @@ void thiefMove() {//boss2
 					DrawRotaGraph(Bomb_X[0] + 64, Bomb_Y[0] + 32, 1 + ((50 - Bomb_count[0]) * 0.01), 0, g_img.bomb, TRUE);//”š’e‚Ì•`‰æ
 					g_map.gimmickData[(Bomb_Y[0] / CHIPSIZE) + 1][Bomb_X[0] / CHIPSIZE] = 0;
 					g_map.gimmickData[(Bomb_Y[0] / CHIPSIZE) + 1][(Bomb_X[0] / CHIPSIZE) + 1] = 0;
-				} else {//”š”j
+				}
+				else {//”š”j
 					DrawBox(Bomb_X[0] - 32, Bomb_Y[0] - 64, Bomb_X[0] + 160, Bomb_Y[0] + 64, 0xFF0000, true);//”š”­”ÍˆÍ
 					g_map.gimmickData[(Bomb_Y[0] / CHIPSIZE) + 1][Bomb_X[0] / CHIPSIZE] = BOSS_G_2;
 					g_map.gimmickData[(Bomb_Y[0] / CHIPSIZE) + 1][(Bomb_X[0] / CHIPSIZE) + 1] = BOSS_G_2;
@@ -279,11 +282,25 @@ void thiefMove() {//boss2
 	}
 
 	if (g_boss[1].hp <= 0) {//HP‚ª0‚É‚È‚Á‚½‚ç
+		if (g_boss[1].x == 17 * CHIPSIZE + 32) g_boss[1].anime = 15;
+		if (g_boss[1].x == 1 * CHIPSIZE + 32) g_boss[1].anime = 23;
 		//g_map.select++;
-		g_gameScene = GAME_CLEAR;
+		if (g_boss[1].y < 3 * CHIPSIZE + 85) g_boss[1].y++;
+		else {
+			if (motion_y++ > 200) {
+				motion_attack = 0;
+				motion_y = 0;
+				warp_num = 0;
+				g_gameScene = GAME_CLEAR;
+			}
+
+		}
 	}
 
 
+	static int sx = -64;
+	static int sy = -64;
+	static bool smokeFlg = false;
 	if (g_player.py == 9 * CHIPSIZE) {//player‚ª’n–Ê‚É’…’n‚µ‚½‚ç
 		if (g_boss[1].x == 1 * CHIPSIZE + 32) {
 			if (g_player.item[0] == K_NO && g_map.playStage[9][18] == 0 && g_map.playStage[9][1] == 0) {
@@ -300,8 +317,26 @@ void thiefMove() {//boss2
 			for (int j = 0; j < STAGE_WIDTH; j++) {
 				if (g_map.gimmickData[i][j] == BOSS_G_3) {
 					g_map.gimmickData[i][j] = BOSS_G_2;
+					sx = j * CHIPSIZE;
+					sy = i * CHIPSIZE;
+					smokeFlg = true;
 				}
 			}
+		}
+	}
+
+	if (smokeFlg == true) {
+		static float anime = 0;
+
+		DrawGraph(sx, sy, g_img.smoke[int(anime)], TRUE);
+		DrawGraph(sx - 64, sy, g_img.smoke[int(anime)], TRUE);
+
+		if (anime < 7.0F) anime += 0.2F;
+		else {
+			anime = 0;
+			sx = -64;
+			sy = -64;
+			smokeFlg = false;
 		}
 	}
 

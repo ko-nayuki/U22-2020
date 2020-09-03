@@ -13,6 +13,7 @@ void PlayerInit() {
 	g_player.dir = 0;
 	g_player.aaa = 0;
 	g_player.aab = 0;
+	g_player.result = 0;
 
 	for (int i = 0; i < ITEM_MAX; i++) {
 		g_player.item[i] = K_NO;

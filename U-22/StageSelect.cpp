@@ -129,25 +129,29 @@ void SelectBook() {
 	static bool text_Flg = true;//テキストをふわふわさせる
 	static float text_Y = 0.0;
 
-	static float animation =  0.0;//本のアニメーション
+	static float animation = 0.0;//本のアニメーション(チュートリアル)
+	static float animation2 = 0.0;//本のアニメーション
 
-	if (animation < 4.0) animation += 0.1F;
-	else animation = 0.0;
 
-	//g_Select.Key = 3;
+	//g_Select.Key = 4;
 
 	//W1
 	if (g_Select.stage1x < g_player.px + 64 && g_Select.stage1x + 128 > g_player.px) {
 		DrawGraph(3 * CHIPSIZE, 8 * CHIPSIZE, g_img.goal[int(animation)], TRUE);
+		if (animation < 4.0) animation += 0.1F;
+		else animation = 0.0;
 	}
 	else {
 		DrawGraph(3 * CHIPSIZE, 8 * CHIPSIZE, g_img.goal[0], TRUE);
+		if (animation2 < 7.0) animation2 += 0.1F;
+		else animation2 = 0.0;
 	}
 
 	//W2
 	if (g_Select.stage2x < g_player.px + 64 && g_Select.stage2x + 128 > g_player.px && g_Select.Key >= 1) {
 		//SetDrawBright(255, 255, 255);
-		DrawGraph(9 * CHIPSIZE, 8 * CHIPSIZE, g_img.goal[int(animation)], TRUE);
+		//DrawGraph(8 * CHIPSIZE, 8 * CHIPSIZE, g_img.BookAnime[int(animation2)], TRUE);
+		DrawExtendGraph(8 * CHIPSIZE + 48, 8 * CHIPSIZE, 12 * CHIPSIZE - 48, 10 * CHIPSIZE, g_img.BookAnime[int(animation2)], TRUE);
 		//SetDrawBright(255, 255, 255);
 	}
 	else {
@@ -157,7 +161,8 @@ void SelectBook() {
 	//W3
 	if (g_Select.stage3x < g_player.px + 64 && g_Select.stage3x + 128 > g_player.px && g_Select.Key >= 2) {
 		//SetDrawBright(255, 0, 0);
-		DrawGraph(12 * CHIPSIZE, 8 * CHIPSIZE, g_img.goal[int(animation)], TRUE);
+		//DrawGraph(11 * CHIPSIZE, 8 * CHIPSIZE, g_img.BookAnime[int(animation)], TRUE);
+		DrawExtendGraph(11 * CHIPSIZE + 48, 8 * CHIPSIZE, 15 * CHIPSIZE - 48, 10 * CHIPSIZE, g_img.BookAnime[int(animation2)], TRUE);
 		//SetDrawBright(255, 255, 255);
 	}
 	else {
@@ -167,7 +172,8 @@ void SelectBook() {
 	//W4
 	if (g_Select.stage4x < g_player.px + 64 && g_Select.stage4x + 128 > g_player.px && g_Select.Key >= 3) {
 		//SetDrawBright(255, 0, 0);
-		DrawGraph(15 * CHIPSIZE, 8 * CHIPSIZE, g_img.goal[int(animation)], TRUE);
+		//DrawGraph(14 * CHIPSIZE, 8 * CHIPSIZE, g_img.BookAnime[int(animation)], TRUE);
+		DrawExtendGraph(14 * CHIPSIZE + 48, 8 * CHIPSIZE, 18 * CHIPSIZE - 48, 10 * CHIPSIZE, g_img.BookAnime[int(animation2)], TRUE);
 		//SetDrawBright(255, 255, 255);
 	}
 	else {
@@ -187,7 +193,8 @@ void SelectBook() {
 	SetFontSize(24);
 	if (g_Select.Key != 0 && g_Select.Key <= 3) {
 		DrawString((6 + (3 * g_Select.Key)) * CHIPSIZE + 38, 480 + text_Y, "NEXT", 0x444444);
-	} else if(g_Select.Key == 0){
+	}
+	else if (g_Select.Key == 0) {
 		DrawString(3 * CHIPSIZE + 30, 480 + text_Y, "START", 0x444444);
 	}
 
