@@ -32,10 +32,10 @@ void ColossusMove() {//boss3
 	static int attck_start = 35;
 	static int attck_end = 0;
 
-	DrawFormatString(500, 510, 0xFFFF00, "%d", g_boss[Random].attackFlg);
-	DrawFormatString(500, 530, 0xFFFF00, "%d", g_boss[Random].count);
-	DrawFormatString(500, 550, 0xFFFF00, "%d", attck_start);
-	DrawFormatString(500, 570, 0xFFFF00, "%d", g_boss[2].x);
+	//DrawFormatString(500, 510, 0xFFFF00, "%d", g_boss[Random].attackFlg);
+	//DrawFormatString(500, 530, 0xFFFF00, "%d", g_boss[Random].count);
+	//DrawFormatString(500, 550, 0xFFFF00, "%d", attck_start);
+	//DrawFormatString(500, 570, 0xFFFF00, "%d", g_boss[2].x);
 	//if (g_KeyFlg & PAD_INPUT_Z) g_player.py -= 300;
 
 	if (boss3_attack == 0 && (g_boss[2].hp > 0 || g_boss[3].hp > 0)) {
