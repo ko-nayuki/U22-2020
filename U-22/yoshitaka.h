@@ -11,10 +11,6 @@
 //g_img.T_kanzi[2]・・・終
 //g_img.T_kanzi[3]・・・了
 
-//白くフェードアウト→加算合成(加算ブレンド) ( SetDrawBlendMode 引数→DX_BLENDMODE_ADD ) 画像にしか使用できない、内藤先生に聞く
-
-//音を実装する→バグ修正終わったら取り掛かる
-
 //void StageInit();
 //int StageObj(int Objimg);
 
@@ -24,6 +20,8 @@ struct StageInfo {
 	int stage2x = 576;
 	int stage3x = 768;
 	int stage4x = 960;
+
+	int PlayerStay;
 
 	int CursorFlg = 0;	//カーソルを元に戻す
 	int Key = 0;		//セレクト画面でステージをロックするフラグ

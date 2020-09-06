@@ -35,6 +35,7 @@ void SelectMove() {
 	//if (g_map.playStage[int(g_player.py /CHIPSIZE) + 1][int(g_player.px / CHIPSIZE)] != 1) {
 	//	g_player.py += 16;
 	//}
+	if (g_Select.PlayerStay == 1)g_player.px = 1* CHIPSIZE,g_player.py = 9*CHIPSIZE,g_Select.PlayerStay = 0;
 
 	PlayerMove();
 
