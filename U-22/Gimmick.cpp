@@ -785,7 +785,8 @@ void bombMove() {
 		g_gimmick[BOMB].anime;
 		if (g_gimmick[BOMB].anime-- < 0) {
 			PlaySoundMem(g_sounds.Break, DX_PLAYTYPE_BACK, TRUE);//”š”­‰¹
-			DrawBox(g_gimmick[BOMB].x - 64, g_gimmick[BOMB].y - 64, g_gimmick[BOMB].x + 128, g_gimmick[BOMB].y + 64, 0xFF0000, true);//”š”­”ÍˆÍ
+			//DrawBox(g_gimmick[BOMB].x - 64, g_gimmick[BOMB].y - 64, g_gimmick[BOMB].x + 128, g_gimmick[BOMB].y + 64, 0xFF0000, true);//”š”­”ÍˆÍ
+			DrawExtendGraph(g_gimmick[BOMB].x - 74, g_gimmick[BOMB].y - 64, g_gimmick[BOMB].x + 138, g_gimmick[BOMB].y + 64, g_img.BombEff, TRUE);
 			//g_map.playStage[g_gimmick[BOMB].y / CHIPSIZE][g_gimmick[BOMB].x / CHIPSIZE] = AIR;
 			g_gimmick[BOMB].anime = 50;
 			g_gimmick[BOMB].y = -CHIPSIZE;

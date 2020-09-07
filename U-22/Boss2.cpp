@@ -149,7 +149,8 @@ void thiefMove() {//boss2
 					g_map.gimmickData[(Bomb_Y[0] / CHIPSIZE) + 1][(Bomb_X[0] / CHIPSIZE) + 1] = 0;
 				}
 				else {//”š”j
-					DrawBox(Bomb_X[0] - 32, Bomb_Y[0] - 64, Bomb_X[0] + 160, Bomb_Y[0] + 64, 0xFF0000, true);//”š”­”ÍˆÍ
+					//DrawBox(Bomb_X[0] - 32, Bomb_Y[0] - 64, Bomb_X[0] + 160, Bomb_Y[0] + 64, 0xFF0000, true);//”š”­”ÍˆÍ
+					DrawExtendGraph(Bomb_X[0] - 32, Bomb_Y[0] - 64, Bomb_X[0] + 160, Bomb_Y[0] + 64, g_img.BombEff, TRUE);//”š”­”ÍˆÍ
 					g_map.gimmickData[(Bomb_Y[0] / CHIPSIZE) + 1][Bomb_X[0] / CHIPSIZE] = BOSS_G_2;
 					g_map.gimmickData[(Bomb_Y[0] / CHIPSIZE) + 1][(Bomb_X[0] / CHIPSIZE) + 1] = BOSS_G_2;
 					Bomb_Flg[0] = false;
@@ -180,7 +181,8 @@ void thiefMove() {//boss2
 					g_map.gimmickData[(Bomb_Y[1] / CHIPSIZE) + 1][(Bomb_X[1] / CHIPSIZE) + 1] = 0;
 				}
 				else {
-					DrawBox(Bomb_X[1] - 32, Bomb_Y[1] - 64, Bomb_X[1] + 160, Bomb_Y[1] + 64, 0xFF0000, true);//”š”­”ÍˆÍ
+					//DrawBox(Bomb_X[1] - 32, Bomb_Y[1] - 64, Bomb_X[1] + 160, Bomb_Y[1] + 64, 0xFF0000, true);//”š”­”ÍˆÍ
+					DrawExtendGraph(Bomb_X[1] - 32, Bomb_Y[1] - 64, Bomb_X[1] + 160, Bomb_Y[1] + 64, g_img.BombEff, TRUE);//”š”­”ÍˆÍ
 					g_map.gimmickData[(Bomb_Y[1] / CHIPSIZE) + 1][Bomb_X[1] / CHIPSIZE] = BOSS_G_2;
 					g_map.gimmickData[(Bomb_Y[1] / CHIPSIZE) + 1][(Bomb_X[1] / CHIPSIZE) + 1] = BOSS_G_2;
 					Bomb_Flg[1] = false;
@@ -211,7 +213,8 @@ void thiefMove() {//boss2
 					g_map.gimmickData[(Bomb_Y[2] / CHIPSIZE) + 1][(Bomb_X[2] / CHIPSIZE) + 1] = 0;
 				}
 				else {
-					DrawBox(Bomb_X[2] - 32, Bomb_Y[2] - 64, Bomb_X[2] + 160, Bomb_Y[2] + 64, 0xFF0000, true);//”š”­”ÍˆÍ
+					//DrawBox(Bomb_X[2] - 32, Bomb_Y[2] - 64, Bomb_X[2] + 160, Bomb_Y[2] + 64, 0xFF0000, true);//”š”­”ÍˆÍ
+					DrawExtendGraph(Bomb_X[2] - 32, Bomb_Y[2] - 64, Bomb_X[2] + 160, Bomb_Y[2] + 64, g_img.BombEff, TRUE);//”š”­”ÍˆÍ
 					g_map.gimmickData[(Bomb_Y[2] / CHIPSIZE) + 1][Bomb_X[2] / CHIPSIZE] = BOSS_G_2;
 					g_map.gimmickData[(Bomb_Y[2] / CHIPSIZE) + 1][(Bomb_X[2] / CHIPSIZE) + 1] = BOSS_G_2;
 					Bomb_Flg[2] = false;
@@ -251,7 +254,8 @@ void thiefMove() {//boss2
 				else {
 					if (g_boss[1].count == 0) {
 						PlaySoundMem(g_sounds.Break, DX_PLAYTYPE_BACK, TRUE);//”š”j‰¹
-						DrawBox(Bomb_X[bomb_num] - 32, Bomb_Y[bomb_num] - 64, Bomb_X[bomb_num] + 160, Bomb_Y[bomb_num] + 64, 0xFF0000, true);//”š”­”ÍˆÍ
+						//DrawBox(Bomb_X[bomb_num] - 32, Bomb_Y[bomb_num] - 64, Bomb_X[bomb_num] + 160, Bomb_Y[bomb_num] + 64, 0xFF0000, true);//”š”­”ÍˆÍ
+						DrawExtendGraph(Bomb_X[bomb_num] - 32, Bomb_Y[bomb_num] - 64, Bomb_X[bomb_num] + 160, Bomb_Y[bomb_num] + 64, g_img.BombEff, TRUE);//”š”­”ÍˆÍ
 						g_map.gimmickData[(Bomb_Y[bomb_num] / CHIPSIZE) + 1][Bomb_X[bomb_num] / CHIPSIZE] = BOSS_G_2;
 						g_map.gimmickData[(Bomb_Y[bomb_num] / CHIPSIZE) + 1][(Bomb_X[bomb_num] / CHIPSIZE) + 1] = BOSS_G_2;
 					}

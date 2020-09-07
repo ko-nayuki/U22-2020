@@ -34,6 +34,8 @@ struct image {
 	int trampoline[2];	//ƒgƒ‰ƒ“ƒ|ƒŠƒ“
 	int wind;
 
+	int BombEff;
+
 	int stage3;
 	int stage4;
 	int SelectBook[3];
