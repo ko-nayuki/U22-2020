@@ -99,6 +99,9 @@ void FeadOut() {
 		g_gameScene = GAME_PLAY;
 	}
 	else if (Fead.InfoStg == 3 && Fead.OverFlg == 1) {
+		StopSoundMem(g_sounds.World1);
+		StopSoundMem(g_sounds.World2);
+		StopSoundMem(g_sounds.World3);
 		g_gameScene = GAME_SELECT;
 		Fead.InfoStg = 2;
 	}
