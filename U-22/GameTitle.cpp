@@ -66,8 +66,6 @@ void TitleMove() {
 			Fead.InfoStg = 1;
 			Fead.FeadCredit = 0;
 			FeadOut();
-			if (CheckHitKey(KEY_INPUT_SPACE) == 1)
-				g_KeyFlg = 0;
 		}
 		DrawGraph(128, 512, g_img.T_kanzi[1], FALSE);
 	}

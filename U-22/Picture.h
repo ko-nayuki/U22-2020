@@ -36,6 +36,8 @@ struct image {
 
 	int BombEff;
 
+	int KanBan[1];		//�Ŕ摜
+
 	int stage3;
 	int stage4;
 	int SelectBook[3];

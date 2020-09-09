@@ -53,6 +53,10 @@ int LoadPicture(){
 	//爆弾エフェクト
 	if ((g_img.BombEff = LoadGraph("images/Bomb_eff.png")) == -1)return -1;
 
+	//看板画像
+	if ((g_img.KanBan[0] = LoadGraph("images/kanban.png")) == -1)return -1;
+	if ((g_img.KanBan[1] = LoadGraph("images/board.png")) == -1)return -1;
+
 
 	//敵
 	if ((g_img.Teki[1] = LoadGraph("images/Cone.png")) == -1)return -1;
