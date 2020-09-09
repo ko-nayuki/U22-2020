@@ -50,6 +50,9 @@ int LoadPicture(){
 
 	//セレクト画面の幕
 	if ((g_img.Curtain = LoadGraph("images/Select.png")) == -1)return -1;
+	//爆弾エフェクト
+	if ((g_img.BombEff = LoadGraph("images/Bomb_eff.png")) == -1)return -1;
+
 
 	//敵
 	if ((g_img.Teki[1] = LoadGraph("images/Cone.png")) == -1)return -1;
