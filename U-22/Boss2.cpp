@@ -291,7 +291,7 @@ void thiefMove() {//boss2
 		//g_map.select++;
 		if (g_boss[1].y < 3 * CHIPSIZE + 85) g_boss[1].y++;
 		else {
-			if (motion_y++ > 200) {
+			if (motion_y++ > 100) {
 				motion_attack = 0;
 				motion_y = 0;
 				warp_num = 0;

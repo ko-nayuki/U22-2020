@@ -79,6 +79,7 @@ void GameClearMove() {
 
 void GameComplete() {
 	DrawGraph(0, 0, g_img.End, FALSE);
+	g_Select.Key = 4;
 
 }
 

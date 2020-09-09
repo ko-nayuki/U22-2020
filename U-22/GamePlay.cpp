@@ -62,28 +62,30 @@ void PlayDisp() {
 }
 
 void PlayMove() {
-	if (g_map.select == 1 || g_map.select == 2 ){
-		EnemyMove();
-	}
-	if (g_map.select == 3 || g_map.select == 4 || g_map.select == 5) {
-		EnemyMove3();
-	}
-	if (g_map.select == 6) {
-		EnemyMove();
-		EnemyMove2();
-	}
-	if (g_map.select == 7) {
-		EnemyMove();
-		EnemyMove3();
-		EnemyMove4();
-	}
-	if (g_map.select == 9) {
-		EnemyMove3();
+	if (g_gimmick[BillBoard].moveFlg != true) {
+		if (g_map.select == 1 || g_map.select == 2) {
+			EnemyMove();
+		}
+		if (g_map.select == 3 || g_map.select == 4 || g_map.select == 5) {
+			EnemyMove3();
+		}
+		if (g_map.select == 6) {
+			EnemyMove();
+			EnemyMove2();
+		}
+		if (g_map.select == 7) {
+			EnemyMove();
+			EnemyMove3();
+			EnemyMove4();
+		}
+		if (g_map.select == 9) {
+			EnemyMove3();
+		}
 	}
 
-	bossMove();
-	gimmickMove();
-	if(g_gimmick->moveFlg != true && g_gimmick->moveFlg2 != true) PlayerMove();
+		bossMove();
+		gimmickMove();
+		if (g_gimmick[LIFT].moveFlg != true && g_gimmick[LIFT].moveFlg2 != true && g_gimmick[BillBoard].moveFlg != true) PlayerMove();
 
 	for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {//playerより手前のマップの描画

@@ -139,6 +139,7 @@ void gimmickMove() {
 	cauldronMove();	//大釜
 	if (g_map.select == 8 || g_map.select == 11) bigboundMove();	//横長ジャンプ台
 	//if (g_map.select == 11) boss_Hand();	//boss3の手
+	Bill_board(); //看板
 
 	if (g_map.playStage[int((g_player.py + 32) / CHIPSIZE) + 1][int((g_player.px + 32) / CHIPSIZE)] == BLOCK) {
 		if (g_player.py % CHIPSIZE != 0) g_player.py--;
@@ -890,6 +891,40 @@ void boss_Hand() {
 	}
 }
 
+void Bill_board() {
+	//看板
+	if (g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] == Board) {
+		if (g_gimmick[BillBoard].moveFlg == false){
+			DrawGraph(g_player.px, g_player.py - 40, g_img.Button, TRUE);
+		}
+
+		if ((key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2) && g_gimmick[BillBoard].moveFlg == false) {
+			g_gimmick[BillBoard].moveFlg = true;
+		}
+	}
+
+	if (g_gimmick[BillBoard].moveFlg == true) {
+		g_gimmick[BillBoard].anime++;
+		DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
+		DrawExtendGraph(2 * CHIPSIZE, 2 * CHIPSIZE, 17 * CHIPSIZE, 8 * CHIPSIZE, g_img.KanBan[1], TRUE);
+		if(g_gimmick[BillBoard].anime > 50)DrawGraph(16 * CHIPSIZE + 32, 7 * CHIPSIZE + 32, g_img.Button, TRUE);
+		if ((key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)
+			&& g_gimmick[BillBoard].moveFlg == true && g_gimmick[BillBoard].anime > 50) {
+			g_gimmick[BillBoard].moveFlg = false;
+			g_gimmick[BillBoard].anime = 0;
+		}
+
+		//テキスト文
+		SetFontSize(40);
+		if (g_map.select == 0) {// 1-1
+			DrawString(3 * CHIPSIZE + 32, 3 * CHIPSIZE, "test", 0x000000);
+		}
+
+
+		SetFontSize(16);
+	}
+}
+
 void mistake() {
 	if (/*key[KEY_INPUT_SPACE] == 1 ||*/ g_KeyFlg & PAD_INPUT_2) {
 		if (g_player.item[g_player.itemSelect] != K_NO) {
@@ -1001,6 +1036,7 @@ void mistake() {
 				DrawGraph(g_player.px, g_player.py - 40, g_img.Button, TRUE);
 			}
 		}
+
 	}
 }
 

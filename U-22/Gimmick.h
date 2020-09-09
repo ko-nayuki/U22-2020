@@ -28,6 +28,8 @@ void cauldronMove();//大釜
 void bigboundMove();//横長ジャンプ台
 void boss_Hand();	//boss3の手
 
+void Bill_board();	//看板
+
 enum {//ギミック
 	LIFT = 0,		//エレベーター
 	BOUND = 1,		//ジャンプ台
@@ -38,6 +40,7 @@ enum {//ギミック
 	WARP_B = 6,		//ワープB
 	WARP_C = 7,		//ワープC
 	BOMB = 8,		//爆弾
+	BillBoard = 9,	//看板
 };
 
 enum {//漢字

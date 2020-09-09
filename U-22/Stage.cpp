@@ -142,23 +142,34 @@ void StageDisp() {
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[4], TRUE);
 			}
 			else if (g_map.playStage[i][j] == GIM_601 && g_map.gimmickData[i][j] == AIR) {
+				SetDrawBright(0, 0, 255);
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.warp, TRUE);
+				SetDrawBright(255, 255, 255);
 			}
 			if (g_map.gimmickData[i][j] == GIM_602 && g_map.gimmickData[i][j] == GIM_602) {
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[4], TRUE);
 			}
 			else if (g_map.playStage[i][j] == GIM_602 && g_map.gimmickData[i][j] == AIR) {
+				SetDrawBright(255, 0, 0);
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.warp, TRUE);
+				SetDrawBright(255, 255, 255);
 			}
 			if (g_map.gimmickData[i][j] == GIM_603 && g_map.gimmickData[i][j] == GIM_603) {
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.gimKanzi[4], TRUE);
 			}
 			else if (g_map.playStage[i][j] == GIM_603 && g_map.gimmickData[i][j] == AIR) {
+				SetDrawBright(0, 255, 0);
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.warp, TRUE);
+				SetDrawBright(255, 255, 255);
 			}
 
 			if (g_map.playStage[i][j] == BOSS_G_1 && g_map.playStage[i][j + 1] == BOSS_G_1) {
 				DrawGraph(j * CHIPSIZE, i * CHIPSIZE, g_img.Cauldron, TRUE);
+			}
+
+			if (g_map.playStage[i][j] == Board) {
+				DrawGraph(j * CHIPSIZE - 18, i * CHIPSIZE - 46, g_img.KanBan[0], TRUE);
+				//DrawExtendGraph(j * CHIPSIZE, i * CHIPSIZE, j * CHIPSIZE + 64, i * CHIPSIZE + 64, g_img.KanBan[0], TRUE);
 			}
 		}
 	}

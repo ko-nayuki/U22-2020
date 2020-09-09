@@ -36,12 +36,13 @@ struct image {
 
 	int BombEff;
 
-	int KanBan[1];		//看板画像
+	int KanBan[2];		//看板画像
 
 	int stage3;
 	int stage4;
 	int SelectBook[3];
-	int BookAnime[8];
+	int BookAnime[6];
+	int world_4book[6];
 
 	int Curtain;		//セレクト画面の幕
 	int RetryButon;		//リトライボタン
