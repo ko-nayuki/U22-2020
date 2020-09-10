@@ -24,7 +24,6 @@ void GamePlay() {
 
 void PlayDisp() {
 	BackStageDisp();
-	gimmickDisp();
 	StageDisp();
 
 	
@@ -83,9 +82,10 @@ void PlayMove() {
 		}
 	}
 
-		bossMove();
-		gimmickMove();
-		if (g_gimmick[LIFT].moveFlg != true && g_gimmick[LIFT].moveFlg2 != true && g_gimmick[BillBoard].moveFlg != true) PlayerMove();
+	bossMove();
+	gimmickDisp();
+	gimmickMove();
+	if (g_gimmick[LIFT].moveFlg != true && g_gimmick[LIFT].moveFlg2 != true && g_gimmick[BillBoard].moveFlg != true) PlayerMove();
 
 	for (int i = 0; i < STAGE_HEIGHT; i++) {
 		for (int j = 0; j < STAGE_WIDTH; j++) {//playerより手前のマップの描画

@@ -58,7 +58,7 @@ void bossInit() {
 	g_boss[1].attackFlg = false;
 
 	//É{ÉX3ÇÃì™ÇÃèâä˙âª
-	g_boss3head.x = 7 * CHIPSIZE;
+	g_boss3head.x = 6 * CHIPSIZE;
 	g_boss3head.y = 1 * CHIPSIZE;
 	g_boss3head.anime = 0;
 
@@ -66,7 +66,7 @@ void bossInit() {
 	g_boss[2].x = -3 * CHIPSIZE;
 	g_boss[2].y = 2 * CHIPSIZE;
 	g_boss[2].anime = 0;
-	g_boss[2].hp = 0;
+	g_boss[2].hp = 2;
 	g_boss[2].count = 0;
 	g_boss[2].damageFlg = false;
 	g_boss[2].attackFlg = false;
@@ -75,7 +75,7 @@ void bossInit() {
 	g_boss[3].x = 17 * CHIPSIZE;
 	g_boss[3].y = 2 * CHIPSIZE;
 	g_boss[3].anime = 3;
-	g_boss[3].hp = 1;
+	g_boss[3].hp = 2;
 	g_boss[3].count = 0;
 	g_boss[3].damageFlg = false;
 	g_boss[3].attackFlg = false;

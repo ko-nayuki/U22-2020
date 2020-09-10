@@ -869,9 +869,10 @@ void boss_Hand() {
 	//bossにダメージを与える処理
 
 	//boss3右手
-	if (g_player.py <= g_boss[2].y + 256 && g_player.py + 64 >= g_boss[2].y - 32 && g_player.px + 32 < g_boss[2].x + 330 && g_player.px + 32 > g_boss[2].x + 54) {
-		if (g_player.item[g_player.itemSelect] == K_HA && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)) {
+	if (g_boss[2].hp != 0 && g_player.py <= g_boss[2].y + 256 && g_player.py + 64 >= g_boss[2].y - 32 && g_player.px + 32 < g_boss[2].x + 330 && g_player.px + 32 > g_boss[2].x + 54) {
+		if (g_boss[2].hp != 0 && g_player.item[g_player.itemSelect] == K_HA && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)) {
 			use_Flg = true;
+			g_boss[2].hp -= 1;
 			g_boss[2].damageFlg = true;
 		}
 		if (g_player.item[g_player.itemSelect] != K_NO) {
@@ -880,9 +881,10 @@ void boss_Hand() {
 	}
 
 	//boss3左手
-	if (g_player.py <= g_boss[3].y + 256 && g_player.py + 64 >= g_boss[3].y - 32 && g_player.px + 32 < g_boss[3].x + 330 && g_player.px + 32 > g_boss[3].x + 54) {
-		if (g_player.item[g_player.itemSelect] == K_HA && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)) {
+	if (g_boss[3].hp != 0 && g_player.py <= g_boss[3].y + 256 && g_player.py + 64 >= g_boss[3].y - 32 && g_player.px + 32 < g_boss[3].x + 330 && g_player.px + 32 > g_boss[3].x + 54) {
+		if (g_boss[3].hp != 0 && g_player.item[g_player.itemSelect] == K_HA && (key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)) {
 			use_Flg = true;
+			g_boss[3].hp -= 1;
 			g_boss[3].damageFlg = true;
 		}
 		if (g_player.item[g_player.itemSelect] != K_NO) {

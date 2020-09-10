@@ -40,9 +40,9 @@ void ColossusMove() {//boss3
 	static int attck_end1 = true;
 	static int attck_end2 = true;
 
-	//DrawFormatString(500, 510, 0xFFFF00, "%d", g_boss[Random].attackFlg);
-	//DrawFormatString(500, 530, 0xFFFF00, "%d", g_boss[Random].count);
-	//DrawFormatString(500, 550, 0xFFFF00, "%d", attck_start);
+	DrawFormatString(500, 510, 0xFFFF00, "%d", head_Number);
+	DrawFormatString(500, 530, 0xFFFF00, "%d", g_boss[2].hp);
+	DrawFormatString(500, 550, 0xFFFF00, "%d", g_boss[3].hp);
 	//DrawFormatString(500, 570, 0xFFFF00, "%d", g_boss[2].x);
 	//if (g_KeyFlg & PAD_INPUT_Z) g_player.py -= 300;
 
@@ -87,8 +87,8 @@ void ColossusMove() {//boss3
 		if (g_boss[2].hp > 0 && g_boss[3].hp > 0) {
 			Random = GetRand(1);
 			Random += 2;
-			boss3_attack = (GetRand(1) + 1);
-			//boss3_attack += 1;
+			boss3_attack = GetRand(1);
+			boss3_attack += 1;
 		}
 		else if (g_boss[2].hp > 0 && g_boss[3].hp == 0) {
 			Random = 2;
@@ -214,7 +214,7 @@ void ColossusMove() {//boss3
 			if (attack1_Fall >= 400) {  //˜r–ß‚é
 				search_attack1 = 0;
 				search_count = 250;
-				if (attck_end2 == true && g_boss[Random].y >= -192) {
+				if (g_boss[Random].hp != 0 && attck_end2 == true && g_boss[Random].y >= -192) {
 					g_boss[Random].y -= 10;
 				}
 
@@ -232,14 +232,14 @@ void ColossusMove() {//boss3
 					attck_end1 = false;
 				}
 
-				if (attck_end1 == false) {
+				if (g_boss[Random].hp == 0 || attck_end1 == false) {
 					if (g_boss[3].x > 17 * CHIPSIZE) {
 						g_boss[3].x -= 5;
 					}
 					if (g_boss[2].x < -3 * CHIPSIZE) {
 						g_boss[2].x += 5;
 					}
-					if ((Random == 2 && g_boss[2].x >= -3 * CHIPSIZE) || (Random == 3 && g_boss[3].x <= 17 * CHIPSIZE)) {
+					if (g_boss[Random].hp == 0 || (Random == 2 && g_boss[2].x >= -3 * CHIPSIZE) || (Random == 3 && g_boss[3].x <= 17 * CHIPSIZE)) {
 						search_stop = 100;
 						boss3_attack = 0;
 						search_LR = 1;
@@ -372,18 +372,16 @@ void ColossusMove() {//boss3
 			g_boss3head.anime = 1;
 			attack1_Fall = 400;
 			g_boss[Random].anime += 1;
-			g_boss[Random].hp -= 1;
-			g_map.playStage[9][9] = D;//[”j]‚ðÄÝ’u
+		
+			g_map.playStage[9][18] = D;//[”j]‚ðÄÝ’u
 			g_boss[Random].damageFlg = false;
 		}
 		if (g_boss3head.anime == 1)
 		{
-			if (head_Number >= 50) {
+				head_Number += 1;
+			if (head_Number >= 40) {
 				head_Number = 0;
 				g_boss3head.anime = 0;
-			}
-			else {
-				head_Number += 1;
 			}
 		}
 		if (g_boss[2].hp <= 0 && g_boss[3].hp <= 0) {
@@ -391,7 +389,15 @@ void ColossusMove() {//boss3
 			if ((g_map.playStage[(int(g_boss3head.y) / CHIPSIZE) + 3][int(g_boss3head.x) / CHIPSIZE]) == AIR ||
 				(g_map.playStage[(int(g_boss3head.y) / CHIPSIZE) + 3][int(g_boss3head.x) / CHIPSIZE]) == START) {
 				g_boss3head.y += CHIPSIZE / 2;
-				g_map.playStage[int(g_boss3head.y / CHIPSIZE)][int((g_boss3head.x + 224) / CHIPSIZE)] = 2;//ƒS[ƒ‹Ý’u
+				g_map.playStage[10][9] = 1;
+				g_map.playStage[10][10] = 1;
+				g_map.playStage[9][18] = 0;
+				g_map.gimmickData[10][9] = 0;
+				g_map.gimmickData[10][10] = 0;
+				g_map.playStage[9][9] = 2;
+				g_map.playStage[9][10] = 2;
+				g_map.playStage[8][9] = 2;
+				g_map.playStage[8][10] = 2;
 			}
 		}
 
