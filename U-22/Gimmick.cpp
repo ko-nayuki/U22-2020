@@ -905,9 +905,9 @@ void Bill_board() {
 
 	if (g_gimmick[BillBoard].moveFlg == true) {
 		g_gimmick[BillBoard].anime++;
-		DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
-		DrawExtendGraph(2 * CHIPSIZE, 2 * CHIPSIZE, 17 * CHIPSIZE, 8 * CHIPSIZE, g_img.KanBan[1], TRUE);
-		if(g_gimmick[BillBoard].anime > 50)DrawGraph(16 * CHIPSIZE + 32, 7 * CHIPSIZE + 32, g_img.Button, TRUE);
+		//DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
+		DrawExtendGraph(3 * CHIPSIZE, 2 * CHIPSIZE, 16 * CHIPSIZE, 11 * CHIPSIZE, g_img.KanBan[1], FALSE);
+		if(g_gimmick[BillBoard].anime > 50)DrawGraph(15 * CHIPSIZE + 32, 10 * CHIPSIZE + 32, g_img.Button, TRUE);
 		if ((key[KEY_INPUT_SPACE] == 1 || g_KeyFlg & PAD_INPUT_2)
 			&& g_gimmick[BillBoard].moveFlg == true && g_gimmick[BillBoard].anime > 50) {
 			g_gimmick[BillBoard].moveFlg = false;
@@ -915,9 +915,48 @@ void Bill_board() {
 		}
 
 		//テキスト文
-		SetFontSize(40);
-		if (g_map.select == 0) {// 1-1
-			DrawString(3 * CHIPSIZE + 32, 3 * CHIPSIZE, "test", 0x000000);
+		SetFontSize(64);
+		if (g_map.select == 0) {
+			SetFontSize(64);
+			DrawString(5 * CHIPSIZE, 3 * CHIPSIZE, "漢字を組み合わせて", 0x000000);
+			DrawString(4 * CHIPSIZE, 4 * CHIPSIZE, "ギミックを完成させよう", 0x000000);
+			DrawGraph(5 * CHIPSIZE, 7 * CHIPSIZE, g_img.kanzi[0], FALSE);
+			DrawGraph(4 * CHIPSIZE, 7 * CHIPSIZE, g_img.gh[0], TRUE);
+			DrawGraph(12 * CHIPSIZE, 7 * CHIPSIZE, g_img.gimKanzi[0], FALSE);
+			DrawGraph(13 * CHIPSIZE, 7 * CHIPSIZE, g_img.gh[3], TRUE);
+			DrawString(4 * CHIPSIZE, 8 * CHIPSIZE, "上をとって", 0x000000);
+			DrawString(11 * CHIPSIZE, 8 * CHIPSIZE, "「上昇」", 0x000000);
+			DrawString(11 * CHIPSIZE, 9 * CHIPSIZE, "を作ろう", 0x000000);
+			SetFontSize(0);
+		}
+		if (g_map.select == 1) {
+			SetFontSize(64);
+			DrawString(4 * CHIPSIZE, 3 * CHIPSIZE, "とれるのは〇枠の漢字", 0x000000);
+			DrawString(5 * CHIPSIZE, 4 * CHIPSIZE, "□枠はとれないよ", 0x000000);
+			DrawGraph(5 * CHIPSIZE, 5 * CHIPSIZE, g_img.kanzi[0], FALSE);
+			DrawGraph(4 * CHIPSIZE, 5 * CHIPSIZE, g_img.gh[0], TRUE);
+			DrawGraph(12 * CHIPSIZE, 5 * CHIPSIZE, g_img.gimKanzi[0], FALSE);
+			DrawGraph(13 * CHIPSIZE, 5 * CHIPSIZE, g_img.gh[3], TRUE);
+			DrawString(4 * CHIPSIZE, 6 * CHIPSIZE, "とれる", 0x000000);
+			DrawString(11 * CHIPSIZE, 6 * CHIPSIZE, "とれない", 0x000000);
+			DrawString(5 * CHIPSIZE, 8 * CHIPSIZE, "ただし例外もある", 0x000000);
+			DrawGraph(7 * CHIPSIZE, 9 * CHIPSIZE, g_img.kanzi[6], TRUE);
+			DrawString(8 * CHIPSIZE, 9 * CHIPSIZE, "とれない", 0x000000);
+			SetFontSize(0);
+		}
+		if (g_map.select == 3) {
+			SetFontSize(64);
+			DrawString(4 * CHIPSIZE, 3 * CHIPSIZE, "敵は漢字を", 0x000000);
+			DrawString(8 * CHIPSIZE, 4 * CHIPSIZE, "組み合わせたり", 0x000000);
+			DrawString(4 * CHIPSIZE, 5 * CHIPSIZE, "持ったままぶつかる", 0x000000);
+			DrawString(8 * CHIPSIZE, 6 * CHIPSIZE, "ことで倒せるよ", 0x000000);
+			DrawGraph(5 * CHIPSIZE, 7 * CHIPSIZE, g_img.kanzi[4], FALSE);
+			DrawGraph(5 * CHIPSIZE, 8 * CHIPSIZE, g_img.gh[1], TRUE);
+			DrawGraph(6 * CHIPSIZE, 7 * CHIPSIZE, g_img.Teki[3], TRUE);
+			DrawGraph(12 * CHIPSIZE, 7 * CHIPSIZE, g_img.kanzi[4], FALSE);
+			DrawGraph(12 * CHIPSIZE, 8 * CHIPSIZE, g_img.gh[1], TRUE);
+			DrawString(7 * CHIPSIZE, 9 * CHIPSIZE, "例：「消毒」", 0x000000);
+			SetFontSize(0);
 		}
 
 
