@@ -91,10 +91,6 @@ void FeadOut() {
 		StageInit();
 		EnemyInit();
 		bossInit();
-		for (int i = 0; i < ITEM_MAX; i++) {
-			g_player.item[i] = K_NO;
-		}
-		g_player.itemNo = 0;
 		PlayerInit();
 		g_gameScene = GAME_PLAY;
 	}
@@ -139,10 +135,6 @@ void FeadOut() {
 		StageInit();
 		EnemyInit();
 		bossInit();
-		for (int i = 0; i < ITEM_MAX; i++) {
-			g_player.item[i] = K_NO;
-		}
-		g_player.itemNo = 0;
 		PlayerInit();
 		g_gameScene = GAME_PLAY;
 	}
@@ -173,7 +165,7 @@ void FeadIn() {
 		if (Fead.InfoStg == 1) {
 			BackStageDisp();
 			TitleMAPDisp();
-			PlayerMove();
+			DrawGraph(g_player.px, g_player.py, g_img.gh[0], TRUE);
 		}
 		//セレクトステージ描画
 		if (Fead.InfoStg == 2) {

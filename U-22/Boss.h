@@ -5,6 +5,10 @@ void bossMove();
 void bossDisp();
 void bossInit();
 
+void boss1_Init();
+void boss2_Init();
+void boss3_Init();
+
 void wolfMove();
 void thiefMove();
 void ColossusMove();

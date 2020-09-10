@@ -96,6 +96,7 @@ int LoadPicture(){
 
 	if ((g_img.stage3 = LoadGraph("images/Stage3.png")) == -1) return -1;
 	if ((g_img.stage4 = LoadGraph("images/Stage4.png")) == -1) return -1;
+	if ((g_img.boss3_back = LoadGraph("images/BossField3.png")) == -1) return -1;
 	if ((g_img.wind = LoadGraph("images/TKaze.png")) == -1) return -1;
 	return 0;
 }

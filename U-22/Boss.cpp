@@ -40,6 +40,7 @@ void bossMove() {
 
 void bossInit() {
 	//ボス1の初期化
+	boss1_Init();
 	g_boss[0].x = 15 * CHIPSIZE + 32;
 	g_boss[0].y = 6 * CHIPSIZE;
 	g_boss[0].anime = 6;
@@ -49,6 +50,7 @@ void bossInit() {
 	g_boss[0].attackFlg = false;
 
 	//ボス2の初期化
+	boss2_Init();
 	g_boss[1].x = 1 * CHIPSIZE + 32;
 	g_boss[1].y = 3 * CHIPSIZE;
 	g_boss[1].anime = 4;
@@ -58,6 +60,7 @@ void bossInit() {
 	g_boss[1].attackFlg = false;
 
 	//ボス3の頭の初期化
+	boss3_Init();
 	g_boss3head.x = 6 * CHIPSIZE;
 	g_boss3head.y = 1 * CHIPSIZE;
 	g_boss3head.anime = 0;

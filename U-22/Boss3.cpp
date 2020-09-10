@@ -10,39 +10,40 @@
 
 #include <math.h>
 
+int boss3_attack = 0; //攻撃
+int Random = 0;
+
+int head_Number = 0;     //ボスの顔
+int UpDown_head = true;  //true:上下 false:上下しない
+int UpDown_head_s = 0;
+int UpDown_head_s2 = 0;
+int UpDown_head_count = 50;
+int UpDown_head_count2 = 0;
+
+int UpDown_flg = 1;  // 0:上下しない 1:ずっと上下する
+int UpDown_s = 0;
+int UpDown_count = 0;
+
+int search_LR = 1;  //0:オフ 1:オン
+int search_count = 250;
+int search_stop = 100;
+int search_attack1 = 0;//0:オフ 1:オン
+
+int attack1_Fall = 0;
+
+int attck_count = 0;
+
+int attck_start = 35;
+int attck_end1 = true;
+int attck_end2 = true;
+
 void ColossusMove() {//boss3
 	//0~2 左側の手  3~5 右側の手
 
-	static int boss3_attack = 0; //攻撃
-	static int Random = 0;
 
-	static int head_Number = 0;     //ボスの顔
-	static int UpDown_head = true;  //true:上下 false:上下しない
-	static int UpDown_head_s = 0;
-	static int UpDown_head_s2 = 0;
-	static int UpDown_head_count = 50;
-	static int UpDown_head_count2 = 0;
-
-	static int UpDown_flg = 1;  // 0:上下しない 1:ずっと上下する
-	static int UpDown_s = 0;
-	static int UpDown_count = 0;
-
-	static int search_LR = 1;  //0:オフ 1:オン
-	static int search_count = 250;
-	static int search_stop = 100;
-	static int search_attack1 = 0;//0:オフ 1:オン
-
-	static int attack1_Fall = 0;
-
-	static int attck_count = 0;
-
-	static int attck_start = 35;
-	static int attck_end1 = true;
-	static int attck_end2 = true;
-
-	DrawFormatString(500, 510, 0xFFFF00, "%d", head_Number);
-	DrawFormatString(500, 530, 0xFFFF00, "%d", g_boss[2].hp);
-	DrawFormatString(500, 550, 0xFFFF00, "%d", g_boss[3].hp);
+	//DrawFormatString(500, 510, 0xFFFF00, "%d", head_Number);
+	//DrawFormatString(500, 530, 0xFFFF00, "%d", g_boss[2].hp);
+	//DrawFormatString(500, 550, 0xFFFF00, "%d", g_boss[3].hp);
 	//DrawFormatString(500, 570, 0xFFFF00, "%d", g_boss[2].x);
 	//if (g_KeyFlg & PAD_INPUT_Z) g_player.py -= 300;
 
@@ -405,4 +406,34 @@ void ColossusMove() {//boss3
 			g_player.px -= 4 * g_player.move;
 		}
 	}
+}
+
+void boss3_Init() {
+
+	boss3_attack = 0; //攻撃
+	Random = 0;
+
+	head_Number = 0;     //ボスの顔
+	UpDown_head = true;  //true:上下 false:上下しない
+	UpDown_head_s = 0;
+	UpDown_head_s2 = 0;
+	UpDown_head_count = 50;
+	UpDown_head_count2 = 0;
+
+	UpDown_flg = 1;  // 0:上下しない 1:ずっと上下する
+	UpDown_s = 0;
+	UpDown_count = 0;
+
+	search_LR = 1;  //0:オフ 1:オン
+	search_count = 250;
+	search_stop = 100;
+	search_attack1 = 0;//0:オフ 1:オン
+
+	attack1_Fall = 0;
+
+	attck_count = 0;
+
+	attck_start = 35;
+	attck_end1 = true;
+	attck_end2 = true;
 }

@@ -241,11 +241,14 @@ void BackStageDisp() {
 			DrawBox(0, 0, 1280, 768, 0x000000, TRUE);
 			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		}
-		if (g_map.select >= 9 && g_map.select <= 11) {
+		if (g_map.select >= 9 && g_map.select <= 10) {
 			DrawGraph(0, 0, g_img.stage4, FALSE);
 			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 50);
 			DrawBox(0, 0, 1280, 768, 0x000000, TRUE);
 			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		}
+		if (g_map.select == 11) {
+			DrawGraph(0, 0, g_img.boss3_back, FALSE);
 		}
 	}
 }

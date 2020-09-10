@@ -67,6 +67,9 @@ int LoadSounds(void)
 	ChangeVolumeSoundMem(255 * 50 / 100, g_sounds.Select);
 	//アイテム選択SE
 	ChangeVolumeSoundMem(255 * 50 / 100, g_sounds.SenTaku);
+	//クリアSE
+	ChangeVolumeSoundMem(255 * 50 / 100, g_sounds.Clear_SE);
+
 	//エレベータSE
 	ChangeVolumeSoundMem(255 * 50 / 100, g_sounds.Eleverter);
 	//バネSE

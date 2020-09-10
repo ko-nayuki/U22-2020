@@ -10,15 +10,16 @@
 
 #include <math.h>
 
+int next_Action = 0;					// 1~3:ジャンプ  4:風
+int jump_x = 10 * CHIPSIZE + 32;		//ジャンプの着地地点
+int jump_num = 0;					//0:前進 1:後退 2:その場
+float fallSpeed = 0.0;
+int wind_time = 200;					//風の時間
+bool windFlg = false;
+bool jumpFlg = false;
+int gimmick_time = 100;				//落下ギミックが元に戻る時間
+
 void wolfMove() {// boss1
-	static int next_Action = 0;					// 1~3:ジャンプ  4:風
-	static int jump_x = 10 * CHIPSIZE + 32;		//ジャンプの着地地点
-	static int jump_num = 0;					//0:前進 1:後退 2:その場
-	static float fallSpeed = 0.0;
-	static int wind_time = 200;					//風の時間
-	static bool windFlg = false;
-	static bool jumpFlg = false;
-	static int gimmick_time = 100;				//落下ギミックが元に戻る時間
 
 	//DrawFormatString(500, 450, 0x00FFFF, "%d", jump_x);
 	//DrawFormatString(500, 420, 0x00FFFF, "%d", next_Action);
@@ -258,4 +259,16 @@ void wolfMove() {// boss1
 	//	g_gameScene = GAME_OVER;
 	//}
 
+}
+
+void boss1_Init() {
+
+	next_Action = 0;					// 1~3:ジャンプ  4:風
+	jump_x = 10 * CHIPSIZE + 32;		//ジャンプの着地地点
+	jump_num = 0;					//0:前進 1:後退 2:その場
+	fallSpeed = 0.0;
+	wind_time = 200;					//風の時間
+	windFlg = false;
+	jumpFlg = false;
+	gimmick_time = 100;				//落下ギミックが元に戻る時間
 }

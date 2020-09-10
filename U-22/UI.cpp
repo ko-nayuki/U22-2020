@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "UI.h"
 #include "player.h"
+#include "Boss.h"
 #include "Map.h"
 #include "Picture.h"
 #include "KeyControl.h"
@@ -120,6 +121,10 @@ void retry_Button() {
 	if (/*g_KeyFlg & PAD_INPUT_2 ||*/ g_KeyFlg & PAD_INPUT_C) {//コントローラを基準にしています。デバッグ時はコメント化なりしてください。コントローラはX
 		Fead.InfoStg = 3;
 		Fead.OverFlg = 1;
+		PlayerInit();
+		bossInit();
+		g_player.px = 128;
+		g_player.py = 576;
 		FeadOut();
 	}
 }

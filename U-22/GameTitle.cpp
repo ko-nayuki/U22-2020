@@ -39,7 +39,7 @@ void TitleDisp() {
 
 	//DrawFormatString(600, 300, 0xFFFFFF, "スペースキー");
 
-	DrawGraph(g_player.px, g_player.py, g_img.gh[g_player.result], TRUE);
+	DrawGraph(g_player.px, g_player.py, g_img.gh[0], TRUE);
 
 	//SetDrawBright(255, 255, 255);
 
@@ -104,7 +104,8 @@ void TitleMove() {
 
 	//カーソル
 	MenuY = MenuNo * 75;
-	DrawTriangle(540, 450 + MenuY, 560, 465 + MenuY, 540, 480 + MenuY, GetColor(0, 0, 0), TRUE);
+	DrawTriangle(540, 450 + MenuY, 560, 465 + MenuY, 540, 480 + MenuY, GetColor(255, 0, 0), TRUE);
+	DrawGraph(480, 432 + MenuY, g_img.Button, TRUE);
 }
 
 void CrejitDips() {

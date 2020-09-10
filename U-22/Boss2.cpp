@@ -10,23 +10,24 @@
 
 #include <math.h>
 
+//0:左待機 1~3:左攻撃 4:右待機 5~7:右攻撃 8~15:左からワープ 16~23:右からワープ
+
+int motion_attack = 0;		//攻撃加算値
+int motion_y = 0;			//移動時の高さ
+bool warpFlg = false;		//移動フラグ
+int warp_num = 0;			//0:移動開始 1:反対側へ 2:移動完了
+
+//攻撃の爆弾用
+int Bomb_X[3] = { -CHIPSIZE, -CHIPSIZE, -CHIPSIZE };
+int Bomb_Y[3] = { -CHIPSIZE, -CHIPSIZE, -CHIPSIZE };
+int Bomb_speed[3] = { 0 };
+bool Bomb_Flg[3] = { false, false, false };
+bool Bomb_Flg2[3] = { false, false, false };//跳ね返った爆弾
+int Bomb_count[3] = { 0 };
+int bomb_num = 0;
+
 void thiefMove() {//boss2
 	//モーション加算値
-	//0:左待機 1~3:左攻撃 4:右待機 5~7:右攻撃 8~15:左からワープ 16~23:右からワープ
-
-	static int motion_attack = 0;		//攻撃加算値
-	static int motion_y = 0;			//移動時の高さ
-	static bool warpFlg = false;		//移動フラグ
-	static int warp_num = 0;			//0:移動開始 1:反対側へ 2:移動完了
-
-	//攻撃の爆弾用
-	static int Bomb_X[3] = { -CHIPSIZE, -CHIPSIZE, -CHIPSIZE };
-	static int Bomb_Y[3] = { -CHIPSIZE, -CHIPSIZE, -CHIPSIZE };
-	static int Bomb_speed[3] = { 0 };
-	static bool Bomb_Flg[3] = { false, false, false };
-	static bool Bomb_Flg2[3] = { false, false, false };//跳ね返った爆弾
-	static int Bomb_count[3] = { 0 };
-	static int bomb_num = 0;
 
 	//DrawFormatString(500, 420, 0x00FFFF, "%d", Bomb_X[0]);
 	//DrawFormatString(500, 450, 0x00FFFF, "%d", Bomb_X[1]);
@@ -363,4 +364,23 @@ void thiefMove() {//boss2
 	//	g_gameScene = GAME_OVER;
 	//	//g_player.px = CHIPSIZE * 1, g_player.py = CHIPSIZE * 9;
 	//}
+}
+
+void boss2_Init(){
+
+	motion_attack = 0;		//攻撃加算値
+	motion_y = 0;			//移動時の高さ
+	warpFlg = false;		//移動フラグ
+	warp_num = 0;			//0:移動開始 1:反対側へ 2:移動完了
+
+	//攻撃の爆弾用
+	for (int i = 0; i < 3; i++) {
+		Bomb_X[i] = -CHIPSIZE;
+		Bomb_Y[i] = -CHIPSIZE;
+		Bomb_speed[i] = 0;
+		Bomb_Flg[i] = false;
+		Bomb_Flg2[i] = false;//跳ね返った爆弾
+		Bomb_count[i] = 0;
+	}
+	bomb_num = 0;
 }

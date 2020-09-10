@@ -41,6 +41,7 @@ struct image {
 
 	int stage3;
 	int stage4;
+	int boss3_back;
 	int SelectBook[3];
 	int BookAnime[6];
 
