@@ -95,17 +95,21 @@ void FeadOut() {
 		g_gameScene = GAME_PLAY;
 	}
 	else if (Fead.InfoStg == 3 && Fead.OverFlg == 1) {
+		StopSoundMem(g_sounds.World0);
 		StopSoundMem(g_sounds.World1);
 		StopSoundMem(g_sounds.World2);
 		StopSoundMem(g_sounds.World3);
+		StopSoundMem(g_sounds.Boss);
 		g_gameScene = GAME_SELECT;
 		Fead.InfoStg = 2;
 	}
 	else if(Fead.InfoStg == 4 && Fead.ClearFlg == 0) {
 		if (g_map.select == 5 || g_map.select == 8 || g_map.select == 11) {
+			StopSoundMem(g_sounds.World0);
 			StopSoundMem(g_sounds.World1);
 			StopSoundMem(g_sounds.World2);
 			StopSoundMem(g_sounds.World3);
+			StopSoundMem(g_sounds.Boss);
 		}
 		Fead.InfoStg = 3;
 		//g_map.select++;

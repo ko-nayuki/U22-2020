@@ -509,9 +509,13 @@ void dropMove() {
 					}
 					if (g_map.playStage[i][j] == GIM_402) {
 						g_map.gimmickData[i][j] = GIM_402;
+						g_gimmick[DROP].x = -CHIPSIZE;
+						g_gimmick[DROP].y = -CHIPSIZE;
 					}
 					if (g_map.playStage[i][j] == GIM_403) {
 						g_map.gimmickData[i][j] = GIM_403;
+						g_gimmick[DROP].x = -CHIPSIZE;
+						g_gimmick[DROP].y = -CHIPSIZE;
 					}
 					g_gimmick[DROP].moveFlg = false;
 					g_gimmick[DROP].ONFlg = false;

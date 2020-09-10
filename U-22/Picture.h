@@ -29,7 +29,7 @@ struct image {
 	int drop;			//落下看板
 	int crack;			//ヒビ入りブロック
 	int gear[2];		//回転足場
-	int warp;			//ワープ
+	int warp[3];		//ワープ
 	int bomb;
 	int Cauldron;		//大釜
 	int trampoline[2];	//トランポリン

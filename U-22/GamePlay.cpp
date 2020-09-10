@@ -24,6 +24,7 @@ void GamePlay() {
 
 void PlayDisp() {
 	BackStageDisp();
+	if (g_map.select != 11) gimmickDisp();
 	StageDisp();
 
 	
@@ -83,7 +84,7 @@ void PlayMove() {
 	}
 
 	bossMove();
-	gimmickDisp();
+	if (g_map.select == 11) gimmickDisp();
 	gimmickMove();
 	if (g_gimmick[LIFT].moveFlg != true && g_gimmick[LIFT].moveFlg2 != true && g_gimmick[BillBoard].moveFlg != true) PlayerMove();
 
