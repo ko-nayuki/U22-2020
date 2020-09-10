@@ -76,6 +76,7 @@ int LoadPicture(){
 	if (LoadDivGraph("images/wolf.png", 9, 9, 1, 64, 128, g_img.wolf) == -1) return -1;				//boss1
 	if (LoadDivGraph("images/BossThief.png", 24, 8, 3, 64, 128, g_img.thief) == -1) return -1;		//boss2
 	if (LoadDivGraph("images/BOSS3HAND.png", 6, 3, 2, 384, 256, g_img.Colossus) == -1) return -1;   //boss3
+	if (LoadDivGraph("images/GLM.png", 3, 3, 1, 448, 256, g_img.GLM) == -1)return -1;               //boss3head
 	if ((g_img.Cauldron = LoadGraph("images/Cauldron.png")) == -1) return -1;
 	if ((g_img.trampoline[0] = LoadGraph("images/trampoline0.png")) == -1) return -1;
 	if ((g_img.trampoline[1] = LoadGraph("images/trampoline.png")) == -1) return -1;

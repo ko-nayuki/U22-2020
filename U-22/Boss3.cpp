@@ -16,6 +16,13 @@ void ColossusMove() {//boss3
 	static int boss3_attack = 0; //攻撃
 	static int Random = 0;
 
+	static int head_Number = 0;     //ボスの顔
+	static int UpDown_head = true;  //true:上下 false:上下しない
+	static int UpDown_head_s = 0;
+	static int UpDown_head_s2 = 0;
+	static int UpDown_head_count = 50;
+	static int UpDown_head_count2 = 0;
+
 	static int UpDown_flg = 1;  // 0:上下しない 1:ずっと上下する
 	static int UpDown_s = 0;
 	static int UpDown_count = 0;
@@ -38,6 +45,43 @@ void ColossusMove() {//boss3
 	//DrawFormatString(500, 550, 0xFFFF00, "%d", attck_start);
 	//DrawFormatString(500, 570, 0xFFFF00, "%d", g_boss[2].x);
 	//if (g_KeyFlg & PAD_INPUT_Z) g_player.py -= 300;
+
+	if (g_boss3head.anime == 0) {//ボス３頭の上下移動処理
+		if (UpDown_head == true) {
+
+			/*if (UpDown_head_s == 0) {
+				g_boss3head[head_Number].x += 0.5;
+				UpDown_head_count += 1;
+				if (UpDown_head_count == 100) {
+					UpDown_head_s = 1;
+				}
+			}
+			if (UpDown_head_s == 1) {
+				g_boss3head[head_Number].x -= 0.5;
+				UpDown_head_count -= 1;
+				if (UpDown_head_count == 0) {
+					UpDown_head_s = 0;
+				}
+			}*/
+
+			if (UpDown_head_s2 == 0) {
+				g_boss3head.y += 0.5;
+				UpDown_head_count2 += 1;
+				if (UpDown_head_count2 == 50) {
+					UpDown_head_s2 = 1;
+				}
+			}
+			if (UpDown_head_s2 == 1) {
+				g_boss3head.y -= 0.5;
+				UpDown_head_count2 -= 1;
+				if (UpDown_head_count2 == 0) {
+					UpDown_head_s2 = 0;
+				}
+			}
+		}
+	}
+
+
 
 	if (boss3_attack == 0 && (g_boss[2].hp > 0 || g_boss[3].hp > 0)) {
 		if (g_boss[2].hp > 0 && g_boss[3].hp > 0) {
@@ -274,32 +318,85 @@ void ColossusMove() {//boss3
 				}
 			}
 
-			if (g_boss[Random].y <= -192) {    //初期化
-				g_boss[2].x = -3 * CHIPSIZE;
-				g_boss[3].x = 17 * CHIPSIZE;
-				g_boss[Random].y = 2 * CHIPSIZE;
-				attck_count = 0;
-				g_boss[Random].count = 0;
-				g_boss[Random].attackFlg = false;
-				boss3_attack = 0;
-				attck_start = 35;
+			if (Random == 3 && g_boss[3].y <= -192 && attck_end1 == true) {
+				attck_end2 = false;
+				g_boss[3].x = 20 * CHIPSIZE;
+				g_boss[3].y = 2 * CHIPSIZE;
+				attck_end1 = false;
+			}
+
+			if (Random == 2 && g_boss[2].y <= -192 && attck_end1 == true) {
+				attck_end2 = false;
+				g_boss[2].x = -5 * CHIPSIZE;
+				g_boss[2].y = 2 * CHIPSIZE;
+				attck_end1 = false;
+			}
+
+			if (attck_end1 == false) {
+				if (g_boss[3].x > 17 * CHIPSIZE) {
+					g_boss[3].x -= 5;
+				}
+				if (g_boss[2].x < -3 * CHIPSIZE) {
+					g_boss[2].x += 5;
+				}
+				if ((Random == 2 && g_boss[2].x >= -3 * CHIPSIZE) || (Random == 3 && g_boss[3].x <= 17 * CHIPSIZE)) {
+					search_stop = 100;
+					boss3_attack = 0;
+					search_LR = 1;
+					UpDown_count = 0;
+					attack1_Fall = 0;
+					attck_count = 0;
+					g_boss[Random].count = 0;
+					g_boss[Random].attackFlg = false;
+					UpDown_flg = 1;
+					UpDown_s = 0;
+					attck_start = 35;
+					attck_end1 = true;
+					attck_end2 = true;
+				}
+				//if (g_boss[Random].y <= -192) {    //初期化
+				//	g_boss[2].x = -3 * CHIPSIZE;
+				//	g_boss[3].x = 17 * CHIPSIZE;
+				//	g_boss[Random].y = 2 * CHIPSIZE;
+				//	attck_count = 0;
+				//	g_boss[Random].count = 0;
+				//	g_boss[Random].attackFlg = false;
+				//	boss3_attack = 0;
+				//	attck_start = 35;
+				//}
 			}
 		}
-	}
 
-	//bossダメージ
-	if (g_boss[Random].damageFlg == true) {
-		attack1_Fall = 400;
-		g_boss[Random].anime += 1;
-		g_boss[Random].hp -= 1;
-		g_map.playStage[9][9] = D;//[破]を再設置
-		g_boss[Random].damageFlg = false;
-	}
-	if (g_boss[2].hp <= 0 && g_boss[3].hp <= 0) {
-		g_map.playStage[int(g_player.py / CHIPSIZE)][int((g_player.px + 32) / CHIPSIZE)] = 2;//ゴール設置
-	}
+		//bossダメージ
+		if (g_boss[Random].damageFlg == true) {
+			g_boss3head.anime = 1;
+			attack1_Fall = 400;
+			g_boss[Random].anime += 1;
+			g_boss[Random].hp -= 1;
+			g_map.playStage[9][9] = D;//[破]を再設置
+			g_boss[Random].damageFlg = false;
+		}
+		if (g_boss3head.anime == 1)
+		{
+			if (head_Number >= 50) {
+				head_Number = 0;
+				g_boss3head.anime = 0;
+			}
+			else {
+				head_Number += 1;
+			}
+		}
+		if (g_boss[2].hp <= 0 && g_boss[3].hp <= 0) {
+			g_boss3head.anime = 2;
+			if ((g_map.playStage[(int(g_boss3head.y) / CHIPSIZE) + 3][int(g_boss3head.x) / CHIPSIZE]) == AIR ||
+				(g_map.playStage[(int(g_boss3head.y) / CHIPSIZE) + 3][int(g_boss3head.x) / CHIPSIZE]) == START) {
+				g_boss3head.y += CHIPSIZE / 2;
+				g_map.playStage[int(g_boss3head.y / CHIPSIZE)][int((g_boss3head.x + 224) / CHIPSIZE)] = 2;//ゴール設置
+			}
+		}
 
-	if (g_map.playStage[int((g_player.py - 1) / CHIPSIZE) + 1][int((g_player.px - 4) / CHIPSIZE)] == g_boss[Random].x + 330) {
-		g_player.px -= 4 * g_player.move;
+		if (g_map.playStage[int((g_player.py - 1) / CHIPSIZE) + 1][int((g_player.px - 4) / CHIPSIZE)] == g_boss[Random].x + 330) {
+			g_player.px -= 4 * g_player.move;
+		}
 	}
 }

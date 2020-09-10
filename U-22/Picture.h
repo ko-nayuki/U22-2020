@@ -24,6 +24,7 @@ struct image {
 	int wolf[9];		//boss1
 	int thief[24];		//boss2
 	int Colossus[6];    //boss3
+	int GLM[3];         //boss3head
 	int fire[2];		//炎
 	int drop;			//落下看板
 	int crack;			//ヒビ入りブロック

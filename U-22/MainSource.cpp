@@ -33,6 +33,7 @@ Player g_player;								// プレイヤーの情報
 Gimmick g_gimmick[GIMMICK_NUM];					// ギミックの情報
 MAP g_map;										// マップの情報
 boss g_boss[4];									// ボスの情報
+boss g_boss3head;                            //ボスの頭情報
 int g_KeyFlg; //6.16 (key入力変数）
 int g_OldKey;
 int g_NowKey;
