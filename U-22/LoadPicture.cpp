@@ -89,6 +89,9 @@ int LoadPicture(){
 	if (LoadDivGraph("images/RYuka0.png", 2, 2, 1, 64, 64, g_img.gear) == -1) return -1;
 	if (LoadDivGraph("images/SelectBooks.png", 3, 3, 1, 128, 128, g_img.SelectBook) == -1) return -1;
 	if (LoadDivGraph("images/SelectBookO3.png", 6, 3, 2, 256, 128, g_img.world_4book) == -1) return -1;
+	if (LoadDivGraph("images/SelectBook1.png", 6, 3, 2, 256, 128, g_img.world_3book) == -1) return -1;
+	if (LoadDivGraph("images/SelectBook3.png", 6, 3, 2, 256, 128, g_img.world_2book) == -1) return -1;
+	
 	if (LoadDivGraph("images/SCBook.png", 6, 3, 2, 256, 128, g_img.BookAnime) == -1) return -1;
 
 	if ((g_img.stage3 = LoadGraph("images/Stage3.png")) == -1) return -1;

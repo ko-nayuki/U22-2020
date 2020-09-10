@@ -159,13 +159,13 @@ void SelectBook() {
 		else {
 			if (animation2 < 5.0) animation2 += 0.2F;
 			else animeFlg[0] = true;
-			DrawGraph(8 * CHIPSIZE, 8 * CHIPSIZE, g_img.world_4book[int(animation2)], TRUE);
+			DrawGraph(8 * CHIPSIZE, 8 * CHIPSIZE, g_img.world_2book[int(animation2)], TRUE);
 			//DrawExtendGraph(8 * CHIPSIZE + 48, 8 * CHIPSIZE, 12 * CHIPSIZE - 48, 10 * CHIPSIZE, g_img.BookAnime[int(animation2)], TRUE);
 		}
 	}
 	else {
 		if (animeFlg[0] == true) {
-			DrawGraph(8 * CHIPSIZE, 8 * CHIPSIZE, g_img.world_4book[int(animation2)], TRUE);
+			DrawGraph(8 * CHIPSIZE, 8 * CHIPSIZE, g_img.world_2book[int(animation2)], TRUE);
 			if (animation2 > 0.1) animation2 -= 0.2F;
 			else animation2 = 0.0, animeFlg[0] = false;
 		}
@@ -184,14 +184,14 @@ void SelectBook() {
 		else {
 			if (animation3 < 5.0) animation3 += 0.2F;
 			else animeFlg[1] = true;
-			DrawGraph(11 * CHIPSIZE, 8 * CHIPSIZE, g_img.world_4book[int(animation3)], TRUE);
+			DrawGraph(11 * CHIPSIZE, 8 * CHIPSIZE, g_img.world_3book[int(animation3)], TRUE);
 			//DrawExtendGraph(11 * CHIPSIZE + 48, 8 * CHIPSIZE, 15 * CHIPSIZE - 48, 10 * CHIPSIZE, g_img.BookAnime[int(animation3)], TRUE);
 
 		}
 	}
 	else {
 		if (animeFlg[1] == true) {
-			DrawGraph(11 * CHIPSIZE, 8 * CHIPSIZE, g_img.world_4book[int(animation3)], TRUE);
+			DrawGraph(11 * CHIPSIZE, 8 * CHIPSIZE, g_img.world_3book[int(animation3)], TRUE);
 			if (animation3 > 0.1) animation3 -= 0.2F;
 			else animation3 = 0.0, animeFlg[1] = false;
 		}

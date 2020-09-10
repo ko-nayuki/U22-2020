@@ -43,7 +43,11 @@ struct image {
 	int stage4;
 	int SelectBook[3];
 	int BookAnime[6];
+
 	int world_4book[6];
+	int world_3book[6];
+	int world_2book[6];
+
 
 	int Curtain;		//セレクト画面の幕
 	int RetryButon;		//リトライボタン
