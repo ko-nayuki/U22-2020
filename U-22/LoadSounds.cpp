@@ -78,6 +78,8 @@ int LoadSounds(void)
 	ChangeVolumeSoundMem(255 * 60 / 100, g_sounds.Fire);
 	//ワープ
 	ChangeVolumeSoundMem(255 * 40 / 100, g_sounds.Warp);
+	//落下SE
+	ChangeVolumeSoundMem(255 * 40 / 100, g_sounds.Fall);
 
 	//オオカミSE
 	ChangeVolumeSoundMem(255 * 40 / 100, g_sounds.Breath);

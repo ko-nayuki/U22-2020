@@ -59,6 +59,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_
 	// フルスクリーンにしないかどうか TRUE:しない FALSE:する
 	ChangeWindowMode(TRUE);
 
+	SetMainWindowText("漢字ストーリー");
+
 	// ウィンドウ画面の大きさ
 	SetGraphMode(1280, 768, 32);
 
